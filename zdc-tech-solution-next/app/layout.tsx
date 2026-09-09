@@ -1,5 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import Script from "next/script";
 import { SiteChrome } from "@/components/site/SiteChrome";
 
 export const metadata: Metadata = {
@@ -77,6 +78,16 @@ export default function RootLayout({
         className="min-h-screen bg-background font-sans text-foreground"
         suppressHydrationWarning
       >
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-1DQD719M6E" strategy="afterInteractive" />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-1DQD719M6E');
+          `}
+        </Script>
         <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
