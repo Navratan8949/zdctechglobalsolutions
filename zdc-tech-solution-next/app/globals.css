@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222 47% 5%;
+    --foreground: 210 40% 98%;
+    --card: 222 45% 7%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222 45% 7%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 212 100% 50%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 263 70% 58%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 217 33% 12%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 212 100% 50%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 217 33% 14%;
+    --input: 217 33% 14%;
+    --ring: 212 100% 50%;
+    --chart-1: 212 100% 50%;
+    --chart-2: 263 70% 58%;
+    --chart-3: 173 58% 39%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 340 75% 55%;
+    --radius: 0.625rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(212 100% 60%), hsl(263 70% 65%));
+  }
+
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, hsl(217 33% 14% / 0.5) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(217 33% 14% / 0.5) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  .glass {
+    @apply border border-white/10 bg-white/5 backdrop-blur-md;
+  }
+
+  .glow-blue {
+    box-shadow: 0 0 24px -4px hsl(212 100% 50% / 0.45);
+  }
+
+  .glow-purple {
+    box-shadow: 0 0 24px -4px hsl(263 70% 58% / 0.45);
+  }
+
+  .glow-blue-sm {
+    box-shadow: 0 0 12px -2px hsl(212 100% 50% / 0.35);
+  }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(222 47% 5%);
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(217 33% 18%);
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(212 100% 50% / 0.5);
+}
