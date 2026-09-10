@@ -43,7 +43,7 @@ export function HomeCaseStudiesSection() {
         />
         <div className="mt-12 grid gap-6 sm:grid-cols-2">
           {items.slice(0, 4).map((item, i) => (
-            <CaseStudyCard key={item.slug} study={item} index={i} />
+            <CaseStudyCard key={item.slug} caseStudy={item} index={i} />
           ))}
         </div>
         <div className="mt-10 text-center">

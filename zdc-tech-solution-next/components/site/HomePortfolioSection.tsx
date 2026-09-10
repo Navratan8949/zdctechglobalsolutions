@@ -6,7 +6,7 @@ import { ArrowRight } from "lucide-react";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { PortfolioCard } from "@/components/site/PortfolioCard";
 import { portfolio as fallbackPortfolio, type PortfolioItem } from "@/data/portfolio";
-import { getPortfolio } from "@/service/portfolio.service";
+import { getPortfolios } from "@/service/portfolio.service";
 import { unwrapApiResponse } from "@/lib/public-api";
 
 export function HomePortfolioSection() {
@@ -16,7 +16,7 @@ export function HomePortfolioSection() {
     let active = true;
     const fetchPortfolio = async () => {
       try {
-        const res = await getPortfolio();
+        const res = await getPortfolios();
         if (!active) return;
         const liveItems = unwrapApiResponse<PortfolioItem[]>(res) || [];
         if (liveItems.length > 0) {

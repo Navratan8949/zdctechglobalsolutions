@@ -20,6 +20,8 @@ import { technologyStack } from "@/data/technologies";
 import { HomeHero } from "./_components/HomeHero";
 import { CompanyDescription } from "@/components/site/CompanyDescription";
 import { TestimonialsSection } from "@/components/site/TestimonialsSection";
+import { StatsCounter } from "@/components/site/StatsCounter";
+import { SectionHeading } from "@/components/site/SectionHeading";
 
 export const metadata: Metadata = {
   title: "ZDC Tech Global Solutions — Software Development & IT Company",
