@@ -1,11 +1,8 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowRight } from "lucide-react";
-import { SectionHeading } from "@/components/site/SectionHeading";
-import { StatsCounter } from "@/components/site/StatsCounter";
-import { PortfolioCard } from "@/components/site/PortfolioCard";
-import { CaseStudyCard } from "@/components/site/CaseStudyCard";
-import { BlogCard } from "@/components/site/BlogCard";
+import { HomePortfolioSection } from "@/components/site/HomePortfolioSection";
+import { HomeCaseStudiesSection } from "@/components/site/HomeCaseStudiesSection";
+import { HomeBlogSection } from "@/components/site/HomeBlogSection";
 import { FAQAccordion } from "@/components/site/FAQAccordion";
 import { CTASection } from "@/components/site/CTASection";
 import { TechStackGrid } from "@/components/site/TechStackGrid";
@@ -104,64 +101,15 @@ export default function HomePage() {
       </section>
 
       {/* Portfolio */}
-      <section className="py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="Our Work"
-            title="Featured Projects"
-            description="A selection of projects we have delivered for clients across industries."
-          />
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {portfolio.map((item, i) => (
-              <PortfolioCard key={item.slug} item={item} index={i} />
-            ))}
-          </div>
-          <div className="mt-10 text-center">
-            <Link
-              href="/portfolio"
-              className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition-all hover:border-primary/40 hover:bg-white/10"
-            >
-              View All Projects
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-        </div>
-      </section>
+      <HomePortfolioSection />
 
       {/* Case Studies */}
-      <section className="relative overflow-hidden py-20 lg:py-28">
-        <div className="absolute left-0 top-1/3 h-[300px] w-[400px] rounded-full bg-primary/10 blur-[120px]" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="Case Studies"
-            title="Real Results, Real Impact"
-            description="See how we have helped our clients overcome challenges and achieve their business goals."
-          />
-          <div className="mt-12 grid gap-6 sm:grid-cols-2">
-            {caseStudies.map((cs, i) => (
-              <CaseStudyCard key={cs.slug} caseStudy={cs} index={i} />
-            ))}
-          </div>
-        </div>
-      </section>
+      <HomeCaseStudiesSection />
 
       <TestimonialsSection />
 
       {/* Blog Preview */}
-      <section className="py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="Latest Insights"
-            title="From Our Blog"
-            description="Thoughts, trends and practical advice from our team of experts."
-          />
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {blogPosts.slice(0, 3).map((post, i) => (
-              <BlogCard key={post.slug} post={post} index={i} />
-            ))}
-          </div>
-        </div>
-      </section>
+      <HomeBlogSection />
 
       {/* FAQ */}
       <section className="relative overflow-hidden py-20 lg:py-28">

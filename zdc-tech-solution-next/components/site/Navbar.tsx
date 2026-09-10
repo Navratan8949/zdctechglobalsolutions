@@ -7,10 +7,12 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Menu, X, Sparkles, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { services } from "@/data/services";
 import { useSiteContent } from "@/components/providers/SiteContentProvider";
 import { TopBar } from "@/components/site/TopBar";
 import { getIcon } from "@/lib/icons";
+import { getServices } from "@/service/service.service";
+import { unwrapApiResponse } from "@/lib/public-api";
+import type { Service } from "@/data/services";
 
 const companyLinks = [
   {
@@ -143,9 +145,47 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-  const [openMobileSubmenu, setOpenMobileSubmenu] = useState<string | null>(
-    null,
-  );
+  const [openMobileSubmenu, setOpenMobileSubmenu] = useState<string | null>(null);
+  const [navItems, setNavItems] = useState(mainNav);
+
+  useEffect(() => {
+    let active = true;
+    const fetchServices = async () => {
+      try {
+        const res = await getServices();
+        if (!active) return;
+        const liveServices = unwrapApiResponse<Service[]>(res) || [];
+        if (liveServices.length > 0) {
+          const grouped = liveServices.reduce((acc, curr) => {
+            const cat = curr.category || "Other Services";
+            if (!acc[cat]) acc[cat] = [];
+            acc[cat].push({ label: curr.title, href: `/services/${curr.slug}` });
+            return acc;
+          }, {} as Record<string, { label: string; href: string }[]>);
+
+          const megaMenuGroups = Object.keys(grouped).map((title) => ({
+            title,
+            items: grouped[title],
+          }));
+
+          setNavItems((current) =>
+            current.map((item) => {
+              if (item.label === "Services") {
+                return { ...item, megaMenuGroups };
+              }
+              return item;
+            }),
+          );
+        }
+      } catch (err) {
+        // Silently fail and keep default mainNav
+      }
+    };
+    void fetchServices();
+    return () => {
+      active = false;
+    };
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -211,7 +251,7 @@ export function Navbar() {
           </Link>
 
           <ul className="hidden items-center gap-1.5 lg:flex">
-            {mainNav.map((item) => (
+            {navItems.map((item) => (
               <li
                 key={item.label}
                 className="relative"
@@ -443,7 +483,7 @@ export function Navbar() {
 
               <div className="flex-1 overflow-y-auto px-4 py-4">
                 <ul className="space-y-1">
-                  {mainNav.map((item) => (
+                  {navItems.map((item) => (
                     <li key={item.label}>
                       {(item.children || item.isMegaMenu) ? (
                         <>

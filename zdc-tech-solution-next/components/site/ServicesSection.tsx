@@ -1,13 +1,36 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { SectionHeading } from "@/components/site/SectionHeading";
-import { services } from "@/data/services";
+import { services as fallbackServices, type Service } from "@/data/services";
+import { getServices } from "@/service/service.service";
+import { unwrapApiResponse } from "@/lib/public-api";
 import { getIcon } from "@/lib/icons";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 
 export function ServicesSection() {
+  const [items, setItems] = useState<Service[]>(fallbackServices);
+
+  useEffect(() => {
+    let active = true;
+    const fetchServices = async () => {
+      try {
+        const res = await getServices();
+        if (!active) return;
+        const liveServices = unwrapApiResponse<Service[]>(res) || [];
+        if (liveServices.length > 0) setItems(liveServices);
+      } catch (err) {
+        // Fallback already set
+      }
+    };
+    void fetchServices();
+    return () => {
+      active = false;
+    };
+  }, []);
+
   return (
     <section className="relative py-20 lg:py-28">
       {/* Static top accent line */}
@@ -21,7 +44,7 @@ export function ServicesSection() {
         />
 
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service, i) => {
+          {items.slice(0, 6).map((service, i) => {
             const Icon = getIcon(service.icon);
             return (
               <motion.div
