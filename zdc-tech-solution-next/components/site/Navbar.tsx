@@ -89,7 +89,26 @@ const companyLinks = [
   },
 ];
 
-const mainNav = [
+export type NavItem = {
+  label: string;
+  href: string;
+  children?: {
+    label: string;
+    description: string;
+    href: string;
+    icon: string;
+  }[];
+  isMegaMenu?: boolean;
+  megaMenuGroups?: {
+    title: string;
+    items: {
+      label: string;
+      href: string;
+    }[];
+  }[];
+};
+
+const mainNav: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "Company", href: "/about", children: companyLinks },
   {
