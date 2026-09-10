@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Menu, X, Sparkles, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { services } from "@/data/services";
-import { companyInfo } from "@/data/company";
+import { useSiteContent } from "@/components/providers/SiteContentProvider";
 import { TopBar } from "@/components/site/TopBar";
 import { getIcon } from "@/lib/icons";
 
@@ -138,6 +138,7 @@ const mainNav = [
 ];
 
 export function Navbar() {
+  const companyInfo = useSiteContent();
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -194,8 +195,8 @@ export function Navbar() {
         >
           <Link href="/" className="group flex items-center gap-3">
             <Image
-              src="/logo/favi.png"
-              alt="ZDC Tech Logo"
+              src={companyInfo?.logo?.url || "/logo/favi.png"}
+              alt={`${companyInfo?.name || "ZDC Tech"} Logo`}
               width={40}
               height={40}
               className="h-10 w-auto object-contain transition-transform group-hover:scale-105"

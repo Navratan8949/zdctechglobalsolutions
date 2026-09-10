@@ -13,8 +13,8 @@ import {
   ChevronRight,
   ExternalLink,
 } from "lucide-react";
-import { companyInfo } from "@/data/company";
 import { HeroParticles } from "@/components/site/HeroParticles";
+import { useSiteContent } from "@/components/providers/SiteContentProvider";
 
 // ── Navigation columns ──────────────────────────────────────────────────────
 
@@ -49,13 +49,6 @@ const resourceLinks = [
   { label: "Refund Policy", href: "/refund-policy" },
 ];
 
-const socials = [
-  { icon: Linkedin, href: companyInfo.socials.linkedin, label: "LinkedIn" },
-  { icon: Twitter, href: companyInfo.socials.twitter, label: "Twitter" },
-  { icon: Github, href: companyInfo.socials.github, label: "GitHub" },
-  { icon: Instagram, href: companyInfo.socials.instagram, label: "Instagram" },
-];
-
 // ── Reusable link list ───────────────────────────────────────────────────────
 function FooterLinkList({
   links,
@@ -65,13 +58,13 @@ function FooterLinkList({
   return (
     <ul className="mt-6 space-y-3">
       {links.map((link) => (
-        <li key={link.href} style={{ listStyle: "initial" }}>
+        <li key={link.href}>
           <Link
             href={link.href}
-            className="group flex items-center gap-2 text-[13px] text-slate-400 transition-all duration-300 hover:text-white"
+            className="group relative flex items-center text-[13px] text-slate-400 transition-all duration-300 hover:text-white"
           >
-            <ChevronRight className="h-3.5 w-3.5 shrink-0 text-blue-500 opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0" />
-            <span className="transition-transform duration-300 group-hover:translate-x-1">
+            <ChevronRight className="absolute left-0 h-3.5 w-3.5 text-blue-500 opacity-0 -translate-x-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0" />
+            <span className="transition-transform duration-300 group-hover:translate-x-5">
               {link.label}
             </span>
           </Link>
@@ -93,6 +86,27 @@ function FooterHeading({ children }: { children: React.ReactNode }) {
 
 // ── Main Footer ──────────────────────────────────────────────────────────────
 export function Footer() {
+  const companyInfo = useSiteContent();
+
+  const socials = [
+    {
+      icon: Linkedin,
+      href: companyInfo.socials?.linkedin || "#",
+      label: "LinkedIn",
+    },
+    {
+      icon: Twitter,
+      href: companyInfo.socials?.twitter || "#",
+      label: "Twitter",
+    },
+    { icon: Github, href: companyInfo.socials?.github || "#", label: "GitHub" },
+    {
+      icon: Instagram,
+      href: companyInfo.socials?.instagram || "#",
+      label: "Instagram",
+    },
+  ];
+
   return (
     <footer className="relative mt-20 overflow-hidden bg-[#030917] pt-20 sm:pt-28">
       {/* Background gradients */}
@@ -143,8 +157,8 @@ export function Footer() {
                 />
               </div>
               <Image
-                src="/logo/zdc.png"
-                alt="ZDC Tech Global Solutions"
+                src={companyInfo?.logo?.url || "/logo/zdc.png"}
+                alt={`${companyInfo?.name || "ZDC Tech Global Solutions"} Logo`}
                 width={140}
                 height={34}
                 className="h-8 w-auto object-contain"
@@ -210,9 +224,26 @@ export function Footer() {
                   <MapPin className="h-3.5 w-3.5" />
                 </div>
                 <span className="flex-1 leading-relaxed mt-1">
+                  <span className="block text-white font-medium mb-1">
+                    Head Office
+                  </span>
                   {companyInfo.headOffice}
                 </span>
               </div>
+
+              {companyInfo.branchOffice && (
+                <div className="group flex items-start gap-3 text-[13px] text-slate-400 mt-2">
+                  <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-fuchsia-500/10 text-fuchsia-400">
+                    <MapPin className="h-3.5 w-3.5" />
+                  </div>
+                  <span className="flex-1 leading-relaxed mt-1">
+                    <span className="block text-white font-medium mb-1">
+                      Branch Office
+                    </span>
+                    {companyInfo.branchOffice}
+                  </span>
+                </div>
+              )}
             </div>
 
             <div className="mt-8 rounded-2xl border border-white/5 bg-white/[0.02] p-5">

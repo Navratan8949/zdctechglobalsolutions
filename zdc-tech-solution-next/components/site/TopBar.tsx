@@ -1,7 +1,10 @@
+"use client";
+
 import { Mail, Phone, MapPin, Linkedin, Facebook, Instagram } from "lucide-react";
-import { companyInfo } from "@/data/company";
+import { useSiteContent } from "@/components/providers/SiteContentProvider";
 
 export function TopBar() {
+  const companyInfo = useSiteContent();
   return (
     <div className="w-full text-slate-300 py-2 border-b border-white/5 relative bg-transparent">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center text-xs font-medium">
@@ -26,7 +29,7 @@ export function TopBar() {
 
         <div className="flex items-center gap-4">
           <a
-            href={companyInfo.socials.linkedin}
+            href={companyInfo.socials?.linkedin || "#"}
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-primary transition-colors"
@@ -35,7 +38,7 @@ export function TopBar() {
             <Linkedin className="h-4 w-4" />
           </a>
           <a
-            href="#"
+            href={companyInfo.socials?.twitter || "#"}
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-primary transition-colors"
@@ -44,7 +47,7 @@ export function TopBar() {
             <Facebook className="h-4 w-4" />
           </a>
           <a
-            href={companyInfo.socials.instagram}
+            href={companyInfo.socials?.instagram || "#"}
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-primary transition-colors"
