@@ -184,10 +184,10 @@ export function ContactForm() {
             <option value="" className="bg-card">
               Select budget range
             </option>
-            <option className="bg-card">Less than $5,000</option>
-            <option className="bg-card">$5,000 - $15,000</option>
-            <option className="bg-card">$15,000 - $50,000</option>
-            <option className="bg-card">$50,000+</option>
+            <option className="bg-card">Less than $5,000 (₹4 Lakhs)</option>
+            <option className="bg-card">$5,000 - $15,000 (₹4L - ₹12L)</option>
+            <option className="bg-card">$15,000 - $50,000 (₹12L - ₹40L)</option>
+            <option className="bg-card">$50,000+ (₹40L+)</option>
           </select>
         </div>
       </div>
