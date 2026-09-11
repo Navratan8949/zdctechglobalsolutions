@@ -41,31 +41,31 @@ export default async function PortfolioDetailPage({
 
   return (
     <>
-      <section className="relative overflow-hidden pt-32 pb-16 sm:pt-40 lg:pt-44 lg:pb-20">
-        <div className="absolute inset-0 bg-grid opacity-20" />
+      <section className="relative overflow-hidden pt-32 pb-16 sm:pt-40 lg:pt-44 lg:pb-20 bg-slate-50">
         <div className="relative mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
           <Link
             href="/portfolio"
-            className="mb-6 inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary"
+            className="mb-6 inline-flex items-center gap-1.5 text-[12px] font-bold uppercase tracking-widest text-slate-500 hover:text-[#0ea5e9] transition-colors"
           >
-            <ArrowLeft className="h-4 w-4" />
+            <ArrowLeft className="h-4 w-4" strokeWidth={3} />
             All Projects
           </Link>
-          <p className="text-sm font-medium uppercase tracking-wider text-primary">
+          <br />
+          <p className="inline-block mt-4 text-[12px] font-black uppercase tracking-widest text-[#0ea5e9] bg-blue-50 px-4 py-2 rounded-full">
             {item.category}
           </p>
-          <h1 className="mt-4 font-display text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
+          <h1 className="mt-6 text-4xl font-bold tracking-tight text-[#0b1b3d] sm:text-5xl lg:text-6xl">
             {item.title}
           </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+          <p className="mx-auto mt-6 max-w-3xl text-[18px] leading-relaxed text-slate-500">
             {item.description}
           </p>
         </div>
       </section>
 
-      <section className="py-20 lg:py-28">
+      <section className="py-20 lg:py-28 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="overflow-hidden rounded-3xl border border-white/10">
+          <div className="overflow-hidden rounded-3xl border border-slate-100 shadow-sm">
             <img
               src={item.image}
               alt={item.title}
@@ -74,50 +74,54 @@ export default async function PortfolioDetailPage({
           </div>
           <div className="mt-16 grid gap-12 lg:grid-cols-3">
             <div className="lg:col-span-2">
-              <h2 className="text-2xl font-bold text-white">
+              <h2 className="text-3xl font-bold text-[#0b1b3d]">
                 Project Overview
               </h2>
-              <p className="mt-4 leading-relaxed text-muted-foreground">
+              <p className="mt-6 text-[16px] leading-relaxed text-slate-500">
                 {item.description}
               </p>
-              <div className="mt-8 flex flex-wrap gap-2">
+              <div className="mt-10 flex flex-wrap gap-3">
                 {item.technologies.map((technology) => (
-                  <TechnologyBadge key={technology} name={technology} />
+                  <span key={technology} className="px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-[13px] font-bold text-slate-700">
+                    {technology}
+                  </span>
                 ))}
               </div>
             </div>
-            <div className="rounded-2xl border border-white/10 bg-card/40 p-6">
-              <h2 className="text-lg font-semibold text-white">
+            <div className="rounded-2xl border border-slate-100 bg-slate-50 p-8 shadow-sm h-fit">
+              <h2 className="text-[18px] font-bold text-[#0b1b3d] border-b border-slate-200 pb-4">
                 Project Details
               </h2>
-              <dl className="mt-5 space-y-4 text-sm">
+              <dl className="mt-6 space-y-6 text-[14px]">
                 <div>
-                  <dt className="text-muted-foreground">Client</dt>
-                  <dd className="mt-1 font-medium text-white">{item.client}</dd>
+                  <dt className="text-slate-500 font-medium uppercase tracking-wider text-[11px] mb-1">Client</dt>
+                  <dd className="font-bold text-[#0b1b3d] text-[16px]">{item.client}</dd>
                 </div>
                 <div>
-                  <dt className="text-muted-foreground">Year</dt>
-                  <dd className="mt-1 font-medium text-white">{item.year}</dd>
+                  <dt className="text-slate-500 font-medium uppercase tracking-wider text-[11px] mb-1">Year</dt>
+                  <dd className="font-bold text-[#0b1b3d] text-[16px]">{item.year}</dd>
                 </div>
                 <div>
-                  <dt className="text-muted-foreground">Category</dt>
-                  <dd className="mt-1 font-medium text-white">
+                  <dt className="text-slate-500 font-medium uppercase tracking-wider text-[11px] mb-1">Category</dt>
+                  <dd className="font-bold text-[#0b1b3d] text-[16px]">
                     {item.category}
                   </dd>
                 </div>
               </dl>
             </div>
           </div>
-          <Link
-            href="/contact"
-            className="group mt-12 inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-bold text-primary-foreground"
-          >
-            Start a Similar Project{" "}
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </Link>
+          <div className="mt-16 text-center lg:text-left">
+            <Link
+              href="/contact"
+              className="group inline-flex items-center gap-2 rounded-full bg-[#0ea5e9] px-8 py-4 text-[14px] font-bold uppercase tracking-widest text-white shadow-lg transition-transform hover:scale-105"
+            >
+              Start a Similar Project{" "}
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" strokeWidth={3} />
+            </Link>
+          </div>
         </div>
       </section>
-      <CTASection />
+      {/* <CTASection /> */}
     </>
   );
 }

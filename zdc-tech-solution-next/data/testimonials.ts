@@ -1,9 +1,10 @@
 export interface Testimonial {
+  _id?: string;
   name: string;
   position: string;
   company: string;
   quote: string;
-  avatar: string;
+  avatar: string | { url: string; public_id?: string };
   rating: number;
 }
 

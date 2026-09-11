@@ -21,11 +21,11 @@ export function FloatingContactButton() {
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 1, duration: 0.5 }}
-        className="fixed right-0 top-1/2 z-[100]"
+        className="fixed right-0 top-1/2 z-[100] hidden lg:block"
       >
         <button
           onClick={handleClick}
-          className="flex items-center gap-3 rounded-r-xl px-3 py-6 font-semibold text-white shadow-[-10px_0_20px_rgba(var(--primary),0.3)] transition-all hover:-translate-x-1"
+          className="flex items-center gap-3 rounded-r-xl px-3 py-6 font-semibold text-foreground shadow-[-10px_0_20px_rgba(var(--primary),0.3)] transition-all hover:-translate-x-1"
           style={{
             writingMode: "vertical-rl",
             transform: "rotate(180deg)",

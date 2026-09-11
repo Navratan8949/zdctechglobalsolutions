@@ -13,14 +13,17 @@ import {
   RefreshCw,
   Settings2,
   Users,
+  CheckCircle,
+  ArrowRight,
+  TrendingUp,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { getBlogs } from "@/service/blog.service";
 import { getContacts } from "@/service/contact.service";
 import { getPortfolios } from "@/service/portfolio.service";
 import { getServices } from "@/service/service.service";
 import { getSiteContents } from "@/service/siteContent.service";
 import { getTeamMembers } from "@/service/team.service";
+import { getWhyChooseUs } from "@/service/whyChooseUs.service";
 
 interface ApiListResponse {
   data?: unknown;
@@ -32,6 +35,7 @@ interface DashboardCard {
   description: string;
   href: string;
   icon: ComponentType<{ className?: string }>;
+  color: string;
   load: () => Promise<unknown>;
 }
 
@@ -45,10 +49,11 @@ interface DashboardResult {
 const dashboardCards: DashboardCard[] = [
   {
     key: "site-content",
-    label: "Site content",
+    label: "Site Content",
     description: "Pages and global settings",
     href: "/admin/site-content",
     icon: Building2,
+    color: "#6366f1",
     load: getSiteContents,
   },
   {
@@ -57,6 +62,7 @@ const dashboardCards: DashboardCard[] = [
     description: "What your company offers",
     href: "/admin/services",
     icon: Settings2,
+    color: "#2563eb",
     load: getServices,
   },
   {
@@ -65,22 +71,25 @@ const dashboardCards: DashboardCard[] = [
     description: "Published work and case studies",
     href: "/admin/portfolio",
     icon: BriefcaseBusiness,
+    color: "#7c3aed",
     load: getPortfolios,
   },
   {
     key: "blog",
-    label: "Blog posts",
+    label: "Blog Posts",
     description: "Articles and announcements",
     href: "/admin/blog",
     icon: FileText,
+    color: "#0891b2",
     load: getBlogs,
   },
   {
     key: "team",
-    label: "Team members",
+    label: "Team Members",
     description: "People featured on the site",
     href: "/admin/team",
     icon: Users,
+    color: "#059669",
     load: getTeamMembers,
   },
   {
@@ -89,7 +98,17 @@ const dashboardCards: DashboardCard[] = [
     description: "Contact form submissions",
     href: "/admin/contacts",
     icon: MessageSquare,
+    color: "#d97706",
     load: getContacts,
+  },
+  {
+    key: "why-choose-us",
+    label: "Why Choose Us",
+    description: "Reasons to partner with us",
+    href: "/admin/why-choose-us",
+    icon: CheckCircle,
+    color: "#dc2626",
+    load: getWhyChooseUs,
   },
 ];
 
@@ -155,135 +174,149 @@ export function AdminOverview() {
     void loadDashboard();
   }, []);
 
-  const hasLoadedData = dashboardCards.some(
-    (card) => results[card.key]?.state === "success",
-  );
+  const totalRecords = dashboardCards.reduce((acc, card) => {
+    const r = results[card.key];
+    return r?.state === "success" && r.count ? acc + r.count : acc;
+  }, 0);
 
   return (
     <div>
-      <div className="mb-8 flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
+      {/* Page Header */}
+      <div className="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+          <p style={{ color: "#60a5fa" }} className="text-[11px] font-semibold uppercase tracking-widest mb-1">
             Overview
           </p>
-          <h1 className="mt-2 font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Dashboard
-          </h1>
-          <p className="mt-2 max-w-xl text-sm leading-6 text-muted-foreground">
-            A live summary of the content and messages managed through your
-            admin workspace.
+          <h1 className="text-2xl font-bold text-white sm:text-3xl">Dashboard</h1>
+          <p className="mt-1 text-sm" style={{ color: "#64748b" }}>
+            A live summary of all your website content.
           </p>
         </div>
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 text-xs text-muted-foreground">
-            <BarChart3 className="h-4 w-4 text-primary" /> Content operations
-          </div>
-          <Button
-            type="button"
-            variant="outline"
-            size="icon"
-            onClick={() => void loadDashboard()}
-            disabled={isRefreshing}
-            aria-label="Refresh dashboard"
-            title="Refresh dashboard"
-            className="border-white/15 bg-white/[0.04] text-white hover:bg-white/[0.08]"
-          >
-            <RefreshCw
-              className={`h-4 w-4 ${isRefreshing ? "animate-spin" : ""}`}
-            />
-          </Button>
-        </div>
+        <button
+          type="button"
+          onClick={() => void loadDashboard()}
+          disabled={isRefreshing}
+          style={{
+            backgroundColor: "rgba(37,99,235,0.15)",
+            border: "1px solid rgba(37,99,235,0.3)",
+            color: "#60a5fa",
+          }}
+          className="flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all hover:brightness-125 disabled:opacity-50"
+        >
+          <RefreshCw className={`h-4 w-4 ${isRefreshing ? "animate-spin" : ""}`} />
+          Refresh
+        </button>
       </div>
 
+      {/* Stats bar */}
+      <div
+        style={{
+          backgroundColor: "rgba(37,99,235,0.08)",
+          border: "1px solid rgba(37,99,235,0.15)",
+        }}
+        className="mb-6 flex items-center gap-4 rounded-xl px-5 py-4"
+      >
+        <TrendingUp className="h-5 w-5 shrink-0" style={{ color: "#60a5fa" }} />
+        <div>
+          <p className="text-sm font-semibold text-white">
+            {totalRecords} total records across all modules
+          </p>
+          <p className="text-[11px]" style={{ color: "#64748b" }}>
+            {dashboardCards.filter((c) => results[c.key]?.state === "success").length} of{" "}
+            {dashboardCards.length} modules connected
+          </p>
+        </div>
+        <span
+          style={{ backgroundColor: "rgba(16,185,129,0.15)", color: "#34d399" }}
+          className="ml-auto rounded-md px-2.5 py-1 text-[11px] font-medium"
+        >
+          Live
+        </span>
+      </div>
+
+      {/* Error notice */}
       {errors.length > 0 && (
         <div
+          style={{
+            backgroundColor: "rgba(245,158,11,0.08)",
+            border: "1px solid rgba(245,158,11,0.2)",
+            color: "#fbbf24",
+          }}
           role="alert"
-          className="mb-5 flex items-start gap-3 rounded-lg border border-amber-400/25 bg-amber-400/10 p-4 text-sm text-amber-200"
+          className="mb-5 flex items-start gap-3 rounded-xl p-4 text-sm"
         >
           <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
           <div>
-            <p className="font-medium">Some dashboard data is unavailable.</p>
-            <p className="mt-1 text-amber-200/80">{errors.join(" ")}</p>
+            <p className="font-medium">Some data is unavailable</p>
+            <p className="mt-1 text-xs opacity-80">{errors.join(" ")}</p>
           </div>
         </div>
       )}
 
-      <section
-        className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3"
-        aria-label="Content resources"
-      >
-        {dashboardCards.map(({ key, label, description, href, icon: Icon }) => {
+      {/* Cards Grid */}
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+        {dashboardCards.map(({ key, label, description, href, icon: Icon, color }) => {
           const result = results[key];
           const isLoading = result?.state === "loading";
           const isError = result?.state === "error";
+
           return (
             <Link
               key={key}
               href={href}
-              className="group rounded-xl border border-white/10 bg-card/70 p-5 transition-colors hover:border-primary/40 hover:bg-card"
+              style={{
+                backgroundColor: "rgba(255,255,255,0.03)",
+                border: "1px solid rgba(255,255,255,0.07)",
+              }}
+              className="group relative overflow-hidden rounded-xl p-5 transition-all duration-200 hover:border-blue-500/30 hover:bg-blue-500/5"
             >
-              <div className="flex items-start justify-between gap-3">
-                <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                  <Icon className="h-5 w-5" />
-                </span>
-                <span
-                  className={`text-xs ${isError ? "text-amber-300" : "text-muted-foreground"}`}
-                >
-                  {isLoading ? (
-                    <Loader2
-                      className="h-4 w-4 animate-spin"
-                      aria-label={`Loading ${label}`}
-                    />
-                  ) : isError ? (
-                    "Unavailable"
-                  ) : (
-                    "Connected"
-                  )}
-                </span>
+              {/* Icon */}
+              <div
+                style={{
+                  backgroundColor: `${color}18`,
+                  border: `1px solid ${color}30`,
+                }}
+                className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg"
+              >
+                <Icon className="h-5 w-5" style={{ color }} />
               </div>
-              <h2 className="mt-5 text-base font-semibold text-white">
-                {label}
-              </h2>
-              <p className="mt-1 text-sm text-muted-foreground">
+
+              <h2 className="text-sm font-semibold text-white">{label}</h2>
+              <p className="mt-0.5 text-xs" style={{ color: "#64748b" }}>
                 {description}
               </p>
-              <div className="mt-5 flex items-center justify-between border-t border-white/10 pt-4 text-xs text-muted-foreground">
-                <span className="flex items-center gap-2">
-                  <span
-                    className={`h-1.5 w-1.5 rounded-full ${isError ? "bg-amber-400" : "bg-primary/70"}`}
-                  />
-                  {isLoading
-                    ? "Loading records"
-                    : isError
-                      ? "Could not load records"
-                      : `${result.count} ${result.count === 1 ? "record" : "records"}`}
+
+              {/* Footer */}
+              <div
+                style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
+                className="mt-4 flex items-center justify-between pt-3"
+              >
+                <span className="flex items-center gap-1.5 text-xs">
+                  {isLoading ? (
+                    <Loader2 className="h-3.5 w-3.5 animate-spin" style={{ color }} />
+                  ) : isError ? (
+                    <>
+                      <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
+                      <span style={{ color: "#fbbf24" }}>Unavailable</span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: color }} />
+                      <span style={{ color: "#94a3b8" }}>
+                        {result.count} {result.count === 1 ? "record" : "records"}
+                      </span>
+                    </>
+                  )}
                 </span>
-                <span className="text-primary opacity-0 transition-opacity group-hover:opacity-100">
-                  Open
-                </span>
+                <ArrowRight
+                  className="h-3.5 w-3.5 opacity-0 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0.5"
+                  style={{ color }}
+                />
               </div>
             </Link>
           );
         })}
-      </section>
-
-      <section className="mt-6 rounded-xl border border-dashed border-primary/25 bg-primary/[0.04] p-5 sm:p-6">
-        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <p className="text-sm font-semibold text-white">
-              Publishing workspace
-            </p>
-            <p className="mt-1 text-sm text-muted-foreground">
-              {hasLoadedData
-                ? "Your connected modules are reporting live records from the API."
-                : "Waiting for the admin API to return your workspace data."}
-            </p>
-          </div>
-          <span className="w-fit rounded-md bg-white/10 px-2.5 py-1 text-xs text-muted-foreground">
-            Live API summary
-          </span>
-        </div>
-      </section>
+      </div>
     </div>
   );
 }

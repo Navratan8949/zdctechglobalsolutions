@@ -42,7 +42,7 @@ export default function TeamPage() {
         description="A diverse team of passionate professionals united by a love for technology and a commitment to excellence."
       />
 
-      <section className="py-20 lg:py-28">
+      <section className="py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {loading && (
             <p className="mb-8 text-center text-sm text-muted-foreground">
@@ -60,12 +60,12 @@ export default function TeamPage() {
         </div>
       </section>
 
-      <CTASection
+      {/* <CTASection
         title="Want to Join Our Team?"
         description="We are always looking for talented people who share our passion for technology and quality."
         primaryLabel="View Open Positions"
         primaryHref="/careers"
-      />
+      /> */}
     </>
   );
 }

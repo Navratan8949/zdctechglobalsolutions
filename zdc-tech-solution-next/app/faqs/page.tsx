@@ -31,7 +31,7 @@ export default function FAQsPage() {
           </div>
         </div>
       </section>
-      <CTASection />
+      {/* <CTASection /> */}
     </>
   );
 }

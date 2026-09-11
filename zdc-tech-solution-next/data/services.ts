@@ -7,7 +7,41 @@ export type ServiceSlug =
   | "digital-marketing"
   | "seo"
   | "cloud-services"
-  | "it-consulting";
+  | "it-consulting"
+  | "social-media"
+  | "google-ads"
+  | "meta-ads"
+  | "gmb"
+  | "web-design"
+  | "crm-development"
+  | "software"
+  | "educational-portal"
+  | "restaurant-portal"
+  | "healthcare-portal"
+  | "travel-portal"
+  | "real-estate-portal"
+  | "ecommerce"
+  | "mobile-app"
+  | "windows-app"
+  | "xamarin"
+  | "native-app"
+  | "hybrid-app"
+  | "data-analytics"
+  | "ai-ml"
+  | "it-support"
+  | "logo-design"
+  | "ui-ux"
+  | "brochure-design"
+  | "hr-payroll"
+  | "jewellery-software"
+  | "crm-software"
+  | "real-estate-software"
+  | "inventory"
+  | "hospital-management"
+  | "school-management"
+  | "software-testing"
+  | "security-testing"
+  | "performance-testing";
 
 export interface ServiceFeature {
   title: string;
@@ -24,6 +58,10 @@ export interface Service {
   title: string;
   shortDescription: string;
   icon: string;
+  image?: {
+    public_id: string;
+    url: string;
+  };
   category: string;
   heroHeadline: string;
   heroSubheadline: string;
@@ -38,6 +76,1468 @@ export interface Service {
 }
 
 export const services: Service[] = [
+  {
+    slug: "social-media",
+    title: "Social Media Marketing",
+    shortDescription: "Professional Social Media Marketing services tailored to your business needs, delivering robust and scalable solutions.",
+    icon: "Share2",
+    category: "Online Marketing",
+    heroHeadline: "Expert Social Media Marketing Solutions",
+    heroSubheadline: "We provide comprehensive Social Media Marketing to help your business grow and succeed in the digital world.",
+    introduction: "Our Social Media Marketing services are designed to address your specific challenges. We use industry best practices and the latest technologies to ensure high-quality delivery and measurable results for your organization.",
+    whatWeOffer: [
+      { title: "Custom Solutions", description: "Tailored approaches specific to your Social Media Marketing requirements." },
+      { title: "Expert Consultation", description: "Strategic guidance from our experienced professionals." },
+      { title: "Seamless Integration", description: "Smooth implementation within your existing workflows." },
+      { title: "Ongoing Support", description: "Continuous maintenance and optimization of your services." }
+    ],
+    keyFeatures: [
+      "Scalable Architecture",
+      "High Performance",
+      "Secure Implementation",
+      "24/7 Support",
+      "Cost-effective Solutions",
+      "Modern Technologies"
+    ],
+    technologies: ["React", "Node.js", "Python", "Cloud", "Modern Stack"],
+    benefits: [
+      { title: "Increased Efficiency", description: "Streamline operations and reduce manual overhead." },
+      { title: "Better ROI", description: "Maximize the return on your technology investments." },
+      { title: "Competitive Edge", description: "Stay ahead of the curve with modern solutions." },
+      { title: "Business Growth", description: "Scale your business with reliable infrastructure." }
+    ],
+    whyChooseUs: [
+      "Years of industry expertise",
+      "Dedicated professional team",
+      "Proven track record of success",
+      "Client-first approach"
+    ],
+    faqs: [
+      { question: "How much does Social Media Marketing cost?", answer: "Costs vary depending on the scope and complexity of your requirements. Contact us for a detailed quote." },
+      { question: "How long does implementation take?", answer: "Timelines depend on the project size, but we always strive for efficient and timely delivery." },
+      { question: "Do you provide ongoing support?", answer: "Yes, we offer comprehensive post-launch support and maintenance packages." }
+    ],
+    relatedSlugs: ["website-development", "digital-marketing", "it-consulting"]
+  },
+  {
+    slug: "google-ads",
+    title: "Google Ads",
+    shortDescription: "Professional Google Ads services tailored to your business needs, delivering robust and scalable solutions.",
+    icon: "Megaphone",
+    category: "Online Marketing",
+    heroHeadline: "Expert Google Ads Solutions",
+    heroSubheadline: "We provide comprehensive Google Ads to help your business grow and succeed in the digital world.",
+    introduction: "Our Google Ads services are designed to address your specific challenges. We use industry best practices and the latest technologies to ensure high-quality delivery and measurable results for your organization.",
+    whatWeOffer: [
+      { title: "Custom Solutions", description: "Tailored approaches specific to your Google Ads requirements." },
+      { title: "Expert Consultation", description: "Strategic guidance from our experienced professionals." },
+      { title: "Seamless Integration", description: "Smooth implementation within your existing workflows." },
+      { title: "Ongoing Support", description: "Continuous maintenance and optimization of your services." }
+    ],
+    keyFeatures: [
+      "Scalable Architecture",
+      "High Performance",
+      "Secure Implementation",
+      "24/7 Support",
+      "Cost-effective Solutions",
+      "Modern Technologies"
+    ],
+    technologies: ["React", "Node.js", "Python", "Cloud", "Modern Stack"],
+    benefits: [
+      { title: "Increased Efficiency", description: "Streamline operations and reduce manual overhead." },
+      { title: "Better ROI", description: "Maximize the return on your technology investments." },
+      { title: "Competitive Edge", description: "Stay ahead of the curve with modern solutions." },
+      { title: "Business Growth", description: "Scale your business with reliable infrastructure." }
+    ],
+    whyChooseUs: [
+      "Years of industry expertise",
+      "Dedicated professional team",
+      "Proven track record of success",
+      "Client-first approach"
+    ],
+    faqs: [
+      { question: "How much does Google Ads cost?", answer: "Costs vary depending on the scope and complexity of your requirements. Contact us for a detailed quote." },
+      { question: "How long does implementation take?", answer: "Timelines depend on the project size, but we always strive for efficient and timely delivery." },
+      { question: "Do you provide ongoing support?", answer: "Yes, we offer comprehensive post-launch support and maintenance packages." }
+    ],
+    relatedSlugs: ["website-development", "digital-marketing", "it-consulting"]
+  },
+  {
+    slug: "meta-ads",
+    title: "Meta Ads",
+    shortDescription: "Professional Meta Ads services tailored to your business needs, delivering robust and scalable solutions.",
+    icon: "Megaphone",
+    category: "Online Marketing",
+    heroHeadline: "Expert Meta Ads Solutions",
+    heroSubheadline: "We provide comprehensive Meta Ads to help your business grow and succeed in the digital world.",
+    introduction: "Our Meta Ads services are designed to address your specific challenges. We use industry best practices and the latest technologies to ensure high-quality delivery and measurable results for your organization.",
+    whatWeOffer: [
+      { title: "Custom Solutions", description: "Tailored approaches specific to your Meta Ads requirements." },
+      { title: "Expert Consultation", description: "Strategic guidance from our experienced professionals." },
+      { title: "Seamless Integration", description: "Smooth implementation within your existing workflows." },
+      { title: "Ongoing Support", description: "Continuous maintenance and optimization of your services." }
+    ],
+    keyFeatures: [
+      "Scalable Architecture",
+      "High Performance",
+      "Secure Implementation",
+      "24/7 Support",
+      "Cost-effective Solutions",
+      "Modern Technologies"
+    ],
+    technologies: ["React", "Node.js", "Python", "Cloud", "Modern Stack"],
+    benefits: [
+      { title: "Increased Efficiency", description: "Streamline operations and reduce manual overhead." },
+      { title: "Better ROI", description: "Maximize the return on your technology investments." },
+      { title: "Competitive Edge", description: "Stay ahead of the curve with modern solutions." },
+      { title: "Business Growth", description: "Scale your business with reliable infrastructure." }
+    ],
+    whyChooseUs: [
+      "Years of industry expertise",
+      "Dedicated professional team",
+      "Proven track record of success",
+      "Client-first approach"
+    ],
+    faqs: [
+      { question: "How much does Meta Ads cost?", answer: "Costs vary depending on the scope and complexity of your requirements. Contact us for a detailed quote." },
+      { question: "How long does implementation take?", answer: "Timelines depend on the project size, but we always strive for efficient and timely delivery." },
+      { question: "Do you provide ongoing support?", answer: "Yes, we offer comprehensive post-launch support and maintenance packages." }
+    ],
+    relatedSlugs: ["website-development", "digital-marketing", "it-consulting"]
+  },
+  {
+    slug: "gmb",
+    title: "Google My Business Profile",
+    shortDescription: "Professional Google My Business Profile services tailored to your business needs, delivering robust and scalable solutions.",
+    icon: "MapPin",
+    category: "Online Marketing",
+    heroHeadline: "Expert Google My Business Profile Solutions",
+    heroSubheadline: "We provide comprehensive Google My Business Profile to help your business grow and succeed in the digital world.",
+    introduction: "Our Google My Business Profile services are designed to address your specific challenges. We use industry best practices and the latest technologies to ensure high-quality delivery and measurable results for your organization.",
+    whatWeOffer: [
+      { title: "Custom Solutions", description: "Tailored approaches specific to your Google My Business Profile requirements." },
+      { title: "Expert Consultation", description: "Strategic guidance from our experienced professionals." },
+      { title: "Seamless Integration", description: "Smooth implementation within your existing workflows." },
+      { title: "Ongoing Support", description: "Continuous maintenance and optimization of your services." }
+    ],
+    keyFeatures: [
+      "Scalable Architecture",
+      "High Performance",
+      "Secure Implementation",
+      "24/7 Support",
+      "Cost-effective Solutions",
+      "Modern Technologies"
+    ],
+    technologies: ["React", "Node.js", "Python", "Cloud", "Modern Stack"],
+    benefits: [
+      { title: "Increased Efficiency", description: "Streamline operations and reduce manual overhead." },
+      { title: "Better ROI", description: "Maximize the return on your technology investments." },
+      { title: "Competitive Edge", description: "Stay ahead of the curve with modern solutions." },
+      { title: "Business Growth", description: "Scale your business with reliable infrastructure." }
+    ],
+    whyChooseUs: [
+      "Years of industry expertise",
+      "Dedicated professional team",
+      "Proven track record of success",
+      "Client-first approach"
+    ],
+    faqs: [
+      { question: "How much does Google My Business Profile cost?", answer: "Costs vary depending on the scope and complexity of your requirements. Contact us for a detailed quote." },
+      { question: "How long does implementation take?", answer: "Timelines depend on the project size, but we always strive for efficient and timely delivery." },
+      { question: "Do you provide ongoing support?", answer: "Yes, we offer comprehensive post-launch support and maintenance packages." }
+    ],
+    relatedSlugs: ["website-development", "digital-marketing", "it-consulting"]
+  },
+  {
+    slug: "web-design",
+    title: "Web Design & Development",
+    shortDescription: "Professional Web Design & Development services tailored to your business needs, delivering robust and scalable solutions.",
+    icon: "Monitor",
+    category: "Web Design & Development",
+    heroHeadline: "Expert Web Design & Development Solutions",
+    heroSubheadline: "We provide comprehensive Web Design & Development to help your business grow and succeed in the digital world.",
+    introduction: "Our Web Design & Development services are designed to address your specific challenges. We use industry best practices and the latest technologies to ensure high-quality delivery and measurable results for your organization.",
+    whatWeOffer: [
+      { title: "Custom Solutions", description: "Tailored approaches specific to your Web Design & Development requirements." },
+      { title: "Expert Consultation", description: "Strategic guidance from our experienced professionals." },
+      { title: "Seamless Integration", description: "Smooth implementation within your existing workflows." },
+      { title: "Ongoing Support", description: "Continuous maintenance and optimization of your services." }
+    ],
+    keyFeatures: [
+      "Scalable Architecture",
+      "High Performance",
+      "Secure Implementation",
+      "24/7 Support",
+      "Cost-effective Solutions",
+      "Modern Technologies"
+    ],
+    technologies: ["React", "Node.js", "Python", "Cloud", "Modern Stack"],
+    benefits: [
+      { title: "Increased Efficiency", description: "Streamline operations and reduce manual overhead." },
+      { title: "Better ROI", description: "Maximize the return on your technology investments." },
+      { title: "Competitive Edge", description: "Stay ahead of the curve with modern solutions." },
+      { title: "Business Growth", description: "Scale your business with reliable infrastructure." }
+    ],
+    whyChooseUs: [
+      "Years of industry expertise",
+      "Dedicated professional team",
+      "Proven track record of success",
+      "Client-first approach"
+    ],
+    faqs: [
+      { question: "How much does Web Design & Development cost?", answer: "Costs vary depending on the scope and complexity of your requirements. Contact us for a detailed quote." },
+      { question: "How long does implementation take?", answer: "Timelines depend on the project size, but we always strive for efficient and timely delivery." },
+      { question: "Do you provide ongoing support?", answer: "Yes, we offer comprehensive post-launch support and maintenance packages." }
+    ],
+    relatedSlugs: ["website-development", "digital-marketing", "it-consulting"]
+  },
+  {
+    slug: "crm-development",
+    title: "CRM Software Development",
+    shortDescription: "Professional CRM Software Development services tailored to your business needs, delivering robust and scalable solutions.",
+    icon: "Users",
+    category: "Web Design & Development",
+    heroHeadline: "Expert CRM Software Development Solutions",
+    heroSubheadline: "We provide comprehensive CRM Software Development to help your business grow and succeed in the digital world.",
+    introduction: "Our CRM Software Development services are designed to address your specific challenges. We use industry best practices and the latest technologies to ensure high-quality delivery and measurable results for your organization.",
+    whatWeOffer: [
+      { title: "Custom Solutions", description: "Tailored approaches specific to your CRM Software Development requirements." },
+      { title: "Expert Consultation", description: "Strategic guidance from our experienced professionals." },
+      { title: "Seamless Integration", description: "Smooth implementation within your existing workflows." },
+      { title: "Ongoing Support", description: "Continuous maintenance and optimization of your services." }
+    ],
+    keyFeatures: [
+      "Scalable Architecture",
+      "High Performance",
+      "Secure Implementation",
+      "24/7 Support",
+      "Cost-effective Solutions",
+      "Modern Technologies"
+    ],
+    technologies: ["React", "Node.js", "Python", "Cloud", "Modern Stack"],
+    benefits: [
+      { title: "Increased Efficiency", description: "Streamline operations and reduce manual overhead." },
+      { title: "Better ROI", description: "Maximize the return on your technology investments." },
+      { title: "Competitive Edge", description: "Stay ahead of the curve with modern solutions." },
+      { title: "Business Growth", description: "Scale your business with reliable infrastructure." }
+    ],
+    whyChooseUs: [
+      "Years of industry expertise",
+      "Dedicated professional team",
+      "Proven track record of success",
+      "Client-first approach"
+    ],
+    faqs: [
+      { question: "How much does CRM Software Development cost?", answer: "Costs vary depending on the scope and complexity of your requirements. Contact us for a detailed quote." },
+      { question: "How long does implementation take?", answer: "Timelines depend on the project size, but we always strive for efficient and timely delivery." },
+      { question: "Do you provide ongoing support?", answer: "Yes, we offer comprehensive post-launch support and maintenance packages." }
+    ],
+    relatedSlugs: ["website-development", "digital-marketing", "it-consulting"]
+  },
+  {
+    slug: "software",
+    title: "Software Development",
+    shortDescription: "Professional Software Development services tailored to your business needs, delivering robust and scalable solutions.",
+    icon: "Code",
+    category: "Web Design & Development",
+    heroHeadline: "Expert Software Development Solutions",
+    heroSubheadline: "We provide comprehensive Software Development to help your business grow and succeed in the digital world.",
+    introduction: "Our Software Development services are designed to address your specific challenges. We use industry best practices and the latest technologies to ensure high-quality delivery and measurable results for your organization.",
+    whatWeOffer: [
+      { title: "Custom Solutions", description: "Tailored approaches specific to your Software Development requirements." },
+      { title: "Expert Consultation", description: "Strategic guidance from our experienced professionals." },
+      { title: "Seamless Integration", description: "Smooth implementation within your existing workflows." },
+      { title: "Ongoing Support", description: "Continuous maintenance and optimization of your services." }
+    ],
+    keyFeatures: [
+      "Scalable Architecture",
+      "High Performance",
+      "Secure Implementation",
+      "24/7 Support",
+      "Cost-effective Solutions",
+      "Modern Technologies"
+    ],
+    technologies: ["React", "Node.js", "Python", "Cloud", "Modern Stack"],
+    benefits: [
+      { title: "Increased Efficiency", description: "Streamline operations and reduce manual overhead." },
+      { title: "Better ROI", description: "Maximize the return on your technology investments." },
+      { title: "Competitive Edge", description: "Stay ahead of the curve with modern solutions." },
+      { title: "Business Growth", description: "Scale your business with reliable infrastructure." }
+    ],
+    whyChooseUs: [
+      "Years of industry expertise",
+      "Dedicated professional team",
+      "Proven track record of success",
+      "Client-first approach"
+    ],
+    faqs: [
+      { question: "How much does Software Development cost?", answer: "Costs vary depending on the scope and complexity of your requirements. Contact us for a detailed quote." },
+      { question: "How long does implementation take?", answer: "Timelines depend on the project size, but we always strive for efficient and timely delivery." },
+      { question: "Do you provide ongoing support?", answer: "Yes, we offer comprehensive post-launch support and maintenance packages." }
+    ],
+    relatedSlugs: ["website-development", "digital-marketing", "it-consulting"]
+  },
+  {
+    slug: "educational-portal",
+    title: "Educational Web Portal",
+    shortDescription: "Professional Educational Web Portal services tailored to your business needs, delivering robust and scalable solutions.",
+    icon: "BookOpen",
+    category: "Web Design & Development",
+    heroHeadline: "Expert Educational Web Portal Solutions",
+    heroSubheadline: "We provide comprehensive Educational Web Portal to help your business grow and succeed in the digital world.",
+    introduction: "Our Educational Web Portal services are designed to address your specific challenges. We use industry best practices and the latest technologies to ensure high-quality delivery and measurable results for your organization.",
+    whatWeOffer: [
+      { title: "Custom Solutions", description: "Tailored approaches specific to your Educational Web Portal requirements." },
+      { title: "Expert Consultation", description: "Strategic guidance from our experienced professionals." },
+      { title: "Seamless Integration", description: "Smooth implementation within your existing workflows." },
+      { title: "Ongoing Support", description: "Continuous maintenance and optimization of your services." }
+    ],
+    keyFeatures: [
+      "Scalable Architecture",
+      "High Performance",
+      "Secure Implementation",
+      "24/7 Support",
+      "Cost-effective Solutions",
+      "Modern Technologies"
+    ],
+    technologies: ["React", "Node.js", "Python", "Cloud", "Modern Stack"],
+    benefits: [
+      { title: "Increased Efficiency", description: "Streamline operations and reduce manual overhead." },
+      { title: "Better ROI", description: "Maximize the return on your technology investments." },
+      { title: "Competitive Edge", description: "Stay ahead of the curve with modern solutions." },
+      { title: "Business Growth", description: "Scale your business with reliable infrastructure." }
+    ],
+    whyChooseUs: [
+      "Years of industry expertise",
+      "Dedicated professional team",
+      "Proven track record of success",
+      "Client-first approach"
+    ],
+    faqs: [
+      { question: "How much does Educational Web Portal cost?", answer: "Costs vary depending on the scope and complexity of your requirements. Contact us for a detailed quote." },
+      { question: "How long does implementation take?", answer: "Timelines depend on the project size, but we always strive for efficient and timely delivery." },
+      { question: "Do you provide ongoing support?", answer: "Yes, we offer comprehensive post-launch support and maintenance packages." }
+    ],
+    relatedSlugs: ["website-development", "digital-marketing", "it-consulting"]
+  },
+  {
+    slug: "restaurant-portal",
+    title: "Restaurant Web Portal",
+    shortDescription: "Professional Restaurant Web Portal services tailored to your business needs, delivering robust and scalable solutions.",
+    icon: "Coffee",
+    category: "Web Design & Development",
+    heroHeadline: "Expert Restaurant Web Portal Solutions",
+    heroSubheadline: "We provide comprehensive Restaurant Web Portal to help your business grow and succeed in the digital world.",
+    introduction: "Our Restaurant Web Portal services are designed to address your specific challenges. We use industry best practices and the latest technologies to ensure high-quality delivery and measurable results for your organization.",
+    whatWeOffer: [
+      { title: "Custom Solutions", description: "Tailored approaches specific to your Restaurant Web Portal requirements." },
+      { title: "Expert Consultation", description: "Strategic guidance from our experienced professionals." },
+      { title: "Seamless Integration", description: "Smooth implementation within your existing workflows." },
+      { title: "Ongoing Support", description: "Continuous maintenance and optimization of your services." }
+    ],
+    keyFeatures: [
+      "Scalable Architecture",
+      "High Performance",
+      "Secure Implementation",
+      "24/7 Support",
+      "Cost-effective Solutions",
+      "Modern Technologies"
+    ],
+    technologies: ["React", "Node.js", "Python", "Cloud", "Modern Stack"],
+    benefits: [
+      { title: "Increased Efficiency", description: "Streamline operations and reduce manual overhead." },
+      { title: "Better ROI", description: "Maximize the return on your technology investments." },
+      { title: "Competitive Edge", description: "Stay ahead of the curve with modern solutions." },
+      { title: "Business Growth", description: "Scale your business with reliable infrastructure." }
+    ],
+    whyChooseUs: [
+      "Years of industry expertise",
+      "Dedicated professional team",
+      "Proven track record of success",
+      "Client-first approach"
+    ],
+    faqs: [
+      { question: "How much does Restaurant Web Portal cost?", answer: "Costs vary depending on the scope and complexity of your requirements. Contact us for a detailed quote." },
+      { question: "How long does implementation take?", answer: "Timelines depend on the project size, but we always strive for efficient and timely delivery." },
+      { question: "Do you provide ongoing support?", answer: "Yes, we offer comprehensive post-launch support and maintenance packages." }
+    ],
+    relatedSlugs: ["website-development", "digital-marketing", "it-consulting"]
+  },
+  {
+    slug: "healthcare-portal",
+    title: "Health Care Portal",
+    shortDescription: "Professional Health Care Portal services tailored to your business needs, delivering robust and scalable solutions.",
+    icon: "Heart",
+    category: "Web Design & Development",
+    heroHeadline: "Expert Health Care Portal Solutions",
+    heroSubheadline: "We provide comprehensive Health Care Portal to help your business grow and succeed in the digital world.",
+    introduction: "Our Health Care Portal services are designed to address your specific challenges. We use industry best practices and the latest technologies to ensure high-quality delivery and measurable results for your organization.",
+    whatWeOffer: [
+      { title: "Custom Solutions", description: "Tailored approaches specific to your Health Care Portal requirements." },
+      { title: "Expert Consultation", description: "Strategic guidance from our experienced professionals." },
+      { title: "Seamless Integration", description: "Smooth implementation within your existing workflows." },
+      { title: "Ongoing Support", description: "Continuous maintenance and optimization of your services." }
+    ],
+    keyFeatures: [
+      "Scalable Architecture",
+      "High Performance",
+      "Secure Implementation",
+      "24/7 Support",
+      "Cost-effective Solutions",
+      "Modern Technologies"
+    ],
+    technologies: ["React", "Node.js", "Python", "Cloud", "Modern Stack"],
+    benefits: [
+      { title: "Increased Efficiency", description: "Streamline operations and reduce manual overhead." },
+      { title: "Better ROI", description: "Maximize the return on your technology investments." },
+      { title: "Competitive Edge", description: "Stay ahead of the curve with modern solutions." },
+      { title: "Business Growth", description: "Scale your business with reliable infrastructure." }
+    ],
+    whyChooseUs: [
+      "Years of industry expertise",
+      "Dedicated professional team",
+      "Proven track record of success",
+      "Client-first approach"
+    ],
+    faqs: [
+      { question: "How much does Health Care Portal cost?", answer: "Costs vary depending on the scope and complexity of your requirements. Contact us for a detailed quote." },
+      { question: "How long does implementation take?", answer: "Timelines depend on the project size, but we always strive for efficient and timely delivery." },
+      { question: "Do you provide ongoing support?", answer: "Yes, we offer comprehensive post-launch support and maintenance packages." }
+    ],
+    relatedSlugs: ["website-development", "digital-marketing", "it-consulting"]
+  },
+  {
+    slug: "travel-portal",
+    title: "Travel Portal Development",
+    shortDescription: "Professional Travel Portal Development services tailored to your business needs, delivering robust and scalable solutions.",
+    icon: "Plane",
+    category: "Web Design & Development",
+    heroHeadline: "Expert Travel Portal Development Solutions",
+    heroSubheadline: "We provide comprehensive Travel Portal Development to help your business grow and succeed in the digital world.",
+    introduction: "Our Travel Portal Development services are designed to address your specific challenges. We use industry best practices and the latest technologies to ensure high-quality delivery and measurable results for your organization.",
+    whatWeOffer: [
+      { title: "Custom Solutions", description: "Tailored approaches specific to your Travel Portal Development requirements." },
+      { title: "Expert Consultation", description: "Strategic guidance from our experienced professionals." },
+      { title: "Seamless Integration", description: "Smooth implementation within your existing workflows." },
+      { title: "Ongoing Support", description: "Continuous maintenance and optimization of your services." }
+    ],
+    keyFeatures: [
+      "Scalable Architecture",
+      "High Performance",
+      "Secure Implementation",
+      "24/7 Support",
+      "Cost-effective Solutions",
+      "Modern Technologies"
+    ],
+    technologies: ["React", "Node.js", "Python", "Cloud", "Modern Stack"],
+    benefits: [
+      { title: "Increased Efficiency", description: "Streamline operations and reduce manual overhead." },
+      { title: "Better ROI", description: "Maximize the return on your technology investments." },
+      { title: "Competitive Edge", description: "Stay ahead of the curve with modern solutions." },
+      { title: "Business Growth", description: "Scale your business with reliable infrastructure." }
+    ],
+    whyChooseUs: [
+      "Years of industry expertise",
+      "Dedicated professional team",
+      "Proven track record of success",
+      "Client-first approach"
+    ],
+    faqs: [
+      { question: "How much does Travel Portal Development cost?", answer: "Costs vary depending on the scope and complexity of your requirements. Contact us for a detailed quote." },
+      { question: "How long does implementation take?", answer: "Timelines depend on the project size, but we always strive for efficient and timely delivery." },
+      { question: "Do you provide ongoing support?", answer: "Yes, we offer comprehensive post-launch support and maintenance packages." }
+    ],
+    relatedSlugs: ["website-development", "digital-marketing", "it-consulting"]
+  },
+  {
+    slug: "real-estate-portal",
+    title: "Real Estate Portal",
+    shortDescription: "Professional Real Estate Portal services tailored to your business needs, delivering robust and scalable solutions.",
+    icon: "Home",
+    category: "Web Design & Development",
+    heroHeadline: "Expert Real Estate Portal Solutions",
+    heroSubheadline: "We provide comprehensive Real Estate Portal to help your business grow and succeed in the digital world.",
+    introduction: "Our Real Estate Portal services are designed to address your specific challenges. We use industry best practices and the latest technologies to ensure high-quality delivery and measurable results for your organization.",
+    whatWeOffer: [
+      { title: "Custom Solutions", description: "Tailored approaches specific to your Real Estate Portal requirements." },
+      { title: "Expert Consultation", description: "Strategic guidance from our experienced professionals." },
+      { title: "Seamless Integration", description: "Smooth implementation within your existing workflows." },
+      { title: "Ongoing Support", description: "Continuous maintenance and optimization of your services." }
+    ],
+    keyFeatures: [
+      "Scalable Architecture",
+      "High Performance",
+      "Secure Implementation",
+      "24/7 Support",
+      "Cost-effective Solutions",
+      "Modern Technologies"
+    ],
+    technologies: ["React", "Node.js", "Python", "Cloud", "Modern Stack"],
+    benefits: [
+      { title: "Increased Efficiency", description: "Streamline operations and reduce manual overhead." },
+      { title: "Better ROI", description: "Maximize the return on your technology investments." },
+      { title: "Competitive Edge", description: "Stay ahead of the curve with modern solutions." },
+      { title: "Business Growth", description: "Scale your business with reliable infrastructure." }
+    ],
+    whyChooseUs: [
+      "Years of industry expertise",
+      "Dedicated professional team",
+      "Proven track record of success",
+      "Client-first approach"
+    ],
+    faqs: [
+      { question: "How much does Real Estate Portal cost?", answer: "Costs vary depending on the scope and complexity of your requirements. Contact us for a detailed quote." },
+      { question: "How long does implementation take?", answer: "Timelines depend on the project size, but we always strive for efficient and timely delivery." },
+      { question: "Do you provide ongoing support?", answer: "Yes, we offer comprehensive post-launch support and maintenance packages." }
+    ],
+    relatedSlugs: ["website-development", "digital-marketing", "it-consulting"]
+  },
+  {
+    slug: "ecommerce",
+    title: "E-Commerce Website",
+    shortDescription: "Professional E-Commerce Website services tailored to your business needs, delivering robust and scalable solutions.",
+    icon: "ShoppingCart",
+    category: "Web Design & Development",
+    heroHeadline: "Expert E-Commerce Website Solutions",
+    heroSubheadline: "We provide comprehensive E-Commerce Website to help your business grow and succeed in the digital world.",
+    introduction: "Our E-Commerce Website services are designed to address your specific challenges. We use industry best practices and the latest technologies to ensure high-quality delivery and measurable results for your organization.",
+    whatWeOffer: [
+      { title: "Custom Solutions", description: "Tailored approaches specific to your E-Commerce Website requirements." },
+      { title: "Expert Consultation", description: "Strategic guidance from our experienced professionals." },
+      { title: "Seamless Integration", description: "Smooth implementation within your existing workflows." },
+      { title: "Ongoing Support", description: "Continuous maintenance and optimization of your services." }
+    ],
+    keyFeatures: [
+      "Scalable Architecture",
+      "High Performance",
+      "Secure Implementation",
+      "24/7 Support",
+      "Cost-effective Solutions",
+      "Modern Technologies"
+    ],
+    technologies: ["React", "Node.js", "Python", "Cloud", "Modern Stack"],
+    benefits: [
+      { title: "Increased Efficiency", description: "Streamline operations and reduce manual overhead." },
+      { title: "Better ROI", description: "Maximize the return on your technology investments." },
+      { title: "Competitive Edge", description: "Stay ahead of the curve with modern solutions." },
+      { title: "Business Growth", description: "Scale your business with reliable infrastructure." }
+    ],
+    whyChooseUs: [
+      "Years of industry expertise",
+      "Dedicated professional team",
+      "Proven track record of success",
+      "Client-first approach"
+    ],
+    faqs: [
+      { question: "How much does E-Commerce Website cost?", answer: "Costs vary depending on the scope and complexity of your requirements. Contact us for a detailed quote." },
+      { question: "How long does implementation take?", answer: "Timelines depend on the project size, but we always strive for efficient and timely delivery." },
+      { question: "Do you provide ongoing support?", answer: "Yes, we offer comprehensive post-launch support and maintenance packages." }
+    ],
+    relatedSlugs: ["website-development", "digital-marketing", "it-consulting"]
+  },
+  {
+    slug: "mobile-app",
+    title: "Mobile App Development",
+    shortDescription: "Professional Mobile App Development services tailored to your business needs, delivering robust and scalable solutions.",
+    icon: "Smartphone",
+    category: "Mobile Application",
+    heroHeadline: "Expert Mobile App Development Solutions",
+    heroSubheadline: "We provide comprehensive Mobile App Development to help your business grow and succeed in the digital world.",
+    introduction: "Our Mobile App Development services are designed to address your specific challenges. We use industry best practices and the latest technologies to ensure high-quality delivery and measurable results for your organization.",
+    whatWeOffer: [
+      { title: "Custom Solutions", description: "Tailored approaches specific to your Mobile App Development requirements." },
+      { title: "Expert Consultation", description: "Strategic guidance from our experienced professionals." },
+      { title: "Seamless Integration", description: "Smooth implementation within your existing workflows." },
+      { title: "Ongoing Support", description: "Continuous maintenance and optimization of your services." }
+    ],
+    keyFeatures: [
+      "Scalable Architecture",
+      "High Performance",
+      "Secure Implementation",
+      "24/7 Support",
+      "Cost-effective Solutions",
+      "Modern Technologies"
+    ],
+    technologies: ["React", "Node.js", "Python", "Cloud", "Modern Stack"],
+    benefits: [
+      { title: "Increased Efficiency", description: "Streamline operations and reduce manual overhead." },
+      { title: "Better ROI", description: "Maximize the return on your technology investments." },
+      { title: "Competitive Edge", description: "Stay ahead of the curve with modern solutions." },
+      { title: "Business Growth", description: "Scale your business with reliable infrastructure." }
+    ],
+    whyChooseUs: [
+      "Years of industry expertise",
+      "Dedicated professional team",
+      "Proven track record of success",
+      "Client-first approach"
+    ],
+    faqs: [
+      { question: "How much does Mobile App Development cost?", answer: "Costs vary depending on the scope and complexity of your requirements. Contact us for a detailed quote." },
+      { question: "How long does implementation take?", answer: "Timelines depend on the project size, but we always strive for efficient and timely delivery." },
+      { question: "Do you provide ongoing support?", answer: "Yes, we offer comprehensive post-launch support and maintenance packages." }
+    ],
+    relatedSlugs: ["website-development", "digital-marketing", "it-consulting"]
+  },
+  {
+    slug: "windows-app",
+    title: "Windows App Development",
+    shortDescription: "Professional Windows App Development services tailored to your business needs, delivering robust and scalable solutions.",
+    icon: "Monitor",
+    category: "Mobile Application",
+    heroHeadline: "Expert Windows App Development Solutions",
+    heroSubheadline: "We provide comprehensive Windows App Development to help your business grow and succeed in the digital world.",
+    introduction: "Our Windows App Development services are designed to address your specific challenges. We use industry best practices and the latest technologies to ensure high-quality delivery and measurable results for your organization.",
+    whatWeOffer: [
+      { title: "Custom Solutions", description: "Tailored approaches specific to your Windows App Development requirements." },
+      { title: "Expert Consultation", description: "Strategic guidance from our experienced professionals." },
+      { title: "Seamless Integration", description: "Smooth implementation within your existing workflows." },
+      { title: "Ongoing Support", description: "Continuous maintenance and optimization of your services." }
+    ],
+    keyFeatures: [
+      "Scalable Architecture",
+      "High Performance",
+      "Secure Implementation",
+      "24/7 Support",
+      "Cost-effective Solutions",
+      "Modern Technologies"
+    ],
+    technologies: ["React", "Node.js", "Python", "Cloud", "Modern Stack"],
+    benefits: [
+      { title: "Increased Efficiency", description: "Streamline operations and reduce manual overhead." },
+      { title: "Better ROI", description: "Maximize the return on your technology investments." },
+      { title: "Competitive Edge", description: "Stay ahead of the curve with modern solutions." },
+      { title: "Business Growth", description: "Scale your business with reliable infrastructure." }
+    ],
+    whyChooseUs: [
+      "Years of industry expertise",
+      "Dedicated professional team",
+      "Proven track record of success",
+      "Client-first approach"
+    ],
+    faqs: [
+      { question: "How much does Windows App Development cost?", answer: "Costs vary depending on the scope and complexity of your requirements. Contact us for a detailed quote." },
+      { question: "How long does implementation take?", answer: "Timelines depend on the project size, but we always strive for efficient and timely delivery." },
+      { question: "Do you provide ongoing support?", answer: "Yes, we offer comprehensive post-launch support and maintenance packages." }
+    ],
+    relatedSlugs: ["website-development", "digital-marketing", "it-consulting"]
+  },
+  {
+    slug: "xamarin",
+    title: "Xamarine App Development",
+    shortDescription: "Professional Xamarine App Development services tailored to your business needs, delivering robust and scalable solutions.",
+    icon: "Smartphone",
+    category: "Mobile Application",
+    heroHeadline: "Expert Xamarine App Development Solutions",
+    heroSubheadline: "We provide comprehensive Xamarine App Development to help your business grow and succeed in the digital world.",
+    introduction: "Our Xamarine App Development services are designed to address your specific challenges. We use industry best practices and the latest technologies to ensure high-quality delivery and measurable results for your organization.",
+    whatWeOffer: [
+      { title: "Custom Solutions", description: "Tailored approaches specific to your Xamarine App Development requirements." },
+      { title: "Expert Consultation", description: "Strategic guidance from our experienced professionals." },
+      { title: "Seamless Integration", description: "Smooth implementation within your existing workflows." },
+      { title: "Ongoing Support", description: "Continuous maintenance and optimization of your services." }
+    ],
+    keyFeatures: [
+      "Scalable Architecture",
+      "High Performance",
+      "Secure Implementation",
+      "24/7 Support",
+      "Cost-effective Solutions",
+      "Modern Technologies"
+    ],
+    technologies: ["React", "Node.js", "Python", "Cloud", "Modern Stack"],
+    benefits: [
+      { title: "Increased Efficiency", description: "Streamline operations and reduce manual overhead." },
+      { title: "Better ROI", description: "Maximize the return on your technology investments." },
+      { title: "Competitive Edge", description: "Stay ahead of the curve with modern solutions." },
+      { title: "Business Growth", description: "Scale your business with reliable infrastructure." }
+    ],
+    whyChooseUs: [
+      "Years of industry expertise",
+      "Dedicated professional team",
+      "Proven track record of success",
+      "Client-first approach"
+    ],
+    faqs: [
+      { question: "How much does Xamarine App Development cost?", answer: "Costs vary depending on the scope and complexity of your requirements. Contact us for a detailed quote." },
+      { question: "How long does implementation take?", answer: "Timelines depend on the project size, but we always strive for efficient and timely delivery." },
+      { question: "Do you provide ongoing support?", answer: "Yes, we offer comprehensive post-launch support and maintenance packages." }
+    ],
+    relatedSlugs: ["website-development", "digital-marketing", "it-consulting"]
+  },
+  {
+    slug: "native-app",
+    title: "Native App Development",
+    shortDescription: "Professional Native App Development services tailored to your business needs, delivering robust and scalable solutions.",
+    icon: "Smartphone",
+    category: "Mobile Application",
+    heroHeadline: "Expert Native App Development Solutions",
+    heroSubheadline: "We provide comprehensive Native App Development to help your business grow and succeed in the digital world.",
+    introduction: "Our Native App Development services are designed to address your specific challenges. We use industry best practices and the latest technologies to ensure high-quality delivery and measurable results for your organization.",
+    whatWeOffer: [
+      { title: "Custom Solutions", description: "Tailored approaches specific to your Native App Development requirements." },
+      { title: "Expert Consultation", description: "Strategic guidance from our experienced professionals." },
+      { title: "Seamless Integration", description: "Smooth implementation within your existing workflows." },
+      { title: "Ongoing Support", description: "Continuous maintenance and optimization of your services." }
+    ],
+    keyFeatures: [
+      "Scalable Architecture",
+      "High Performance",
+      "Secure Implementation",
+      "24/7 Support",
+      "Cost-effective Solutions",
+      "Modern Technologies"
+    ],
+    technologies: ["React", "Node.js", "Python", "Cloud", "Modern Stack"],
+    benefits: [
+      { title: "Increased Efficiency", description: "Streamline operations and reduce manual overhead." },
+      { title: "Better ROI", description: "Maximize the return on your technology investments." },
+      { title: "Competitive Edge", description: "Stay ahead of the curve with modern solutions." },
+      { title: "Business Growth", description: "Scale your business with reliable infrastructure." }
+    ],
+    whyChooseUs: [
+      "Years of industry expertise",
+      "Dedicated professional team",
+      "Proven track record of success",
+      "Client-first approach"
+    ],
+    faqs: [
+      { question: "How much does Native App Development cost?", answer: "Costs vary depending on the scope and complexity of your requirements. Contact us for a detailed quote." },
+      { question: "How long does implementation take?", answer: "Timelines depend on the project size, but we always strive for efficient and timely delivery." },
+      { question: "Do you provide ongoing support?", answer: "Yes, we offer comprehensive post-launch support and maintenance packages." }
+    ],
+    relatedSlugs: ["website-development", "digital-marketing", "it-consulting"]
+  },
+  {
+    slug: "hybrid-app",
+    title: "Hybrid App Development",
+    shortDescription: "Professional Hybrid App Development services tailored to your business needs, delivering robust and scalable solutions.",
+    icon: "Smartphone",
+    category: "Mobile Application",
+    heroHeadline: "Expert Hybrid App Development Solutions",
+    heroSubheadline: "We provide comprehensive Hybrid App Development to help your business grow and succeed in the digital world.",
+    introduction: "Our Hybrid App Development services are designed to address your specific challenges. We use industry best practices and the latest technologies to ensure high-quality delivery and measurable results for your organization.",
+    whatWeOffer: [
+      { title: "Custom Solutions", description: "Tailored approaches specific to your Hybrid App Development requirements." },
+      { title: "Expert Consultation", description: "Strategic guidance from our experienced professionals." },
+      { title: "Seamless Integration", description: "Smooth implementation within your existing workflows." },
+      { title: "Ongoing Support", description: "Continuous maintenance and optimization of your services." }
+    ],
+    keyFeatures: [
+      "Scalable Architecture",
+      "High Performance",
+      "Secure Implementation",
+      "24/7 Support",
+      "Cost-effective Solutions",
+      "Modern Technologies"
+    ],
+    technologies: ["React", "Node.js", "Python", "Cloud", "Modern Stack"],
+    benefits: [
+      { title: "Increased Efficiency", description: "Streamline operations and reduce manual overhead." },
+      { title: "Better ROI", description: "Maximize the return on your technology investments." },
+      { title: "Competitive Edge", description: "Stay ahead of the curve with modern solutions." },
+      { title: "Business Growth", description: "Scale your business with reliable infrastructure." }
+    ],
+    whyChooseUs: [
+      "Years of industry expertise",
+      "Dedicated professional team",
+      "Proven track record of success",
+      "Client-first approach"
+    ],
+    faqs: [
+      { question: "How much does Hybrid App Development cost?", answer: "Costs vary depending on the scope and complexity of your requirements. Contact us for a detailed quote." },
+      { question: "How long does implementation take?", answer: "Timelines depend on the project size, but we always strive for efficient and timely delivery." },
+      { question: "Do you provide ongoing support?", answer: "Yes, we offer comprehensive post-launch support and maintenance packages." }
+    ],
+    relatedSlugs: ["website-development", "digital-marketing", "it-consulting"]
+  },
+  {
+    slug: "data-analytics",
+    title: "Data Analytics & BI",
+    shortDescription: "Professional Data Analytics & BI services tailored to your business needs, delivering robust and scalable solutions.",
+    icon: "BarChart",
+    category: "Our Service",
+    heroHeadline: "Expert Data Analytics & BI Solutions",
+    heroSubheadline: "We provide comprehensive Data Analytics & BI to help your business grow and succeed in the digital world.",
+    introduction: "Our Data Analytics & BI services are designed to address your specific challenges. We use industry best practices and the latest technologies to ensure high-quality delivery and measurable results for your organization.",
+    whatWeOffer: [
+      { title: "Custom Solutions", description: "Tailored approaches specific to your Data Analytics & BI requirements." },
+      { title: "Expert Consultation", description: "Strategic guidance from our experienced professionals." },
+      { title: "Seamless Integration", description: "Smooth implementation within your existing workflows." },
+      { title: "Ongoing Support", description: "Continuous maintenance and optimization of your services." }
+    ],
+    keyFeatures: [
+      "Scalable Architecture",
+      "High Performance",
+      "Secure Implementation",
+      "24/7 Support",
+      "Cost-effective Solutions",
+      "Modern Technologies"
+    ],
+    technologies: ["React", "Node.js", "Python", "Cloud", "Modern Stack"],
+    benefits: [
+      { title: "Increased Efficiency", description: "Streamline operations and reduce manual overhead." },
+      { title: "Better ROI", description: "Maximize the return on your technology investments." },
+      { title: "Competitive Edge", description: "Stay ahead of the curve with modern solutions." },
+      { title: "Business Growth", description: "Scale your business with reliable infrastructure." }
+    ],
+    whyChooseUs: [
+      "Years of industry expertise",
+      "Dedicated professional team",
+      "Proven track record of success",
+      "Client-first approach"
+    ],
+    faqs: [
+      { question: "How much does Data Analytics & BI cost?", answer: "Costs vary depending on the scope and complexity of your requirements. Contact us for a detailed quote." },
+      { question: "How long does implementation take?", answer: "Timelines depend on the project size, but we always strive for efficient and timely delivery." },
+      { question: "Do you provide ongoing support?", answer: "Yes, we offer comprehensive post-launch support and maintenance packages." }
+    ],
+    relatedSlugs: ["website-development", "digital-marketing", "it-consulting"]
+  },
+  {
+    slug: "ai-ml",
+    title: "AI & Machine Learning",
+    shortDescription: "Professional AI & Machine Learning services tailored to your business needs, delivering robust and scalable solutions.",
+    icon: "Brain",
+    category: "Our Service",
+    heroHeadline: "Expert AI & Machine Learning Solutions",
+    heroSubheadline: "We provide comprehensive AI & Machine Learning to help your business grow and succeed in the digital world.",
+    introduction: "Our AI & Machine Learning services are designed to address your specific challenges. We use industry best practices and the latest technologies to ensure high-quality delivery and measurable results for your organization.",
+    whatWeOffer: [
+      { title: "Custom Solutions", description: "Tailored approaches specific to your AI & Machine Learning requirements." },
+      { title: "Expert Consultation", description: "Strategic guidance from our experienced professionals." },
+      { title: "Seamless Integration", description: "Smooth implementation within your existing workflows." },
+      { title: "Ongoing Support", description: "Continuous maintenance and optimization of your services." }
+    ],
+    keyFeatures: [
+      "Scalable Architecture",
+      "High Performance",
+      "Secure Implementation",
+      "24/7 Support",
+      "Cost-effective Solutions",
+      "Modern Technologies"
+    ],
+    technologies: ["React", "Node.js", "Python", "Cloud", "Modern Stack"],
+    benefits: [
+      { title: "Increased Efficiency", description: "Streamline operations and reduce manual overhead." },
+      { title: "Better ROI", description: "Maximize the return on your technology investments." },
+      { title: "Competitive Edge", description: "Stay ahead of the curve with modern solutions." },
+      { title: "Business Growth", description: "Scale your business with reliable infrastructure." }
+    ],
+    whyChooseUs: [
+      "Years of industry expertise",
+      "Dedicated professional team",
+      "Proven track record of success",
+      "Client-first approach"
+    ],
+    faqs: [
+      { question: "How much does AI & Machine Learning cost?", answer: "Costs vary depending on the scope and complexity of your requirements. Contact us for a detailed quote." },
+      { question: "How long does implementation take?", answer: "Timelines depend on the project size, but we always strive for efficient and timely delivery." },
+      { question: "Do you provide ongoing support?", answer: "Yes, we offer comprehensive post-launch support and maintenance packages." }
+    ],
+    relatedSlugs: ["website-development", "digital-marketing", "it-consulting"]
+  },
+  {
+    slug: "it-support",
+    title: "IT Support & Managed Service",
+    shortDescription: "Professional IT Support & Managed Service services tailored to your business needs, delivering robust and scalable solutions.",
+    icon: "Headphones",
+    category: "Our Service",
+    heroHeadline: "Expert IT Support & Managed Service Solutions",
+    heroSubheadline: "We provide comprehensive IT Support & Managed Service to help your business grow and succeed in the digital world.",
+    introduction: "Our IT Support & Managed Service services are designed to address your specific challenges. We use industry best practices and the latest technologies to ensure high-quality delivery and measurable results for your organization.",
+    whatWeOffer: [
+      { title: "Custom Solutions", description: "Tailored approaches specific to your IT Support & Managed Service requirements." },
+      { title: "Expert Consultation", description: "Strategic guidance from our experienced professionals." },
+      { title: "Seamless Integration", description: "Smooth implementation within your existing workflows." },
+      { title: "Ongoing Support", description: "Continuous maintenance and optimization of your services." }
+    ],
+    keyFeatures: [
+      "Scalable Architecture",
+      "High Performance",
+      "Secure Implementation",
+      "24/7 Support",
+      "Cost-effective Solutions",
+      "Modern Technologies"
+    ],
+    technologies: ["React", "Node.js", "Python", "Cloud", "Modern Stack"],
+    benefits: [
+      { title: "Increased Efficiency", description: "Streamline operations and reduce manual overhead." },
+      { title: "Better ROI", description: "Maximize the return on your technology investments." },
+      { title: "Competitive Edge", description: "Stay ahead of the curve with modern solutions." },
+      { title: "Business Growth", description: "Scale your business with reliable infrastructure." }
+    ],
+    whyChooseUs: [
+      "Years of industry expertise",
+      "Dedicated professional team",
+      "Proven track record of success",
+      "Client-first approach"
+    ],
+    faqs: [
+      { question: "How much does IT Support & Managed Service cost?", answer: "Costs vary depending on the scope and complexity of your requirements. Contact us for a detailed quote." },
+      { question: "How long does implementation take?", answer: "Timelines depend on the project size, but we always strive for efficient and timely delivery." },
+      { question: "Do you provide ongoing support?", answer: "Yes, we offer comprehensive post-launch support and maintenance packages." }
+    ],
+    relatedSlugs: ["website-development", "digital-marketing", "it-consulting"]
+  },
+  {
+    slug: "logo-design",
+    title: "Logo Design",
+    shortDescription: "Professional Logo Design services tailored to your business needs, delivering robust and scalable solutions.",
+    icon: "PenTool",
+    category: "Our Service",
+    heroHeadline: "Expert Logo Design Solutions",
+    heroSubheadline: "We provide comprehensive Logo Design to help your business grow and succeed in the digital world.",
+    introduction: "Our Logo Design services are designed to address your specific challenges. We use industry best practices and the latest technologies to ensure high-quality delivery and measurable results for your organization.",
+    whatWeOffer: [
+      { title: "Custom Solutions", description: "Tailored approaches specific to your Logo Design requirements." },
+      { title: "Expert Consultation", description: "Strategic guidance from our experienced professionals." },
+      { title: "Seamless Integration", description: "Smooth implementation within your existing workflows." },
+      { title: "Ongoing Support", description: "Continuous maintenance and optimization of your services." }
+    ],
+    keyFeatures: [
+      "Scalable Architecture",
+      "High Performance",
+      "Secure Implementation",
+      "24/7 Support",
+      "Cost-effective Solutions",
+      "Modern Technologies"
+    ],
+    technologies: ["React", "Node.js", "Python", "Cloud", "Modern Stack"],
+    benefits: [
+      { title: "Increased Efficiency", description: "Streamline operations and reduce manual overhead." },
+      { title: "Better ROI", description: "Maximize the return on your technology investments." },
+      { title: "Competitive Edge", description: "Stay ahead of the curve with modern solutions." },
+      { title: "Business Growth", description: "Scale your business with reliable infrastructure." }
+    ],
+    whyChooseUs: [
+      "Years of industry expertise",
+      "Dedicated professional team",
+      "Proven track record of success",
+      "Client-first approach"
+    ],
+    faqs: [
+      { question: "How much does Logo Design cost?", answer: "Costs vary depending on the scope and complexity of your requirements. Contact us for a detailed quote." },
+      { question: "How long does implementation take?", answer: "Timelines depend on the project size, but we always strive for efficient and timely delivery." },
+      { question: "Do you provide ongoing support?", answer: "Yes, we offer comprehensive post-launch support and maintenance packages." }
+    ],
+    relatedSlugs: ["website-development", "digital-marketing", "it-consulting"]
+  },
+  {
+    slug: "ui-ux",
+    title: "UI/UX Design",
+    shortDescription: "Professional UI/UX Design services tailored to your business needs, delivering robust and scalable solutions.",
+    icon: "Palette",
+    category: "Our Service",
+    heroHeadline: "Expert UI/UX Design Solutions",
+    heroSubheadline: "We provide comprehensive UI/UX Design to help your business grow and succeed in the digital world.",
+    introduction: "Our UI/UX Design services are designed to address your specific challenges. We use industry best practices and the latest technologies to ensure high-quality delivery and measurable results for your organization.",
+    whatWeOffer: [
+      { title: "Custom Solutions", description: "Tailored approaches specific to your UI/UX Design requirements." },
+      { title: "Expert Consultation", description: "Strategic guidance from our experienced professionals." },
+      { title: "Seamless Integration", description: "Smooth implementation within your existing workflows." },
+      { title: "Ongoing Support", description: "Continuous maintenance and optimization of your services." }
+    ],
+    keyFeatures: [
+      "Scalable Architecture",
+      "High Performance",
+      "Secure Implementation",
+      "24/7 Support",
+      "Cost-effective Solutions",
+      "Modern Technologies"
+    ],
+    technologies: ["React", "Node.js", "Python", "Cloud", "Modern Stack"],
+    benefits: [
+      { title: "Increased Efficiency", description: "Streamline operations and reduce manual overhead." },
+      { title: "Better ROI", description: "Maximize the return on your technology investments." },
+      { title: "Competitive Edge", description: "Stay ahead of the curve with modern solutions." },
+      { title: "Business Growth", description: "Scale your business with reliable infrastructure." }
+    ],
+    whyChooseUs: [
+      "Years of industry expertise",
+      "Dedicated professional team",
+      "Proven track record of success",
+      "Client-first approach"
+    ],
+    faqs: [
+      { question: "How much does UI/UX Design cost?", answer: "Costs vary depending on the scope and complexity of your requirements. Contact us for a detailed quote." },
+      { question: "How long does implementation take?", answer: "Timelines depend on the project size, but we always strive for efficient and timely delivery." },
+      { question: "Do you provide ongoing support?", answer: "Yes, we offer comprehensive post-launch support and maintenance packages." }
+    ],
+    relatedSlugs: ["website-development", "digital-marketing", "it-consulting"]
+  },
+  {
+    slug: "brochure-design",
+    title: "Brochure Design",
+    shortDescription: "Professional Brochure Design services tailored to your business needs, delivering robust and scalable solutions.",
+    icon: "Book",
+    category: "Our Service",
+    heroHeadline: "Expert Brochure Design Solutions",
+    heroSubheadline: "We provide comprehensive Brochure Design to help your business grow and succeed in the digital world.",
+    introduction: "Our Brochure Design services are designed to address your specific challenges. We use industry best practices and the latest technologies to ensure high-quality delivery and measurable results for your organization.",
+    whatWeOffer: [
+      { title: "Custom Solutions", description: "Tailored approaches specific to your Brochure Design requirements." },
+      { title: "Expert Consultation", description: "Strategic guidance from our experienced professionals." },
+      { title: "Seamless Integration", description: "Smooth implementation within your existing workflows." },
+      { title: "Ongoing Support", description: "Continuous maintenance and optimization of your services." }
+    ],
+    keyFeatures: [
+      "Scalable Architecture",
+      "High Performance",
+      "Secure Implementation",
+      "24/7 Support",
+      "Cost-effective Solutions",
+      "Modern Technologies"
+    ],
+    technologies: ["React", "Node.js", "Python", "Cloud", "Modern Stack"],
+    benefits: [
+      { title: "Increased Efficiency", description: "Streamline operations and reduce manual overhead." },
+      { title: "Better ROI", description: "Maximize the return on your technology investments." },
+      { title: "Competitive Edge", description: "Stay ahead of the curve with modern solutions." },
+      { title: "Business Growth", description: "Scale your business with reliable infrastructure." }
+    ],
+    whyChooseUs: [
+      "Years of industry expertise",
+      "Dedicated professional team",
+      "Proven track record of success",
+      "Client-first approach"
+    ],
+    faqs: [
+      { question: "How much does Brochure Design cost?", answer: "Costs vary depending on the scope and complexity of your requirements. Contact us for a detailed quote." },
+      { question: "How long does implementation take?", answer: "Timelines depend on the project size, but we always strive for efficient and timely delivery." },
+      { question: "Do you provide ongoing support?", answer: "Yes, we offer comprehensive post-launch support and maintenance packages." }
+    ],
+    relatedSlugs: ["website-development", "digital-marketing", "it-consulting"]
+  },
+  {
+    slug: "hr-payroll",
+    title: "HR and Payroll Software",
+    shortDescription: "Professional HR and Payroll Software services tailored to your business needs, delivering robust and scalable solutions.",
+    icon: "Users",
+    category: "Software",
+    heroHeadline: "Expert HR and Payroll Software Solutions",
+    heroSubheadline: "We provide comprehensive HR and Payroll Software to help your business grow and succeed in the digital world.",
+    introduction: "Our HR and Payroll Software services are designed to address your specific challenges. We use industry best practices and the latest technologies to ensure high-quality delivery and measurable results for your organization.",
+    whatWeOffer: [
+      { title: "Custom Solutions", description: "Tailored approaches specific to your HR and Payroll Software requirements." },
+      { title: "Expert Consultation", description: "Strategic guidance from our experienced professionals." },
+      { title: "Seamless Integration", description: "Smooth implementation within your existing workflows." },
+      { title: "Ongoing Support", description: "Continuous maintenance and optimization of your services." }
+    ],
+    keyFeatures: [
+      "Scalable Architecture",
+      "High Performance",
+      "Secure Implementation",
+      "24/7 Support",
+      "Cost-effective Solutions",
+      "Modern Technologies"
+    ],
+    technologies: ["React", "Node.js", "Python", "Cloud", "Modern Stack"],
+    benefits: [
+      { title: "Increased Efficiency", description: "Streamline operations and reduce manual overhead." },
+      { title: "Better ROI", description: "Maximize the return on your technology investments." },
+      { title: "Competitive Edge", description: "Stay ahead of the curve with modern solutions." },
+      { title: "Business Growth", description: "Scale your business with reliable infrastructure." }
+    ],
+    whyChooseUs: [
+      "Years of industry expertise",
+      "Dedicated professional team",
+      "Proven track record of success",
+      "Client-first approach"
+    ],
+    faqs: [
+      { question: "How much does HR and Payroll Software cost?", answer: "Costs vary depending on the scope and complexity of your requirements. Contact us for a detailed quote." },
+      { question: "How long does implementation take?", answer: "Timelines depend on the project size, but we always strive for efficient and timely delivery." },
+      { question: "Do you provide ongoing support?", answer: "Yes, we offer comprehensive post-launch support and maintenance packages." }
+    ],
+    relatedSlugs: ["website-development", "digital-marketing", "it-consulting"]
+  },
+  {
+    slug: "jewellery-software",
+    title: "Jewellery Software",
+    shortDescription: "Professional Jewellery Software services tailored to your business needs, delivering robust and scalable solutions.",
+    icon: "Diamond",
+    category: "Software",
+    heroHeadline: "Expert Jewellery Software Solutions",
+    heroSubheadline: "We provide comprehensive Jewellery Software to help your business grow and succeed in the digital world.",
+    introduction: "Our Jewellery Software services are designed to address your specific challenges. We use industry best practices and the latest technologies to ensure high-quality delivery and measurable results for your organization.",
+    whatWeOffer: [
+      { title: "Custom Solutions", description: "Tailored approaches specific to your Jewellery Software requirements." },
+      { title: "Expert Consultation", description: "Strategic guidance from our experienced professionals." },
+      { title: "Seamless Integration", description: "Smooth implementation within your existing workflows." },
+      { title: "Ongoing Support", description: "Continuous maintenance and optimization of your services." }
+    ],
+    keyFeatures: [
+      "Scalable Architecture",
+      "High Performance",
+      "Secure Implementation",
+      "24/7 Support",
+      "Cost-effective Solutions",
+      "Modern Technologies"
+    ],
+    technologies: ["React", "Node.js", "Python", "Cloud", "Modern Stack"],
+    benefits: [
+      { title: "Increased Efficiency", description: "Streamline operations and reduce manual overhead." },
+      { title: "Better ROI", description: "Maximize the return on your technology investments." },
+      { title: "Competitive Edge", description: "Stay ahead of the curve with modern solutions." },
+      { title: "Business Growth", description: "Scale your business with reliable infrastructure." }
+    ],
+    whyChooseUs: [
+      "Years of industry expertise",
+      "Dedicated professional team",
+      "Proven track record of success",
+      "Client-first approach"
+    ],
+    faqs: [
+      { question: "How much does Jewellery Software cost?", answer: "Costs vary depending on the scope and complexity of your requirements. Contact us for a detailed quote." },
+      { question: "How long does implementation take?", answer: "Timelines depend on the project size, but we always strive for efficient and timely delivery." },
+      { question: "Do you provide ongoing support?", answer: "Yes, we offer comprehensive post-launch support and maintenance packages." }
+    ],
+    relatedSlugs: ["website-development", "digital-marketing", "it-consulting"]
+  },
+  {
+    slug: "crm-software",
+    title: "CRM Software",
+    shortDescription: "Professional CRM Software services tailored to your business needs, delivering robust and scalable solutions.",
+    icon: "Users",
+    category: "Software",
+    heroHeadline: "Expert CRM Software Solutions",
+    heroSubheadline: "We provide comprehensive CRM Software to help your business grow and succeed in the digital world.",
+    introduction: "Our CRM Software services are designed to address your specific challenges. We use industry best practices and the latest technologies to ensure high-quality delivery and measurable results for your organization.",
+    whatWeOffer: [
+      { title: "Custom Solutions", description: "Tailored approaches specific to your CRM Software requirements." },
+      { title: "Expert Consultation", description: "Strategic guidance from our experienced professionals." },
+      { title: "Seamless Integration", description: "Smooth implementation within your existing workflows." },
+      { title: "Ongoing Support", description: "Continuous maintenance and optimization of your services." }
+    ],
+    keyFeatures: [
+      "Scalable Architecture",
+      "High Performance",
+      "Secure Implementation",
+      "24/7 Support",
+      "Cost-effective Solutions",
+      "Modern Technologies"
+    ],
+    technologies: ["React", "Node.js", "Python", "Cloud", "Modern Stack"],
+    benefits: [
+      { title: "Increased Efficiency", description: "Streamline operations and reduce manual overhead." },
+      { title: "Better ROI", description: "Maximize the return on your technology investments." },
+      { title: "Competitive Edge", description: "Stay ahead of the curve with modern solutions." },
+      { title: "Business Growth", description: "Scale your business with reliable infrastructure." }
+    ],
+    whyChooseUs: [
+      "Years of industry expertise",
+      "Dedicated professional team",
+      "Proven track record of success",
+      "Client-first approach"
+    ],
+    faqs: [
+      { question: "How much does CRM Software cost?", answer: "Costs vary depending on the scope and complexity of your requirements. Contact us for a detailed quote." },
+      { question: "How long does implementation take?", answer: "Timelines depend on the project size, but we always strive for efficient and timely delivery." },
+      { question: "Do you provide ongoing support?", answer: "Yes, we offer comprehensive post-launch support and maintenance packages." }
+    ],
+    relatedSlugs: ["website-development", "digital-marketing", "it-consulting"]
+  },
+  {
+    slug: "real-estate-software",
+    title: "Real Estate Software",
+    shortDescription: "Professional Real Estate Software services tailored to your business needs, delivering robust and scalable solutions.",
+    icon: "Home",
+    category: "Software",
+    heroHeadline: "Expert Real Estate Software Solutions",
+    heroSubheadline: "We provide comprehensive Real Estate Software to help your business grow and succeed in the digital world.",
+    introduction: "Our Real Estate Software services are designed to address your specific challenges. We use industry best practices and the latest technologies to ensure high-quality delivery and measurable results for your organization.",
+    whatWeOffer: [
+      { title: "Custom Solutions", description: "Tailored approaches specific to your Real Estate Software requirements." },
+      { title: "Expert Consultation", description: "Strategic guidance from our experienced professionals." },
+      { title: "Seamless Integration", description: "Smooth implementation within your existing workflows." },
+      { title: "Ongoing Support", description: "Continuous maintenance and optimization of your services." }
+    ],
+    keyFeatures: [
+      "Scalable Architecture",
+      "High Performance",
+      "Secure Implementation",
+      "24/7 Support",
+      "Cost-effective Solutions",
+      "Modern Technologies"
+    ],
+    technologies: ["React", "Node.js", "Python", "Cloud", "Modern Stack"],
+    benefits: [
+      { title: "Increased Efficiency", description: "Streamline operations and reduce manual overhead." },
+      { title: "Better ROI", description: "Maximize the return on your technology investments." },
+      { title: "Competitive Edge", description: "Stay ahead of the curve with modern solutions." },
+      { title: "Business Growth", description: "Scale your business with reliable infrastructure." }
+    ],
+    whyChooseUs: [
+      "Years of industry expertise",
+      "Dedicated professional team",
+      "Proven track record of success",
+      "Client-first approach"
+    ],
+    faqs: [
+      { question: "How much does Real Estate Software cost?", answer: "Costs vary depending on the scope and complexity of your requirements. Contact us for a detailed quote." },
+      { question: "How long does implementation take?", answer: "Timelines depend on the project size, but we always strive for efficient and timely delivery." },
+      { question: "Do you provide ongoing support?", answer: "Yes, we offer comprehensive post-launch support and maintenance packages." }
+    ],
+    relatedSlugs: ["website-development", "digital-marketing", "it-consulting"]
+  },
+  {
+    slug: "inventory",
+    title: "Inventory Management",
+    shortDescription: "Professional Inventory Management services tailored to your business needs, delivering robust and scalable solutions.",
+    icon: "Package",
+    category: "Software",
+    heroHeadline: "Expert Inventory Management Solutions",
+    heroSubheadline: "We provide comprehensive Inventory Management to help your business grow and succeed in the digital world.",
+    introduction: "Our Inventory Management services are designed to address your specific challenges. We use industry best practices and the latest technologies to ensure high-quality delivery and measurable results for your organization.",
+    whatWeOffer: [
+      { title: "Custom Solutions", description: "Tailored approaches specific to your Inventory Management requirements." },
+      { title: "Expert Consultation", description: "Strategic guidance from our experienced professionals." },
+      { title: "Seamless Integration", description: "Smooth implementation within your existing workflows." },
+      { title: "Ongoing Support", description: "Continuous maintenance and optimization of your services." }
+    ],
+    keyFeatures: [
+      "Scalable Architecture",
+      "High Performance",
+      "Secure Implementation",
+      "24/7 Support",
+      "Cost-effective Solutions",
+      "Modern Technologies"
+    ],
+    technologies: ["React", "Node.js", "Python", "Cloud", "Modern Stack"],
+    benefits: [
+      { title: "Increased Efficiency", description: "Streamline operations and reduce manual overhead." },
+      { title: "Better ROI", description: "Maximize the return on your technology investments." },
+      { title: "Competitive Edge", description: "Stay ahead of the curve with modern solutions." },
+      { title: "Business Growth", description: "Scale your business with reliable infrastructure." }
+    ],
+    whyChooseUs: [
+      "Years of industry expertise",
+      "Dedicated professional team",
+      "Proven track record of success",
+      "Client-first approach"
+    ],
+    faqs: [
+      { question: "How much does Inventory Management cost?", answer: "Costs vary depending on the scope and complexity of your requirements. Contact us for a detailed quote." },
+      { question: "How long does implementation take?", answer: "Timelines depend on the project size, but we always strive for efficient and timely delivery." },
+      { question: "Do you provide ongoing support?", answer: "Yes, we offer comprehensive post-launch support and maintenance packages." }
+    ],
+    relatedSlugs: ["website-development", "digital-marketing", "it-consulting"]
+  },
+  {
+    slug: "hospital-management",
+    title: "Hospital Management",
+    shortDescription: "Professional Hospital Management services tailored to your business needs, delivering robust and scalable solutions.",
+    icon: "Heart",
+    category: "Software",
+    heroHeadline: "Expert Hospital Management Solutions",
+    heroSubheadline: "We provide comprehensive Hospital Management to help your business grow and succeed in the digital world.",
+    introduction: "Our Hospital Management services are designed to address your specific challenges. We use industry best practices and the latest technologies to ensure high-quality delivery and measurable results for your organization.",
+    whatWeOffer: [
+      { title: "Custom Solutions", description: "Tailored approaches specific to your Hospital Management requirements." },
+      { title: "Expert Consultation", description: "Strategic guidance from our experienced professionals." },
+      { title: "Seamless Integration", description: "Smooth implementation within your existing workflows." },
+      { title: "Ongoing Support", description: "Continuous maintenance and optimization of your services." }
+    ],
+    keyFeatures: [
+      "Scalable Architecture",
+      "High Performance",
+      "Secure Implementation",
+      "24/7 Support",
+      "Cost-effective Solutions",
+      "Modern Technologies"
+    ],
+    technologies: ["React", "Node.js", "Python", "Cloud", "Modern Stack"],
+    benefits: [
+      { title: "Increased Efficiency", description: "Streamline operations and reduce manual overhead." },
+      { title: "Better ROI", description: "Maximize the return on your technology investments." },
+      { title: "Competitive Edge", description: "Stay ahead of the curve with modern solutions." },
+      { title: "Business Growth", description: "Scale your business with reliable infrastructure." }
+    ],
+    whyChooseUs: [
+      "Years of industry expertise",
+      "Dedicated professional team",
+      "Proven track record of success",
+      "Client-first approach"
+    ],
+    faqs: [
+      { question: "How much does Hospital Management cost?", answer: "Costs vary depending on the scope and complexity of your requirements. Contact us for a detailed quote." },
+      { question: "How long does implementation take?", answer: "Timelines depend on the project size, but we always strive for efficient and timely delivery." },
+      { question: "Do you provide ongoing support?", answer: "Yes, we offer comprehensive post-launch support and maintenance packages." }
+    ],
+    relatedSlugs: ["website-development", "digital-marketing", "it-consulting"]
+  },
+  {
+    slug: "school-management",
+    title: "School Management",
+    shortDescription: "Professional School Management services tailored to your business needs, delivering robust and scalable solutions.",
+    icon: "BookOpen",
+    category: "Software",
+    heroHeadline: "Expert School Management Solutions",
+    heroSubheadline: "We provide comprehensive School Management to help your business grow and succeed in the digital world.",
+    introduction: "Our School Management services are designed to address your specific challenges. We use industry best practices and the latest technologies to ensure high-quality delivery and measurable results for your organization.",
+    whatWeOffer: [
+      { title: "Custom Solutions", description: "Tailored approaches specific to your School Management requirements." },
+      { title: "Expert Consultation", description: "Strategic guidance from our experienced professionals." },
+      { title: "Seamless Integration", description: "Smooth implementation within your existing workflows." },
+      { title: "Ongoing Support", description: "Continuous maintenance and optimization of your services." }
+    ],
+    keyFeatures: [
+      "Scalable Architecture",
+      "High Performance",
+      "Secure Implementation",
+      "24/7 Support",
+      "Cost-effective Solutions",
+      "Modern Technologies"
+    ],
+    technologies: ["React", "Node.js", "Python", "Cloud", "Modern Stack"],
+    benefits: [
+      { title: "Increased Efficiency", description: "Streamline operations and reduce manual overhead." },
+      { title: "Better ROI", description: "Maximize the return on your technology investments." },
+      { title: "Competitive Edge", description: "Stay ahead of the curve with modern solutions." },
+      { title: "Business Growth", description: "Scale your business with reliable infrastructure." }
+    ],
+    whyChooseUs: [
+      "Years of industry expertise",
+      "Dedicated professional team",
+      "Proven track record of success",
+      "Client-first approach"
+    ],
+    faqs: [
+      { question: "How much does School Management cost?", answer: "Costs vary depending on the scope and complexity of your requirements. Contact us for a detailed quote." },
+      { question: "How long does implementation take?", answer: "Timelines depend on the project size, but we always strive for efficient and timely delivery." },
+      { question: "Do you provide ongoing support?", answer: "Yes, we offer comprehensive post-launch support and maintenance packages." }
+    ],
+    relatedSlugs: ["website-development", "digital-marketing", "it-consulting"]
+  },
+  {
+    slug: "software-testing",
+    title: "Software Testing",
+    shortDescription: "Professional Software Testing services tailored to your business needs, delivering robust and scalable solutions.",
+    icon: "CheckSquare",
+    category: "Testing",
+    heroHeadline: "Expert Software Testing Solutions",
+    heroSubheadline: "We provide comprehensive Software Testing to help your business grow and succeed in the digital world.",
+    introduction: "Our Software Testing services are designed to address your specific challenges. We use industry best practices and the latest technologies to ensure high-quality delivery and measurable results for your organization.",
+    whatWeOffer: [
+      { title: "Custom Solutions", description: "Tailored approaches specific to your Software Testing requirements." },
+      { title: "Expert Consultation", description: "Strategic guidance from our experienced professionals." },
+      { title: "Seamless Integration", description: "Smooth implementation within your existing workflows." },
+      { title: "Ongoing Support", description: "Continuous maintenance and optimization of your services." }
+    ],
+    keyFeatures: [
+      "Scalable Architecture",
+      "High Performance",
+      "Secure Implementation",
+      "24/7 Support",
+      "Cost-effective Solutions",
+      "Modern Technologies"
+    ],
+    technologies: ["React", "Node.js", "Python", "Cloud", "Modern Stack"],
+    benefits: [
+      { title: "Increased Efficiency", description: "Streamline operations and reduce manual overhead." },
+      { title: "Better ROI", description: "Maximize the return on your technology investments." },
+      { title: "Competitive Edge", description: "Stay ahead of the curve with modern solutions." },
+      { title: "Business Growth", description: "Scale your business with reliable infrastructure." }
+    ],
+    whyChooseUs: [
+      "Years of industry expertise",
+      "Dedicated professional team",
+      "Proven track record of success",
+      "Client-first approach"
+    ],
+    faqs: [
+      { question: "How much does Software Testing cost?", answer: "Costs vary depending on the scope and complexity of your requirements. Contact us for a detailed quote." },
+      { question: "How long does implementation take?", answer: "Timelines depend on the project size, but we always strive for efficient and timely delivery." },
+      { question: "Do you provide ongoing support?", answer: "Yes, we offer comprehensive post-launch support and maintenance packages." }
+    ],
+    relatedSlugs: ["website-development", "digital-marketing", "it-consulting"]
+  },
+  {
+    slug: "security-testing",
+    title: "Security Testing",
+    shortDescription: "Professional Security Testing services tailored to your business needs, delivering robust and scalable solutions.",
+    icon: "Shield",
+    category: "Testing",
+    heroHeadline: "Expert Security Testing Solutions",
+    heroSubheadline: "We provide comprehensive Security Testing to help your business grow and succeed in the digital world.",
+    introduction: "Our Security Testing services are designed to address your specific challenges. We use industry best practices and the latest technologies to ensure high-quality delivery and measurable results for your organization.",
+    whatWeOffer: [
+      { title: "Custom Solutions", description: "Tailored approaches specific to your Security Testing requirements." },
+      { title: "Expert Consultation", description: "Strategic guidance from our experienced professionals." },
+      { title: "Seamless Integration", description: "Smooth implementation within your existing workflows." },
+      { title: "Ongoing Support", description: "Continuous maintenance and optimization of your services." }
+    ],
+    keyFeatures: [
+      "Scalable Architecture",
+      "High Performance",
+      "Secure Implementation",
+      "24/7 Support",
+      "Cost-effective Solutions",
+      "Modern Technologies"
+    ],
+    technologies: ["React", "Node.js", "Python", "Cloud", "Modern Stack"],
+    benefits: [
+      { title: "Increased Efficiency", description: "Streamline operations and reduce manual overhead." },
+      { title: "Better ROI", description: "Maximize the return on your technology investments." },
+      { title: "Competitive Edge", description: "Stay ahead of the curve with modern solutions." },
+      { title: "Business Growth", description: "Scale your business with reliable infrastructure." }
+    ],
+    whyChooseUs: [
+      "Years of industry expertise",
+      "Dedicated professional team",
+      "Proven track record of success",
+      "Client-first approach"
+    ],
+    faqs: [
+      { question: "How much does Security Testing cost?", answer: "Costs vary depending on the scope and complexity of your requirements. Contact us for a detailed quote." },
+      { question: "How long does implementation take?", answer: "Timelines depend on the project size, but we always strive for efficient and timely delivery." },
+      { question: "Do you provide ongoing support?", answer: "Yes, we offer comprehensive post-launch support and maintenance packages." }
+    ],
+    relatedSlugs: ["website-development", "digital-marketing", "it-consulting"]
+  },
+  {
+    slug: "performance-testing",
+    title: "Performance Testing",
+    shortDescription: "Professional Performance Testing services tailored to your business needs, delivering robust and scalable solutions.",
+    icon: "Activity",
+    category: "Testing",
+    heroHeadline: "Expert Performance Testing Solutions",
+    heroSubheadline: "We provide comprehensive Performance Testing to help your business grow and succeed in the digital world.",
+    introduction: "Our Performance Testing services are designed to address your specific challenges. We use industry best practices and the latest technologies to ensure high-quality delivery and measurable results for your organization.",
+    whatWeOffer: [
+      { title: "Custom Solutions", description: "Tailored approaches specific to your Performance Testing requirements." },
+      { title: "Expert Consultation", description: "Strategic guidance from our experienced professionals." },
+      { title: "Seamless Integration", description: "Smooth implementation within your existing workflows." },
+      { title: "Ongoing Support", description: "Continuous maintenance and optimization of your services." }
+    ],
+    keyFeatures: [
+      "Scalable Architecture",
+      "High Performance",
+      "Secure Implementation",
+      "24/7 Support",
+      "Cost-effective Solutions",
+      "Modern Technologies"
+    ],
+    technologies: ["React", "Node.js", "Python", "Cloud", "Modern Stack"],
+    benefits: [
+      { title: "Increased Efficiency", description: "Streamline operations and reduce manual overhead." },
+      { title: "Better ROI", description: "Maximize the return on your technology investments." },
+      { title: "Competitive Edge", description: "Stay ahead of the curve with modern solutions." },
+      { title: "Business Growth", description: "Scale your business with reliable infrastructure." }
+    ],
+    whyChooseUs: [
+      "Years of industry expertise",
+      "Dedicated professional team",
+      "Proven track record of success",
+      "Client-first approach"
+    ],
+    faqs: [
+      { question: "How much does Performance Testing cost?", answer: "Costs vary depending on the scope and complexity of your requirements. Contact us for a detailed quote." },
+      { question: "How long does implementation take?", answer: "Timelines depend on the project size, but we always strive for efficient and timely delivery." },
+      { question: "Do you provide ongoing support?", answer: "Yes, we offer comprehensive post-launch support and maintenance packages." }
+    ],
+    relatedSlugs: ["website-development", "digital-marketing", "it-consulting"]
+  },
   {
     slug: "website-development",
     title: "Website Development",

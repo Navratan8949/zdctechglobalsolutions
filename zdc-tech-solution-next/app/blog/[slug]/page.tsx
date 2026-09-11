@@ -51,18 +51,18 @@ export default async function BlogPostPage({
 
   return (
     <>
-      <article className="pt-24 lg:pt-32">
+      <article className="pt-32 lg:pt-40 bg-slate-50 border-b border-slate-100">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-8"
+            className="inline-flex items-center gap-1.5 text-[12px] font-bold uppercase tracking-widest text-slate-500 hover:text-[#0ea5e9] transition-colors mb-8"
           >
-            <ArrowLeft className="h-4 w-4" />
+            <ArrowLeft className="h-4 w-4" strokeWidth={3} />
             Back to Blog
           </Link>
 
-          <div className="flex items-center gap-3 text-sm text-muted-foreground mb-6">
-            <span className="rounded-full border border-primary/30 bg-primary/10 px-3 py-1 font-medium text-primary">
+          <div className="flex items-center gap-4 text-[13px] font-bold text-slate-500 mb-6 uppercase tracking-wider">
+            <span className="rounded-full bg-blue-50 px-4 py-1.5 text-[#0ea5e9]">
               {post.category}
             </span>
             <span className="flex items-center gap-1.5">
@@ -79,19 +79,19 @@ export default async function BlogPostPage({
             </span>
           </div>
 
-          <h1 className="font-display text-3xl font-bold text-white sm:text-4xl lg:text-5xl leading-tight mb-8">
+          <h1 className="text-4xl font-bold text-[#0b1b3d] sm:text-5xl lg:text-6xl leading-tight mb-8">
             {post.title}
           </h1>
 
-          <div className="flex items-center gap-4 border-y border-white/10 py-6 mb-12">
+          <div className="flex items-center gap-4 py-8 mb-12">
             <img
               src={post.author.avatar}
               alt={post.author.name}
-              className="h-12 w-12 rounded-full border border-white/10 object-cover"
+              className="h-14 w-14 rounded-full shadow-sm object-cover"
             />
             <div>
-              <p className="font-medium text-white">{post.author.name}</p>
-              <p className="text-sm text-muted-foreground">
+              <p className="font-bold text-[#0b1b3d] text-[16px]">{post.author.name}</p>
+              <p className="text-[13px] font-bold uppercase tracking-wider text-slate-500 mt-1">
                 {post.author.role}
               </p>
             </div>
@@ -99,7 +99,7 @@ export default async function BlogPostPage({
         </div>
 
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 mb-16">
-          <div className="aspect-[21/9] overflow-hidden rounded-3xl border border-white/10">
+          <div className="aspect-[21/9] overflow-hidden rounded-3xl border border-slate-100 shadow-sm">
             <img
               src={post.coverImage}
               alt={post.title}
@@ -109,18 +109,18 @@ export default async function BlogPostPage({
         </div>
 
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 pb-20">
-          <div className="prose prose-invert prose-lg max-w-none prose-p:leading-relaxed prose-a:text-primary hover:prose-a:text-primary/80 prose-img:rounded-2xl prose-img:border prose-img:border-white/10 prose-headings:font-display">
+          <div className="prose prose-slate prose-lg max-w-none prose-p:leading-relaxed prose-a:text-[#0ea5e9] hover:prose-a:text-blue-600 prose-img:rounded-2xl prose-img:border prose-img:border-slate-100 prose-img:shadow-sm prose-headings:text-[#0b1b3d] prose-headings:font-bold">
             {post.content.map((section, idx) => (
               <div key={idx} className="mb-10">
                 {section.heading && (
-                  <h2 className="text-2xl font-bold text-white mt-12 mb-6">
+                  <h2 className="text-3xl font-bold text-[#0b1b3d] mt-12 mb-6">
                     {section.heading}
                   </h2>
                 )}
                 {section.paragraphs.map((paragraph, pIdx) => (
                   <p
                     key={pIdx}
-                    className="text-muted-foreground text-lg mb-6 leading-relaxed"
+                    className="text-slate-600 text-[18px] mb-6 leading-relaxed"
                   >
                     {paragraph}
                   </p>
@@ -132,15 +132,15 @@ export default async function BlogPostPage({
       </article>
 
       {relatedPosts.length > 0 && (
-        <section className="border-t border-white/10 py-20 bg-card/20">
+        <section className="py-20 bg-white">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between mb-12">
-              <h2 className="text-2xl font-bold text-white">
+              <h2 className="text-3xl font-bold text-[#0b1b3d]">
                 Related Articles
               </h2>
               <Link
                 href="/blog"
-                className="text-sm font-medium text-primary hover:underline"
+                className="text-[14px] font-bold uppercase tracking-widest text-[#0ea5e9] hover:underline"
               >
                 View all posts
               </Link>
@@ -154,7 +154,7 @@ export default async function BlogPostPage({
         </section>
       )}
 
-      <CTASection />
+      {/* <CTASection /> */}
     </>
   );
 }

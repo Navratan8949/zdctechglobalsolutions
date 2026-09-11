@@ -1,23 +1,41 @@
-import type { Metadata } from 'next';
-import { PageHero } from '@/components/site/PageHero';
-import { SectionHeading } from '@/components/site/SectionHeading';
-import { CTASection } from '@/components/site/CTASection';
-import { lifeAtCompany } from '@/data/company';
-import { getIcon } from '@/lib/icons';
+import type { Metadata } from "next";
+import { PageHero } from "@/components/site/PageHero";
+import { SectionHeading } from "@/components/site/SectionHeading";
+import { CTASection } from "@/components/site/CTASection";
+import { lifeAtCompany } from "@/data/company";
+import { getIcon } from "@/lib/icons";
 
 export const metadata: Metadata = {
-  title: 'Life at Company',
+  title: "Life at Company",
   description:
-    'Discover the culture, environment and activities that make ZDC Tech Global Solutions a great place to work and grow your career.',
+    "Discover the culture, environment and activities that make ZDC Tech Global Solutions a great place to work and grow your career.",
 };
 
 const galleryImages = [
-  { src: 'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop', alt: 'Team collaboration session' },
-  { src: 'https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop', alt: 'Team meeting and brainstorming' },
-  { src: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop', alt: 'Office workspace' },
-  { src: 'https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop', alt: 'Team working together' },
-  { src: 'https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop', alt: 'Company event' },
-  { src: 'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop', alt: 'Learning and development session' },
+  {
+    src: "https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop",
+    alt: "Team collaboration session",
+  },
+  {
+    src: "https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop",
+    alt: "Team meeting and brainstorming",
+  },
+  {
+    src: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop",
+    alt: "Office workspace",
+  },
+  {
+    src: "https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop",
+    alt: "Team working together",
+  },
+  {
+    src: "https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop",
+    alt: "Company event",
+  },
+  {
+    src: "https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop",
+    alt: "Learning and development session",
+  },
 ];
 
 export default function LifeAtCompanyPage() {
@@ -44,8 +62,12 @@ export default function LifeAtCompanyPage() {
                     <Icon className="h-6 w-6 text-primary" />
                   </div>
                   <div>
-                    <h3 className="text-base font-semibold text-white">{item.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
+                    <h3 className="text-base font-semibold text-white">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                      {item.description}
+                    </p>
                   </div>
                 </div>
               );
@@ -74,21 +96,23 @@ export default function LifeAtCompanyPage() {
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
-                <p className="absolute bottom-3 left-3 text-xs font-medium text-white/80">{img.alt}</p>
+                <p className="absolute bottom-3 left-3 text-xs font-medium text-white/80">
+                  {img.alt}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <CTASection
+      {/* <CTASection
         title="Ready to Join the Team?"
         description="Explore our open positions and start your journey with ZDC Tech Global Solutions today."
         primaryLabel="View Open Positions"
         primaryHref="/careers"
         secondaryLabel="Learn About Us"
         secondaryHref="/about"
-      />
+      /> */}
     </>
   );
 }

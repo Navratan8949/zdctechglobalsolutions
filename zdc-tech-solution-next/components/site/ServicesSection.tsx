@@ -2,16 +2,26 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { SectionHeading } from "@/components/site/SectionHeading";
 import { services as fallbackServices, type Service } from "@/data/services";
 import { getServices } from "@/service/service.service";
 import { unwrapApiResponse } from "@/lib/public-api";
 import { getIcon } from "@/lib/icons";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+
+const MAIN_SERVICE_SLUGS = [
+  "google-ads",
+  "meta-ads",
+  "mobile-app",
+  "social-media",
+  "crm-development",
+  "web-design",
+  "software",
+  "it-consulting"
+];
 
 export function ServicesSection() {
-  const [items, setItems] = useState<Service[]>(fallbackServices);
+  const [items, setItems] = useState<Service[]>(fallbackServices.filter(s => MAIN_SERVICE_SLUGS.includes(s.slug)));
 
   useEffect(() => {
     let active = true;
@@ -20,7 +30,10 @@ export function ServicesSection() {
         const res = await getServices();
         if (!active) return;
         const liveServices = unwrapApiResponse<Service[]>(res) || [];
-        if (liveServices.length > 0) setItems(liveServices);
+        if (liveServices.length > 0) {
+          const mainLive = liveServices.filter(s => MAIN_SERVICE_SLUGS.includes(s.slug));
+          setItems(mainLive.length > 0 ? mainLive : liveServices.slice(0, 8));
+        }
       } catch (err) {
         // Fallback already set
       }
@@ -32,94 +45,59 @@ export function ServicesSection() {
   }, []);
 
   return (
-    <section className="relative py-20 lg:py-28">
-      {/* Static top accent line */}
-      <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
-
+    <section className="relative py-16 lg:py-20 bg-[#f8fafc]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <SectionHeading
-          eyebrow="What We Do"
-          title="Services Built for Digital Growth"
-          description="From websites to enterprise software, we offer a full spectrum of digital services."
-        />
+        <div className="text-center mb-16">
+          <h2 className="text-2xl sm:text-3xl font-bold uppercase tracking-widest text-[#0b1b3d] inline-block relative pb-4">
+            OUR SERVICES
+            <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-[3px] bg-[#0ea5e9]" />
+          </h2>
+        </div>
 
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {items.slice(0, 6).map((service, i) => {
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {items.slice(0, 8).map((service, i) => {
             const Icon = getIcon(service.icon);
             return (
               <motion.div
                 key={service.slug}
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.45, delay: i * 0.06 }}
+                transition={{ duration: 0.5, delay: i * 0.05 }}
               >
                 <Link
                   href={`/services/${service.slug}`}
                   className="group block h-full"
                 >
-                  <div className="relative h-full overflow-hidden rounded-2xl border border-white/10 bg-card/40 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:bg-card/70">
-                    {/* Radial bg — pure CSS, no JS */}
-                    <div
-                      className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                      style={{
-                        background:
-                          "radial-gradient(280px circle at 50% 0%, rgba(99,102,241,0.07), transparent 70%)",
-                      }}
-                    />
+                  <div className="relative h-full overflow-hidden rounded-lg bg-white shadow-[0_8px_30px_rgba(0,0,0,0.04)] px-6 py-10 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(30,64,175,0.2)] flex flex-col items-center text-center">
+                    {/* Water Fill Effect Background */}
+                    <div className="absolute bottom-0 left-0 right-0 h-0 bg-[#1e40af] transition-all duration-500 ease-out group-hover:h-full z-0" />
 
-                    {/* Top row: icon + arrow */}
-                    <div className="relative flex items-start justify-between">
-                      <div
-                        className="flex h-12 w-12 items-center justify-center rounded-xl transition-transform duration-300 group-hover:scale-110"
-                        style={{
-                          background:
-                            "linear-gradient(135deg, rgba(99,102,241,0.2), rgba(139,92,246,0.2))",
-                        }}
-                      >
-                        <Icon className="h-6 w-6 text-primary" />
-                      </div>
-                      <ArrowUpRight className="h-4 w-4 text-muted-foreground opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100" />
+                    <div className="relative z-10 flex h-[72px] w-[72px] items-center justify-center rounded-full bg-[#0ea5e9] transition-all duration-500 group-hover:scale-110 mb-6 group-hover:bg-white/20 overflow-hidden">
+                      {service.image?.url ? (
+                        <img 
+                          src={service.image.url} 
+                          alt={service.title} 
+                          className="w-12 h-12 object-contain transition-transform duration-500"
+                        />
+                      ) : (
+                        <Icon className="h-8 w-8 text-white" />
+                      )}
                     </div>
 
-                    {/* Text */}
-                    <div className="relative mt-5">
-                      <h3 className="font-display text-base font-semibold text-white">
-                        {service.title}
-                      </h3>
-                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground line-clamp-2">
-                        {service.shortDescription}
-                      </p>
-                    </div>
+                    <h3 className="relative z-10 text-[15px] font-bold uppercase tracking-wide text-[#0b1b3d] group-hover:text-white transition-colors duration-300 mb-4">
+                      {service.title}
+                    </h3>
 
-                    {/* Learn more */}
-                    <div className="relative mt-5 flex items-center gap-1 text-xs font-medium text-primary opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                      Learn more <ArrowRight className="h-3 w-3" />
-                    </div>
-
-                    {/* Bottom border — CSS transition-[width], no JS/Framer */}
-                    <div className="absolute bottom-0 left-0 h-px w-0 bg-gradient-to-r from-primary to-secondary transition-[width] duration-300 group-hover:w-full" />
+                    <p className="relative z-10 text-[13px] leading-relaxed text-slate-500 group-hover:text-blue-100 transition-colors duration-300 line-clamp-4">
+                      {service.shortDescription}
+                    </p>
                   </div>
                 </Link>
               </motion.div>
             );
           })}
         </div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="mt-10 text-center"
-        >
-          <Link
-            href="/services"
-            className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition-all hover:border-primary/40 hover:bg-white/10"
-          >
-            View All Services
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-        </motion.div>
       </div>
     </section>
   );

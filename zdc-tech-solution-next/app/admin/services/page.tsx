@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { IconPicker } from "@/components/admin/IconPicker";
 import { RichTextEditor } from "@/components/admin/RichTextEditor";
+import { ImageUploadField } from "@/components/admin/ImageUploadField";
 import {
   createService,
   deleteService,
@@ -33,6 +34,7 @@ interface ServiceItem {
   title: string;
   shortDescription: string;
   icon: string;
+  image?: { public_id: string; url: string };
   category: string;
   heroHeadline: string;
   heroSubheadline: string;
@@ -100,6 +102,7 @@ function toDraft(service: ServiceItem): ServiceDraft {
     title: service.title || "",
     shortDescription: service.shortDescription || "",
     icon: service.icon || "",
+    image: service.image,
     category: service.category || "",
     heroHeadline: service.heroHeadline || "",
     heroSubheadline: service.heroSubheadline || "",
@@ -469,6 +472,16 @@ export default function ServicesPage() {
                   <IconPicker
                     value={draft.icon}
                     onChange={(value) => updateField("icon", value)}
+                  />
+                </div>
+                <div>
+                  <ImageUploadField
+                    label="Service Image"
+                    value={draft.image?.url}
+                    onChange={(url, public_id) =>
+                      updateField("image", { public_id: public_id || "", url })
+                    }
+                    onRemove={() => updateField("image", undefined)}
                   />
                 </div>
                 <Field

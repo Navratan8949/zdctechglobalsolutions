@@ -46,14 +46,16 @@ function Counter({ stat, inView, delay }: { stat: Stat; inView: boolean; delay: 
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.4, delay }}
-      className="relative text-center"
+      transition={{ duration: 0.5, delay }}
+      className="relative flex flex-col items-center justify-center rounded-2xl bg-white border border-gray-100 p-8 shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-all hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)]"
     >
-      <div className="font-display text-4xl font-bold text-white sm:text-5xl">
-        <span className="text-gradient">{count}</span>
-        <span className="text-primary">{stat.suffix}</span>
+      <div className="text-4xl font-black tracking-tight text-[#0b1b3d] sm:text-5xl">
+        {count}
+        <span className="text-[#0ea5e9]">{stat.suffix}</span>
       </div>
-      <p className="mt-2 text-sm text-muted-foreground sm:text-base">{stat.label}</p>
+      <p className="mt-3 text-center text-[13px] font-bold uppercase tracking-wider text-slate-500">
+        {stat.label}
+      </p>
     </motion.div>
   );
 }

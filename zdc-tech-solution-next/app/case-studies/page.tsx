@@ -73,7 +73,7 @@ export default function CaseStudiesPage() {
         </div>
       </section>
 
-      <CTASection />
+      {/* <CTASection /> */}
     </>
   );
 }

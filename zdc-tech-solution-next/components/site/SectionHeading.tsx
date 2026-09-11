@@ -36,7 +36,7 @@ export function SectionHeading({ eyebrow, title, description, align = 'center', 
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: 0.1 }}
-        className="mt-2 font-display text-2xl font-bold tracking-tight text-white sm:text-3xl lg:text-4xl"
+        className="mt-2 font-display text-2xl font-bold tracking-tight text-foreground sm:text-3xl lg:text-4xl"
       >
         {title}
       </motion.h2>

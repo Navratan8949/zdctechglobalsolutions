@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { getIcon } from "@/lib/icons";
 import type { TechGroup } from "@/data/technologies";
-import { TechnologyBadge } from "./TechnologyBadge";
+import { getIconSlug } from "./TechnologyBadge";
 import { cn } from "@/lib/utils";
 import { getTechnologies } from "@/service/technology.service";
 import { getApiErrorMessage, unwrapApiResponse } from "@/lib/public-api";
@@ -40,9 +40,9 @@ export function TechStackGrid({ groups }: TechStackGridProps) {
   }, []);
 
   return (
-    <div className="grid lg:grid-cols-[300px_1fr] gap-8 lg:gap-16 items-start">
+    <div className="grid lg:grid-cols-[300px_1fr] gap-8 lg:gap-12 items-start">
       {/* Left side: Tabs */}
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 p-2 bg-white/80 backdrop-blur-sm shadow-[0_0_20px_rgba(0,0,0,0.02)] rounded-lg">
         {items.map((group) => {
           const Icon = getIcon(group.icon);
           const isActive = activeTab === group.category;
@@ -51,31 +51,29 @@ export function TechStackGrid({ groups }: TechStackGridProps) {
               key={group.category}
               onClick={() => setActiveTab(group.category)}
               className={cn(
-                "flex items-center gap-4 px-6 py-4 rounded-xl text-left transition-all duration-300 border border-transparent",
+                "flex items-center gap-4 px-6 py-4 rounded-xl text-left transition-all duration-300 border w-full",
                 isActive
-                  ? "bg-primary/10 border-primary/20 shadow-[0_0_20px_rgba(var(--primary),0.1)]"
-                  : "hover:bg-white/5 hover:border-white/10",
+                  ? "bg-[#0ea5e9]/10 border-[#0ea5e9]/20 shadow-[0_0_20px_rgba(14,165,233,0.1)]"
+                  : "border-transparent hover:bg-slate-50",
               )}
             >
               <div
                 className={cn(
-                  "flex h-12 w-12 items-center justify-center rounded-lg transition-colors",
+                  "flex h-12 w-12 shrink-0 items-center justify-center rounded-xl transition-all duration-300",
                   isActive
-                    ? "bg-primary text-primary-foreground shadow-lg"
-                    : "bg-white/5 text-slate-400",
+                    ? "bg-[#0ea5e9] text-white shadow-md scale-105"
+                    : "bg-white border border-gray-100 text-slate-400 shadow-[0_2px_10px_rgba(0,0,0,0.02)]",
                 )}
               >
-                <Icon className="h-6 w-6" />
+                <Icon className="h-5 w-5" />
               </div>
-              <div>
-                <div
-                  className={cn(
-                    "font-bold text-lg",
-                    isActive ? "text-primary" : "text-white",
-                  )}
-                >
-                  {group.category}
-                </div>
+              <div
+                className={cn(
+                  "font-bold text-[15px] transition-colors duration-300",
+                  isActive ? "text-[#0ea5e9]" : "text-[#0b1b3d]",
+                )}
+              >
+                {group.category}
               </div>
             </button>
           );
@@ -83,8 +81,8 @@ export function TechStackGrid({ groups }: TechStackGridProps) {
       </div>
 
       {/* Right side: Content */}
-      <div className="relative min-h-[300px] p-8 rounded-2xl border border-white/10 bg-card/40 backdrop-blur-sm">
-        {error && <p className="mb-4 text-xs text-amber-300">{error}</p>}
+      <div className="relative min-h-[400px] p-8 lg:p-10 rounded-3xl border border-gray-100 bg-slate-50/50 shadow-inner">
+        {error && <p className="mb-4 text-xs text-amber-500">{error}</p>}
         <AnimatePresence mode="wait">
           {items.map((group) => {
             if (group.category !== activeTab) return null;
@@ -92,23 +90,38 @@ export function TechStackGrid({ groups }: TechStackGridProps) {
             return (
               <motion.div
                 key={group.category}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3 }}
                 className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6"
               >
-                {group.technologies.map((tech) => (
-                  <div
-                    key={tech}
-                    className="flex flex-col items-center justify-center p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-primary/10 hover:border-primary/30 transition-colors gap-3"
-                  >
-                    <TechnologyBadge name={tech} />
-                    <span className="text-sm font-medium text-slate-300">
-                      {tech}
-                    </span>
-                  </div>
-                ))}
+                {group.technologies.map((tech) => {
+                  const iconSlug = getIconSlug(tech);
+                  return (
+                    <div
+                      key={tech}
+                      className="group flex flex-col items-center justify-center p-6 rounded-lg bg-white border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.02)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_40px_rgba(14,165,233,0.1)] hover:border-blue-200 gap-4"
+                    >
+                      {iconSlug ? (
+                        <div className="h-16 w-16 flex items-center justify-center rounded-xl">
+                          <img
+                            src={`https://cdn.simpleicons.org/${iconSlug}`}
+                            alt={`${tech} icon`}
+                            className="h-14 w-14 object-contain transition-transform duration-300 group-hover:scale-110"
+                          />
+                        </div>
+                      ) : (
+                        <div className="h-14 w-14 flex items-center justify-center rounded-xl bg-blue-50 text-[#0ea5e9] font-bold text-xs transition-transform duration-300 group-hover:scale-110">
+                          {tech.slice(0, 2)}
+                        </div>
+                      )}
+                      <span className="text-[14px] font-bold text-[#0b1b3d] text-center transition-colors group-hover:text-[#0ea5e9]">
+                        {tech}
+                      </span>
+                    </div>
+                  );
+                })}
               </motion.div>
             );
           })}

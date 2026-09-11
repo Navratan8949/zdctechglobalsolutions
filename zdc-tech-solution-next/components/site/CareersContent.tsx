@@ -18,7 +18,7 @@ import { getApiErrorMessage, unwrapApiResponse } from "@/lib/public-api";
 type Job = JobOpening & { _id?: string; slug?: string };
 
 const inputClasses =
-  "w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-muted-foreground/60 focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/30";
+  "w-full rounded-lg border border-border bg-card shadow-sm px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/30";
 
 export function CareersContent() {
   const [jobs, setJobs] = useState<Job[]>(jobOpenings);
@@ -106,12 +106,12 @@ export function CareersContent() {
             {jobs.map((job) => (
               <div
                 key={job._id || job.slug || job.id}
-                className="group rounded-2xl border border-white/10 bg-card/50 p-6 transition-all hover:border-primary/30"
+                className="group rounded-2xl border border-border bg-card shadow-sm p-6 transition-all hover:border-primary/30"
               >
                 <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                   <div className="flex-1">
                     <div className="flex items-center gap-3">
-                      <h3 className="text-xl font-semibold text-white">
+                      <h3 className="text-xl font-semibold text-foreground">
                         {job.position}
                       </h3>
                       <span className="rounded-full border border-primary/30 bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">
@@ -140,7 +140,7 @@ export function CareersContent() {
                         View full description{" "}
                         <ArrowRight className="h-4 w-4 transition-transform group-open/details:rotate-90" />
                       </summary>
-                      <div className="mt-4 space-y-4 border-t border-white/10 pt-4">
+                      <div className="mt-4 space-y-4 border-t border-border pt-4">
                         <JobList
                           title="Responsibilities"
                           items={job.responsibilities}
@@ -158,7 +158,7 @@ export function CareersContent() {
                       setSubmitted(false);
                       setFormError("");
                     }}
-                    className="group inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground shadow-lg shadow-primary/20 transition-all hover:scale-105 hover:bg-primary/90"
+                    className="group inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-primary text-primary-foreground px-5 py-2.5 text-sm font-bold text-primary-foreground shadow-lg shadow-primary/20 transition-all hover:scale-105 hover:bg-primary/90"
                   >
                     Apply Now{" "}
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -177,11 +177,11 @@ export function CareersContent() {
 
       <section
         id="application"
-        className="border-t border-white/10 py-20 lg:py-28"
+        className="border-t border-border py-16 lg:py-20"
       >
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <div className="mb-10 text-center">
-            <h2 className="font-display text-3xl font-bold text-white">
+            <h2 className="font-display text-3xl font-bold text-foreground">
               Apply to Join Us
             </h2>
             <p className="mt-3 text-muted-foreground">
@@ -191,7 +191,7 @@ export function CareersContent() {
           {submitted ? (
             <div className="rounded-2xl border border-green-500/20 bg-green-500/5 p-10 text-center">
               <CheckCircle2 className="mx-auto h-10 w-10 text-green-400" />
-              <h3 className="mt-4 text-xl font-semibold text-white">
+              <h3 className="mt-4 text-xl font-semibold text-foreground">
                 Application submitted
               </h3>
               <p className="mt-2 text-sm text-muted-foreground">
@@ -201,9 +201,9 @@ export function CareersContent() {
           ) : (
             <form
               onSubmit={handleSubmit}
-              className="space-y-5 rounded-2xl border border-white/10 bg-card/40 p-6 sm:p-8"
+              className="space-y-5 rounded-2xl border border-border bg-card shadow-sm p-6 sm:p-8"
             >
-              <label className="block text-sm font-medium text-white">
+              <label className="block text-sm font-medium text-foreground">
                 Position *
                 <select
                   name="positionLabel"
@@ -231,7 +231,7 @@ export function CareersContent() {
                 </select>
               </label>
               <div className="grid gap-5 sm:grid-cols-2">
-                <label className="text-sm font-medium text-white">
+                <label className="text-sm font-medium text-foreground">
                   Name *
                   <input
                     name="name"
@@ -239,7 +239,7 @@ export function CareersContent() {
                     className={`${inputClasses} mt-2`}
                   />
                 </label>
-                <label className="text-sm font-medium text-white">
+                <label className="text-sm font-medium text-foreground">
                   Email *
                   <input
                     name="email"
@@ -250,7 +250,7 @@ export function CareersContent() {
                 </label>
               </div>
               <div className="grid gap-5 sm:grid-cols-2">
-                <label className="text-sm font-medium text-white">
+                <label className="text-sm font-medium text-foreground">
                   Phone
                   <input
                     name="phone"
@@ -258,7 +258,7 @@ export function CareersContent() {
                     className={`${inputClasses} mt-2`}
                   />
                 </label>
-                <label className="text-sm font-medium text-white">
+                <label className="text-sm font-medium text-foreground">
                   Resume *
                   <span className="relative mt-2 flex cursor-pointer items-center gap-2 ${inputClasses}">
                     <Upload className="h-4 w-4 text-primary" />
@@ -276,7 +276,7 @@ export function CareersContent() {
                 </label>
               </div>
               <div className="grid gap-5 sm:grid-cols-2">
-                <label className="text-sm font-medium text-white">
+                <label className="text-sm font-medium text-foreground">
                   Portfolio URL
                   <input
                     name="portfolioUrl"
@@ -284,7 +284,7 @@ export function CareersContent() {
                     className={`${inputClasses} mt-2`}
                   />
                 </label>
-                <label className="text-sm font-medium text-white">
+                <label className="text-sm font-medium text-foreground">
                   LinkedIn URL
                   <input
                     name="linkedinUrl"
@@ -293,7 +293,7 @@ export function CareersContent() {
                   />
                 </label>
               </div>
-              <label className="block text-sm font-medium text-white">
+              <label className="block text-sm font-medium text-foreground">
                 Cover letter
                 <textarea
                   name="coverLetter"
@@ -309,7 +309,7 @@ export function CareersContent() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground disabled:cursor-not-allowed disabled:opacity-60"
+                className="inline-flex items-center gap-2 rounded-lg bg-primary text-primary-foreground px-6 py-3 text-sm font-semibold text-primary-foreground disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {isSubmitting && <Loader2 className="h-4 w-4 animate-spin" />}
                 {isSubmitting ? "Submitting..." : "Submit Application"}
@@ -325,14 +325,14 @@ export function CareersContent() {
 function JobList({ title, items }: { title: string; items: string[] }) {
   return (
     <div>
-      <h4 className="text-sm font-semibold text-white">{title}</h4>
+      <h4 className="text-sm font-semibold text-foreground">{title}</h4>
       <ul className="mt-2 space-y-1.5">
         {items.map((item) => (
           <li
             key={item}
             className="flex items-start gap-2 text-sm text-muted-foreground"
           >
-            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary text-primary-foreground" />
             {item}
           </li>
         ))}

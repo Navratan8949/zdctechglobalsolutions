@@ -6,6 +6,7 @@ import { getCurrentSiteContent } from "@/service/siteContent.service";
 import { unwrapApiResponse } from "@/lib/public-api";
 
 interface SocialLinks {
+  facebook?: string;
   linkedin: string;
   twitter: string;
   github: string;
@@ -22,6 +23,7 @@ export interface SiteContent {
   branchOffice: string;
   hours: string;
   logo?: { public_id: string; url: string };
+  logoText?: { public_id: string; url: string };
   socials: SocialLinks;
 }
 

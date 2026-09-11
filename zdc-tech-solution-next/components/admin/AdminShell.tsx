@@ -20,10 +20,9 @@ import {
   Cpu,
   Users,
   X,
+  CheckCircle,
+  Shield,
 } from "lucide-react";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import {
   useAdminAuth,
   type AdminUser,
@@ -40,28 +39,21 @@ const primaryNavigation: AdminNavItem[] = [
   { label: "Site content", href: "/admin/site-content", icon: Building2 },
   { label: "Services", href: "/admin/services", icon: Settings2 },
   { label: "Portfolio", href: "/admin/portfolio", icon: BriefcaseBusiness },
-  {
-    label: "Case studies",
-    href: "/admin/case-studies",
-    icon: BriefcaseBusiness,
-  },
+  { label: "Case studies", href: "/admin/case-studies", icon: BriefcaseBusiness },
   { label: "Blog", href: "/admin/blog", icon: FileText },
   { label: "Jobs", href: "/admin/jobs", icon: BriefcaseBusiness },
   { label: "Team", href: "/admin/team", icon: Users },
   { label: "Clients", href: "/admin/clients", icon: Building2 },
   { label: "Industries", href: "/admin/industries", icon: Building2 },
   { label: "Technologies", href: "/admin/technologies", icon: Cpu },
+  { label: "Why Choose Us", href: "/admin/why-choose-us", icon: CheckCircle },
   { label: "Testimonials", href: "/admin/testimonials", icon: Star },
 ];
 
 const secondaryNavigation: AdminNavItem[] = [
   { label: "Contacts", href: "/admin/contacts", icon: MessageSquare },
   { label: "Subscribers", href: "/admin/subscribers", icon: MessageSquare },
-  {
-    label: "Applications",
-    href: "/admin/job-applications",
-    icon: ClipboardList,
-  },
+  { label: "Applications", href: "/admin/job-applications", icon: ClipboardList },
   { label: "FAQs", href: "/admin/faqs", icon: HelpCircle },
   { label: "Database backup", href: "/admin/backup", icon: DatabaseBackup },
 ];
@@ -94,15 +86,15 @@ function NavigationLink({
     <Link
       href={item.href}
       onClick={onNavigate}
-      className={`group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors ${
+      className={`group flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200 ${
         isActive
-          ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20"
-          : "text-muted-foreground hover:bg-white/[0.06] hover:text-white"
+          ? "bg-blue-600 text-white shadow-lg shadow-blue-600/30"
+          : "text-slate-400 hover:bg-slate-700/60 hover:text-white"
       }`}
     >
       <Icon className="h-4 w-4 shrink-0" />
       <span>{item.label}</span>
-      {isActive && <ChevronRight className="ml-auto h-4 w-4 opacity-70" />}
+      {isActive && <ChevronRight className="ml-auto h-3.5 w-3.5 opacity-70" />}
     </Link>
   );
 }
@@ -117,89 +109,82 @@ function Sidebar({
   onLogout: () => void;
 }) {
   return (
-    <aside className="flex h-full min-h-0 w-72 shrink-0 flex-col border-r border-white/10 bg-card/95 px-4 py-5 backdrop-blur-xl">
-      <div className="flex shrink-0 items-center justify-between px-2">
-        <Link
-          href="/admin"
-          className="flex items-center gap-3"
-          onClick={onClose}
-        >
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-sm font-bold text-primary-foreground shadow-lg shadow-primary/20">
+    <aside
+      style={{ backgroundColor: "#0f1729", borderRight: "1px solid rgba(255,255,255,0.06)" }}
+      className="flex h-full min-h-0 w-64 shrink-0 flex-col px-3 py-4"
+    >
+      {/* Logo */}
+      <div className="flex items-center justify-between px-2 mb-6">
+        <Link href="/admin" className="flex items-center gap-3" onClick={onClose}>
+          <span
+            style={{ background: "linear-gradient(135deg, #2563eb, #7c3aed)" }}
+            className="flex h-8 w-8 items-center justify-center rounded-lg text-sm font-bold text-white shadow-lg"
+          >
             Z
           </span>
-          <span>
-            <span className="block font-display text-sm font-bold tracking-wide text-white">
-              ZDC ADMIN
-            </span>
-            <span className="block text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-              Control center
-            </span>
-          </span>
+          <div>
+            <p className="text-sm font-bold text-white tracking-wide">ZDC Admin</p>
+            <p className="text-[10px] text-slate-500 uppercase tracking-wider">Control Panel</p>
+          </div>
         </Link>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="lg:hidden"
+        <button
+          className="lg:hidden text-slate-400 hover:text-white"
           onClick={onClose}
           aria-label="Close navigation"
         >
-          <X className="h-5 w-5" />
-        </Button>
+          <X className="h-4 w-4" />
+        </button>
       </div>
 
-      <nav
-        className="mt-9 min-h-0 flex-1 space-y-7 overflow-y-auto pr-1 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-white/15"
-        aria-label="Admin navigation"
-      >
+      {/* Nav */}
+      <nav className="flex-1 overflow-y-auto space-y-5 pr-1" aria-label="Admin navigation">
         <div>
-          <p className="mb-2 px-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground/70">
+          <p className="px-3 mb-1.5 text-[10px] font-semibold uppercase tracking-widest text-slate-600">
             Workspace
           </p>
-          <div className="space-y-1">
+          <div className="space-y-0.5">
             {primaryNavigation.map((item) => (
-              <NavigationLink
-                key={item.href}
-                item={item}
-                onNavigate={onClose}
-              />
+              <NavigationLink key={item.href} item={item} onNavigate={onClose} />
             ))}
           </div>
         </div>
         <div>
-          <p className="mb-2 px-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground/70">
+          <p className="px-3 mb-1.5 text-[10px] font-semibold uppercase tracking-widest text-slate-600">
             Inbox
           </p>
-          <div className="space-y-1">
+          <div className="space-y-0.5">
             {secondaryNavigation.map((item) => (
-              <NavigationLink
-                key={item.href}
-                item={item}
-                onNavigate={onClose}
-              />
+              <NavigationLink key={item.href} item={item} onNavigate={onClose} />
             ))}
           </div>
         </div>
       </nav>
 
-      <div className="shrink-0 border-t border-white/10 pt-4">
-        <div className="flex items-center gap-3 rounded-lg bg-white/[0.04] p-3">
-          <Avatar className="h-9 w-9 border border-primary/30">
-            <AvatarFallback className="bg-primary/15 text-xs font-semibold text-primary">
-              {getInitials(user)}
-            </AvatarFallback>
-          </Avatar>
+      {/* User */}
+      <div
+        style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
+        className="shrink-0 pt-3 mt-3"
+      >
+        <div
+          style={{ backgroundColor: "rgba(255,255,255,0.04)" }}
+          className="flex items-center gap-3 rounded-lg px-3 py-2.5"
+        >
+          <div
+            style={{ background: "linear-gradient(135deg, #2563eb, #7c3aed)" }}
+            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white"
+          >
+            {getInitials(user)}
+          </div>
           <div className="min-w-0 flex-1">
-            <p className="truncate text-sm font-medium text-white">
+            <p className="truncate text-xs font-semibold text-white">
               {user?.fullName || "Administrator"}
             </p>
-            <p className="truncate text-xs text-muted-foreground">
-              {user?.email}
-            </p>
+            <p className="truncate text-[10px] text-slate-500">{user?.email}</p>
           </div>
           <button
             type="button"
             onClick={onLogout}
-            className="text-muted-foreground transition-colors hover:text-white"
+            className="text-slate-500 hover:text-red-400 transition-colors"
             aria-label="Log out"
           >
             <LogOut className="h-4 w-4" />
@@ -230,7 +215,8 @@ export function AdminShell({
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div style={{ backgroundColor: "#080f1e", minHeight: "100vh", color: "white" }}>
+      {/* Desktop Sidebar */}
       <div className="fixed inset-y-0 left-0 z-40 hidden lg:flex">
         <Sidebar
           user={user}
@@ -238,6 +224,8 @@ export function AdminShell({
           onLogout={handleLogout}
         />
       </div>
+
+      {/* Mobile Sidebar */}
       {isSidebarOpen && (
         <>
           <button
@@ -255,46 +243,51 @@ export function AdminShell({
         </>
       )}
 
-      <div className="lg:pl-72">
-        <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-white/10 bg-background/85 px-4 backdrop-blur-xl sm:px-8">
+      {/* Main content */}
+      <div className="lg:pl-64">
+        {/* Top Bar */}
+        <header
+          style={{
+            backgroundColor: "rgba(8,15,30,0.95)",
+            borderBottom: "1px solid rgba(255,255,255,0.06)",
+            backdropFilter: "blur(12px)",
+          }}
+          className="sticky top-0 z-30 flex h-14 items-center justify-between px-4 sm:px-6"
+        >
           <div className="flex items-center gap-3">
-            <Button
-              variant="ghost"
-              size="icon"
-              className="lg:hidden"
+            <button
+              className="lg:hidden text-slate-400 hover:text-white"
               onClick={() => setIsSidebarOpen(true)}
               aria-label="Open navigation"
             >
               <Menu className="h-5 w-5" />
-            </Button>
+            </button>
             <div>
-              <p className="text-sm font-medium text-white">
-                Good to see you, {user?.fullName?.split(" ")[0] || "Admin"}
+              <p className="text-sm font-semibold text-white">
+                Welcome, {user?.fullName?.split(" ")[0] || "Admin"} 👋
               </p>
-              <p className="hidden text-xs text-muted-foreground sm:block">
-                Here is your website at a glance.
+              <p className="hidden text-[11px] text-slate-500 sm:block">
+                ZDC Tech Global Solutions — Admin Panel
               </p>
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <Badge
-              variant="outline"
-              className="hidden border-emerald-500/30 bg-emerald-500/10 text-emerald-300 sm:inline-flex"
+            <span className="hidden sm:flex items-center gap-1.5 text-[11px] text-emerald-400">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              Session active
+            </span>
+            <div
+              style={{ background: "linear-gradient(135deg, #2563eb, #7c3aed)" }}
+              className="flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold text-white lg:hidden"
             >
-              <span className="mr-1.5 h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              Admin session active
-            </Badge>
-            <Avatar className="h-8 w-8 border border-white/10 lg:hidden">
-              <AvatarFallback className="bg-primary/15 text-xs text-primary">
-                {getInitials(user)}
-              </AvatarFallback>
-            </Avatar>
+              {getInitials(user)}
+            </div>
           </div>
         </header>
 
-        <main className="relative min-h-[calc(100vh-4rem)] overflow-hidden px-4 py-7 sm:px-8 sm:py-10">
-          <div className="pointer-events-none absolute inset-0 bg-grid opacity-20" />
-          <div className="relative mx-auto max-w-7xl">{children}</div>
+        {/* Page Content */}
+        <main className="px-4 py-6 sm:px-6 sm:py-8">
+          <div className="mx-auto max-w-7xl">{children}</div>
         </main>
       </div>
     </div>

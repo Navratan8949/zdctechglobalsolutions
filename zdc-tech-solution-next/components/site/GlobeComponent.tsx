@@ -83,21 +83,21 @@ export function GlobeComponent() {
       />
 
       {/* City connection labels */}
-      <div className="absolute left-[8%] top-[20%] flex items-center gap-2 rounded-full border border-white/10 bg-black/50 px-3 py-1.5 backdrop-blur-md">
+      <div className="absolute left-[8%] top-[20%] flex items-center gap-2 rounded-full border border-border bg-black/50 px-3 py-1.5 backdrop-blur-md">
         <span className="h-1.5 w-1.5 rounded-full bg-blue-400 animate-pulse" />
-        <span className="text-xs font-medium text-white/80">London</span>
+        <span className="text-xs font-medium text-foreground/80">London</span>
       </div>
-      <div className="absolute right-[10%] top-[35%] flex items-center gap-2 rounded-full border border-white/10 bg-black/50 px-3 py-1.5 backdrop-blur-md">
+      <div className="absolute right-[10%] top-[35%] flex items-center gap-2 rounded-full border border-border bg-black/50 px-3 py-1.5 backdrop-blur-md">
         <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-        <span className="text-xs font-medium text-white/80">New York</span>
+        <span className="text-xs font-medium text-foreground/80">New York</span>
       </div>
-      <div className="absolute bottom-[25%] left-[20%] flex items-center gap-2 rounded-full border border-white/10 bg-black/50 px-3 py-1.5 backdrop-blur-md">
+      <div className="absolute bottom-[25%] left-[20%] flex items-center gap-2 rounded-full border border-border bg-black/50 px-3 py-1.5 backdrop-blur-md">
         <span className="h-1.5 w-1.5 rounded-full bg-purple-400 animate-pulse" />
-        <span className="text-xs font-medium text-white/80">Singapore</span>
+        <span className="text-xs font-medium text-foreground/80">Singapore</span>
       </div>
-      <div className="absolute right-[5%] bottom-[30%] flex items-center gap-2 rounded-full border border-white/10 bg-black/50 px-3 py-1.5 backdrop-blur-md">
+      <div className="absolute right-[5%] bottom-[30%] flex items-center gap-2 rounded-full border border-border bg-black/50 px-3 py-1.5 backdrop-blur-md">
         <span className="h-1.5 w-1.5 rounded-full bg-orange-400 animate-pulse" />
-        <span className="text-xs font-medium text-white/80">Dubai</span>
+        <span className="text-xs font-medium text-foreground/80">Dubai</span>
       </div>
     </div>
   );

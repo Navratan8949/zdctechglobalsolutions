@@ -18,7 +18,7 @@ const bentoCards = [
             <Globe2 className="h-3 w-3" />
             Global Reach
           </div>
-          <h3 className="font-display text-3xl font-bold text-white">Serving Clients in<br /><span className="text-gradient">20+ Countries</span></h3>
+          <h3 className="font-display text-3xl font-bold text-foreground">Serving Clients in<br /><span className="text-gradient">20+ Countries</span></h3>
           <p className="mt-2 text-sm text-muted-foreground">India-based, globally connected. We deliver world-class digital solutions to businesses across every continent.</p>
         </div>
         {/* SVG World Map lines */}
@@ -56,7 +56,7 @@ const bentoCards = [
       <div className="flex h-full flex-col justify-between p-6">
         <TrendingUp className="h-6 w-6 text-emerald-400" />
         <div>
-          <div className="font-display text-4xl font-bold text-white">500+</div>
+          <div className="font-display text-4xl font-bold text-foreground">500+</div>
           <div className="text-sm text-muted-foreground">Projects Delivered</div>
           <div className="mt-2 flex items-center gap-1 text-xs text-emerald-400">
             <TrendingUp className="h-3 w-3" />
@@ -73,7 +73,7 @@ const bentoCards = [
       <div className="flex h-full flex-col justify-between p-6">
         <Users className="h-6 w-6 text-purple-400" />
         <div>
-          <div className="font-display text-4xl font-bold text-white">98%</div>
+          <div className="font-display text-4xl font-bold text-foreground">98%</div>
           <div className="text-sm text-muted-foreground">Client Satisfaction</div>
           <div className="mt-3 flex gap-0.5">
             {[1,2,3,4,5].map(i => (
@@ -91,7 +91,7 @@ const bentoCards = [
       <div className="flex h-full flex-col p-6">
         <div className="mb-3 flex items-center gap-2">
           <HeartHandshake className="h-5 w-5 text-pink-400" />
-          <span className="text-sm font-semibold text-white">Why ZDC Tech?</span>
+          <span className="text-sm font-semibold text-foreground">Why ZDC Tech?</span>
         </div>
         <div className="grid grid-cols-2 gap-3">
           {[
@@ -122,9 +122,9 @@ const bentoCards = [
       <div className="flex h-full flex-col justify-between p-6">
         <Clock className="h-6 w-6 text-orange-400" />
         <div>
-          <div className="font-display text-4xl font-bold text-white">5+</div>
+          <div className="font-display text-4xl font-bold text-foreground">5+</div>
           <div className="text-sm text-muted-foreground">Years of Excellence</div>
-          <div className="mt-3 h-1.5 w-full rounded-full bg-white/10">
+          <div className="mt-3 h-1.5 w-full rounded-full bg-muted">
             <div className="h-full w-[85%] rounded-full bg-gradient-to-r from-orange-500 to-yellow-400" />
           </div>
         </div>
@@ -135,7 +135,7 @@ const bentoCards = [
 
 export function AboutBento() {
   return (
-    <section className="py-20 lg:py-28">
+    <section className="py-16 lg:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -147,7 +147,7 @@ export function AboutBento() {
             <Code2 className="h-3 w-3" />
             About Our Company
           </div>
-          <h2 className="font-display text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
+          <h2 className="font-display text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl">
             Your Global Digital Partner
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground">
@@ -163,7 +163,7 @@ export function AboutBento() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08 }}
-              className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-card/60 backdrop-blur-sm transition-all hover:border-primary/30 hover:bg-card/80 ${card.className}`}
+              className={`group relative overflow-hidden rounded-2xl border border-border bg-card shadow-sm backdrop-blur-sm transition-all hover:border-primary/30 hover:bg-card/80 ${card.className}`}
             >
               <div className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                 style={{ background: 'radial-gradient(200px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(99,102,241,0.06), transparent 70%)' }}

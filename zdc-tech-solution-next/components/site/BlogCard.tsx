@@ -22,7 +22,7 @@ export function BlogCard({ post, index = 0, featured = false }: BlogCardProps) {
       >
         <Link
           href={`/blog/${post.slug}`}
-          className="group relative grid overflow-hidden rounded-2xl border border-white/10 bg-card/50 transition-all hover:border-primary/40 lg:grid-cols-2"
+          className="group relative grid overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-all hover:border-primary/40 lg:grid-cols-2"
         >
           <div className="relative aspect-[16/10] overflow-hidden lg:aspect-auto">
             <img
@@ -30,7 +30,7 @@ export function BlogCard({ post, index = 0, featured = false }: BlogCardProps) {
               alt={post.title}
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
-            <span className="absolute left-4 top-4 rounded-full bg-primary px-3 py-1 text-xs font-semibold text-white">
+            <span className="absolute left-4 top-4 rounded-full bg-primary text-primary-foreground px-3 py-1 text-xs font-semibold text-foreground">
               Featured
             </span>
           </div>
@@ -48,14 +48,14 @@ export function BlogCard({ post, index = 0, featured = false }: BlogCardProps) {
                 {post.readingTime}
               </span>
             </div>
-            <h3 className="mt-4 font-display text-xl font-bold text-white transition-colors group-hover:text-primary lg:text-2xl">
+            <h3 className="mt-4 font-display text-xl font-bold text-foreground transition-colors group-hover:text-primary lg:text-2xl">
               {post.title}
             </h3>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground line-clamp-3">{post.excerpt}</p>
             <div className="mt-6 flex items-center gap-3">
-              <img src={post.author.avatar} alt={post.author.name} className="h-9 w-9 rounded-full border border-white/10 object-cover" />
+              <img src={post.author.avatar} alt={post.author.name} className="h-9 w-9 rounded-full border border-border object-cover" />
               <div>
-                <p className="text-sm font-medium text-white">{post.author.name}</p>
+                <p className="text-sm font-medium text-foreground">{post.author.name}</p>
                 <p className="text-xs text-muted-foreground">{post.author.role}</p>
               </div>
             </div>
@@ -74,7 +74,7 @@ export function BlogCard({ post, index = 0, featured = false }: BlogCardProps) {
     >
       <Link
         href={`/blog/${post.slug}`}
-        className="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-card/50 transition-all hover:border-primary/40"
+        className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-all hover:border-primary/40"
       >
         <div className="relative aspect-[16/10] overflow-hidden">
           <img
@@ -82,7 +82,7 @@ export function BlogCard({ post, index = 0, featured = false }: BlogCardProps) {
             alt={post.title}
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
           />
-          <span className="absolute left-4 top-4 rounded-full border border-white/20 bg-background/60 px-3 py-1 text-xs font-medium text-primary backdrop-blur-sm">
+          <span className="absolute left-4 top-4 rounded-full border border-border bg-white/80 backdrop-blur-md px-3 py-1 text-xs font-medium text-primary backdrop-blur-sm">
             {post.category}
           </span>
         </div>
@@ -97,12 +97,12 @@ export function BlogCard({ post, index = 0, featured = false }: BlogCardProps) {
               {post.readingTime}
             </span>
           </div>
-          <h3 className="mt-3 text-lg font-semibold text-white transition-colors group-hover:text-primary">
+          <h3 className="mt-3 text-lg font-semibold text-foreground transition-colors group-hover:text-primary">
             {post.title}
           </h3>
           <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground line-clamp-2">{post.excerpt}</p>
-          <div className="mt-4 flex items-center gap-2 border-t border-white/10 pt-4">
-            <img src={post.author.avatar} alt={post.author.name} className="h-7 w-7 rounded-full border border-white/10 object-cover" />
+          <div className="mt-4 flex items-center gap-2 border-t border-border pt-4">
+            <img src={post.author.avatar} alt={post.author.name} className="h-7 w-7 rounded-full border border-border object-cover" />
             <span className="text-xs text-muted-foreground">{post.author.name}</span>
             <span className="ml-auto inline-flex items-center gap-1 text-sm font-medium text-primary">
               Read

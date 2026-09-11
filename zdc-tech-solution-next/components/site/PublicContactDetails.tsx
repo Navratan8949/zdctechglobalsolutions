@@ -9,38 +9,38 @@ export function PublicContactDetails() {
   return (
     <div className="mt-12 space-y-8">
       <div className="flex gap-4">
-        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-card/50">
-          <Mail className="h-5 w-5 text-primary" />
+        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-blue-400/20 bg-blue-500/10 shadow-sm">
+          <Mail className="h-5 w-5 text-blue-400" />
         </div>
         <div>
           <h3 className="text-sm font-medium text-white">Email Us</h3>
-          <p className="mt-1 text-sm text-muted-foreground">{details.email}</p>
-          <p className="mt-1 text-sm text-muted-foreground">
+          <p className="mt-1 text-sm text-blue-100/70">{details.email}</p>
+          <p className="mt-1 text-sm text-blue-100/70">
             careers@zdctechglobalsolutions.com
           </p>
         </div>
       </div>
       <div className="flex gap-4">
-        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-card/50">
-          <Phone className="h-5 w-5 text-primary" />
+        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-blue-400/20 bg-blue-500/10 shadow-sm">
+          <Phone className="h-5 w-5 text-blue-400" />
         </div>
         <div>
           <h3 className="text-sm font-medium text-white">Call Us</h3>
-          <p className="mt-1 text-sm text-muted-foreground">{details.phone}</p>
-          <p className="mt-1 text-sm text-muted-foreground">{details.hours}</p>
+          <p className="mt-1 text-sm text-blue-100/70">{details.phone}</p>
+          <p className="mt-1 text-sm text-blue-100/70">{details.hours}</p>
         </div>
       </div>
       <div className="flex gap-4">
-        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-card/50">
-          <MapPin className="h-5 w-5 text-primary" />
+        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-blue-400/20 bg-blue-500/10 shadow-sm">
+          <MapPin className="h-5 w-5 text-blue-400" />
         </div>
         <div>
           <h3 className="text-sm font-medium text-white">Visit Us</h3>
-          <p className="mt-1 text-sm text-muted-foreground">
+          <p className="mt-1 text-sm text-blue-100/70">
             {details.headOffice}
           </p>
           {details.branchOffice && (
-            <p className="mt-1 text-sm text-muted-foreground">
+            <p className="mt-1 text-sm text-blue-100/70">
               {details.branchOffice}
             </p>
           )}

@@ -40,6 +40,7 @@ app.use("/api/v1/technologies", require("./routes/technology.routes"));
 app.use("/api/v1/faqs", require("./routes/faq.routes"));
 app.use("/api/v1/subscribers", require("./routes/subscriber.routes"));
 app.use("/api/v1/upload", require("./routes/upload.routes"));
+app.use("/api/v1/why-choose-us", require("./routes/whyChooseUs.routes"));
 
 // Admin — Backup
 const isAuthenticated = require("./middleware/auth");

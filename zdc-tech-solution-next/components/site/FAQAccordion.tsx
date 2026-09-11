@@ -56,9 +56,9 @@ export function FAQAccordion({ items }: FAQAccordionProps) {
           >
             <AccordionItem
               value={`item-${index}`}
-              className="rounded-xl border border-white/10 bg-card/50 px-5 transition-colors hover:border-primary/30 data-[state=open]:border-primary/40"
+              className="rounded-xl border border-border bg-card shadow-sm px-5 transition-colors hover:border-primary/30 data-[state=open]:border-primary/40"
             >
-              <AccordionTrigger className="text-base font-medium text-white hover:no-underline">
+              <AccordionTrigger className="text-base font-medium text-foreground hover:no-underline">
                 {item.question}
               </AccordionTrigger>
               <AccordionContent className="text-sm leading-relaxed text-muted-foreground pb-4">

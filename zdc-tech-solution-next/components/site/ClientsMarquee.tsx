@@ -71,51 +71,30 @@ export function ClientsMarquee() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden border-b border-white/5 py-12 lg:py-16">
-      <div className="absolute inset-0 bg-background/50 backdrop-blur-sm pointer-events-none" />
-
-      <div className="relative z-10 mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
-        <h2 className="font-display text-2xl font-bold tracking-tight text-white md:text-3xl">
-          <span className="text-primary">100K</span> Clients Worldwide
+    <section className="relative overflow-hidden bg-[#f8fafc] border-y border-gray-100 py-12 lg:py-16">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8 mb-10">
+        <h2 className="text-[13px] font-bold tracking-[0.2em] text-slate-400 uppercase">
+          Trusted by <span className="text-[#0ea5e9]">100K+</span> Clients Worldwide
         </h2>
         {error && <p className="mt-2 text-xs text-amber-300">{error}</p>}
       </div>
 
-      <div className="relative z-10 mt-10">
+      <div className="relative z-10">
         <Marquee pauseOnHover duration="40s" className="[--gap:3rem]">
           {companies.map((company, i) => (
             <div
               key={i}
-              className="group relative flex items-center justify-center gap-2 rounded-2xl border border-white/5 bg-white/5 px-8 py-4 transition-colors hover:bg-white/10"
+              className="group relative flex items-center justify-center gap-3 rounded-xl border border-gray-200 bg-white shadow-[0_2px_10px_rgba(0,0,0,0.02)] px-8 py-4 transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-[0_8px_20px_rgba(14,165,233,0.1)] grayscale hover:grayscale-0"
             >
-              <span className={cn("text-xl", company.color)}>
+              <span className={cn("text-2xl", company.color)}>
                 {company.icon}
               </span>
-              <span className="font-display text-lg font-medium text-white/80 transition-colors group-hover:text-white">
+              <span className="text-lg font-bold text-slate-500 transition-colors group-hover:text-[#0b1b3d]">
                 {company.name}
               </span>
             </div>
           ))}
         </Marquee>
-
-        {/* Decorative Floating Cursors */}
-        {/* {popups.map((popup, i) => (
-          <div
-            key={i}
-            className={cn(
-              'absolute z-20 flex animate-float flex-col items-start',
-              popup.className,
-              popup.delay
-            )}
-          >
-            <div className="rounded-full border border-white/10 bg-black/60 px-3 py-1 text-xs font-medium text-white/90 backdrop-blur-md">
-              {popup.text}
-            </div>
-            <MousePointer2
-              className={cn('h-5 w-5 -mt-1 ml-4 rotate-[-20deg]', popup.pointerColor, popup.pointerFill)}
-            />
-          </div>
-        ))} */}
       </div>
     </section>
   );

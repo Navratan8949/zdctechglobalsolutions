@@ -22,15 +22,17 @@ import { CompanyDescription } from "@/components/site/CompanyDescription";
 import { TestimonialsSection } from "@/components/site/TestimonialsSection";
 import { StatsCounter } from "@/components/site/StatsCounter";
 import { SectionHeading } from "@/components/site/SectionHeading";
+import { AllServicesCloud } from "@/components/site/AllServicesCloud";
 
 export const metadata: Metadata = {
-  title: "ZDC Tech Global Solutions — Software Development & IT Company",
+  title: "ZDC Tech Global Solutions — Best IT Company | Web & App Development",
   description:
-    "India-based global IT company delivering world-class websites, mobile apps, custom software and digital solutions to businesses across 20+ countries.",
+    "Looking for the best IT company? ZDC Tech Global Solutions delivers premium website design, mobile app development, SEO, and custom software globally.",
   openGraph: {
-    title: "ZDC Tech Global Solutions — Software Development & IT Company",
+    title:
+      "ZDC Tech Global Solutions — Best IT Company | Web & App Development",
     description:
-      "India-based global IT company delivering world-class websites, mobile apps, custom software and digital solutions to businesses across 20+ countries.",
+      "Looking for the best IT company? ZDC Tech Global Solutions delivers premium website design, mobile app development, SEO, and custom software globally.",
     url: "https://zdctechglobalsolutions.com/",
   },
 };
@@ -40,29 +42,29 @@ export default function HomePage() {
     <>
       <HomeHero />
       <CompanyDescription />
-      <ClientsMarquee />
-
-      {/* Stats */}
-      <section className="relative border-y border-white/10 py-16 lg:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <StatsCounter stats={stats} />
-        </div>
-      </section>
+      {/* <ClientsMarquee /> */}
 
       {/* Services — New premium animated section */}
       <ServicesSection />
 
       {/* About Company — Bento Grid */}
-      <AboutBento />
+      {/* <AboutBento /> */}
 
       {/* Why Choose Us */}
-      <section className="py-20 lg:py-28">
+      <section className="py-20 lg:py-28 bg-[#0b1b3d]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="Why Choose Us"
-            title="Reasons to Partner With Us"
-            description="We combine technical excellence with business understanding to deliver results that matter."
-          />
+          <div className="text-center mb-16">
+            <p className="text-[12px] font-black uppercase tracking-widest text-blue-200 mb-3">
+              Why Choose Us
+            </p>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">
+              Reasons to Partner With Us
+            </h2>
+            <p className="mt-6 text-[16px] sm:text-[18px] leading-relaxed text-blue-100 max-w-2xl mx-auto">
+              We combine technical excellence with business understanding to
+              deliver results that matter.
+            </p>
+          </div>
           <div className="mt-12">
             <WhyChooseUsCards items={whyChooseUs} />
           </div>
@@ -70,8 +72,7 @@ export default function HomePage() {
       </section>
 
       {/* Development Process */}
-      <section className="relative overflow-hidden py-20 lg:py-28">
-        <div className="absolute left-1/2 top-0 h-[300px] w-[600px] -translate-x-1/2 rounded-full bg-primary/10 blur-[120px]" />
+      <section className="py-20 lg:py-28 bg-slate-50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Our Process"
@@ -88,8 +89,8 @@ export default function HomePage() {
       <IndustriesMarquee />
 
       {/* Technology Stack */}
-      <section className="relative overflow-hidden py-20 lg:py-28">
-        <div className="absolute right-0 top-1/4 h-[300px] w-[400px] rounded-full bg-secondary/10 blur-[120px]" />
+      <section className="relative overflow-hidden py-16 lg:py-20 bg-white">
+        <div className="absolute right-0 top-1/4 h-[300px] w-[400px] rounded-full bg-secondary/5 blur-[120px]" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Our Tech Stack"
@@ -108,14 +109,24 @@ export default function HomePage() {
       {/* Case Studies */}
       <HomeCaseStudiesSection />
 
+      {/* Stats */}
+      <section className="relative border-y border-border py-16 lg:py-20 bg-muted/30">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <StatsCounter stats={stats} />
+        </div>
+      </section>
+
       <TestimonialsSection />
 
       {/* Blog Preview */}
       <HomeBlogSection />
 
+      {/* All Services Cloud */}
+      <AllServicesCloud />
+
       {/* FAQ */}
-      <section className="relative overflow-hidden py-20 lg:py-28">
-        <div className="absolute left-1/2 top-0 h-[300px] w-[500px] -translate-x-1/2 rounded-full bg-primary/10 blur-[120px]" />
+      <section className="relative overflow-hidden py-16 lg:py-20 bg-muted/30">
+        <div className="absolute left-1/2 top-0 h-[300px] w-[500px] -translate-x-1/2 rounded-full bg-primary/5 blur-[120px]" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="FAQ"
@@ -129,7 +140,7 @@ export default function HomePage() {
       </section>
 
       {/* CTA */}
-      <CTASection />
+      {/* <CTASection /> */}
     </>
   );
 }

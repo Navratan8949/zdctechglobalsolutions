@@ -79,12 +79,14 @@ export function ContactForm() {
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="flex flex-col items-center justify-center rounded-2xl border border-green-500/20 bg-green-500/5 p-12 text-center"
+        className="flex flex-col items-center justify-center rounded-2xl border border-green-500/20 bg-green-500/5 p-8 text-center"
       >
         <div className="flex h-16 w-16 items-center justify-center rounded-full bg-green-500/10">
           <CheckCircle2 className="h-8 w-8 text-green-400" />
         </div>
-        <h3 className="mt-6 text-xl font-semibold text-white">Thank you!</h3>
+        <h3 className="mt-6 text-xl font-semibold text-foreground">
+          Thank you!
+        </h3>
         <p className="mt-2 max-w-md text-sm text-muted-foreground">
           We&apos;ll get back to you soon. Our team typically responds within 24
           hours.
@@ -100,13 +102,13 @@ export function ContactForm() {
   }
 
   const inputClasses =
-    "w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-muted-foreground/60 transition-colors focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/30";
+    "w-full rounded-lg border border-border bg-card shadow-sm px-4 py-2 text-sm text-foreground placeholder:text-muted-foreground/60 transition-colors focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/30";
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="grid gap-3 sm:grid-cols-2">
         <div>
-          <label className="mb-1.5 block text-sm font-medium text-white">
+          <label className="mb-1.5 block text-sm font-medium text-foreground">
             Name *
           </label>
           <input
@@ -120,7 +122,7 @@ export function ContactForm() {
           )}
         </div>
         <div>
-          <label className="mb-1.5 block text-sm font-medium text-white">
+          <label className="mb-1.5 block text-sm font-medium text-foreground">
             Email *
           </label>
           <input
@@ -135,9 +137,9 @@ export function ContactForm() {
         </div>
       </div>
 
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="grid gap-3 sm:grid-cols-2">
         <div>
-          <label className="mb-1.5 block text-sm font-medium text-white">
+          <label className="mb-1.5 block text-sm font-medium text-foreground">
             Phone
           </label>
           <input
@@ -148,7 +150,7 @@ export function ContactForm() {
           />
         </div>
         <div>
-          <label className="mb-1.5 block text-sm font-medium text-white">
+          <label className="mb-1.5 block text-sm font-medium text-foreground">
             Company
           </label>
           <input
@@ -160,9 +162,9 @@ export function ContactForm() {
         </div>
       </div>
 
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="grid gap-3 sm:grid-cols-2">
         <div>
-          <label className="mb-1.5 block text-sm font-medium text-white">
+          <label className="mb-1.5 block text-sm font-medium text-foreground">
             Service
           </label>
           <select name="service" className={inputClasses} defaultValue="">
@@ -177,7 +179,7 @@ export function ContactForm() {
           </select>
         </div>
         <div>
-          <label className="mb-1.5 block text-sm font-medium text-white">
+          <label className="mb-1.5 block text-sm font-medium text-foreground">
             Budget
           </label>
           <select name="budget" className={inputClasses} defaultValue="">
@@ -196,7 +198,7 @@ export function ContactForm() {
       )}
 
       <div>
-        <label className="mb-1.5 block text-sm font-medium text-white">
+        <label className="mb-1.5 block text-sm font-medium text-foreground">
           Message *
         </label>
         <textarea
@@ -213,7 +215,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-[0_0_20px_rgba(var(--primary),0.3)] transition-all hover:scale-105 hover:bg-primary/90 sm:w-auto"
+        className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary text-primary-foreground px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-[0_0_20px_rgba(var(--primary),0.3)] transition-all hover:scale-105 hover:bg-primary/90 sm:w-auto"
       >
         <Send className="h-4 w-4" />
         {isSubmitting ? "Sending..." : "Send Message"}

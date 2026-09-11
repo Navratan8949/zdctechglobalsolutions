@@ -63,36 +63,36 @@ export default function PortfolioPage() {
         description="Explore our recent projects and see how we have helped businesses transform their digital presence."
       />
 
-      <section className="py-20 lg:py-28">
+      <section className="py-16 lg:py-20 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {loading && (
-            <p className="mb-8 text-center text-sm text-muted-foreground">
+            <p className="mb-8 text-center text-sm text-slate-500">
               Loading portfolio...
             </p>
           )}
           {error && (
-            <p className="mb-8 text-center text-sm text-amber-300">{error}</p>
+            <p className="mb-8 text-center text-sm text-red-500">{error}</p>
           )}
           {!loading && items.length === 0 && (
-            <p className="mb-8 text-center text-muted-foreground">
+            <p className="mb-8 text-center text-slate-500">
               No published projects are available yet.
             </p>
           )}
-          <SectionHeading
-            eyebrow="Projects"
-            title="Our Latest Work"
-            description="Filter by category to explore projects similar to what you are looking for."
-          />
+          <div className="text-center mb-12">
+            <p className="text-[12px] font-black uppercase tracking-widest text-[#0ea5e9] mb-3">Projects</p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#0b1b3d]">Our Latest Work</h2>
+            <p className="mt-4 text-[16px] text-slate-500 max-w-2xl mx-auto">Filter by category to explore projects similar to what you are looking for.</p>
+          </div>
 
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-2">
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             {categories.map((category) => (
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`rounded-full px-5 py-2 text-sm font-medium transition-all ${
+                className={`rounded-full px-5 py-2 text-[13px] font-bold uppercase tracking-widest transition-all ${
                   activeCategory === category
-                    ? "bg-primary text-primary-foreground shadow-[0_0_15px_rgba(0,136,255,0.4)]"
-                    : "bg-card/50 text-muted-foreground hover:bg-card hover:text-white"
+                    ? "bg-[#0ea5e9] text-white shadow-md"
+                    : "bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-[#0b1b3d]"
                 }`}
               >
                 {category}
@@ -100,7 +100,7 @@ export default function PortfolioPage() {
             ))}
           </div>
 
-          <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {filteredPortfolio.map((item, index) => (
               <PortfolioCard key={item.slug} item={item} index={index} />
             ))}
@@ -108,7 +108,7 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      <CTASection />
+      {/* <CTASection /> */}
     </>
   );
 }

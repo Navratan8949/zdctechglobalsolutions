@@ -33,11 +33,19 @@ export async function generateMetadata({
   if (!service) return { title: "Service Not Found" };
 
   return {
-    title: service.title,
-    description: service.shortDescription,
+    title: `${service.title} | Best IT Company Services`,
+    description: `${service.shortDescription} Partner with ZDC Tech Global Solutions, the best IT company for premium ${service.title.toLowerCase()} services.`,
+    keywords: [
+      service.title,
+      `Best ${service.title} Agency`,
+      `Top ${service.title} Company`,
+      "Best IT Company",
+      "Software Development",
+      "ZDC Tech Global Solutions",
+    ],
     openGraph: {
-      title: `${service.title} | ZDC Tech Global Solutions`,
-      description: service.shortDescription,
+      title: `${service.title} | Best IT Company Services`,
+      description: `${service.shortDescription} Partner with ZDC Tech Global Solutions, the best IT company for premium ${service.title.toLowerCase()} services.`,
       url: `https://zdctechglobalsolutions.com/services/${service.slug}`,
     },
   };
@@ -64,37 +72,43 @@ export default async function ServiceDetailPage({
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden pt-32 pb-16 sm:pt-40 lg:pt-44 lg:pb-20">
-        <div className="absolute inset-0 bg-grid opacity-20" />
-        <div className="absolute left-1/2 top-0 h-[300px] w-[600px] -translate-x-1/2 rounded-full bg-primary/20 blur-[120px]" />
+      <section className="relative overflow-hidden pt-32 pb-16 sm:pt-40 lg:pt-44 lg:pb-20 bg-slate-50">
         <div className="relative mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
           <Link
             href="/services"
-            className="mb-6 inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary"
+            className="mb-6 inline-flex items-center gap-1.5 text-sm font-bold uppercase tracking-widest text-slate-500 hover:text-[#0ea5e9] transition-colors"
           >
-            <ArrowLeft className="h-4 w-4" />
+            <ArrowLeft className="h-4 w-4" strokeWidth={3} />
             All Services
           </Link>
-          <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-gradient-to-br from-primary/20 to-secondary/20 glow-blue-sm">
-            <Icon className="h-8 w-8 text-primary" />
+          <div className="mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-2xl bg-white shadow-sm border border-slate-100 text-[#0ea5e9] overflow-hidden">
+            {service.image?.url ? (
+              <img 
+                src={service.image.url} 
+                alt={service.title} 
+                className="w-14 h-14 object-contain"
+              />
+            ) : (
+              <Icon className="h-10 w-10" strokeWidth={2} />
+            )}
           </div>
-          <h1 className="font-display text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
+          <h1 className="text-4xl font-bold tracking-tight text-[#0b1b3d] sm:text-5xl lg:text-6xl">
             {service.heroHeadline}
           </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+          <p className="mx-auto mt-6 max-w-3xl text-[18px] leading-relaxed text-slate-500">
             {service.heroSubheadline}
           </p>
-          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
               href="/contact"
-              className="group inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-bold text-primary-foreground shadow-lg shadow-primary/20 transition-all hover:scale-105 hover:bg-primary/90"
+              className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#0ea5e9] px-8 py-4 text-[14px] font-bold uppercase tracking-widest text-white shadow-lg transition-transform hover:scale-105"
             >
               Get Started
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" strokeWidth={3} />
             </Link>
             <Link
               href="/portfolio"
-              className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition-all hover:border-primary/40 hover:bg-white/10"
+              className="inline-flex items-center gap-2 rounded-full border-2 border-slate-200 bg-white px-8 py-4 text-[14px] font-bold uppercase tracking-widest text-[#0b1b3d] transition-colors hover:border-[#0ea5e9] hover:text-[#0ea5e9]"
             >
               View Our Work
             </Link>
@@ -103,43 +117,39 @@ export default async function ServiceDetailPage({
       </section>
 
       {/* Introduction */}
-      <section className="py-20 lg:py-28">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="Overview"
-            title={`About Our ${service.title} Services`}
-            align="left"
-          />
-          <p className="mt-6 text-base leading-relaxed text-muted-foreground sm:text-lg">
+      <section className="py-20 lg:py-28 bg-white">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-[12px] font-black uppercase tracking-widest text-[#0ea5e9] mb-3">Overview</p>
+          <h2 className="text-3xl font-bold text-[#0b1b3d]">About Our {service.title} Services</h2>
+          <p className="mt-6 text-[18px] leading-relaxed text-slate-500">
             {service.introduction}
           </p>
         </div>
       </section>
 
       {/* What We Offer */}
-      <section className="relative overflow-hidden py-20 lg:py-28">
-        <div className="absolute right-0 top-1/4 h-[300px] w-[400px] rounded-full bg-primary/10 blur-[120px]" />
+      <section className="py-20 lg:py-28 bg-slate-50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="What We Offer"
-            title="Our Service Offerings"
-            description="Comprehensive solutions tailored to your specific needs."
-          />
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="text-center mb-16">
+            <p className="text-[12px] font-black uppercase tracking-widest text-[#0ea5e9] mb-3">What We Offer</p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#0b1b3d]">Our Service Offerings</h2>
+            <p className="mt-4 text-[16px] text-slate-500 max-w-2xl mx-auto">Comprehensive solutions tailored to your specific needs.</p>
+          </div>
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {service.whatWeOffer.map((offer, i) => (
               <div
                 key={i}
-                className="group rounded-2xl border border-white/10 bg-card/40 p-6 transition-all hover:border-primary/30 hover:bg-card/70"
+                className="group rounded-2xl border border-slate-200 bg-white p-8 shadow-sm transition-all hover:border-blue-200 hover:shadow-md"
               >
-                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-gradient-to-br from-primary/15 to-secondary/15">
-                  <span className="font-display text-sm font-bold text-primary">
+                <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-[#0ea5e9]">
+                  <span className="text-[18px] font-black">
                     0{i + 1}
                   </span>
                 </div>
-                <h3 className="text-base font-semibold text-white">
+                <h3 className="text-[18px] font-bold text-[#0b1b3d]">
                   {offer.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                <p className="mt-3 text-[14px] leading-relaxed text-slate-500">
                   {offer.description}
                 </p>
               </div>
@@ -149,21 +159,21 @@ export default async function ServiceDetailPage({
       </section>
 
       {/* Key Features */}
-      <section className="py-20 lg:py-28">
+      <section className="py-20 lg:py-28 bg-white border-t border-slate-100">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="Key Features"
-            title="Everything You Need"
-            description="Features and capabilities included in every project we deliver."
-          />
-          <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="text-center mb-16">
+            <p className="text-[12px] font-black uppercase tracking-widest text-[#0ea5e9] mb-3">Key Features</p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#0b1b3d]">Everything You Need</h2>
+            <p className="mt-4 text-[16px] text-slate-500 max-w-2xl mx-auto">Features and capabilities included in every project we deliver.</p>
+          </div>
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {service.keyFeatures.map((feature, i) => (
               <div
                 key={i}
-                className="flex items-center gap-2.5 rounded-xl border border-white/10 bg-card/40 px-4 py-3"
+                className="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 px-5 py-4"
               >
-                <CheckCircle2 className="h-5 w-5 shrink-0 text-primary" />
-                <span className="text-sm text-foreground/90">{feature}</span>
+                <CheckCircle2 className="h-5 w-5 shrink-0 text-[#0ea5e9]" />
+                <span className="text-[14px] font-bold text-[#0b1b3d]">{feature}</span>
               </div>
             ))}
           </div>
@@ -171,30 +181,28 @@ export default async function ServiceDetailPage({
       </section>
 
       {/* Technologies */}
-      <section className="relative overflow-hidden py-20 lg:py-28">
-        <div className="absolute left-0 top-1/3 h-[300px] w-[400px] rounded-full bg-secondary/10 blur-[120px]" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="Technologies"
-            title="Tools We Use"
-            description="We leverage the best technologies to deliver outstanding results."
-          />
-          <div className="mt-12 flex flex-wrap justify-center gap-3">
+      <section className="py-20 lg:py-28 bg-slate-50">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-[12px] font-black uppercase tracking-widest text-[#0ea5e9] mb-3">Technologies</p>
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#0b1b3d] mb-12">Tools We Use</h2>
+          
+          <div className="flex flex-wrap justify-center gap-3">
             {service.technologies.map((tech) => (
-              <TechnologyBadge key={tech} name={tech} />
+              <span key={tech} className="px-4 py-2 bg-white border border-slate-200 rounded-lg text-[13px] font-bold text-slate-700 shadow-sm">
+                {tech}
+              </span>
             ))}
           </div>
         </div>
       </section>
 
       {/* Development Process */}
-      <section className="py-20 lg:py-28">
+      <section className="py-20 lg:py-28 bg-white border-t border-slate-100">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="Our Process"
-            title="How We Deliver"
-            description="A proven process that ensures quality at every stage."
-          />
+          <div className="text-center mb-16">
+            <p className="text-[12px] font-black uppercase tracking-widest text-[#0ea5e9] mb-3">Our Process</p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#0b1b3d]">How We Deliver</h2>
+          </div>
           <div className="mt-16">
             <ProcessTimeline steps={processSteps} />
           </div>
@@ -202,27 +210,25 @@ export default async function ServiceDetailPage({
       </section>
 
       {/* Benefits */}
-      <section className="relative overflow-hidden py-20 lg:py-28">
-        <div className="absolute right-0 top-1/4 h-[300px] w-[400px] rounded-full bg-primary/10 blur-[120px]" />
+      <section className="py-20 lg:py-28 bg-slate-50 border-t border-slate-100">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="Benefits"
-            title="Why It Matters"
-            description="The tangible benefits you can expect from working with us."
-          />
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="text-center mb-16">
+            <p className="text-[12px] font-black uppercase tracking-widest text-[#0ea5e9] mb-3">Benefits</p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#0b1b3d]">Why It Matters</h2>
+          </div>
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {service.benefits.map((benefit, i) => (
               <div
                 key={i}
-                className="group rounded-2xl border border-white/10 bg-card/40 p-6 transition-all hover:border-primary/30 hover:bg-card/70"
+                className="group rounded-2xl border border-slate-200 bg-white p-8 shadow-sm transition-all hover:border-blue-200 hover:shadow-md"
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-gradient-to-br from-primary/15 to-secondary/15">
-                  <CheckCircle2 className="h-5 w-5 text-primary" />
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-[#0ea5e9] mb-6">
+                  <CheckCircle2 className="h-6 w-6" strokeWidth={2.5} />
                 </div>
-                <h3 className="mt-4 text-base font-semibold text-white">
+                <h3 className="text-[18px] font-bold text-[#0b1b3d]">
                   {benefit.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                <p className="mt-3 text-[14px] leading-relaxed text-slate-500">
                   {benefit.description}
                 </p>
               </div>
@@ -231,44 +237,25 @@ export default async function ServiceDetailPage({
         </div>
       </section>
 
-      {/* Why Choose Us */}
-      <section className="py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="Why Choose Us"
-            title="The ZDC Tech Global Solutions Advantage"
-            description="What makes us the right partner for your project."
-          />
-          <div className="mt-12">
-            <WhyChooseUsCards items={whyChooseUs} />
-          </div>
-        </div>
-      </section>
-
       {/* FAQ */}
-      <section className="relative overflow-hidden py-20 lg:py-28">
-        <div className="absolute left-1/2 top-0 h-[300px] w-[500px] -translate-x-1/2 rounded-full bg-primary/10 blur-[120px]" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="FAQ"
-            title="Frequently Asked Questions"
-            description="Common questions about our services and process."
-          />
-          <div className="mt-12">
-            <FAQAccordion items={service.faqs} />
+      <section className="py-20 lg:py-28 bg-white">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <p className="text-[12px] font-black uppercase tracking-widest text-[#0ea5e9] mb-3">FAQ</p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#0b1b3d]">Frequently Asked Questions</h2>
           </div>
+          <FAQAccordion items={service.faqs} />
         </div>
       </section>
 
       {/* Related Services */}
-      <section className="py-20 lg:py-28">
+      <section className="py-20 lg:py-28 bg-slate-50 border-t border-slate-100">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="Related Services"
-            title="Explore More Services"
-            align="left"
-          />
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="text-center mb-12">
+            <p className="text-[12px] font-black uppercase tracking-widest text-[#0ea5e9] mb-3">Related Services</p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#0b1b3d]">Explore More Services</h2>
+          </div>
+          <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {relatedServices.map((s, i) => (
               <ServiceCard key={s.slug} service={s} index={i} />
             ))}
@@ -276,7 +263,7 @@ export default async function ServiceDetailPage({
         </div>
       </section>
 
-      <CTASection />
+      {/* <CTASection /> */}
     </>
   );
 }

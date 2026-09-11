@@ -1,12 +1,14 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Our Portfolio',
-  description: 'Explore our recent projects and see how we have helped businesses transform their digital presence.',
+  title: "Our Portfolio | Best IT Company Projects",
+  description:
+    "Explore the portfolio of the best IT company. See our recent success stories in website development, mobile apps, custom software, and digital marketing.",
   openGraph: {
-    title: 'Our Portfolio | ZDC Tech Global Solutions',
-    description: 'Explore our recent projects and see how we have helped businesses transform their digital presence.',
-    url: 'https://zdctechglobalsolutions.com/portfolio',
+    title: "Our Portfolio | Best IT Company Projects",
+    description:
+      "Explore the portfolio of the best IT company. See our recent success stories in website development, mobile apps, custom software, and digital marketing.",
+    url: "https://zdctechglobalsolutions.com/portfolio",
   },
 };
 

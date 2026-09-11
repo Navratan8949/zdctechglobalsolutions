@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
-import type { CaseStudy } from '@/data/caseStudies';
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import type { CaseStudy } from "@/data/caseStudies";
 
 interface CaseStudyCardProps {
   caseStudy: CaseStudy;
@@ -16,46 +16,43 @@ export function CaseStudyCard({ caseStudy, index = 0 }: CaseStudyCardProps) {
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.4, delay: index * 0.1 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
     >
       <Link
         href={`/case-studies/${caseStudy.slug}`}
-        className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-card/50 transition-all duration-300 hover:border-primary/40"
+        className="group flex flex-col h-full overflow-hidden rounded-xl bg-white border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.02)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(14,165,233,0.1)] hover:border-blue-200"
       >
-        <div className="relative aspect-[16/10] overflow-hidden">
+        <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
           <img
             src={caseStudy.image}
             alt={caseStudy.title}
-            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
-          <span className="absolute left-4 top-4 rounded-full border border-white/20 bg-background/60 px-3 py-1 text-xs font-medium text-primary backdrop-blur-sm">
-            {caseStudy.industry}
-          </span>
+          <div className="absolute top-4 left-4">
+            <span className="rounded-full bg-white/95 backdrop-blur-md px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest text-[#0b1b3d] shadow-sm">
+              {caseStudy.industry}
+            </span>
+          </div>
         </div>
 
-        <div className="flex flex-1 flex-col p-6">
-          <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">{caseStudy.client}</p>
-          <h3 className="mt-2 text-xl font-semibold text-white transition-colors group-hover:text-primary">
+        <div className="flex flex-1 flex-col p-6 sm:p-8">
+          <p className="text-[11px] font-black uppercase tracking-widest text-[#0ea5e9] mb-3">
+            {caseStudy.client}
+          </p>
+          <h3 className="text-[18px] sm:text-[20px] font-bold text-[#0b1b3d] transition-colors duration-300 group-hover:text-[#0ea5e9] leading-snug mb-3">
             {caseStudy.title}
           </h3>
-          <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground line-clamp-3">
+          <p className="text-[14px] leading-relaxed text-slate-500 line-clamp-3 mb-6 flex-1">
             {caseStudy.challenge}
           </p>
 
-          <div className="mt-5 grid grid-cols-3 gap-4 border-t border-white/10 pt-4">
-            {caseStudy.results.slice(0, 3).map((r) => (
-              <div key={r.label}>
-                <p className="font-display text-lg font-bold text-primary">{r.value}</p>
-                <p className="text-[10px] leading-tight text-muted-foreground">{r.label}</p>
-              </div>
-            ))}
-          </div>
-
-          <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-primary">
+          <div className="mt-auto flex items-center text-[12px] font-bold uppercase tracking-widest text-[#0b1b3d] transition-colors duration-300 group-hover:text-[#0ea5e9]">
             Read Case Study
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </span>
+            <ArrowRight
+              className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+              strokeWidth={2.5}
+            />
+          </div>
         </div>
       </Link>
     </motion.div>

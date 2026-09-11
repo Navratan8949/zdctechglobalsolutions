@@ -87,7 +87,7 @@ export default function BlogPage() {
         </div>
       </section>
 
-      <CTASection />
+      {/* <CTASection /> */}
     </>
   );
 }

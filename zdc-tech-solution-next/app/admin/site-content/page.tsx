@@ -26,6 +26,7 @@ import {
 } from "@/service/siteContent.service";
 
 interface SocialLinks {
+  facebook: string;
   linkedin: string;
   twitter: string;
   github: string;
@@ -42,6 +43,7 @@ interface SiteContent {
   branchOffice: string;
   hours: string;
   logo: { public_id: string; url: string };
+  logoText: { public_id: string; url: string };
   socials: SocialLinks;
   createdAt?: string;
   updatedAt?: string;
@@ -59,7 +61,8 @@ const emptyDraft: SiteContentDraft = {
   branchOffice: "",
   hours: "",
   logo: { public_id: "", url: "" },
-  socials: { linkedin: "", twitter: "", github: "", instagram: "" },
+  logoText: { public_id: "", url: "" },
+  socials: { facebook: "", linkedin: "", twitter: "", github: "", instagram: "" },
 };
 
 function getErrorMessage(error: unknown) {
@@ -98,7 +101,12 @@ function toDraft(content: SiteContent): SiteContentDraft {
       public_id: content.logo?.public_id || "",
       url: content.logo?.url || ""
     },
+    logoText: {
+      public_id: content.logoText?.public_id || "",
+      url: content.logoText?.url || ""
+    },
     socials: {
+      facebook: content.socials?.facebook || "",
       linkedin: content.socials?.linkedin || "",
       twitter: content.socials?.twitter || "",
       github: content.socials?.github || "",
@@ -192,10 +200,10 @@ export default function SiteContentPage() {
     }));
   };
 
-  const updateLogo = (field: "public_id" | "url", value: string) => {
+  const updateLogo = (type: "logo" | "logoText", field: "public_id" | "url", value: string) => {
     setDraft((current) => ({
       ...current,
-      logo: { ...current.logo, [field]: value },
+      [type]: { ...current[type], [field]: value },
     }));
   };
 
@@ -391,8 +399,16 @@ export default function SiteContentPage() {
                   <ImageUploadField
                     publicId={draft.logo.public_id}
                     url={draft.logo.url}
-                    onChange={(publicId, url) => { updateLogo("public_id", publicId); updateLogo("url", url); }}
-                    label="Company Logo"
+                    onChange={(publicId, url) => { updateLogo("logo", "public_id", publicId); updateLogo("logo", "url", url); }}
+                    label="Company Logo (Icon)"
+                  />
+                </div>
+                <div className="md:col-span-2">
+                  <ImageUploadField
+                    publicId={draft.logoText.public_id}
+                    url={draft.logoText.url}
+                    onChange={(publicId, url) => { updateLogo("logoText", "public_id", publicId); updateLogo("logoText", "url", url); }}
+                    label="Text Logo (Optional)"
                   />
                 </div>
                 <Field
@@ -451,6 +467,11 @@ export default function SiteContentPage() {
                   Social links
                 </h3>
                 <div className="grid gap-5 md:grid-cols-2">
+                  <Field
+                    label="Facebook"
+                    value={draft.socials.facebook}
+                    onChange={(value) => updateSocial("facebook", value)}
+                  />
                   <Field
                     label="LinkedIn"
                     value={draft.socials.linkedin}

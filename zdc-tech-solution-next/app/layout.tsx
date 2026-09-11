@@ -5,24 +5,26 @@ import { SiteChrome } from "@/components/site/SiteChrome";
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
+    process.env.NEXT_PUBLIC_SITE_URL || "https://zdctechglobalsolutions.com",
   ),
   title: {
-    default: "ZDC Tech Global Solutions — Software Development & IT Solutions",
+    default: "ZDC Tech Global Solutions — Best IT Company & Software Development Agency",
     template: "%s | ZDC Tech Global Solutions",
   },
   description:
-    "ZDC Tech Global Solutions builds websites, mobile apps, custom software and digital solutions that move your business forward.",
+    "ZDC Tech Global Solutions is the best IT company offering world-class website development, mobile app development, SEO, digital marketing, and custom software solutions globally.",
   keywords: [
-    "software development",
-    "web development",
-    "mobile app development",
-    "UI/UX design",
-    "cloud services",
-    "IT consulting",
-    "digital marketing",
+    "Best IT Company",
+    "Top Software Development Agency",
+    "Website Development Services",
+    "Mobile App Development Company",
+    "Best SEO Agency",
+    "Digital Marketing Experts",
+    "Custom CRM Software",
+    "UI/UX Design Agency",
+    "IT Consulting Firm",
+    "Global Tech Solutions",
   ],
-
   alternates: {
     canonical: "/",
   },
@@ -38,27 +40,27 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "ZDC Tech Global Solutions — Software Development & IT Solutions",
+    title: "ZDC Tech Global Solutions — Best IT Company & Software Development Agency",
     description:
-      "We build websites, mobile apps, custom software and digital solutions that move your business forward.",
+      "Partner with the best IT company. We build high-performance websites, mobile apps, custom software, and digital solutions that accelerate business growth.",
     type: "website",
     url: "https://zdctechglobalsolutions.com",
     siteName: "ZDC Tech Global Solutions",
     locale: "en_US",
     images: [
       {
-        url: "/images/og-image.jpg", // Assuming we have an OG image
+        url: "/images/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "ZDC Tech Global Solutions",
+        alt: "ZDC Tech Global Solutions - Best IT Company",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "ZDC Tech Global Solutions — Software Development & IT Solutions",
+    title: "ZDC Tech Global Solutions — Best IT Company & Software Development Agency",
     description:
-      "We build websites, mobile apps, custom software and digital solutions that move your business forward.",
+      "Partner with the best IT company. We build high-performance websites, mobile apps, custom software, and digital solutions that accelerate business growth.",
     images: ["/images/og-image.jpg"],
   },
 };
@@ -71,7 +73,6 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className="dark"
       suppressHydrationWarning
     >
       <body
