@@ -6,7 +6,10 @@ import { WhyChooseUsCards } from "@/components/site/WhyChooseUsCards";
 import { ProcessTimeline } from "@/components/site/ProcessTimeline";
 import { TechStackGrid } from "@/components/site/TechStackGrid";
 import { CheckCircle2 } from "lucide-react";
-import { stats, processSteps, whyChooseUs, coreValues } from "@/data/company";
+import { whyChooseUs } from "@/data/company";
+import { getStats } from "@/service/stat.service";
+import { getProcessSteps } from "@/service/processStep.service";
+import { getCoreValues } from "@/service/coreValue.service";
 import { technologyStack } from "@/data/technologies";
 import { getIcon } from "@/lib/icons";
 
@@ -30,7 +33,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const [stats, processSteps, coreValues] = await Promise.all([
+    getStats(),
+    getProcessSteps(),
+    getCoreValues(),
+  ]);
+
   return (
     <div className="bg-white">
       <PageHero

@@ -11,7 +11,8 @@ import { ProcessTimeline } from "@/components/site/ProcessTimeline";
 import { ServiceCard } from "@/components/site/ServiceCard";
 import { getIcon } from "@/lib/icons";
 import { services, getServiceBySlug, type Service } from "@/data/services";
-import { processSteps, whyChooseUs } from "@/data/company";
+import { whyChooseUs } from "@/data/company";
+import { getProcessSteps } from "@/service/processStep.service";
 import { getServiceBySlug as getLiveServiceBySlug } from "@/service/service.service";
 import { unwrapApiResponse } from "@/lib/public-api";
 
@@ -63,6 +64,8 @@ export default async function ServiceDetailPage({
     );
   } catch {}
   if (!service) notFound();
+
+  const processSteps = await getProcessSteps();
 
   const Icon = getIcon(service.icon);
   const relatedServices = service.relatedSlugs

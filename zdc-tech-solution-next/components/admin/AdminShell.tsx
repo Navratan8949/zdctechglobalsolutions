@@ -37,6 +37,10 @@ interface AdminNavItem {
 const primaryNavigation: AdminNavItem[] = [
   { label: "Overview", href: "/admin", icon: LayoutDashboard },
   { label: "Site content", href: "/admin/site-content", icon: Building2 },
+  { label: "Stats", href: "/admin/stats", icon: Settings2 },
+  { label: "Process Steps", href: "/admin/process", icon: ClipboardList },
+  { label: "Core Values", href: "/admin/core-values", icon: Star },
+  { label: "Life at Company", href: "/admin/life-at-company", icon: Users },
   { label: "Services", href: "/admin/services", icon: Settings2 },
   { label: "Portfolio", href: "/admin/portfolio", icon: BriefcaseBusiness },
   { label: "Case studies", href: "/admin/case-studies", icon: BriefcaseBusiness },

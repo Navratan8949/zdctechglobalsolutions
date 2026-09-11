@@ -41,7 +41,10 @@ app.use("/api/v1/faqs", require("./routes/faq.routes"));
 app.use("/api/v1/subscribers", require("./routes/subscriber.routes"));
 app.use("/api/v1/upload", require("./routes/upload.routes"));
 app.use("/api/v1/why-choose-us", require("./routes/whyChooseUs.routes"));
-
+app.use("/api/v1/stats", require("./routes/stat.routes"));
+app.use("/api/v1/process-steps", require("./routes/processStep.routes"));
+app.use("/api/v1/core-values", require("./routes/coreValue.routes"));
+app.use("/api/v1/life-at-company", require("./routes/lifeAtCompany.routes"));
 // Admin — Backup
 const isAuthenticated = require("./middleware/auth");
 const authorizeRoles = require("./middleware/role");

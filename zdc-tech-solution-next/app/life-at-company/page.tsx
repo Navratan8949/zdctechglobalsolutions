@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/site/PageHero";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { CTASection } from "@/components/site/CTASection";
-import { lifeAtCompany } from "@/data/company";
+import { getLifeAtCompany } from "@/service/lifeAtCompany.service";
 import { getIcon } from "@/lib/icons";
 
 export const metadata: Metadata = {
@@ -38,7 +38,9 @@ const galleryImages = [
   },
 ];
 
-export default function LifeAtCompanyPage() {
+export default async function LifeAtCompanyPage() {
+  const lifeAtCompany = await getLifeAtCompany();
+
   return (
     <>
       <PageHero

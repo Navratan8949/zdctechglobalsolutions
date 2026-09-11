@@ -12,8 +12,9 @@ import { ClientsMarquee } from "@/components/site/ClientsMarquee";
 import { IndustriesMarquee } from "@/components/site/IndustriesMarquee";
 import { AboutBento } from "@/components/site/AboutBento";
 import { ServicesSection } from "@/components/site/ServicesSection";
-import { stats, processSteps, whyChooseUs, homeFaqs } from "@/data/company";
-import { portfolio } from "@/data/portfolio";
+import { whyChooseUs, homeFaqs } from "@/data/company";
+import { getStats } from "@/service/stat.service";
+import { getProcessSteps } from "@/service/processStep.service";
 import { caseStudies } from "@/data/caseStudies";
 import { blogPosts } from "@/data/blog";
 import { technologyStack } from "@/data/technologies";
@@ -37,7 +38,12 @@ export const metadata: Metadata = {
   },
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  const [stats, processSteps] = await Promise.all([
+    getStats(),
+    getProcessSteps(),
+  ]);
+
   return (
     <>
       <HomeHero />
