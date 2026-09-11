@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState, type ComponentType } from "react";
+import { useEffect, useState, type ComponentType, type CSSProperties } from "react";
 import {
   AlertCircle,
   BarChart3,
@@ -34,7 +34,7 @@ interface DashboardCard {
   label: string;
   description: string;
   href: string;
-  icon: ComponentType<{ className?: string }>;
+  icon: ComponentType<{ className?: string; style?: CSSProperties }>;
   color: string;
   load: () => Promise<unknown>;
 }

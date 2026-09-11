@@ -12,9 +12,10 @@ import { ClientsMarquee } from "@/components/site/ClientsMarquee";
 import { IndustriesMarquee } from "@/components/site/IndustriesMarquee";
 import { AboutBento } from "@/components/site/AboutBento";
 import { ServicesSection } from "@/components/site/ServicesSection";
-import { whyChooseUs, homeFaqs } from "@/data/company";
+import { whyChooseUs, homeFaqs, type Stat, type ProcessStep } from "@/data/company";
 import { getStats } from "@/service/stat.service";
 import { getProcessSteps } from "@/service/processStep.service";
+import { unwrapApiResponse } from "@/lib/public-api";
 import { caseStudies } from "@/data/caseStudies";
 import { blogPosts } from "@/data/blog";
 import { technologyStack } from "@/data/technologies";
@@ -39,10 +40,12 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
-  const [stats, processSteps] = await Promise.all([
+  const [statsRaw, processStepsRaw] = await Promise.all([
     getStats(),
     getProcessSteps(),
   ]);
+  const stats = unwrapApiResponse<Stat[]>(statsRaw) || [];
+  const processSteps = unwrapApiResponse<ProcessStep[]>(processStepsRaw) || [];
 
   return (
     <>

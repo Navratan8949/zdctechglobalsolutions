@@ -477,11 +477,12 @@ export default function ServicesPage() {
                 <div>
                   <ImageUploadField
                     label="Service Image"
-                    value={draft.image?.url}
-                    onChange={(url, public_id) =>
-                      updateField("image", { public_id: public_id || "", url })
-                    }
-                    onRemove={() => updateField("image", undefined)}
+                    publicId={draft.image?.public_id || ""}
+                    url={draft.image?.url || ""}
+                    onChange={(public_id, url) => {
+                      if (!url) updateField("image", undefined);
+                      else updateField("image", { public_id, url });
+                    }}
                   />
                 </div>
                 <Field

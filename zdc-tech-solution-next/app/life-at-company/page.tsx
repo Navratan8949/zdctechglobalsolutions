@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/site/PageHero";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { CTASection } from "@/components/site/CTASection";
+import { type LifeAtCompanySection } from "@/data/company";
 import { getLifeAtCompany } from "@/service/lifeAtCompany.service";
 import { getIcon } from "@/lib/icons";
+import { unwrapApiResponse } from "@/lib/public-api";
 
 export const metadata: Metadata = {
   title: "Life at Company",
@@ -39,7 +41,8 @@ const galleryImages = [
 ];
 
 export default async function LifeAtCompanyPage() {
-  const lifeAtCompany = await getLifeAtCompany();
+  const res = await getLifeAtCompany();
+  const lifeAtCompany: LifeAtCompanySection[] = unwrapApiResponse<LifeAtCompanySection[]>(res) || [];
 
   return (
     <>

@@ -1,15 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const lifeAtCompanyController = require("../controllers/lifeAtCompany.controller");
-const { protect } = require("../middleware/auth");
+const isAuthenticated = require("../middleware/auth");
 
 router.route("/")
     .get(lifeAtCompanyController.getAllLifeAtCompany)
-    .post(protect, lifeAtCompanyController.createLifeAtCompany);
+    .post(isAuthenticated, lifeAtCompanyController.createLifeAtCompany);
 
 router.route("/:id")
     .get(lifeAtCompanyController.getLifeAtCompanyById)
-    .put(protect, lifeAtCompanyController.updateLifeAtCompany)
-    .delete(protect, lifeAtCompanyController.deleteLifeAtCompany);
+    .put(isAuthenticated, lifeAtCompanyController.updateLifeAtCompany)
+    .delete(isAuthenticated, lifeAtCompanyController.deleteLifeAtCompany);
 
 module.exports = router;

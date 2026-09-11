@@ -6,10 +6,11 @@ import { WhyChooseUsCards } from "@/components/site/WhyChooseUsCards";
 import { ProcessTimeline } from "@/components/site/ProcessTimeline";
 import { TechStackGrid } from "@/components/site/TechStackGrid";
 import { CheckCircle2 } from "lucide-react";
-import { whyChooseUs } from "@/data/company";
+import { whyChooseUs, type Stat, type ProcessStep, type CoreValue } from "@/data/company";
 import { getStats } from "@/service/stat.service";
 import { getProcessSteps } from "@/service/processStep.service";
 import { getCoreValues } from "@/service/coreValue.service";
+import { unwrapApiResponse } from "@/lib/public-api";
 import { technologyStack } from "@/data/technologies";
 import { getIcon } from "@/lib/icons";
 
@@ -34,11 +35,14 @@ export const metadata: Metadata = {
 };
 
 export default async function AboutPage() {
-  const [stats, processSteps, coreValues] = await Promise.all([
+  const [statsRaw, processStepsRaw, coreValuesRaw] = await Promise.all([
     getStats(),
     getProcessSteps(),
     getCoreValues(),
   ]);
+  const stats = unwrapApiResponse<Stat[]>(statsRaw) || [];
+  const processSteps = unwrapApiResponse<ProcessStep[]>(processStepsRaw) || [];
+  const coreValues = unwrapApiResponse<CoreValue[]>(coreValuesRaw) || [];
 
   return (
     <div className="bg-white">

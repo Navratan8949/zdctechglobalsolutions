@@ -1,18 +1,26 @@
 "use client";
 
-import { AdminResourceManager } from "@/components/admin/AdminResourceManager";
+import { AdminResourceManager, type AdminResourceItem } from "@/components/admin/AdminResourceManager";
 import {
   createWhyChooseUs,
   deleteWhyChooseUs,
   getWhyChooseUs,
   getWhyChooseUsById,
   updateWhyChooseUs,
-  type WhyChooseUsData,
 } from "@/service/whyChooseUs.service";
+
+interface WhyChooseUsItem extends AdminResourceItem {
+  title: string;
+  description: string;
+  image: {
+    public_id: string;
+    url: string;
+  };
+}
 
 export default function WhyChooseUsAdmin() {
   return (
-    <AdminResourceManager<WhyChooseUsData>
+    <AdminResourceManager<WhyChooseUsItem>
       config={{
         title: "Why Choose Us",
         description:
