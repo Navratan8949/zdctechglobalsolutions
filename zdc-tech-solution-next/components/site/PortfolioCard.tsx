@@ -36,8 +36,8 @@ export function PortfolioCard({ item, index = 0 }: PortfolioCardProps) {
       </div>
 
       {/* Content Section */}
-      <div className="flex flex-1 flex-col p-6 sm:p-8">
-        <div className="flex items-center justify-between mb-4">
+      <div className="flex flex-1 flex-col p-6 sm:p-4">
+        <div className="flex items-center justify-between mb-2">
           <span className="text-[10px] font-black uppercase tracking-widest text-[#0ea5e9] bg-blue-50/80 px-3 py-1.5 rounded-full border border-blue-100">
             {item.category}
           </span>
@@ -54,14 +54,14 @@ export function PortfolioCard({ item, index = 0 }: PortfolioCardProps) {
           )}
         </div>
 
-        <Link href={`/portfolio/${item.slug}`} className="block mb-3">
+        <Link href={`/portfolio/${item.slug}`} className="block mb-2">
           <h3 className="text-[22px] font-bold text-[#0b1b3d] group-hover:text-[#0ea5e9] transition-colors line-clamp-1">
             {item.title}
           </h3>
         </Link>
 
         <div
-          className="text-[14px] leading-relaxed text-slate-500 line-clamp-2 mb-8 flex-1"
+          className="text-[14px] leading-relaxed text-slate-500 line-clamp-2 mb-2 flex-1"
           dangerouslySetInnerHTML={{ __html: item.description }}
         />
 
