@@ -54,41 +54,43 @@ export default function AdminLoginPage() {
 
   return (
     <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-background px-4 py-12">
-      <div className="pointer-events-none absolute inset-0 bg-grid opacity-40" />
-      <section className="relative w-full max-w-md rounded-2xl border border-white/10 bg-card/90 p-8 shadow-2xl backdrop-blur sm:p-10">
-        <div className="mb-8 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
-          <LockKeyhole className="h-6 w-6" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[400px] w-[600px] rounded-full bg-primary/10 blur-[120px] pointer-events-none" />
+      <section className="relative z-10 w-full max-w-md rounded-3xl border border-white/10 bg-black/40 p-8 shadow-2xl backdrop-blur-xl sm:p-10">
+        <div className="mb-8 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/20 text-primary border border-primary/20 shadow-[0_0_15px_rgba(var(--primary),0.3)]">
+          <LockKeyhole className="h-7 w-7" />
         </div>
         <p className="text-sm font-medium uppercase tracking-[0.2em] text-primary">
           ZDC Admin
         </p>
-        <h1 className="mt-3 font-display text-3xl font-bold text-white">
+        <h1 className="mt-3 font-display text-3xl font-bold text-white tracking-tight">
           Welcome back
         </h1>
-        <p className="mt-2 text-sm leading-6 text-muted-foreground">
+        <p className="mt-2 text-sm leading-6 text-white/60">
           Sign in to manage your company website.
         </p>
 
         <form className="mt-8 space-y-5" onSubmit={handleSubmit}>
           <div className="space-y-2">
-            <Label htmlFor="emailOrMobile">Email or mobile</Label>
+            <Label htmlFor="emailOrMobile" className="text-white/80">Email or mobile</Label>
             <Input
               id="emailOrMobile"
               autoComplete="username"
               value={emailOrMobile}
               onChange={(event) => setEmailOrMobile(event.target.value)}
               placeholder="admin@example.com"
+              className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus-visible:ring-1 focus-visible:ring-primary focus-visible:border-primary transition-all duration-200"
               required
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="password">Password</Label>
+            <Label htmlFor="password" className="text-white/80">Password</Label>
             <Input
               id="password"
               type="password"
               autoComplete="current-password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
+              className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus-visible:ring-1 focus-visible:ring-primary focus-visible:border-primary transition-all duration-200"
               required
             />
           </div>
