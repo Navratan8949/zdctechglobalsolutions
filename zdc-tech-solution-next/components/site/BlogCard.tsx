@@ -51,7 +51,10 @@ export function BlogCard({ post, index = 0, featured = false }: BlogCardProps) {
             <h3 className="mt-4 font-display text-xl font-bold text-foreground transition-colors group-hover:text-primary lg:text-2xl">
               {post.title}
             </h3>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground line-clamp-3">{post.excerpt}</p>
+            <div 
+              className="mt-3 text-sm leading-relaxed text-muted-foreground line-clamp-3"
+              dangerouslySetInnerHTML={{ __html: post.excerpt }}
+            />
             <div className="mt-6 flex items-center gap-3">
               <img src={post.author.avatar} alt={post.author.name} className="h-9 w-9 rounded-full border border-border object-cover" />
               <div>
@@ -100,7 +103,10 @@ export function BlogCard({ post, index = 0, featured = false }: BlogCardProps) {
           <h3 className="mt-3 text-lg font-semibold text-foreground transition-colors group-hover:text-primary">
             {post.title}
           </h3>
-          <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground line-clamp-2">{post.excerpt}</p>
+          <div 
+            className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground line-clamp-2"
+            dangerouslySetInnerHTML={{ __html: post.excerpt }}
+          />
           <div className="mt-4 flex items-center gap-2 border-t border-border pt-4">
             <img src={post.author.avatar} alt={post.author.name} className="h-7 w-7 rounded-full border border-border object-cover" />
             <span className="text-xs text-muted-foreground">{post.author.name}</span>

@@ -125,9 +125,10 @@ export default async function ServiceDetailPage({
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-[12px] font-black uppercase tracking-widest text-[#0ea5e9] mb-3">Overview</p>
           <h2 className="text-3xl font-bold text-[#0b1b3d]">About Our {service.title} Services</h2>
-          <p className="mt-6 text-[18px] leading-relaxed text-slate-500">
-            {service.introduction}
-          </p>
+          <div 
+            className="mt-6 text-[18px] leading-relaxed text-slate-500"
+            dangerouslySetInnerHTML={{ __html: service.introduction }}
+          />
         </div>
       </section>
 

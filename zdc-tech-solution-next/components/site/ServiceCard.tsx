@@ -42,9 +42,10 @@ export function ServiceCard({ service, index = 0 }: ServiceCardProps) {
           <h3 className="mt-6 text-[20px] font-bold text-[#0b1b3d] transition-colors">
             {service.title}
           </h3>
-          <p className="mt-3 flex-1 text-[15px] leading-relaxed text-slate-500">
-            {service.shortDescription}
-          </p>
+          <div 
+            className="mt-3 flex-1 text-[15px] leading-relaxed text-slate-500 line-clamp-3"
+            dangerouslySetInnerHTML={{ __html: service.shortDescription }}
+          />
 
           <span className="mt-6 inline-flex items-center gap-1.5 text-[14px] font-bold uppercase tracking-wider text-[#0ea5e9]">
             Learn More

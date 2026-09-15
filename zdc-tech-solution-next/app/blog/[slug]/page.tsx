@@ -110,23 +110,27 @@ export default async function BlogPostPage({
 
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 pb-20">
           <div className="prose prose-slate prose-lg max-w-none prose-p:leading-relaxed prose-a:text-[#0ea5e9] hover:prose-a:text-blue-600 prose-img:rounded-2xl prose-img:border prose-img:border-slate-100 prose-img:shadow-sm prose-headings:text-[#0b1b3d] prose-headings:font-bold">
-            {post.content.map((section, idx) => (
-              <div key={idx} className="mb-10">
-                {section.heading && (
-                  <h2 className="text-3xl font-bold text-[#0b1b3d] mt-12 mb-6">
-                    {section.heading}
-                  </h2>
-                )}
-                {section.paragraphs.map((paragraph, pIdx) => (
-                  <p
-                    key={pIdx}
-                    className="text-slate-600 text-[18px] mb-6 leading-relaxed"
-                  >
-                    {paragraph}
-                  </p>
-                ))}
-              </div>
-            ))}
+            {typeof post.content === 'string' ? (
+              <div dangerouslySetInnerHTML={{ __html: post.content }} />
+            ) : (
+              Array.isArray(post.content) && post.content.map((section, idx) => (
+                <div key={idx} className="mb-10">
+                  {section.heading && (
+                    <h2 className="text-3xl font-bold text-[#0b1b3d] mt-12 mb-6">
+                      {section.heading}
+                    </h2>
+                  )}
+                  {section.paragraphs.map((paragraph, pIdx) => (
+                    <p
+                      key={pIdx}
+                      className="text-slate-600 text-[18px] mb-6 leading-relaxed"
+                    >
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+              ))
+            )}
           </div>
         </div>
       </article>

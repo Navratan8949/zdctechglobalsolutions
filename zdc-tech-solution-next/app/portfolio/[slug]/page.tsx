@@ -57,9 +57,10 @@ export default async function PortfolioDetailPage({
           <h1 className="mt-6 text-4xl font-bold tracking-tight text-[#0b1b3d] sm:text-5xl lg:text-6xl">
             {item.title}
           </h1>
-          <p className="mx-auto mt-6 max-w-3xl text-[18px] leading-relaxed text-slate-500">
-            {item.description}
-          </p>
+          <div 
+            className="mx-auto mt-6 max-w-3xl text-[18px] leading-relaxed text-slate-500"
+            dangerouslySetInnerHTML={{ __html: item.description }}
+          />
         </div>
       </section>
 
@@ -77,9 +78,10 @@ export default async function PortfolioDetailPage({
               <h2 className="text-3xl font-bold text-[#0b1b3d]">
                 Project Overview
               </h2>
-              <p className="mt-6 text-[16px] leading-relaxed text-slate-500">
-                {item.description}
-              </p>
+              <div 
+                className="mt-6 text-[16px] leading-relaxed text-slate-500"
+                dangerouslySetInnerHTML={{ __html: item.description }}
+              />
               <div className="mt-10 flex flex-wrap gap-3">
                 {item.technologies.map((technology) => (
                   <span key={technology} className="px-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-[13px] font-bold text-slate-700">

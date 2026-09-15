@@ -46,7 +46,10 @@ export function TeamCard({ member, index = 0 }: TeamCardProps) {
       <div className="p-6 bg-white border-t border-gray-100">
         <h3 className="text-[18px] font-bold text-[#0b1b3d]">{member.name}</h3>
         <p className="text-[13px] font-bold uppercase tracking-wider text-[#0ea5e9] mt-1">{member.position}</p>
-        <p className="mt-3 text-[14px] leading-relaxed text-slate-500">{member.description}</p>
+        <div 
+          className="mt-3 text-[14px] leading-relaxed text-slate-500"
+          dangerouslySetInnerHTML={{ __html: member.description }}
+        />
       </div>
     </motion.div>
   );

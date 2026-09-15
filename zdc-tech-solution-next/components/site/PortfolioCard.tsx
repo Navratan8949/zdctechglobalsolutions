@@ -38,9 +38,10 @@ export function PortfolioCard({ item, index = 0 }: PortfolioCardProps) {
             {item.title}
           </h3>
           
-          <p className="text-[14px] leading-relaxed text-slate-500 line-clamp-2 mb-6 flex-1">
-            {item.description}
-          </p>
+          <div 
+            className="text-[14px] leading-relaxed text-slate-500 line-clamp-2 mb-6 flex-1"
+            dangerouslySetInnerHTML={{ __html: item.description }}
+          />
 
           <div className="flex flex-wrap gap-2 mt-auto">
             {item.technologies.slice(0, 3).map((tech) => (

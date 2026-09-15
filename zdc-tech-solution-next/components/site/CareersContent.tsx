@@ -132,9 +132,10 @@ export function CareersContent() {
                         {job.type}
                       </span>
                     </div>
-                    <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                      {job.description}
-                    </p>
+                    <div 
+                      className="mt-4 text-sm leading-relaxed text-muted-foreground"
+                      dangerouslySetInnerHTML={{ __html: job.description }}
+                    />
                     <details className="mt-4 group/details">
                       <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-medium text-primary [&::-webkit-details-marker]:hidden">
                         View full description{" "}
