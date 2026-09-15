@@ -9,8 +9,7 @@ import { ArrowRight, Globe } from "lucide-react";
 import InteractiveNeuralVortex from "@/components/ui/interactive-neural-vortex-background";
 
 // Separate component to prevent HomeHero from re-rendering every 40ms during typing
-const TypewriterEffect = () => {
-  const words = ["ZDC TECH", "DIGITAL GROWTH", "SMART SOLUTIONS", "NEW HORIZONS"];
+const TypewriterEffect = ({ words = ["ZDC TECH", "DIGITAL GROWTH", "SMART SOLUTIONS", "NEW HORIZONS"] }: { words?: string[] }) => {
   const [text, setText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
@@ -56,7 +55,15 @@ const TypewriterEffect = () => {
   );
 };
 
-export function HomeHero() {
+export function HomeHero({
+  heading = "WELCOME TO THE",
+  words,
+  description = "We design and build world-class websites, mobile apps, and custom software that moves your business forward — fast, secure, and highly scalable.",
+}: {
+  heading?: string;
+  words?: string[];
+  description?: string;
+}) {
   return (
     <InteractiveNeuralVortex className="flex items-center justify-center text-center">
       {/* ── Text content ── */}
@@ -77,10 +84,9 @@ export function HomeHero() {
           transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
           className="font-display text-5xl font-bold leading-[1.1] tracking-tight text-white sm:text-6xl lg:text-[90px] flex flex-col items-center"
         >
-          WELCOME TO
+          {heading}
           <span className="relative mt-2 flex flex-wrap sm:flex-nowrap items-center justify-center whitespace-nowrap">
-            THE
-            <TypewriterEffect />
+            <TypewriterEffect words={words} />
           </span>
         </motion.h1>
 
@@ -90,9 +96,7 @@ export function HomeHero() {
           transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
           className="mx-auto mt-8 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg lg:text-xl"
         >
-          We design and build world-class websites, mobile apps, and custom
-          software that moves your business forward — fast, secure, and highly
-          scalable.
+          {description}
         </motion.p>
 
         <motion.div

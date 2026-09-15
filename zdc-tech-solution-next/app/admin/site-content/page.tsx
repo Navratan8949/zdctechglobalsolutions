@@ -45,6 +45,9 @@ interface SiteContent {
   logo: { public_id: string; url: string };
   logoText: { public_id: string; url: string };
   socials: SocialLinks;
+  heroHeading: string;
+  heroWords: string;
+  heroDescription: string;
   createdAt?: string;
   updatedAt?: string;
 }
@@ -62,7 +65,16 @@ const emptyDraft: SiteContentDraft = {
   hours: "",
   logo: { public_id: "", url: "" },
   logoText: { public_id: "", url: "" },
-  socials: { facebook: "", linkedin: "", twitter: "", github: "", instagram: "" },
+  socials: {
+    facebook: "",
+    linkedin: "",
+    twitter: "",
+    github: "",
+    instagram: "",
+  },
+  heroHeading: "WELCOME TO THE",
+  heroWords: "ZDC TECH, DIGITAL GROWTH, SMART SOLUTIONS, NEW HORIZONS",
+  heroDescription: "We design and build world-class websites, mobile apps, and custom software that moves your business forward — fast, secure, and highly scalable.",
 };
 
 function getErrorMessage(error: unknown) {
@@ -99,11 +111,11 @@ function toDraft(content: SiteContent): SiteContentDraft {
     hours: content.hours || "",
     logo: {
       public_id: content.logo?.public_id || "",
-      url: content.logo?.url || ""
+      url: content.logo?.url || "",
     },
     logoText: {
       public_id: content.logoText?.public_id || "",
-      url: content.logoText?.url || ""
+      url: content.logoText?.url || "",
     },
     socials: {
       facebook: content.socials?.facebook || "",
@@ -112,6 +124,9 @@ function toDraft(content: SiteContent): SiteContentDraft {
       github: content.socials?.github || "",
       instagram: content.socials?.instagram || "",
     },
+    heroHeading: content.heroHeading || "WELCOME TO THE",
+    heroWords: content.heroWords || "ZDC TECH, DIGITAL GROWTH, SMART SOLUTIONS, NEW HORIZONS",
+    heroDescription: content.heroDescription || "We design and build world-class websites, mobile apps, and custom software that moves your business forward — fast, secure, and highly scalable.",
   };
 }
 
@@ -200,7 +215,11 @@ export default function SiteContentPage() {
     }));
   };
 
-  const updateLogo = (type: "logo" | "logoText", field: "public_id" | "url", value: string) => {
+  const updateLogo = (
+    type: "logo" | "logoText",
+    field: "public_id" | "url",
+    value: string,
+  ) => {
     setDraft((current) => ({
       ...current,
       [type]: { ...current[type], [field]: value },
@@ -286,14 +305,14 @@ export default function SiteContentPage() {
               public website.
             </p>
           </div>
-          <Button
+          {/* <Button
             type="button"
             variant="outline"
             onClick={startNew}
             className="w-fit border-white/15 bg-white/[0.04] text-white hover:bg-white/[0.08]"
           >
             <Plus className="mr-2 h-4 w-4" /> New record
-          </Button>
+          </Button> */}
         </div>
 
         {error && (
@@ -399,7 +418,10 @@ export default function SiteContentPage() {
                   <ImageUploadField
                     publicId={draft.logo.public_id}
                     url={draft.logo.url}
-                    onChange={(publicId, url) => { updateLogo("logo", "public_id", publicId); updateLogo("logo", "url", url); }}
+                    onChange={(publicId, url) => {
+                      updateLogo("logo", "public_id", publicId);
+                      updateLogo("logo", "url", url);
+                    }}
                     label="Company Logo (Icon)"
                   />
                 </div>
@@ -407,7 +429,10 @@ export default function SiteContentPage() {
                   <ImageUploadField
                     publicId={draft.logoText.public_id}
                     url={draft.logoText.url}
-                    onChange={(publicId, url) => { updateLogo("logoText", "public_id", publicId); updateLogo("logoText", "url", url); }}
+                    onChange={(publicId, url) => {
+                      updateLogo("logoText", "public_id", publicId);
+                      updateLogo("logoText", "url", url);
+                    }}
                     label="Text Logo (Optional)"
                   />
                 </div>
@@ -460,6 +485,49 @@ export default function SiteContentPage() {
                     }
                     rows={3}
                   />
+                </div>
+              </div>
+              <div className="mt-7 border-t border-white/10 pt-6">
+                <h3 className="mb-1 text-sm font-semibold text-white">
+                  Home Hero Section
+                </h3>
+                <p className="mb-4 text-xs text-muted-foreground">
+                  The animated text and description on the main homepage.
+                </p>
+                <div className="grid gap-5 md:grid-cols-2">
+                  <div className="md:col-span-2">
+                    <Field
+                      label="Hero Main Heading"
+                      value={draft.heroHeading}
+                      onChange={(value) => updateDraft("heroHeading", value)}
+                      required
+                    />
+                  </div>
+                  <div className="md:col-span-2">
+                    <Field
+                      label="Hero Animated Words (comma separated)"
+                      value={draft.heroWords}
+                      onChange={(value) => updateDraft("heroWords", value)}
+                      required
+                    />
+                  </div>
+                  <div className="md:col-span-2">
+                    <label
+                      className="mb-2 block text-sm font-medium text-white"
+                      htmlFor="heroDescription"
+                    >
+                      Hero Description
+                    </label>
+                    <Textarea
+                      id="heroDescription"
+                      value={draft.heroDescription}
+                      onChange={(event) =>
+                        updateDraft("heroDescription", event.target.value)
+                      }
+                      rows={3}
+                      required
+                    />
+                  </div>
                 </div>
               </div>
               <div className="mt-7 border-t border-white/10 pt-6">

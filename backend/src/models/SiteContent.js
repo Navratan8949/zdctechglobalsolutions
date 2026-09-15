@@ -24,6 +24,9 @@ const siteContentSchema = new mongoose.Schema(
             github: { type: String, default: "#" },
             instagram: { type: String, default: "#" },
         },
+        heroHeading: { type: String, default: "WELCOME TO THE" },
+        heroWords: { type: String, default: "ZDC TECH, DIGITAL GROWTH, SMART SOLUTIONS, NEW HORIZONS" },
+        heroDescription: { type: String, default: "We design and build world-class websites, mobile apps, and custom software that moves your business forward — fast, secure, and highly scalable." },
     },
     { timestamps: true }
 );

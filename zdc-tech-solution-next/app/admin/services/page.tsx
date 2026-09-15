@@ -212,17 +212,23 @@ export default function ServicesPage() {
   ) => {
     setDraft((current) => {
       const updates: any = { [field]: value };
-      
+
       // Auto-generate slug when title changes
       if (field === "title") {
         const titleStr = value as string;
-        const oldSlug = current.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, "");
+        const oldSlug = current.title
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/(^-|-$)+/g, "");
         const shouldUpdateSlug = !current.slug || current.slug === oldSlug;
         if (shouldUpdateSlug) {
-          updates.slug = titleStr.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, "");
+          updates.slug = titleStr
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/(^-|-$)+/g, "");
         }
       }
-      
+
       return { ...current, ...updates };
     });
   };
@@ -315,14 +321,14 @@ export default function ServicesPage() {
               Create and maintain the services published on the company website.
             </p>
           </div>
-          <Button
+          {/* <Button
             type="button"
             variant="outline"
             onClick={startNew}
             className="w-fit border-white/15 bg-white/[0.04] text-white hover:bg-white/[0.08]"
           >
             <Plus className="mr-2 h-4 w-4" /> New service
-          </Button>
+          </Button> */}
         </div>
 
         {error && (
@@ -460,7 +466,9 @@ export default function ServicesPage() {
                   required
                 />
                 <div className="md:col-span-2">
-                  <label className="mb-2 block text-sm font-medium text-white">Short description</label>
+                  <label className="mb-2 block text-sm font-medium text-white">
+                    Short description
+                  </label>
                   <RichTextEditor
                     value={draft.shortDescription}
                     onChange={(value) => updateField("shortDescription", value)}
@@ -468,7 +476,9 @@ export default function ServicesPage() {
                   />
                 </div>
                 <div>
-                  <label className="mb-2 block text-sm font-medium text-white">Icon</label>
+                  <label className="mb-2 block text-sm font-medium text-white">
+                    Icon
+                  </label>
                   <IconPicker
                     value={draft.icon}
                     onChange={(value) => updateField("icon", value)}
@@ -512,7 +522,9 @@ export default function ServicesPage() {
                   required
                 />
                 <div className="md:col-span-2">
-                  <label className="mb-2 block text-sm font-medium text-white">Introduction</label>
+                  <label className="mb-2 block text-sm font-medium text-white">
+                    Introduction
+                  </label>
                   <RichTextEditor
                     value={draft.introduction}
                     onChange={(value) => updateField("introduction", value)}

@@ -15,6 +15,7 @@ import { ServicesSection } from "@/components/site/ServicesSection";
 import { whyChooseUs, homeFaqs, type Stat, type ProcessStep } from "@/data/company";
 import { getStats } from "@/service/stat.service";
 import { getProcessSteps } from "@/service/processStep.service";
+import { getCurrentSiteContent } from "@/service/siteContent.service";
 import { unwrapApiResponse } from "@/lib/public-api";
 import { caseStudies } from "@/data/caseStudies";
 import { blogPosts } from "@/data/blog";
@@ -40,16 +41,26 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
-  const [statsRaw, processStepsRaw] = await Promise.all([
+  const [statsRaw, processStepsRaw, siteContentRaw] = await Promise.all([
     getStats(),
     getProcessSteps(),
+    getCurrentSiteContent(),
   ]);
   const stats = unwrapApiResponse<Stat[]>(statsRaw) || [];
   const processSteps = unwrapApiResponse<ProcessStep[]>(processStepsRaw) || [];
+  
+  const siteContent: any = unwrapApiResponse<any>(siteContentRaw) || {};
+  const heroWords = siteContent.heroWords 
+    ? siteContent.heroWords.split(",").map((w: string) => w.trim()).filter(Boolean)
+    : ["ZDC TECH", "DIGITAL GROWTH", "SMART SOLUTIONS", "NEW HORIZONS"];
 
   return (
     <>
-      <HomeHero />
+      <HomeHero 
+        heading={siteContent.heroHeading}
+        words={heroWords} 
+        description={siteContent.heroDescription} 
+      />
       <CompanyDescription />
       {/* <ClientsMarquee /> */}
 
