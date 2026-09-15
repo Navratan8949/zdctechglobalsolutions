@@ -20,7 +20,7 @@ const companyLinks = [
   { label: "Services", href: "/services" },
   { label: "Careers", href: "/careers" },
   { label: "Life At Company", href: "/life-at-company" },
-  { label: "Portfolio", href: "/portfolio" },
+  { label: "Projects", href: "/portfolio" },
   { label: "Case Studies", href: "/case-studies" },
   { label: "Testimonials", href: "/testimonials" },
   { label: "Clients", href: "/clients" },

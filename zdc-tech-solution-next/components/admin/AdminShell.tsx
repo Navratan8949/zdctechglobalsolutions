@@ -42,8 +42,12 @@ const primaryNavigation: AdminNavItem[] = [
   { label: "Core Values", href: "/admin/core-values", icon: Star },
   { label: "Life at Company", href: "/admin/life-at-company", icon: Users },
   { label: "Services", href: "/admin/services", icon: Settings2 },
-  { label: "Portfolio", href: "/admin/portfolio", icon: BriefcaseBusiness },
-  { label: "Case studies", href: "/admin/case-studies", icon: BriefcaseBusiness },
+  { label: "Projects", href: "/admin/portfolio", icon: BriefcaseBusiness },
+  {
+    label: "Case studies",
+    href: "/admin/case-studies",
+    icon: BriefcaseBusiness,
+  },
   { label: "Blog", href: "/admin/blog", icon: FileText },
   { label: "Jobs", href: "/admin/jobs", icon: BriefcaseBusiness },
   { label: "Team", href: "/admin/team", icon: Users },
@@ -57,7 +61,11 @@ const primaryNavigation: AdminNavItem[] = [
 const secondaryNavigation: AdminNavItem[] = [
   { label: "Contacts", href: "/admin/contacts", icon: MessageSquare },
   { label: "Subscribers", href: "/admin/subscribers", icon: MessageSquare },
-  { label: "Applications", href: "/admin/job-applications", icon: ClipboardList },
+  {
+    label: "Applications",
+    href: "/admin/job-applications",
+    icon: ClipboardList,
+  },
   { label: "FAQs", href: "/admin/faqs", icon: HelpCircle },
   { label: "Database backup", href: "/admin/backup", icon: DatabaseBackup },
 ];
@@ -114,12 +122,19 @@ function Sidebar({
 }) {
   return (
     <aside
-      style={{ backgroundColor: "#0f1729", borderRight: "1px solid rgba(255,255,255,0.06)" }}
+      style={{
+        backgroundColor: "#0f1729",
+        borderRight: "1px solid rgba(255,255,255,0.06)",
+      }}
       className="flex h-full min-h-0 w-64 shrink-0 flex-col px-3 py-4"
     >
       {/* Logo */}
       <div className="flex items-center justify-between px-2 mb-6">
-        <Link href="/admin" className="flex items-center gap-3" onClick={onClose}>
+        <Link
+          href="/admin"
+          className="flex items-center gap-3"
+          onClick={onClose}
+        >
           <span
             style={{ background: "linear-gradient(135deg, #2563eb, #7c3aed)" }}
             className="flex h-8 w-8 items-center justify-center rounded-lg text-sm font-bold text-white shadow-lg"
@@ -127,8 +142,12 @@ function Sidebar({
             Z
           </span>
           <div>
-            <p className="text-sm font-bold text-white tracking-wide">ZDC Admin</p>
-            <p className="text-[10px] text-slate-500 uppercase tracking-wider">Control Panel</p>
+            <p className="text-sm font-bold text-white tracking-wide">
+              ZDC Admin
+            </p>
+            <p className="text-[10px] text-slate-500 uppercase tracking-wider">
+              Control Panel
+            </p>
           </div>
         </Link>
         <button
@@ -141,14 +160,21 @@ function Sidebar({
       </div>
 
       {/* Nav */}
-      <nav className="flex-1 overflow-y-auto space-y-5 pr-1" aria-label="Admin navigation">
+      <nav
+        className="flex-1 overflow-y-auto space-y-5 pr-1"
+        aria-label="Admin navigation"
+      >
         <div>
           <p className="px-3 mb-1.5 text-[10px] font-semibold uppercase tracking-widest text-slate-600">
             Workspace
           </p>
           <div className="space-y-0.5">
             {primaryNavigation.map((item) => (
-              <NavigationLink key={item.href} item={item} onNavigate={onClose} />
+              <NavigationLink
+                key={item.href}
+                item={item}
+                onNavigate={onClose}
+              />
             ))}
           </div>
         </div>
@@ -158,7 +184,11 @@ function Sidebar({
           </p>
           <div className="space-y-0.5">
             {secondaryNavigation.map((item) => (
-              <NavigationLink key={item.href} item={item} onNavigate={onClose} />
+              <NavigationLink
+                key={item.href}
+                item={item}
+                onNavigate={onClose}
+              />
             ))}
           </div>
         </div>
@@ -219,7 +249,9 @@ export function AdminShell({
   };
 
   return (
-    <div style={{ backgroundColor: "#080f1e", minHeight: "100vh", color: "white" }}>
+    <div
+      style={{ backgroundColor: "#080f1e", minHeight: "100vh", color: "white" }}
+    >
       {/* Desktop Sidebar */}
       <div className="fixed inset-y-0 left-0 z-40 hidden lg:flex">
         <Sidebar
@@ -281,7 +313,9 @@ export function AdminShell({
               Session active
             </span>
             <div
-              style={{ background: "linear-gradient(135deg, #2563eb, #7c3aed)" }}
+              style={{
+                background: "linear-gradient(135deg, #2563eb, #7c3aed)",
+              }}
               className="flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold text-white lg:hidden"
             >
               {getInitials(user)}

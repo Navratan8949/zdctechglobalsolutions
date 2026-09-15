@@ -196,17 +196,23 @@ export default function PortfolioPage() {
   ) => {
     setDraft((current) => {
       const updates: any = { [field]: value };
-      
+
       // Auto-generate slug when title changes
       if (field === "title") {
         const titleStr = value as string;
-        const oldSlug = current.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, "");
+        const oldSlug = current.title
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/(^-|-$)+/g, "");
         const shouldUpdateSlug = !current.slug || current.slug === oldSlug;
         if (shouldUpdateSlug) {
-          updates.slug = titleStr.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, "");
+          updates.slug = titleStr
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/(^-|-$)+/g, "");
         }
       }
-      
+
       return { ...current, ...updates };
     });
   };
@@ -290,7 +296,7 @@ export default function PortfolioPage() {
               Workspace
             </p>
             <h1 className="mt-2 font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              Portfolio
+              Projects
             </h1>
             <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
               Create and maintain the projects published on the company website.
@@ -465,7 +471,9 @@ export default function PortfolioPage() {
                   options={["published", "draft"]}
                 />
                 <div className="md:col-span-2">
-                  <label className="mb-2 block text-sm font-medium text-white">Description</label>
+                  <label className="mb-2 block text-sm font-medium text-white">
+                    Description
+                  </label>
                   <RichTextEditor
                     value={draft.description}
                     onChange={(value) => updateField("description", value)}
