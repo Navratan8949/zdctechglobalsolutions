@@ -8,6 +8,8 @@ import { portfolio, type PortfolioItem } from "@/data/portfolio";
 import { getPortfolioBySlug as getLivePortfolioBySlug } from "@/service/portfolio.service";
 import { unwrapApiResponse } from "@/lib/public-api";
 
+export const revalidate = 0;
+
 export async function generateStaticParams() {
   return portfolio.map((item) => ({ slug: item.slug }));
 }
@@ -61,6 +63,19 @@ export default async function PortfolioDetailPage({
             className="mx-auto mt-6 max-w-3xl text-[18px] leading-relaxed text-slate-500"
             dangerouslySetInnerHTML={{ __html: item.description }}
           />
+          {item.websiteUrl && (
+            <div className="mt-8 flex justify-center">
+              <a 
+                href={item.websiteUrl} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="group inline-flex items-center gap-2 rounded-full bg-[#0ea5e9] px-8 py-4 text-[14px] font-bold uppercase tracking-widest text-white shadow-lg transition-transform hover:scale-105"
+              >
+                View Live Project
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" strokeWidth={3} />
+              </a>
+            </div>
+          )}
         </div>
       </section>
 
@@ -122,7 +137,7 @@ export default async function PortfolioDetailPage({
               </dl>
             </div>
           </div>
-          <div className="mt-16 text-center lg:text-left">
+          <div className="mt-16 flex flex-wrap items-center justify-center lg:justify-start gap-4">
             <Link
               href="/contact"
               className="group inline-flex items-center gap-2 rounded-full bg-[#0ea5e9] px-8 py-4 text-[14px] font-bold uppercase tracking-widest text-white shadow-lg transition-transform hover:scale-105"
@@ -130,6 +145,18 @@ export default async function PortfolioDetailPage({
               Start a Similar Project{" "}
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" strokeWidth={3} />
             </Link>
+            
+            {item.websiteUrl && (
+              <a
+                href={item.websiteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-2 rounded-full border-2 border-[#0ea5e9] bg-white px-8 py-4 text-[14px] font-bold uppercase tracking-widest text-[#0ea5e9] shadow-lg transition-colors hover:bg-[#0ea5e9] hover:text-white"
+              >
+                View Live Project
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" strokeWidth={3} />
+              </a>
+            )}
           </div>
         </div>
       </section>
