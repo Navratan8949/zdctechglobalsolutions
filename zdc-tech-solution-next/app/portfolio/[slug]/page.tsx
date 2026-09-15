@@ -107,6 +107,16 @@ export default async function PortfolioDetailPage({
                     {item.category}
                   </dd>
                 </div>
+                {item.websiteUrl && (
+                  <div>
+                    <dt className="text-slate-500 font-medium uppercase tracking-wider text-[11px] mb-1">Website</dt>
+                    <dd className="font-bold text-[#0b1b3d] text-[16px]">
+                      <a href={item.websiteUrl} target="_blank" rel="noopener noreferrer" className="text-[#0ea5e9] hover:underline">
+                        Visit Project
+                      </a>
+                    </dd>
+                  </div>
+                )}
               </dl>
             </div>
           </div>

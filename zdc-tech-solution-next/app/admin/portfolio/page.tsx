@@ -43,6 +43,7 @@ interface PortfolioItem {
   client: string;
   year: string;
   status: "draft" | "published";
+  websiteUrl: string;
   createdAt?: string;
   updatedAt?: string;
 }
@@ -59,6 +60,7 @@ const emptyDraft: PortfolioDraft = {
   client: "",
   year: "",
   status: "published",
+  websiteUrl: "",
 };
 
 function unwrap<T>(response: ApiResponse<T> | T): T {
@@ -97,6 +99,7 @@ function toDraft(item: PortfolioItem): PortfolioDraft {
     client: item.client || "",
     year: item.year || "",
     status: item.status || "published",
+    websiteUrl: item.websiteUrl || "",
   };
 }
 
@@ -461,6 +464,11 @@ export default function PortfolioPage() {
                   value={draft.year}
                   onChange={(value) => updateField("year", value)}
                   required
+                />
+                <Field
+                  label="Website URL"
+                  value={draft.websiteUrl}
+                  onChange={(value) => updateField("websiteUrl", value)}
                 />
                 <SelectField
                   label="Status"

@@ -1,12 +1,13 @@
 export interface PortfolioItem {
   slug: string;
   title: string;
-  category: 'Web' | 'Mobile' | 'Software' | 'E-commerce' | 'UI/UX';
+  category: 'Web' | 'Mobile' | 'Software' | 'E-commerce' | 'UI/UX' | string;
   description: string;
   image: string;
   technologies: string[];
   client: string;
   year: string;
+  websiteUrl?: string;
 }
 
 export const portfolio: PortfolioItem[] = [

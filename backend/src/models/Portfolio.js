@@ -39,6 +39,10 @@ const portfolioSchema = new mongoose.Schema(
             enum: ["draft", "published"],
             default: "published",
         },
+        websiteUrl: {
+            type: String,
+            default: "",
+        },
     },
     { timestamps: true }
 );

@@ -40,6 +40,8 @@ export const metadata: Metadata = {
   },
 };
 
+export const revalidate = 0;
+
 export default async function HomePage() {
   const [statsRaw, processStepsRaw, siteContentRaw] = await Promise.all([
     getStats(),
