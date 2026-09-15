@@ -31,6 +31,7 @@ interface SocialLinks {
   twitter: string;
   github: string;
   instagram: string;
+  whatsapp: string;
 }
 
 interface SiteContent {
@@ -71,6 +72,7 @@ const emptyDraft: SiteContentDraft = {
     twitter: "",
     github: "",
     instagram: "",
+    whatsapp: "",
   },
   heroHeading: "WELCOME TO THE",
   heroWords: "ZDC TECH, DIGITAL GROWTH, SMART SOLUTIONS, NEW HORIZONS",
@@ -123,6 +125,7 @@ function toDraft(content: SiteContent): SiteContentDraft {
       twitter: content.socials?.twitter || "",
       github: content.socials?.github || "",
       instagram: content.socials?.instagram || "",
+      whatsapp: content.socials?.whatsapp || "",
     },
     heroHeading: content.heroHeading || "WELCOME TO THE",
     heroWords: content.heroWords || "ZDC TECH, DIGITAL GROWTH, SMART SOLUTIONS, NEW HORIZONS",
@@ -559,6 +562,11 @@ export default function SiteContentPage() {
                     label="Instagram"
                     value={draft.socials.instagram}
                     onChange={(value) => updateSocial("instagram", value)}
+                  />
+                  <Field
+                    label="WhatsApp (Phone number with country code, no +, no spaces)"
+                    value={draft.socials.whatsapp}
+                    onChange={(value) => updateSocial("whatsapp", value)}
                   />
                 </div>
               </div>

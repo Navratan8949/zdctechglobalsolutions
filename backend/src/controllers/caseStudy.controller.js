@@ -16,7 +16,7 @@ exports.getAll = async (req, res) => {
     try {
         const query = req.user?.role === "admin" ? {} : { status: "published" };
         const items = await CaseStudy.find(query).sort({ createdAt: -1 });
-        res.status(200).json({ success: true, data: normalizePublicItems(items) });
+        res.status(200).json({ success: true, data: normalizePublicItems(items, req.user?.role === "admin") });
     } catch (error) {
         res.status(400).json({ success: false, message: error.message });
     }
@@ -28,7 +28,7 @@ exports.getBySlug = async (req, res) => {
         if (req.user?.role !== "admin") query.status = "published";
         const item = await CaseStudy.findOne(query);
         if (!item) return res.status(404).json({ success: false, message: 'Not found' });
-        res.status(200).json({ success: true, data: normalizePublicItem(item) });
+        res.status(200).json({ success: true, data: normalizePublicItem(item, req.user?.role === "admin") });
     } catch (error) {
         res.status(400).json({ success: false, message: error.message });
     }
@@ -39,7 +39,7 @@ exports.getOne = async (req, res) => {
     try {
         const item = await CaseStudy.findById(req.params.id);
         if (!item) return res.status(404).json({ success: false, message: 'Not found' });
-        res.status(200).json({ success: true, data: normalizePublicItem(item) });
+        res.status(200).json({ success: true, data: normalizePublicItem(item, req.user?.role === "admin") });
     } catch (error) {
         res.status(400).json({ success: false, message: error.message });
     }

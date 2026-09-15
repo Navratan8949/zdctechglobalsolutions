@@ -4,23 +4,25 @@ const mediaUrl = (value) => {
     return value.url || value.secure_url || "";
 };
 
-const normalizePublicItem = (item) => {
+const normalizePublicItem = (item, isAdmin = false) => {
     const data = typeof item.toObject === "function" ? item.toObject({ virtuals: true }) : { ...item };
 
-    ["image", "coverImage", "avatar", "logo", "resume", "profileImage"].forEach((field) => {
-        if (data[field]) {
-            data[field] = mediaUrl(data[field]);
-        }
-    });
+    if (!isAdmin) {
+        ["image", "coverImage", "avatar", "logo", "resume", "profileImage"].forEach((field) => {
+            if (data[field]) {
+                data[field] = mediaUrl(data[field]);
+            }
+        });
 
-    if (data.author?.avatar) {
-        data.author.avatar = mediaUrl(data.author.avatar);
+        if (data.author?.avatar) {
+            data.author.avatar = mediaUrl(data.author.avatar);
+        }
     }
 
     return data;
 };
 
-const normalizePublicItems = (items) => items.map(normalizePublicItem);
+const normalizePublicItems = (items, isAdmin = false) => items.map(item => normalizePublicItem(item, isAdmin));
 
 const mediaObject = (value) => {
     if (!value) return value;

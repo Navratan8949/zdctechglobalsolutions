@@ -16,7 +16,7 @@ exports.getAll = async (req, res) => {
     try {
         const query = req.user?.role === "admin" ? {} : { status: "active" };
         const items = await Testimonial.find(query).sort({ createdAt: -1 });
-        res.status(200).json({ success: true, data: normalizePublicItems(items) });
+        res.status(200).json({ success: true, data: normalizePublicItems(items, req.user?.role === "admin") });
     } catch (error) {
         res.status(400).json({ success: false, message: error.message });
     }
@@ -27,7 +27,7 @@ exports.getOne = async (req, res) => {
     try {
         const item = await Testimonial.findById(req.params.id);
         if (!item) return res.status(404).json({ success: false, message: 'Not found' });
-        res.status(200).json({ success: true, data: normalizePublicItem(item) });
+        res.status(200).json({ success: true, data: normalizePublicItem(item, req.user?.role === "admin") });
     } catch (error) {
         res.status(400).json({ success: false, message: error.message });
     }

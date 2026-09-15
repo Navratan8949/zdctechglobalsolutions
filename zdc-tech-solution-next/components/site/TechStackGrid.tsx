@@ -1,49 +1,33 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { getIcon } from "@/lib/icons";
 import type { TechGroup } from "@/data/technologies";
 import { getIconSlug } from "./TechnologyBadge";
 import { cn } from "@/lib/utils";
-import { getTechnologies } from "@/service/technology.service";
-import { getApiErrorMessage, unwrapApiResponse } from "@/lib/public-api";
 
 interface TechStackGridProps {
   groups: TechGroup[];
 }
 
 export function TechStackGrid({ groups }: TechStackGridProps) {
-  const [items, setItems] = useState(groups);
   const [activeTab, setActiveTab] = useState(groups[0]?.category ?? "");
-  const [error, setError] = useState<string | null>(null);
 
+  // Update active tab if groups change
   useEffect(() => {
-    let active = true;
-    const loadTechnologies = async () => {
-      try {
-        const response = await getTechnologies();
-        if (!active) return;
-        const liveGroups = unwrapApiResponse<TechGroup[]>(response) || [];
-        if (liveGroups.length) {
-          setItems(liveGroups);
-          setActiveTab(liveGroups[0].category);
-        }
-      } catch (requestError) {
-        if (active) setError(getApiErrorMessage(requestError));
-      }
-    };
-    void loadTechnologies();
-    return () => {
-      active = false;
-    };
-  }, []);
+    if (groups.length > 0 && !groups.find((g) => g.category === activeTab)) {
+      setActiveTab(groups[0].category);
+    }
+  }, [groups, activeTab]);
+
+  if (!groups || groups.length === 0) return null;
 
   return (
     <div className="grid lg:grid-cols-[300px_1fr] gap-8 lg:gap-12 items-start">
       {/* Left side: Tabs */}
       <div className="flex flex-col gap-2 p-2 bg-white/80 backdrop-blur-sm shadow-[0_0_20px_rgba(0,0,0,0.02)] rounded-lg">
-        {items.map((group) => {
+        {groups.map((group) => {
           const Icon = getIcon(group.icon);
           const isActive = activeTab === group.category;
           return (
@@ -82,9 +66,8 @@ export function TechStackGrid({ groups }: TechStackGridProps) {
 
       {/* Right side: Content */}
       <div className="relative min-h-[400px] p-8 lg:p-10 rounded-3xl border border-gray-100 bg-slate-50/50 shadow-inner">
-        {error && <p className="mb-4 text-xs text-amber-500">{error}</p>}
         <AnimatePresence mode="wait">
-          {items.map((group) => {
+          {groups.map((group) => {
             if (group.category !== activeTab) return null;
 
             return (

@@ -11,7 +11,11 @@ export const deleteJobApplication = jobApplicationService.remove;
 
 export const submitJobApplicationWithResume = async (data) => {
   try {
-    return await request(() => api.post("/job-applications", data));
+    return await request(() => api.post("/job-applications", data, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    }));
   } catch (error) {
     throw error;
   }

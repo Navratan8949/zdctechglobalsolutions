@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { getClients } from "@/service/client.service";
 import { getApiErrorMessage, unwrapApiResponse } from "@/lib/public-api";
 
-const fallbackCompanies = [
+const fallbackCompanies: { name: string; icon: string; color: string; logo?: string }[] = [
   { name: "Nexus", icon: "✦", color: "text-blue-400" },
   { name: "Aero", icon: "❊", color: "text-purple-400" },
   { name: "Quantum", icon: "⬡", color: "text-emerald-400" },
@@ -50,6 +50,7 @@ export function ClientsMarquee() {
           setCompanies(
             clients.map((client, index) => ({
               name: client.name,
+              logo: client.logo,
               icon: "✦",
               color: [
                 "text-blue-400",
@@ -86,12 +87,18 @@ export function ClientsMarquee() {
               key={i}
               className="group relative flex items-center justify-center gap-3 rounded-xl border border-gray-200 bg-white shadow-[0_2px_10px_rgba(0,0,0,0.02)] px-8 py-4 transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-[0_8px_20px_rgba(14,165,233,0.1)] grayscale hover:grayscale-0"
             >
-              <span className={cn("text-2xl", company.color)}>
-                {company.icon}
-              </span>
-              <span className="text-lg font-bold text-slate-500 transition-colors group-hover:text-[#0b1b3d]">
-                {company.name}
-              </span>
+              {company.logo ? (
+                <img src={company.logo} alt={company.name} className="h-8 max-w-[120px] object-contain transition-opacity group-hover:opacity-100 opacity-80" />
+              ) : (
+                <>
+                  <span className={cn("text-2xl", company.color)}>
+                    {company.icon}
+                  </span>
+                  <span className="text-lg font-bold text-slate-500 transition-colors group-hover:text-[#0b1b3d]">
+                    {company.name}
+                  </span>
+                </>
+              )}
             </div>
           ))}
         </Marquee>

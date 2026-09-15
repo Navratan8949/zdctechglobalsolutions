@@ -7,7 +7,7 @@ export const getIconSlug = (name: string) => {
     'React': 'react/61DAFB',
     'Next.js': 'nextdotjs/000000',
     'HTML5': 'html5/E34F26',
-    'CSS3': 'css3/1572B6',
+    'CSS3': 'css/1572B6',
     'JavaScript': 'javascript/F7DF1E',
     'TypeScript': 'typescript/3178C6',
     'Node.js': 'nodedotjs/339933',

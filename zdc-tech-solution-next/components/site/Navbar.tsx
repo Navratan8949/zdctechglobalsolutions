@@ -18,7 +18,6 @@ const companyLinks = [
   { label: "About Us", href: "/about" },
   { label: "Our Team", href: "/team" },
   { label: "Services", href: "/services" },
-  { label: "Careers", href: "/careers" },
   { label: "Life At Company", href: "/life-at-company" },
   { label: "Projects", href: "/portfolio" },
   { label: "Case Studies", href: "/case-studies" },
@@ -49,6 +48,7 @@ export type NavItem = {
 const mainNav: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "Company", href: "/about", children: companyLinks },
+  { label: "Careers", href: "/careers" },
   {
     label: "Services",
     href: "/services",
@@ -306,6 +306,7 @@ export function Navbar() {
                                               ? "bg-blue-50 text-[#0ea5e9]"
                                               : "text-slate-600 hover:bg-slate-50 hover:text-[#0b1b3d]",
                                           )}
+                                          onClick={() => setOpenDropdown(null)}
                                         >
                                           {child.label}
                                         </Link>
@@ -335,6 +336,7 @@ export function Navbar() {
                                     ? "bg-blue-50 text-[#0ea5e9]"
                                     : "text-slate-600 hover:bg-slate-50 hover:text-[#0b1b3d]",
                                 )}
+                                onClick={() => setOpenDropdown(null)}
                               >
                                 {child.label}
                               </Link>

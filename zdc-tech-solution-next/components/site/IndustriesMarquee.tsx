@@ -1,7 +1,7 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
 import {
   Building2,
   Stethoscope,
@@ -14,9 +14,6 @@ import {
   Plane,
   Home,
 } from "lucide-react";
-import { getIndustries } from "@/service/industry.service";
-import { getApiErrorMessage, unwrapApiResponse } from "@/lib/public-api";
-import { industries as fallbackIndustries } from "@/data/industries";
 import { getIcon } from "@/lib/icons";
 
 const styledIndustries = [
@@ -82,37 +79,19 @@ const styledIndustries = [
   },
 ];
 
-export function IndustriesMarquee() {
-  const [industries, setIndustries] = useState(styledIndustries);
-  const [error, setError] = useState<string | null>(null);
+interface IndustriesMarqueeProps {
+  items?: any[];
+}
 
-  useEffect(() => {
-    let active = true;
-    const loadIndustries = async () => {
-      try {
-        const response = await getIndustries();
-        if (!active) return;
-        const liveIndustries =
-          unwrapApiResponse<typeof fallbackIndustries>(response) || [];
-        if (liveIndustries.length) {
-          setIndustries(
-            liveIndustries.map((industry, index) => ({
-              name: industry.name,
-              icon: getIcon(industry.icon),
-              description: industry.description,
-              badge: industry.name,
-            })),
-          );
-        }
-      } catch (requestError) {
-        if (active) setError(getApiErrorMessage(requestError));
-      }
-    };
-    void loadIndustries();
-    return () => {
-      active = false;
-    };
-  }, []);
+export function IndustriesMarquee({ items }: IndustriesMarqueeProps) {
+  const displayIndustries = items && items.length > 0
+    ? items.map((industry) => ({
+        name: industry.name,
+        icon: getIcon(industry.icon),
+        description: industry.description,
+        badge: industry.name,
+      }))
+    : styledIndustries;
 
   return (
     <section className="relative bg-[#0b1b3d] py-16 lg:py-20 overflow-hidden">
@@ -133,12 +112,11 @@ export function IndustriesMarquee() {
             We deliver impactful digital solutions tailored to the unique
             challenges and opportunities of each industry we serve.
           </p>
-          {error && <p className="mt-2 text-xs text-amber-500">{error}</p>}
         </div>
 
         {/* Cards grid */}
         <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
-          {industries.map((industry, i) => {
+          {displayIndustries.map((industry, i) => {
             const Icon = industry.icon;
             return (
               <motion.div
@@ -147,8 +125,9 @@ export function IndustriesMarquee() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-30px" }}
                 transition={{ duration: 0.5, delay: i * 0.05 }}
-                className="group relative cursor-default h-full"
+                className="group relative cursor-pointer h-full"
               >
+                <Link href="/contact" className="absolute inset-0 z-20 block rounded-lg" />
                 <div className="relative h-full overflow-hidden rounded-lg bg-white p-4 shadow-[0_8px_30px_rgba(0,0,0,0.2)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(14,165,233,0.3)] flex flex-col items-center text-center">
                   {/* Icon */}
                   <div className="flex h-14 w-14 items-center justify-center rounded-lg bg-blue-50 text-[#0ea5e9] transition-all duration-500 group-hover:scale-110 mb-5 group-hover:bg-[#0ea5e9] group-hover:text-white">

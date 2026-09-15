@@ -14,6 +14,7 @@ import { useAdminAuth } from "@/components/admin/AdminAuthProvider";
 import { AdminShell } from "@/components/admin/AdminShell";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { ImageUploadField } from "@/components/admin/ImageUploadField";
 import {
   createClient,
   deleteClient,
@@ -258,26 +259,19 @@ export default function ClientsPage() {
                 }
                 required
               />
-              <Field
-                label="Logo URL"
-                value={draft.logo.url}
-                onChange={(value) =>
-                  setDraft((current) => ({
-                    ...current,
-                    logo: { ...current.logo, url: value },
-                  }))
-                }
-              />
-              <Field
-                label="Logo public ID"
-                value={draft.logo.public_id}
-                onChange={(value) =>
-                  setDraft((current) => ({
-                    ...current,
-                    logo: { ...current.logo, public_id: value },
-                  }))
-                }
-              />
+              <div className="md:col-span-2">
+                <ImageUploadField
+                  publicId={draft.logo.public_id}
+                  url={draft.logo.url}
+                  onChange={(publicId, url) =>
+                    setDraft((current) => ({
+                      ...current,
+                      logo: { public_id: publicId, url: url },
+                    }))
+                  }
+                  label="Client Logo"
+                />
+              </div>
               <SelectField
                 label="Status"
                 value={draft.status}

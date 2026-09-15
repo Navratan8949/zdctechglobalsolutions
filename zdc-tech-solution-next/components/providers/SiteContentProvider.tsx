@@ -11,6 +11,7 @@ interface SocialLinks {
   twitter: string;
   github: string;
   instagram: string;
+  whatsapp?: string;
 }
 
 export interface SiteContent {

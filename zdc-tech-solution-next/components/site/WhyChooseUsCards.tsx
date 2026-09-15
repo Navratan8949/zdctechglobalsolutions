@@ -1,53 +1,21 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { getIcon } from "@/lib/icons";
 import type { WhyChooseUs } from "@/data/company";
-import {
-  getWhyChooseUs,
-  type WhyChooseUsData,
-} from "@/service/whyChooseUs.service";
-import { unwrapApiResponse } from "@/lib/public-api";
+import type { WhyChooseUsData } from "@/service/whyChooseUs.service";
 
 interface WhyChooseUsCardsProps {
-  items: WhyChooseUs[];
+  items: (WhyChooseUs | WhyChooseUsData)[];
 }
 
-// Convert fallback data to match the API data structure loosely
-const fallbackData: WhyChooseUsData[] = [];
-
-export function WhyChooseUsCards({
-  items: initialFallback,
-}: WhyChooseUsCardsProps) {
-  const [items, setItems] = useState<WhyChooseUsData[]>([]);
-  const [fallbackItems] = useState<WhyChooseUs[]>(initialFallback);
-
-  useEffect(() => {
-    let active = true;
-    const fetchWhyChooseUs = async () => {
-      try {
-        const res = await getWhyChooseUs();
-        if (!active) return;
-        const liveItems = unwrapApiResponse<WhyChooseUsData[]>(res) || [];
-        if (liveItems.length > 0) {
-          setItems(liveItems);
-        }
-      } catch (err) {
-        // Silently fallback
-      }
-    };
-    void fetchWhyChooseUs();
-    return () => {
-      active = false;
-    };
-  }, []);
-
-  const displayItems = items.length > 0 ? items : fallbackItems;
+export function WhyChooseUsCards({ items }: WhyChooseUsCardsProps) {
+  if (!items || items.length === 0) return null;
 
   return (
     <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {displayItems.map((item, i) => {
+      {items.map((item, i) => {
         // If it's a dynamic item with an image URL, we use that. Otherwise fallback icon.
         const isDynamic = "_id" in item;
         const imageUrl = isDynamic
@@ -68,8 +36,9 @@ export function WhyChooseUsCards({
               delay: i * 0.1,
               ease: [0.22, 1, 0.36, 1],
             }}
-            className="group relative h-full rounded-2xl bg-white p-4 shadow-xl overflow-hidden"
+            className="group relative h-full rounded-2xl bg-white p-4 shadow-xl overflow-hidden block hover:-translate-y-2 hover:shadow-2xl transition-all duration-300"
           >
+            <Link href="/contact" className="absolute inset-0 z-20 block rounded-2xl" />
             {/* Advanced Expanding Circle Fill Animation */}
             <div className="absolute top-8 left-8 w-16 h-16 bg-[#0ea5e9] rounded-full scale-0 transition-transform duration-700 ease-out group-hover:scale-[20] z-0 origin-center" />
 

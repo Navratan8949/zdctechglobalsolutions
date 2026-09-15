@@ -16,10 +16,13 @@ import { whyChooseUs, homeFaqs, type Stat, type ProcessStep } from "@/data/compa
 import { getStats } from "@/service/stat.service";
 import { getProcessSteps } from "@/service/processStep.service";
 import { getCurrentSiteContent } from "@/service/siteContent.service";
+import { getTechnologies } from "@/service/technology.service";
+import { getWhyChooseUs, type WhyChooseUsData } from "@/service/whyChooseUs.service";
+import { getIndustries } from "@/service/industry.service";
 import { unwrapApiResponse } from "@/lib/public-api";
 import { caseStudies } from "@/data/caseStudies";
 import { blogPosts } from "@/data/blog";
-import { technologyStack } from "@/data/technologies";
+import { technologyStack, type TechGroup } from "@/data/technologies";
 import { HomeHero } from "./_components/HomeHero";
 import { CompanyDescription } from "@/components/site/CompanyDescription";
 import { TestimonialsSection } from "@/components/site/TestimonialsSection";
@@ -43,10 +46,13 @@ export const metadata: Metadata = {
 export const revalidate = 0;
 
 export default async function HomePage() {
-  const [statsRaw, processStepsRaw, siteContentRaw] = await Promise.all([
-    getStats(),
-    getProcessSteps(),
-    getCurrentSiteContent(),
+  const [statsRaw, processStepsRaw, siteContentRaw, technologiesRaw, whyChooseUsRaw, industriesRaw] = await Promise.all([
+    getStats().catch(() => null),
+    getProcessSteps().catch(() => null),
+    getCurrentSiteContent().catch(() => null),
+    getTechnologies().catch(() => null),
+    getWhyChooseUs().catch(() => null),
+    getIndustries().catch(() => null),
   ]);
   const stats = unwrapApiResponse<Stat[]>(statsRaw) || [];
   const processSteps = unwrapApiResponse<ProcessStep[]>(processStepsRaw) || [];
@@ -55,6 +61,10 @@ export default async function HomePage() {
   const heroWords = siteContent.heroWords 
     ? siteContent.heroWords.split(",").map((w: string) => w.trim()).filter(Boolean)
     : ["ZDC TECH", "DIGITAL GROWTH", "SMART SOLUTIONS", "NEW HORIZONS"];
+
+  const serverTechStack = unwrapApiResponse<TechGroup[]>(technologiesRaw) || [];
+  const serverWhyChooseUs = unwrapApiResponse<WhyChooseUsData[]>(whyChooseUsRaw) || [];
+  const serverIndustries = unwrapApiResponse<any[]>(industriesRaw) || [];
 
   return (
     <>
@@ -88,7 +98,7 @@ export default async function HomePage() {
             </p>
           </div>
           <div className="mt-12">
-            <WhyChooseUsCards items={whyChooseUs} />
+            <WhyChooseUsCards items={serverWhyChooseUs.length > 0 ? serverWhyChooseUs : whyChooseUs} />
           </div>
         </div>
       </section>
@@ -108,7 +118,7 @@ export default async function HomePage() {
       </section>
 
       {/* Industries — scrolling marquee */}
-      <IndustriesMarquee />
+      <IndustriesMarquee items={serverIndustries.length > 0 ? serverIndustries : undefined} />
 
       {/* Technology Stack */}
       <section className="relative overflow-hidden py-16 lg:py-20 bg-white">
@@ -120,7 +130,7 @@ export default async function HomePage() {
             description="We work with modern, proven technologies to build solutions that are fast, secure and scalable."
           />
           <div className="mt-12">
-            <TechStackGrid groups={technologyStack} />
+            <TechStackGrid groups={serverTechStack.length > 0 ? serverTechStack : technologyStack} />
           </div>
         </div>
       </section>

@@ -23,6 +23,7 @@ const siteContentSchema = new mongoose.Schema(
             twitter: { type: String, default: "#" },
             github: { type: String, default: "#" },
             instagram: { type: String, default: "#" },
+            whatsapp: { type: String, default: "" },
         },
         heroHeading: { type: String, default: "WELCOME TO THE" },
         heroWords: { type: String, default: "ZDC TECH, DIGITAL GROWTH, SMART SOLUTIONS, NEW HORIZONS" },
