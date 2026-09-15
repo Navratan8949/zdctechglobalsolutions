@@ -10,7 +10,7 @@ import InteractiveNeuralVortex from "@/components/ui/interactive-neural-vortex-b
 
 // Separate component to prevent HomeHero from re-rendering every 40ms during typing
 const TypewriterEffect = () => {
-  const words = ["FUTURE", "INNOVATION", "TECHNOLOGY", "DIGITAL WORLD"];
+  const words = ["ZDC TECH", "DIGITAL GROWTH", "SMART SOLUTIONS", "NEW HORIZONS"];
   const [text, setText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
@@ -75,7 +75,7 @@ export function HomeHero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
-          className="font-display text-4xl font-bold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-[76px] flex flex-col items-center"
+          className="font-display text-5xl font-bold leading-[1.1] tracking-tight text-white sm:text-6xl lg:text-[90px] flex flex-col items-center"
         >
           WELCOME TO
           <span className="relative mt-2 flex flex-wrap sm:flex-nowrap items-center justify-center whitespace-nowrap">

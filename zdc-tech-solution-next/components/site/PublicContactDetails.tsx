@@ -36,9 +36,9 @@ export function PublicContactDetails() {
         </div>
         <div>
           <h3 className="text-sm font-medium text-white">Visit Us</h3>
-          <p className="mt-1 text-sm text-blue-100/70">
-            {details.headOffice}
-          </p>
+          <h3 className="mt-3 text-sm font-medium text-white">Head Office</h3>
+          <p className="mt-1 text-sm text-blue-100/70">{details.headOffice}</p>
+          <h3 className="mt-4 text-sm font-medium text-white">Branch Office</h3>
           {details.branchOffice && (
             <p className="mt-1 text-sm text-blue-100/70">
               {details.branchOffice}
