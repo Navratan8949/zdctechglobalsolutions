@@ -221,7 +221,7 @@ export function Navbar() {
             />
           </Link>
 
-          <ul className="hidden items-center gap-8 lg:flex">
+          <ul className="hidden items-center gap-10 lg:flex">
             {navItems.map((item) => (
               <li
                 key={item.label}
