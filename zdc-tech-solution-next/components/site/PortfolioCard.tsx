@@ -21,7 +21,10 @@ export function PortfolioCard({ item, index = 0 }: PortfolioCardProps) {
     >
       {/* Image Section */}
       <div className="relative aspect-[16/10] overflow-hidden rounded-t-2xl bg-white border-b border-slate-50">
-        <Link href={`/portfolio/${item.slug}`} className="block h-full w-full p-4">
+        <Link
+          href={`/portfolio/${item.slug}`}
+          className="block h-full w-full p-4"
+        >
           <img
             src={item.image}
             alt={item.title}
@@ -50,38 +53,41 @@ export function PortfolioCard({ item, index = 0 }: PortfolioCardProps) {
             </a>
           )}
         </div>
-        
+
         <Link href={`/portfolio/${item.slug}`} className="block mb-3">
           <h3 className="text-[22px] font-bold text-[#0b1b3d] group-hover:text-[#0ea5e9] transition-colors line-clamp-1">
             {item.title}
           </h3>
         </Link>
-        
-        <div 
+
+        <div
           className="text-[14px] leading-relaxed text-slate-500 line-clamp-2 mb-8 flex-1"
           dangerouslySetInnerHTML={{ __html: item.description }}
         />
 
         {/* Footer Section: Technologies & Action */}
-        <div className="flex flex-col gap-5 mt-auto border-t border-slate-100 pt-6">
-          <div className="flex flex-wrap gap-2">
+        <div className="flex flex-col gap-3 mt-auto border-t border-slate-100 pt-6">
+          <div className="flex flex-wrap gap-1">
             {item.technologies.slice(0, 4).map((tech) => (
-              <span 
-                key={tech} 
-                className="px-3 py-1.5 text-[11px] font-bold tracking-wider text-[#0b1b3d] bg-slate-100 rounded-lg hover:bg-slate-200 transition-colors cursor-default"
+              <span
+                key={tech}
+                className="px-3 py-1 text-[11px] font-bold tracking-wider text-[#0b1b3d] bg-slate-100 rounded-lg hover:bg-slate-200 transition-colors cursor-default"
               >
                 {tech}
               </span>
             ))}
           </div>
-          
+
           <div className="flex items-center justify-between">
-            <Link 
+            <Link
               href={`/portfolio/${item.slug}`}
-              className="inline-flex items-center gap-2 text-[13px] font-bold uppercase tracking-widest text-[#0ea5e9] group/link"
+              className="inline-flex items-center gap-1 text-[13px] font-bold uppercase tracking-widest text-[#0ea5e9] group/link"
             >
-              View Case Study
-              <ArrowRight className="h-4 w-4 transition-transform group-hover/link:translate-x-1" strokeWidth={3} />
+              View Project
+              <ArrowRight
+                className="h-4 w-4 transition-transform group-hover/link:translate-x-1"
+                strokeWidth={3}
+              />
             </Link>
           </div>
         </div>
