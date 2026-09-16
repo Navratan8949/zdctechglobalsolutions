@@ -26,6 +26,8 @@ export function TopBar() {
             <Mail className="h-4 w-4 text-[#0ea5e9]" />
             <a
               href={`mailto:${companyInfo.email}`}
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-[#0b1b3d] hover:text-[#0ea5e9] transition-colors uppercase tracking-wide"
             >
               {companyInfo.email}
@@ -85,6 +87,8 @@ export function TopBar() {
           </a>
           <a
             href={`mailto:${companyInfo.email}`}
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-slate-500 hover:text-slate-800 transition-colors"
             aria-label="Email"
           >
