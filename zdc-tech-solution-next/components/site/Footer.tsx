@@ -214,8 +214,6 @@ export function Footer() {
             <div className="mt-8 space-y-4">
               <a
                 href={`mailto:${companyInfo.email}`}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="flex items-start gap-3 text-[13px] text-slate-300 transition-colors hover:text-white"
               >
                 <Mail className="mt-0.5 h-4 w-4 text-[#0ea5e9]" />
@@ -223,8 +221,6 @@ export function Footer() {
               </a>
               <a
                 href={`tel:${companyInfo.phone}`}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="flex items-start gap-3 text-[13px] text-slate-300 transition-colors hover:text-white"
               >
                 <Phone className="mt-0.5 h-4 w-4 text-[#0ea5e9]" />
@@ -253,18 +249,21 @@ export function Footer() {
             </div>
 
             <div className="mt-8 flex items-center gap-3">
-              {socials.map(({ icon: Icon, href, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  aria-label={label}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-800 text-slate-300 transition-colors hover:bg-[#0ea5e9] hover:text-white"
-                >
-                  <Icon className="h-[18px] w-[18px]" />
-                </a>
-              ))}
+              {socials.map(({ icon: Icon, href, label }) => {
+                const isMailOrTel = href.startsWith('mailto:') || href.startsWith('tel:');
+                return (
+                  <a
+                    key={label}
+                    href={href}
+                    aria-label={label}
+                    target={isMailOrTel ? undefined : "_blank"}
+                    rel={isMailOrTel ? undefined : "noopener noreferrer"}
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-800 text-slate-300 transition-colors hover:bg-[#0ea5e9] hover:text-white"
+                  >
+                    <Icon className="h-[18px] w-[18px]" />
+                  </a>
+                );
+              })}
             </div>
           </div>
 
