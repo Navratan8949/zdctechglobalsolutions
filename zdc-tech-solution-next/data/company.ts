@@ -374,7 +374,7 @@ export const lifeAtCompany: LifeAtCompanySection[] = [
 export const companyInfo = {
   name: "ZDC Tech Global Solutions",
   tagline: "Build Digital Solutions That Move Your Business Forward",
-  email: "info@zdctechglobalsolutions.com",
+  email: "zdctechglobalsolutions@gmail.com",
   phone: "+91 7073551862",
   headOffice: "Jaipur, Rajasthan, India",
   branchOffice: "D. P. Road, Near New Nagar Parishad Office, Deulgaon Raja, Tq. Deulgaon Raja, Dist. Buldhana, Maharashtra - 443204",
