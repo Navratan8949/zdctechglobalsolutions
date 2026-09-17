@@ -25,7 +25,9 @@ export function TopBar() {
           <div className="flex items-center gap-2">
             <Mail className="h-4 w-4 text-[#0ea5e9]" />
             <a
-              href={`mailto:${companyInfo.email}`}
+              href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-[#0b1b3d] hover:text-[#0ea5e9] transition-colors uppercase tracking-wide"
             >
               {companyInfo.email}
@@ -84,7 +86,9 @@ export function TopBar() {
             </svg>
           </a>
           <a
-            href={`mailto:${companyInfo.email}`}
+            href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-slate-500 hover:text-slate-800 transition-colors"
             aria-label="Email"
           >

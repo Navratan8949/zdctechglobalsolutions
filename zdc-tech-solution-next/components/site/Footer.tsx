@@ -153,7 +153,7 @@ export function Footer() {
     },
     {
       icon: Mail,
-      href: `mailto:${companyInfo.email}`,
+      href: "https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox",
       label: "Email",
     },
   ];
@@ -213,7 +213,9 @@ export function Footer() {
 
             <div className="mt-8 space-y-4">
               <a
-                href={`mailto:${companyInfo.email}`}
+                href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-start gap-3 text-[13px] text-slate-300 transition-colors hover:text-white"
               >
                 <Mail className="mt-0.5 h-4 w-4 text-[#0ea5e9]" />
