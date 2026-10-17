@@ -30,6 +30,11 @@ const contactSchema = new mongoose.Schema(
             trim: true,
         },
 
+        subject: {
+            type: String,
+            trim: true,
+        },
+
         budget: {
             type: String,
             trim: true,

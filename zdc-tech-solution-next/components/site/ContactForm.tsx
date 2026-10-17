@@ -180,17 +180,14 @@ export function ContactForm() {
         </div>
         <div>
           <label className="mb-1.5 block text-sm font-medium text-foreground">
-            Budget
+            Subject
           </label>
-          <select name="budget" className={inputClasses} defaultValue="">
-            <option value="" className="bg-card">
-              Select budget range
-            </option>
-            <option className="bg-card">Less than $5,000 (₹4 Lakhs)</option>
-            <option className="bg-card">$5,000 - $15,000 (₹4L - ₹12L)</option>
-            <option className="bg-card">$15,000 - $50,000 (₹12L - ₹40L)</option>
-            <option className="bg-card">$50,000+ (₹40L+)</option>
-          </select>
+          <input
+            name="subject"
+            type="text"
+            placeholder="e.g. Website Redesign, Mobile App"
+            className={inputClasses}
+          />
         </div>
       </div>
       {serviceLoadError && (

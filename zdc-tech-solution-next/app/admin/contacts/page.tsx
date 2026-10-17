@@ -17,6 +17,7 @@ interface ContactItem extends CommunicationItem {
   email: string;
   phone?: string;
   company?: string;
+  subject?: string;
   service?: string;
   budget?: string;
   inquiryType: string;
@@ -39,11 +40,12 @@ const config: AdminCommunicationConfig<ContactItem> = {
   remove: deleteContact,
   getListLabel: (item) => item.name || "Unnamed contact",
   getListDescription: (item) =>
-    `${item.email} · ${item.inquiryType || "general"}`,
+    `${item.email} · ${item.subject || item.service || item.inquiryType || "general"}`,
   detailFields: [
     { label: "Email", getValue: (item) => item.email },
     { label: "Phone", getValue: (item) => item.phone || "" },
     { label: "Company", getValue: (item) => item.company || "" },
+    { label: "Subject", getValue: (item) => item.subject || "" },
     { label: "Service", getValue: (item) => item.service || "" },
     { label: "Budget", getValue: (item) => item.budget || "" },
     {

@@ -28,13 +28,14 @@ exports.create = async (req, res) => {
 
         const adminSubject = payload.inquiryType === "career"
             ? `New career enquiry from ${name}`
-            : `New website enquiry from ${name}`;
+            : (payload.subject ? `New enquiry: ${payload.subject} (from ${name})` : `New website enquiry from ${name}`);
         const adminHtml = `
             <h2>${escapeHtml(adminSubject)}</h2>
             ${detailRow("Name", name)}
             ${detailRow("Email", email)}
             ${detailRow("Phone", payload.phone)}
             ${detailRow("Company", payload.company)}
+            ${detailRow("Subject", payload.subject)}
             ${detailRow("Service", payload.service)}
             ${detailRow("Budget", payload.budget)}
             ${detailRow("Inquiry type", payload.inquiryType)}
@@ -48,7 +49,7 @@ exports.create = async (req, res) => {
             const adminResult = await notifyAdmin({
                 subject: adminSubject,
                 html: adminHtml,
-                text: `${adminSubject}\n\nName: ${name}\nEmail: ${email}\nMessage: ${message}`,
+                text: `${adminSubject}\n\nName: ${name}\nEmail: ${email}${payload.subject ? `\nSubject: ${payload.subject}` : ""}\nMessage: ${message}`,
                 replyTo: email,
             });
             mailStatus.admin = adminResult?.skipped ? "skipped" : "sent";
