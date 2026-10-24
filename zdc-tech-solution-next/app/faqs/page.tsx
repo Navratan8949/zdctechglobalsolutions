@@ -6,9 +6,18 @@ import { CTASection } from "@/components/site/CTASection";
 import { homeFaqs } from "@/data/company";
 
 export const metadata: Metadata = {
-  title: "FAQs",
+  title: "FAQs | Frequently Asked Questions | ZDC Tech Global Solutions",
   description:
     "Answers to frequently asked questions about ZDC Tech Global Solutions services and process.",
+  alternates: {
+    canonical: "/faqs",
+  },
+  openGraph: {
+    title: "FAQs | ZDC Tech Global Solutions",
+    description:
+      "Answers to frequently asked questions about ZDC Tech Global Solutions services and process.",
+    url: "https://zdctechglobalsolutions.com/faqs",
+  },
 };
 
 export default function FAQsPage() {

@@ -33,6 +33,14 @@ export async function generateMetadata({
   return {
     title: `${caseStudy.title} | Case Study`,
     description: caseStudy.challenge,
+    alternates: {
+      canonical: `/case-studies/${caseStudy.slug}`,
+    },
+    openGraph: {
+      title: `${caseStudy.title} | Case Study`,
+      description: caseStudy.challenge,
+      url: `https://zdctechglobalsolutions.com/case-studies/${caseStudy.slug}`,
+    },
   };
 }
 

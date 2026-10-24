@@ -38,9 +38,6 @@ export const metadata: Metadata = {
     "Global Tech Solutions",
     "ZDC Tech Global Solutions",
   ],
-  alternates: {
-    canonical: "/",
-  },
   robots: {
     index: true,
     follow: true,

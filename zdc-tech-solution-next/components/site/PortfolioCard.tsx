@@ -24,12 +24,14 @@ export function PortfolioCard({ item, index = 0 }: PortfolioCardProps) {
         <Link
           href={`/portfolio/${item.slug}`}
           className="block h-full w-full p-4"
+          aria-label={`View project details for ${item.title}`}
         >
           <img
             src={item.image}
             alt={item.title}
             className="h-full w-full object-contain transition-transform duration-700 group-hover:scale-105"
           />
+          <span className="sr-only">View project details for {item.title}</span>
         </Link>
         {/* Subtle overlay gradient on hover */}
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none" />
@@ -45,11 +47,13 @@ export function PortfolioCard({ item, index = 0 }: PortfolioCardProps) {
             <a
               href={item.websiteUrl}
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer nofollow"
               className="flex items-center justify-center w-8 h-8 rounded-full bg-slate-50 text-slate-400 hover:bg-[#0ea5e9] hover:text-white transition-all shadow-sm"
               title="Visit Live Site"
+              aria-label={`Visit live website for ${item.title}`}
             >
               <ExternalLink className="h-4 w-4" />
+              <span className="sr-only">Visit live website for {item.title}</span>
             </a>
           )}
         </div>

@@ -127,7 +127,13 @@ export function IndustriesMarquee({ items }: IndustriesMarqueeProps) {
                 transition={{ duration: 0.5, delay: i * 0.05 }}
                 className="group relative cursor-pointer h-full"
               >
-                <Link href="/contact" className="absolute inset-0 z-20 block rounded-lg" />
+                <Link
+                  href="/contact"
+                  className="absolute inset-0 z-20 block rounded-lg"
+                  aria-label={`Explore solutions for ${industry.name}`}
+                >
+                  <span className="sr-only">Explore solutions for {industry.name}</span>
+                </Link>
                 <div className="relative h-full overflow-hidden rounded-lg bg-white p-4 shadow-[0_8px_30px_rgba(0,0,0,0.2)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(14,165,233,0.3)] flex flex-col items-center text-center">
                   {/* Icon */}
                   <div className="flex h-14 w-14 items-center justify-center rounded-lg bg-blue-50 text-[#0ea5e9] transition-all duration-500 group-hover:scale-110 mb-5 group-hover:bg-[#0ea5e9] group-hover:text-white">

@@ -2,15 +2,24 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/site/PageHero";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { CTASection } from "@/components/site/CTASection";
-import { type LifeAtCompanySection } from "@/data/company";
+import { type LifeAtCompanySection, lifeAtCompany as fallbackLifeAtCompany } from "@/data/company";
 import { getLifeAtCompany } from "@/service/lifeAtCompany.service";
 import { getIcon } from "@/lib/icons";
 import { unwrapApiResponse } from "@/lib/public-api";
 
 export const metadata: Metadata = {
-  title: "Life at Company",
+  title: "Life at Company | ZDC Tech Global Solutions",
   description:
     "Discover the culture, environment and activities that make ZDC Tech Global Solutions a great place to work and grow your career.",
+  alternates: {
+    canonical: "/life-at-company",
+  },
+  openGraph: {
+    title: "Life at Company | ZDC Tech Global Solutions",
+    description:
+      "Discover the culture, environment and activities that make ZDC Tech Global Solutions a great place to work and grow your career.",
+    url: "https://zdctechglobalsolutions.com/life-at-company",
+  },
 };
 
 const galleryImages = [
@@ -41,8 +50,9 @@ const galleryImages = [
 ];
 
 export default async function LifeAtCompanyPage() {
-  const res = await getLifeAtCompany();
-  const lifeAtCompany: LifeAtCompanySection[] = unwrapApiResponse<LifeAtCompanySection[]>(res) || [];
+  const res = await getLifeAtCompany().catch(() => null);
+  const live = unwrapApiResponse<LifeAtCompanySection[]>(res);
+  const lifeAtCompany: LifeAtCompanySection[] = Array.isArray(live) && live.length > 0 ? live : fallbackLifeAtCompany;
 
   return (
     <>

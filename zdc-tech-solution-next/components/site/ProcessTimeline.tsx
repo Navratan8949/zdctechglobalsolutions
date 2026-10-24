@@ -11,8 +11,12 @@ interface ProcessGridProps {
 export function ProcessTimeline({ steps }: ProcessGridProps) {
   const [activeStep, setActiveStep] = useState(0);
 
+  if (!steps || steps.length === 0) {
+    return null;
+  }
+
   // Calculate the percentage width for the progress bar
-  const progressPercentage = (activeStep / (steps.length - 1)) * 100;
+  const progressPercentage = (activeStep / Math.max(steps.length - 1, 1)) * 100;
 
   return (
     <div className="w-full max-w-4xl mx-auto">

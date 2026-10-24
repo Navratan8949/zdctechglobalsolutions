@@ -2,8 +2,16 @@ import type { Metadata } from 'next';
 import { PageHero } from '@/components/site/PageHero';
 
 export const metadata: Metadata = {
-  title: 'Terms and Conditions',
+  title: 'Terms and Conditions | ZDC Tech Global Solutions',
   description: 'The terms and conditions for using ZDC Tech Global Solutions services and website.',
+  alternates: {
+    canonical: '/terms-and-conditions',
+  },
+  openGraph: {
+    title: 'Terms and Conditions | ZDC Tech Global Solutions',
+    description: 'The terms and conditions for using ZDC Tech Global Solutions services and website.',
+    url: 'https://zdctechglobalsolutions.com/terms-and-conditions',
+  },
 };
 
 export default function TermsAndConditionsPage() {

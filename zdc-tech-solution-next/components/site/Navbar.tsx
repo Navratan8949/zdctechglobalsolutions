@@ -204,7 +204,8 @@ export function Navbar() {
           <TopBar />
         </div>
         <nav className="mx-auto flex w-full max-w-7xl items-center justify-between h-20 px-4 sm:px-6 lg:px-8">
-          <Link href="/" className="group flex items-center gap-3">
+          <Link href="/" className="group flex items-center gap-3" aria-label="ZDC Tech Global Solutions Home">
+            <span className="sr-only">ZDC Tech Global Solutions Home</span>
             <Image
               src={companyInfo?.logo?.url || "/logo/favi.png"}
               alt={`${companyInfo?.name || "ZDC Tech"} Logo`}
@@ -387,8 +388,10 @@ export function Navbar() {
                 <Link
                   href="/"
                   className="flex items-center gap-3"
+                  aria-label="ZDC Tech Global Solutions Home"
                   onClick={() => setMobileOpen(false)}
                 >
+                  <span className="sr-only">ZDC Tech Global Solutions Home</span>
                   <Image
                     src={companyInfo?.logo?.url || "/logo/favi.png"}
                     alt="ZDC Tech Logo"

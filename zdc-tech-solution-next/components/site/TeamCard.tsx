@@ -26,21 +26,54 @@ export function TeamCard({ member, index = 0 }: TeamCardProps) {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0b1b3d]/80 via-[#0b1b3d]/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
         <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100 z-10">
-          {member.socials.linkedin && (
-            <a href={member.socials.linkedin} aria-label="LinkedIn" className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-[#0ea5e9] shadow-lg transition-transform hover:scale-110">
+          {member.socials?.linkedin && member.socials.linkedin !== "#" ? (
+            <a
+              href={member.socials.linkedin}
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              aria-label={`${member.name}'s LinkedIn`}
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-[#0ea5e9] shadow-lg transition-transform hover:scale-110"
+            >
               <Linkedin className="h-4 w-4" />
+              <span className="sr-only">{member.name}&apos;s LinkedIn</span>
             </a>
-          )}
-          {member.socials.twitter && (
-            <a href={member.socials.twitter} aria-label="Twitter" className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-[#0ea5e9] shadow-lg transition-transform hover:scale-110">
+          ) : member.socials?.linkedin ? (
+            <span aria-hidden="true" className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-[#0ea5e9] shadow-lg">
+              <Linkedin className="h-4 w-4" />
+            </span>
+          ) : null}
+          {member.socials?.twitter && member.socials.twitter !== "#" ? (
+            <a
+              href={member.socials.twitter}
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              aria-label={`${member.name}'s Twitter`}
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-[#0ea5e9] shadow-lg transition-transform hover:scale-110"
+            >
               <Twitter className="h-4 w-4" />
+              <span className="sr-only">{member.name}&apos;s Twitter</span>
             </a>
-          )}
-          {member.socials.github && (
-            <a href={member.socials.github} aria-label="GitHub" className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-[#0ea5e9] shadow-lg transition-transform hover:scale-110">
+          ) : member.socials?.twitter ? (
+            <span aria-hidden="true" className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-[#0ea5e9] shadow-lg">
+              <Twitter className="h-4 w-4" />
+            </span>
+          ) : null}
+          {member.socials?.github && member.socials.github !== "#" ? (
+            <a
+              href={member.socials.github}
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              aria-label={`${member.name}'s GitHub`}
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-[#0ea5e9] shadow-lg transition-transform hover:scale-110"
+            >
               <Github className="h-4 w-4" />
+              <span className="sr-only">{member.name}&apos;s GitHub</span>
             </a>
-          )}
+          ) : member.socials?.github ? (
+            <span aria-hidden="true" className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-[#0ea5e9] shadow-lg">
+              <Github className="h-4 w-4" />
+            </span>
+          ) : null}
         </div>
       </div>
       <div className="p-6 bg-white border-t border-gray-100">

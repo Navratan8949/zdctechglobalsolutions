@@ -30,7 +30,18 @@ export async function generateMetadata({
   const item = await getPortfolio(params.slug);
   if (!item) return { title: "Project Not Found" };
 
-  return { title: `${item.title} | Portfolio`, description: item.description };
+  return {
+    title: `${item.title} | Portfolio`,
+    description: item.description,
+    alternates: {
+      canonical: `/portfolio/${item.slug}`,
+    },
+    openGraph: {
+      title: `${item.title} | Portfolio`,
+      description: item.description,
+      url: `https://zdctechglobalsolutions.com/portfolio/${item.slug}`,
+    },
+  };
 }
 
 export default async function PortfolioDetailPage({

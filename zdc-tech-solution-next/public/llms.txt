@@ -1,0 +1,53 @@
+# ZDC Tech Global Solutions
+
+> ZDC Tech Global Solutions Pvt. Ltd. is a premier software development, digital marketing, and IT consulting agency delivering enterprise-grade web, mobile, custom software, and AI solutions to clients worldwide.
+
+## Company Overview
+- **Name**: ZDC Tech Global Solutions Pvt. Ltd.
+- **Website**: https://zdctechglobalsolutions.com/
+- **Email**: zdctechglobalsolutions@gmail.com
+- **Phone**: +91 7073551862
+- **Head Office**: Jaipur, Rajasthan, India
+- **Branch Office**: D. P. Road, Near New Nagar Parishad Office, Deulgaon Raja, Tq. Deulgaon Raja, Dist. Buldhana, Maharashtra - 443204
+- **Working Hours**: Monday - Friday: 9:00 AM - 6:00 PM (IST)
+
+## Core Capabilities & Services
+
+### Software & Application Development
+- [Custom Software Development](https://zdctechglobalsolutions.com/services/software): Bespoke ERP, CRM, inventory, and enterprise systems built for performance and scalability.
+- [Website Design & Development](https://zdctechglobalsolutions.com/services/web-design): Modern, responsive web applications built with Next.js, React, Node.js, and TypeScript.
+- [Mobile App Development](https://zdctechglobalsolutions.com/services/mobile-app): High-performance native (Android, iOS) and cross-platform (React Native, Flutter) mobile applications.
+- [E-Commerce Solutions](https://zdctechglobalsolutions.com/services/ecommerce): High-conversion online stores, headless commerce, payment gateway integration, and inventory management.
+- [UI/UX Design](https://zdctechglobalsolutions.com/services/ui-ux): Research-backed user interface design, user journeys, wireframing, and Figma design systems.
+
+### Testing & Quality Assurance
+- [Software Testing](https://zdctechglobalsolutions.com/services/software-testing): Manual and automated testing pipelines for bug-free releases.
+- [Security Testing](https://zdctechglobalsolutions.com/services/security-testing): Vulnerability assessment, penetration testing, compliance checks, and secure code review.
+- [Performance Testing](https://zdctechglobalsolutions.com/services/performance-testing): Load testing, stress testing, scalability analysis, and Core Web Vitals optimization.
+
+### Digital Marketing & Growth
+- [SEO Services](https://zdctechglobalsolutions.com/services/seo): Technical SEO audits, on-page optimization, content marketing, and backlink strategies.
+- [Google Ads](https://zdctechglobalsolutions.com/services/google-ads): High-ROI Search, Display, Performance Max, and Remarketing ad campaigns.
+- [Meta Ads](https://zdctechglobalsolutions.com/services/meta-ads): Facebook and Instagram targeted campaigns for brand awareness and lead generation.
+- [Social Media Marketing](https://zdctechglobalsolutions.com/services/social-media): Social media strategy, content creation, and community management.
+- [Google My Business (GMB)](https://zdctechglobalsolutions.com/services/gmb): Local SEO, Google Business profile optimization, and local citation building.
+
+### Emerging Technologies & Consulting
+- [AI & Machine Learning](https://zdctechglobalsolutions.com/services/ai-ml): Custom AI models, NLP, predictive analytics, computer vision, and automation.
+- [Data Analytics & BI](https://zdctechglobalsolutions.com/services/data-analytics): Business intelligence dashboards, ETL pipelines, and data warehouse architecture.
+- [IT Consulting](https://zdctechglobalsolutions.com/services/it-consulting): Digital transformation roadmaps, cloud strategy, and architecture advisory.
+- [IT Support & Managed Services](https://zdctechglobalsolutions.com/services/it-support): 24/7 infrastructure monitoring, maintenance, and cloud support.
+
+## Key Links & Resources
+- [Home](https://zdctechglobalsolutions.com/)
+- [About Us](https://zdctechglobalsolutions.com/about)
+- [Our Services](https://zdctechglobalsolutions.com/services)
+- [Portfolio](https://zdctechglobalsolutions.com/portfolio)
+- [Case Studies](https://zdctechglobalsolutions.com/case-studies)
+- [Careers](https://zdctechglobalsolutions.com/careers)
+- [Team](https://zdctechglobalsolutions.com/team)
+- [Life at ZDC](https://zdctechglobalsolutions.com/life-at-company)
+- [Contact Us](https://zdctechglobalsolutions.com/contact)
+- [Privacy Policy](https://zdctechglobalsolutions.com/privacy-policy)
+- [Terms & Conditions](https://zdctechglobalsolutions.com/terms-and-conditions)
+- [Refund Policy](https://zdctechglobalsolutions.com/refund-policy)

@@ -6,6 +6,9 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Clients | ZDC Tech Global Solutions',
   description: 'Our trusted partners and clients around the world.',
+  alternates: {
+    canonical: '/clients',
+  },
   openGraph: {
     title: 'Clients | ZDC Tech Global Solutions',
     description: 'Our trusted partners and clients around the world.',

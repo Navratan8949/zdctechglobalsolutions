@@ -33,6 +33,14 @@ export async function generateMetadata({
   return {
     title: `${post.title} | Blog`,
     description: post.excerpt,
+    alternates: {
+      canonical: `/blog/${post.slug}`,
+    },
+    openGraph: {
+      title: `${post.title} | Blog`,
+      description: post.excerpt,
+      url: `https://zdctechglobalsolutions.com/blog/${post.slug}`,
+    },
   };
 }
 

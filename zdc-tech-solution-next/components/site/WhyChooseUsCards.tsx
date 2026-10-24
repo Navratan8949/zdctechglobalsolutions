@@ -38,7 +38,13 @@ export function WhyChooseUsCards({ items }: WhyChooseUsCardsProps) {
             }}
             className="group relative h-full rounded-2xl bg-white p-4 shadow-xl overflow-hidden block hover:-translate-y-2 hover:shadow-2xl transition-all duration-300"
           >
-            <Link href="/contact" className="absolute inset-0 z-20 block rounded-2xl" />
+            <Link
+              href="/contact"
+              className="absolute inset-0 z-20 block rounded-2xl"
+              aria-label={`Learn more about ${item.title}`}
+            >
+              <span className="sr-only">Learn more about {item.title}</span>
+            </Link>
             {/* Advanced Expanding Circle Fill Animation */}
             <div className="absolute top-8 left-8 w-16 h-16 bg-[#0ea5e9] rounded-full scale-0 transition-transform duration-700 ease-out group-hover:scale-[20] z-0 origin-center" />
 

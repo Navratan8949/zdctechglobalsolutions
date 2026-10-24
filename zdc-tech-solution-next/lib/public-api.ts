@@ -4,13 +4,21 @@ export interface ApiResponse<T> {
   message?: string;
 }
 
-export function unwrapApiResponse<T>(response: T | ApiResponse<T>): T {
-  if (response && typeof response === "object" && "data" in response) {
-    const envelope = response as ApiResponse<T>;
-    return envelope.data as T;
+export function unwrapApiResponse<T>(response: T | ApiResponse<T> | null | undefined): T | undefined {
+  if (!response || typeof response !== "object") {
+    return (response as T) ?? undefined;
   }
 
-  return response as T;
+  if ("success" in response && (response as ApiResponse<T>).success === false) {
+    return undefined;
+  }
+
+  if ("data" in response && (response as ApiResponse<T>).data !== undefined) {
+    const envelope = response as ApiResponse<T>;
+    return (envelope.data as T) ?? undefined;
+  }
+
+  return (response as T) ?? undefined;
 }
 
 export function getApiErrorMessage(error: unknown): string {

@@ -4,6 +4,9 @@ export const metadata: Metadata = {
   title: "Our Portfolio | Best IT Company Projects",
   description:
     "Explore the portfolio of the best IT company. See our recent success stories in website development, mobile apps, custom software, and digital marketing.",
+  alternates: {
+    canonical: "/portfolio",
+  },
   openGraph: {
     title: "Our Portfolio | Best IT Company Projects",
     description:

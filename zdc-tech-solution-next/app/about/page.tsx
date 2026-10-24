@@ -6,7 +6,15 @@ import { WhyChooseUsCards } from "@/components/site/WhyChooseUsCards";
 import { ProcessTimeline } from "@/components/site/ProcessTimeline";
 import { TechStackGrid } from "@/components/site/TechStackGrid";
 import { CheckCircle2 } from "lucide-react";
-import { whyChooseUs, type Stat, type ProcessStep, type CoreValue } from "@/data/company";
+import {
+  whyChooseUs,
+  stats as fallbackStats,
+  processSteps as fallbackProcessSteps,
+  coreValues as fallbackCoreValues,
+  type Stat,
+  type ProcessStep,
+  type CoreValue,
+} from "@/data/company";
 import { getStats } from "@/service/stat.service";
 import { getProcessSteps } from "@/service/processStep.service";
 import { getCoreValues } from "@/service/coreValue.service";
@@ -27,6 +35,9 @@ export const metadata: Metadata = {
     "ZDC Tech Global Solutions",
     "about ZDC tech",
   ],
+  alternates: {
+    canonical: "/about",
+  },
   openGraph: {
     title: "About ZDC Tech Global Solutions",
     description:
@@ -37,13 +48,17 @@ export const metadata: Metadata = {
 
 export default async function AboutPage() {
   const [statsRaw, processStepsRaw, coreValuesRaw] = await Promise.all([
-    getStats(),
-    getProcessSteps(),
-    getCoreValues(),
+    getStats().catch(() => null),
+    getProcessSteps().catch(() => null),
+    getCoreValues().catch(() => null),
   ]);
-  const stats = unwrapApiResponse<Stat[]>(statsRaw) || [];
-  const processSteps = unwrapApiResponse<ProcessStep[]>(processStepsRaw) || [];
-  const coreValues = unwrapApiResponse<CoreValue[]>(coreValuesRaw) || [];
+  const liveStats = unwrapApiResponse<Stat[]>(statsRaw);
+  const liveProcessSteps = unwrapApiResponse<ProcessStep[]>(processStepsRaw);
+  const liveCoreValues = unwrapApiResponse<CoreValue[]>(coreValuesRaw);
+
+  const stats = Array.isArray(liveStats) && liveStats.length > 0 ? liveStats : fallbackStats;
+  const processSteps = Array.isArray(liveProcessSteps) && liveProcessSteps.length > 0 ? liveProcessSteps : fallbackProcessSteps;
+  const coreValues = Array.isArray(liveCoreValues) && liveCoreValues.length > 0 ? liveCoreValues : fallbackCoreValues;
 
   return (
     <div className="bg-white">

@@ -45,6 +45,9 @@ export const metadata: Metadata = {
     "SEO & Digital Marketing Jaipur Rajasthan",
     "Best Software Development Company India",
   ],
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title:
       "ZDC Tech Global Solutions — Best IT Company in India, Jaipur & Rajasthan",

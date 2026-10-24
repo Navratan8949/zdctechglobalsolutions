@@ -2,8 +2,16 @@ import type { Metadata } from 'next';
 import { PageHero } from '@/components/site/PageHero';
 
 export const metadata: Metadata = {
-  title: 'Refund Policy',
+  title: 'Refund Policy | ZDC Tech Global Solutions',
   description: 'Our refund policy for services provided by ZDC Tech Global Solutions.',
+  alternates: {
+    canonical: '/refund-policy',
+  },
+  openGraph: {
+    title: 'Refund Policy | ZDC Tech Global Solutions',
+    description: 'Our refund policy for services provided by ZDC Tech Global Solutions.',
+    url: 'https://zdctechglobalsolutions.com/refund-policy',
+  },
 };
 
 export default function RefundPolicyPage() {

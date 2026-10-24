@@ -11,7 +11,7 @@ import { ProcessTimeline } from "@/components/site/ProcessTimeline";
 import { ServiceCard } from "@/components/site/ServiceCard";
 import { getIcon } from "@/lib/icons";
 import { services, getServiceBySlug, type Service } from "@/data/services";
-import { whyChooseUs, type ProcessStep } from "@/data/company";
+import { whyChooseUs, processSteps as fallbackProcessSteps, type ProcessStep } from "@/data/company";
 import { getProcessSteps } from "@/service/processStep.service";
 import { getServiceBySlug as getLiveServiceBySlug } from "@/service/service.service";
 import { unwrapApiResponse } from "@/lib/public-api";
@@ -25,11 +25,15 @@ export async function generateMetadata({
 }: {
   params: { slug: string };
 }): Promise<Metadata> {
-  let service = getServiceBySlug(params.slug);
+  const fallbackService = getServiceBySlug(params.slug);
+  let service = fallbackService;
   try {
-    service = unwrapApiResponse<Service>(
-      await getLiveServiceBySlug(params.slug),
+    const live = unwrapApiResponse<Service>(
+      await getLiveServiceBySlug(params.slug).catch(() => null),
     );
+    if (live && live.title) {
+      service = live;
+    }
   } catch {}
   if (!service) return { title: "Service Not Found" };
 
@@ -44,6 +48,9 @@ export async function generateMetadata({
       "Software Development",
       "ZDC Tech Global Solutions",
     ],
+    alternates: {
+      canonical: `/services/${service.slug}`,
+    },
     openGraph: {
       title: `${service.title} | Best IT Company Services`,
       description: `${service.shortDescription} Partner with ZDC Tech Global Solutions, the best IT company for premium ${service.title.toLowerCase()} services.`,
@@ -57,19 +64,30 @@ export default async function ServiceDetailPage({
 }: {
   params: { slug: string };
 }) {
-  let service = getServiceBySlug(params.slug);
+  const fallbackService = getServiceBySlug(params.slug);
+  let service = fallbackService;
   try {
-    service = unwrapApiResponse<Service>(
-      await getLiveServiceBySlug(params.slug),
+    const live = unwrapApiResponse<Service>(
+      await getLiveServiceBySlug(params.slug).catch(() => null),
     );
+    if (live && live.title) {
+      service = live;
+    }
   } catch {}
   if (!service) notFound();
 
-  const processStepsRaw = await getProcessSteps();
-  const processSteps = unwrapApiResponse<ProcessStep[]>(processStepsRaw) || [];
+  let processSteps: ProcessStep[] = fallbackProcessSteps;
+  try {
+    const processStepsRaw = await getProcessSteps().catch(() => null);
+    const unwrapped = unwrapApiResponse<ProcessStep[]>(processStepsRaw);
+    if (Array.isArray(unwrapped) && unwrapped.length > 0) {
+      processSteps = unwrapped;
+    }
+  } catch {}
 
-  const Icon = getIcon(service.icon);
-  const relatedServices = service.relatedSlugs
+  const Icon = getIcon(service.icon || "Code2");
+  const relatedSlugs = service.relatedSlugs || fallbackService?.relatedSlugs || [];
+  const relatedServices = relatedSlugs
     .map((slug) => services.find((s) => s.slug === slug))
     .filter(Boolean) as typeof services;
 

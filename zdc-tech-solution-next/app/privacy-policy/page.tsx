@@ -2,8 +2,16 @@ import type { Metadata } from 'next';
 import { PageHero } from '@/components/site/PageHero';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy',
+  title: 'Privacy Policy | ZDC Tech Global Solutions',
   description: 'Our privacy policy outlines how we collect, use, and protect your data.',
+  alternates: {
+    canonical: '/privacy-policy',
+  },
+  openGraph: {
+    title: 'Privacy Policy | ZDC Tech Global Solutions',
+    description: 'Our privacy policy outlines how we collect, use, and protect your data.',
+    url: 'https://zdctechglobalsolutions.com/privacy-policy',
+  },
 };
 
 export default function PrivacyPolicyPage() {

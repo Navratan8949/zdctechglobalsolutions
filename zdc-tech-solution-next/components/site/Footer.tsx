@@ -187,7 +187,8 @@ export function Footer() {
         <div className="grid gap-12 lg:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-6 border-b border-slate-700 pb-16">
           {/* Col 1: Brand + Contact */}
           <div className="lg:col-span-2 lg:pr-8">
-            <Link href="/" className="inline-flex items-center gap-3">
+            <Link href="/" className="inline-flex items-center gap-3" aria-label="ZDC Tech Global Solutions Home">
+              <span className="sr-only">ZDC Tech Global Solutions</span>
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white p-2">
                 <Image
                   src={companyInfo?.logo?.url || "/logo/favi.png"}
@@ -215,11 +216,12 @@ export function Footer() {
               <a
                 href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox"
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener noreferrer nofollow"
                 className="flex items-start gap-3 text-[13px] text-slate-300 transition-colors hover:text-white"
               >
                 <Mail className="mt-0.5 h-4 w-4 text-[#0ea5e9]" />
                 <span>{companyInfo.email}</span>
+                <span className="sr-only"> (Opens Gmail compose)</span>
               </a>
               <a
                 href={`tel:${companyInfo.phone}`}
@@ -253,16 +255,30 @@ export function Footer() {
             <div className="mt-8 flex items-center gap-3">
               {socials.map(({ icon: Icon, href, label }) => {
                 const isMailOrTel = href.startsWith('mailto:') || href.startsWith('tel:');
+                const isPlaceholder = !href || href === "#";
+                if (isPlaceholder) {
+                  return (
+                    <span
+                      key={label}
+                      aria-label={label}
+                      className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-800 text-slate-400 opacity-60 cursor-default"
+                    >
+                      <Icon className="h-[18px] w-[18px]" />
+                      <span className="sr-only">{label}</span>
+                    </span>
+                  );
+                }
                 return (
                   <a
                     key={label}
                     href={href}
                     aria-label={label}
                     target={isMailOrTel ? undefined : "_blank"}
-                    rel={isMailOrTel ? undefined : "noopener noreferrer"}
+                    rel={isMailOrTel ? undefined : "noopener noreferrer nofollow"}
                     className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-800 text-slate-300 transition-colors hover:bg-[#0ea5e9] hover:text-white"
                   >
                     <Icon className="h-[18px] w-[18px]" />
+                    <span className="sr-only">{label}</span>
                   </a>
                 );
               })}

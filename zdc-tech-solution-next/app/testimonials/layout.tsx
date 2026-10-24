@@ -4,6 +4,9 @@ export const metadata: Metadata = {
   title: "Testimonials | ZDC Tech Global Solutions",
   description:
     "See what our clients have to say about working with ZDC Tech Global Solutions.",
+  alternates: {
+    canonical: "/testimonials",
+  },
   openGraph: {
     title: "Testimonials | ZDC Tech Global Solutions",
     description:
