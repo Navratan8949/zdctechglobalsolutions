@@ -31,14 +31,25 @@ import { SectionHeading } from "@/components/site/SectionHeading";
 import { AllServicesCloud } from "@/components/site/AllServicesCloud";
 
 export const metadata: Metadata = {
-  title: "ZDC Tech Global Solutions — Best IT Company | Web & App Development",
+  title: "ZDC Tech Global Solutions — Best IT Company in India, Jaipur & Rajasthan",
   description:
-    "Looking for the best IT company? ZDC Tech Global Solutions delivers premium website design, mobile app development, SEO, and custom software globally.",
+    "Looking for the best IT company in India, Jaipur, or Rajasthan? ZDC Tech Global Solutions delivers world-class website design, mobile app development, custom software, and SEO globally.",
+  keywords: [
+    "Best IT Company India",
+    "Best IT Company in Jaipur",
+    "Best IT Company in Rajasthan",
+    "Top IT Company in Jaipur",
+    "Software Development Company in Jaipur",
+    "Web Development Company in Jaipur",
+    "Mobile App Development Company in Jaipur",
+    "SEO & Digital Marketing Jaipur Rajasthan",
+    "Best Software Development Company India",
+  ],
   openGraph: {
     title:
-      "ZDC Tech Global Solutions — Best IT Company | Web & App Development",
+      "ZDC Tech Global Solutions — Best IT Company in India, Jaipur & Rajasthan",
     description:
-      "Looking for the best IT company? ZDC Tech Global Solutions delivers premium website design, mobile app development, SEO, and custom software globally.",
+      "Looking for the best IT company in India, Jaipur, or Rajasthan? ZDC Tech Global Solutions delivers world-class website design, mobile app development, custom software, and SEO globally.",
     url: "https://zdctechglobalsolutions.com/",
   },
 };

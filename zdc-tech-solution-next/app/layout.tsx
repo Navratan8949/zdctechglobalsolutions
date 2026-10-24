@@ -8,22 +8,35 @@ export const metadata: Metadata = {
     process.env.NEXT_PUBLIC_SITE_URL || "https://zdctechglobalsolutions.com",
   ),
   title: {
-    default: "ZDC Tech Global Solutions — Best IT Company & Software Development Agency",
+    default: "ZDC Tech Global Solutions — Best IT Company in India, Jaipur & Rajasthan",
     template: "%s | ZDC Tech Global Solutions",
   },
   description:
-    "ZDC Tech Global Solutions is the best IT company offering world-class website development, mobile app development, SEO, digital marketing, and custom software solutions globally.",
+    "ZDC Tech Global Solutions is the best IT company in Jaipur, Rajasthan & India. We deliver top-tier website development, mobile app development, SEO, digital marketing, and custom software solutions globally.",
   keywords: [
-    "Best IT Company",
+    "Best IT Company India",
+    "Best IT Company in Jaipur",
+    "Best IT Company in Rajasthan",
+    "Top IT Company in Jaipur",
+    "Top IT Companies in Rajasthan",
+    "Best Software Development Company in Jaipur",
+    "Best Software Development Company in India",
+    "Software Development Agency Rajasthan",
+    "Website Development Company in Jaipur",
+    "Best Web Development Company in India",
+    "Website Development Services Rajasthan",
+    "Mobile App Development Company in Jaipur",
+    "Mobile App Development Company in India",
+    "Best SEO Agency in Jaipur",
+    "Digital Marketing Company in Jaipur",
+    "IT Consulting Firm Jaipur Rajasthan",
+    "Custom Software Development Jaipur",
+    "IT Services Jaipur Rajasthan India",
     "Top Software Development Agency",
-    "Website Development Services",
-    "Mobile App Development Company",
-    "Best SEO Agency",
-    "Digital Marketing Experts",
     "Custom CRM Software",
     "UI/UX Design Agency",
-    "IT Consulting Firm",
     "Global Tech Solutions",
+    "ZDC Tech Global Solutions",
   ],
   alternates: {
     canonical: "/",
@@ -40,9 +53,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "ZDC Tech Global Solutions — Best IT Company & Software Development Agency",
+    title: "ZDC Tech Global Solutions — Best IT Company in India, Jaipur & Rajasthan",
     description:
-      "Partner with the best IT company. We build high-performance websites, mobile apps, custom software, and digital solutions that accelerate business growth.",
+      "Partner with the best IT company in Jaipur, Rajasthan & India. We build high-performance websites, mobile apps, custom software, and digital solutions that accelerate business growth.",
     type: "website",
     url: "https://zdctechglobalsolutions.com",
     siteName: "ZDC Tech Global Solutions",
@@ -52,15 +65,15 @@ export const metadata: Metadata = {
         url: "/images/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "ZDC Tech Global Solutions - Best IT Company",
+        alt: "ZDC Tech Global Solutions - Best IT Company in Jaipur, Rajasthan & India",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "ZDC Tech Global Solutions — Best IT Company & Software Development Agency",
+    title: "ZDC Tech Global Solutions — Best IT Company in India, Jaipur & Rajasthan",
     description:
-      "Partner with the best IT company. We build high-performance websites, mobile apps, custom software, and digital solutions that accelerate business growth.",
+      "Partner with the best IT company in Jaipur, Rajasthan & India. We build high-performance websites, mobile apps, custom software, and digital solutions that accelerate business growth.",
     images: ["/images/og-image.jpg"],
   },
 };
@@ -112,6 +125,34 @@ export default function RootLayout({
             alt=""
           />
         </noscript>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": ["Organization", "ProfessionalService"],
+              name: "ZDC Tech Global Solutions",
+              alternateName: "ZDC Tech",
+              url: "https://zdctechglobalsolutions.com",
+              logo: "https://zdctechglobalsolutions.com/logo/zdc.png",
+              description:
+                "Best IT Company in Jaipur, Rajasthan & India offering custom software, website development, mobile app development, SEO, and digital marketing services.",
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "Jaipur",
+                addressRegion: "Rajasthan",
+                addressCountry: "India",
+              },
+              contactPoint: {
+                "@type": "ContactPoint",
+                telephone: "+91 7073551862",
+                contactType: "customer service",
+                areaServed: ["IN", "Global"],
+                availableLanguage: ["English", "Hindi"],
+              },
+            }),
+          }}
+        />
         <SiteChrome>{children}</SiteChrome>
       </body>
     </html>

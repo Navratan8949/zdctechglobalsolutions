@@ -5,13 +5,20 @@ import { MapPin } from "lucide-react";
 import { PublicContactDetails } from "@/components/site/PublicContactDetails";
 
 export const metadata: Metadata = {
-  title: "Contact Us | Connect with the Best IT Company",
+  title: "Contact Us | Best IT Company in Jaipur, Rajasthan & India",
   description:
-    "Contact ZDC Tech Global Solutions, the best IT company for custom software, web development, and digital marketing. Get a free consultation today.",
+    "Contact ZDC Tech Global Solutions, the best IT company in Jaipur, Rajasthan & India for custom software, web development, app development, and SEO. Get a free consultation today.",
+  keywords: [
+    "Contact Best IT Company Jaipur",
+    "IT Company Office Jaipur",
+    "Software Company in Jaipur Rajasthan",
+    "Hire Developers in Jaipur",
+    "Best IT Company in India Contact",
+  ],
   openGraph: {
-    title: "Contact ZDC Tech Global Solutions - Best IT Company",
+    title: "Contact ZDC Tech Global Solutions - Best IT Company in Jaipur, Rajasthan & India",
     description:
-      "Contact ZDC Tech Global Solutions, the best IT company for custom software, web development, and digital marketing. Get a free consultation today.",
+      "Contact ZDC Tech Global Solutions, the best IT company in Jaipur, Rajasthan & India for custom software, web development, app development, and SEO. Get a free consultation today.",
     url: "https://zdctechglobalsolutions.com/contact",
   },
 };

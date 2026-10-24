@@ -19,11 +19,12 @@ export const metadata: Metadata = {
   description:
     "Learn about ZDC Tech Global Solutions — recognized as the best IT company globally. Discover our mission, vision, and how we deliver top-tier software and digital solutions.",
   keywords: [
-    "Best IT company",
-    "software development agency",
-    "top tech partner",
-    "ZDC Tech",
-    "global IT solutions",
+    "Best IT company in Jaipur",
+    "Best IT company India",
+    "Best IT company in Rajasthan",
+    "Top tech partner Jaipur",
+    "software development agency Jaipur",
+    "ZDC Tech Global Solutions",
     "about ZDC tech",
   ],
   openGraph: {
