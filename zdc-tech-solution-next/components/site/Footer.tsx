@@ -195,8 +195,7 @@ export function Footer() {
                   alt="ZDC Tech Icon"
                   width={28}
                   height={28}
-                  className="h-7 w-auto object-contain"
-                  style={{ width: "auto", height: "auto" }}
+                  className="object-contain"
                 />
               </div>
               <Image
@@ -205,7 +204,6 @@ export function Footer() {
                 width={140}
                 height={34}
                 className="h-8 w-auto object-contain brightness-0 invert"
-                style={{ width: "auto", height: "auto" }}
               />
             </Link>
 
