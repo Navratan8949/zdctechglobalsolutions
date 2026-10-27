@@ -9,6 +9,18 @@ interface TeamCardProps {
   index?: number;
 }
 
+function formatDescription(desc?: string): string {
+  if (!desc) return '';
+  const trimmed = desc.trim();
+  if (/<(p|br|div|ul|ol|li|span|strong|em)[^>]*>/i.test(trimmed)) {
+    return trimmed;
+  }
+  return trimmed
+    .split(/\n{2,}/)
+    .map((paragraph) => `<p>${paragraph.replace(/\n/g, '<br />')}</p>`)
+    .join('');
+}
+
 export function TeamCard({ member, index = 0 }: TeamCardProps) {
   const displayCategory = normalizeCategory(member.category, member.position);
 
@@ -91,8 +103,8 @@ export function TeamCard({ member, index = 0 }: TeamCardProps) {
         <h3 className="text-[18px] font-bold text-[#0b1b3d] leading-snug">{member.name}</h3>
         <p className="text-[12px] font-bold uppercase tracking-wider text-[#0ea5e9] mt-1.5">{member.position}</p>
         <div 
-          className="mt-3 text-[14px] leading-relaxed text-slate-500 line-clamp-4 flex-1"
-          dangerouslySetInnerHTML={{ __html: member.description }}
+          className="mt-3 text-[14px] leading-relaxed text-slate-600 flex-1 [&>p]:mb-2.5 [&>p:last-child]:mb-0 [&>strong]:text-[#0b1b3d] [&>strong]:font-semibold [&>ul]:list-disc [&>ul]:pl-5 [&>ol]:list-decimal [&>ol]:pl-5"
+          dangerouslySetInnerHTML={{ __html: formatDescription(member.description) }}
         />
       </div>
     </motion.div>

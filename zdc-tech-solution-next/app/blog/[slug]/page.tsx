@@ -107,38 +107,47 @@ export default async function BlogPostPage({
         </div>
 
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 mb-16">
-          <div className="aspect-[21/9] overflow-hidden rounded-3xl border border-slate-100 shadow-sm">
+          <div className="overflow-hidden rounded-3xl border border-slate-100 shadow-sm bg-slate-900/5 flex items-center justify-center">
             <img
               src={post.coverImage}
               alt={post.title}
-              className="w-full h-full object-cover"
+              className="w-full h-auto max-h-[650px] object-contain rounded-3xl"
             />
           </div>
         </div>
 
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 pb-20">
+          {/* Excerpt / Lead Description */}
+          {post.excerpt && (
+            <div className="mb-10 rounded-2xl bg-blue-50/60 border-l-4 border-[#0ea5e9] p-6 text-[17px] sm:text-[19px] leading-relaxed text-slate-700 font-medium italic shadow-sm">
+              <div dangerouslySetInnerHTML={{ __html: post.excerpt }} />
+            </div>
+          )}
+
           <div className="prose prose-slate prose-lg max-w-none prose-p:leading-relaxed prose-a:text-[#0ea5e9] hover:prose-a:text-blue-600 prose-img:rounded-2xl prose-img:border prose-img:border-slate-100 prose-img:shadow-sm prose-headings:text-[#0b1b3d] prose-headings:font-bold">
             {typeof post.content === 'string' ? (
               <div dangerouslySetInnerHTML={{ __html: post.content }} />
-            ) : (
-              Array.isArray(post.content) && post.content.map((section, idx) => (
+            ) : Array.isArray(post.content) && post.content.length > 0 ? (
+              post.content.map((section, idx) => (
                 <div key={idx} className="mb-10">
                   {section.heading && (
                     <h2 className="text-3xl font-bold text-[#0b1b3d] mt-12 mb-6">
                       {section.heading}
                     </h2>
                   )}
-                  {section.paragraphs.map((paragraph, pIdx) => (
-                    <p
-                      key={pIdx}
-                      className="text-slate-600 text-[18px] mb-6 leading-relaxed"
-                    >
-                      {paragraph}
-                    </p>
-                  ))}
+                  {section.paragraphs &&
+                    section.paragraphs.map((paragraph, pIdx) => (
+                      <div
+                        key={pIdx}
+                        className="text-slate-600 text-[18px] mb-6 leading-relaxed"
+                        dangerouslySetInnerHTML={{ __html: paragraph }}
+                      />
+                    ))}
                 </div>
               ))
-            )}
+            ) : (post as any).description ? (
+              <div dangerouslySetInnerHTML={{ __html: (post as any).description }} />
+            ) : null}
           </div>
         </div>
       </article>

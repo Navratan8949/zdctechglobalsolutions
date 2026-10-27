@@ -21,6 +21,7 @@ import {
   Users,
   X,
   CheckCircle,
+  Newspaper,
 } from "lucide-react";
 import {
   useAdminAuth,
@@ -50,6 +51,7 @@ const primaryNavigation: AdminNavItem[] = [
     icon: BriefcaseBusiness,
   },
   { label: "Blog", href: "/admin/blog", icon: FileText },
+  { label: "Daily Posts", href: "/admin/posts", icon: Newspaper },
   { label: "Jobs", href: "/admin/jobs", icon: BriefcaseBusiness },
   { label: "Team", href: "/admin/team", icon: Users },
   { label: "Clients", href: "/admin/clients", icon: Building2 },

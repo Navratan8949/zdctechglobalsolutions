@@ -15,6 +15,7 @@ export const teamCategories = [
   'All',
   'Leadership & Founders',
   'Developers',
+  'Technical Support',
   'Sales & Marketing',
   'UI/UX Design',
   'Quality Assurance',
@@ -23,42 +24,55 @@ export const teamCategories = [
 export type TeamCategory = (typeof teamCategories)[number];
 
 export function normalizeCategory(category?: string, position?: string): string {
+  // 1. If explicit category was provided, respect user's classification
   if (category && typeof category === 'string' && category.trim()) {
-    const cat = category.trim().toLowerCase();
-    if (cat.includes('founder') || cat.includes('lead') || cat.includes('exec') || cat.includes('director') || cat.includes('chief') || cat.includes('c-level')) {
-      return 'Leadership & Founders';
+    const trimmed = category.trim();
+    const cat = trimmed.toLowerCase();
+
+    // Specific standard mappings
+    if (cat.includes('support') || cat.includes('helpdesk')) {
+      return 'Technical Support';
     }
-    if (cat.includes('dev') || cat.includes('eng') || cat.includes('tech') || cat.includes('code') || cat.includes('software') || cat.includes('mobile') || cat.includes('backend') || cat.includes('frontend')) {
+    if (cat === 'dev' || cat === 'developer' || cat === 'developers' || cat === 'development' || cat === 'engineering') {
       return 'Developers';
     }
-    if (cat.includes('sale') || cat.includes('market') || cat.includes('growth') || cat.includes('biz') || cat.includes('business') || cat.includes('client')) {
+    if (cat === 'founder' || cat === 'founders' || cat === 'founder & ceo' || cat === 'ceo' || cat === 'leadership' || cat === 'co-founder') {
+      return 'Leadership & Founders';
+    }
+    if (cat === 'sales' || cat === 'sales team' || cat === 'marketing' || cat === 'sales & marketing' || cat === 'bde') {
       return 'Sales & Marketing';
     }
-    if (cat.includes('design') || cat.includes('ui') || cat.includes('ux') || cat.includes('creative') || cat.includes('product design')) {
+    if (cat === 'graphic designer' || cat === 'design' || cat === 'designer' || cat === 'ui/ux' || cat === 'ui/ux design') {
       return 'UI/UX Design';
     }
-    if (cat.includes('qa') || cat.includes('test') || cat.includes('quality') || cat.includes('automation')) {
+    if (cat === 'qa' || cat === 'testing' || cat === 'quality assurance') {
       return 'Quality Assurance';
     }
-    return category.trim();
+
+    // Return the entered category
+    return trimmed;
   }
 
-  if (position && typeof position === 'string') {
+  // 2. Fallback to infer from position when category is empty
+  if (position && typeof position === 'string' && position.trim()) {
     const pos = position.toLowerCase();
+    if (pos.includes('support') || pos.includes('helpdesk') || pos.includes('customer service')) {
+      return 'Technical Support';
+    }
     if (pos.includes('founder') || pos.includes('ceo') || pos.includes('coo') || pos.includes('cto') || pos.includes('vice president') || pos.includes('vp') || pos.includes('director')) {
       return 'Leadership & Founders';
     }
-    if (pos.includes('developer') || pos.includes('engineer') || pos.includes('architect') || pos.includes('backend') || pos.includes('frontend') || pos.includes('mobile') || pos.includes('devops') || pos.includes('full-stack') || pos.includes('full stack')) {
-      return 'Developers';
-    }
-    if (pos.includes('sales') || pos.includes('marketing') || pos.includes('growth') || pos.includes('business') || pos.includes('client')) {
+    if (pos.includes('sales') || pos.includes('marketing') || pos.includes('growth') || pos.includes('business development') || pos.includes('bde') || pos.includes('counselor')) {
       return 'Sales & Marketing';
     }
-    if (pos.includes('design') || pos.includes('ui') || pos.includes('ux') || pos.includes('creative')) {
+    if (pos.includes('design') || pos.includes('ui') || pos.includes('ux') || pos.includes('graphic') || pos.includes('creative')) {
       return 'UI/UX Design';
     }
     if (pos.includes('qa') || pos.includes('quality') || pos.includes('test') || pos.includes('automation') || pos.includes('sdet')) {
       return 'Quality Assurance';
+    }
+    if (pos.includes('developer') || pos.includes('engineer') || pos.includes('architect') || pos.includes('programmer') || pos.includes('coder') || pos.includes('software') || pos.includes('mobile') || pos.includes('backend') || pos.includes('frontend')) {
+      return 'Developers';
     }
   }
 

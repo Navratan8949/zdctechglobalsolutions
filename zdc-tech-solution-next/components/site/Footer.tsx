@@ -20,6 +20,7 @@ import { useSiteContent } from "@/components/providers/SiteContentProvider";
 const companyLinks = [
   { label: "About Us", href: "/about" },
   { label: "Our Team", href: "/team" },
+  { label: "Daily Posts", href: "/posts" },
   { label: "Portfolio", href: "/portfolio" },
   { label: "Case Studies", href: "/case-studies" },
   { label: "Life at ZDC", href: "/life-at-company" },

@@ -12,7 +12,7 @@ import {
 } from "@/data/team";
 import { getTeamMembers } from "@/service/team.service";
 import { getApiErrorMessage, unwrapApiResponse } from "@/lib/public-api";
-import { Users, Code, Award, Target, Sparkles, ShieldCheck } from "lucide-react";
+import { Users, Code, Award, Target, Sparkles, ShieldCheck, Headphones } from "lucide-react";
 import Link from "next/link";
 
 const CATEGORY_DESCRIPTIONS: Record<string, string> = {
@@ -21,6 +21,8 @@ const CATEGORY_DESCRIPTIONS: Record<string, string> = {
     "Meet our executive founders and leaders directing strategic innovation, engineering standards, and company-wide growth.",
   Developers:
     "Our core software engineering team specializing in full-stack, backend microservices, modern frontend frameworks, mobile apps, and DevOps.",
+  "Technical Support":
+    "Dedicated technical support executives and client service specialists providing rapid troubleshooting, multi-platform assistance, and round-the-clock digital reliability.",
   "Sales & Marketing":
     "Enterprise account directors, digital marketing specialists, and business growth strategists scaling our global footprint.",
   "UI/UX Design":
@@ -33,6 +35,7 @@ const CATEGORY_ICONS: Record<string, typeof Users> = {
   All: Users,
   "Leadership & Founders": Award,
   Developers: Code,
+  "Technical Support": Headphones,
   "Sales & Marketing": Target,
   "UI/UX Design": Sparkles,
   "Quality Assurance": ShieldCheck,

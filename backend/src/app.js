@@ -25,6 +25,8 @@ app.use("/api/v1/team", require("./routes/team.routes"));
 app.use("/api/v1/site-content", require("./routes/siteContent.routes"));
 
 // New Dynamic Routes
+app.use("/api/v1/posts", require("./routes/post.routes"));
+app.use("/api/v1/post", require("./routes/post.routes"));
 app.use("/api/v1/blogs", require("./routes/blog.routes"));
 app.use("/api/v1/blog", require("./routes/blog.routes"));
 app.use("/api/v1/case-studies", require("./routes/caseStudy.routes"));

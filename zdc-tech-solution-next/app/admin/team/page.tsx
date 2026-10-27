@@ -257,6 +257,7 @@ export default function TeamPage() {
               <datalist id="category-suggestions">
                 <option value="Leadership & Founders" />
                 <option value="Developers" />
+                <option value="Technical Support" />
                 <option value="Sales & Marketing" />
                 <option value="UI/UX Design" />
                 <option value="Quality Assurance" />
