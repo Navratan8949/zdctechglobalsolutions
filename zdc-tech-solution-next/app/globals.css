@@ -114,3 +114,131 @@
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(212 100% 50% / 0.5);
 }
+
+/* ========================================================
+   ADMIN THEME ENGINE (Light Mode & Dark Mode Support)
+   ======================================================== */
+
+.admin-theme-dark {
+  color-scheme: dark;
+}
+
+.admin-theme-light {
+  color-scheme: light;
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+/* Headings and labels in admin light theme */
+.admin-theme-light h1,
+.admin-theme-light h2,
+.admin-theme-light h3,
+.admin-theme-light h4,
+.admin-theme-light label {
+  color: #0f172a !important;
+}
+
+/* Convert static text-white elements to dark text, EXCEPT primary buttons/badges/gradient icons */
+.admin-theme-light .text-white:not(
+  button.bg-primary *,
+  button.bg-blue-600 *,
+  .bg-primary,
+  .bg-primary *,
+  .bg-blue-600,
+  .bg-blue-600 *,
+  .bg-destructive,
+  .bg-destructive *,
+  .badge-white,
+  .keep-white
+) {
+  color: #0f172a !important;
+}
+
+/* Borders in admin light mode */
+.admin-theme-light .border-white\/10,
+.admin-theme-light .border-white\/15,
+.admin-theme-light .border-white\/20,
+.admin-theme-light .border-white\/\[0\.08\],
+.admin-theme-light .border-white\/\[0\.06\] {
+  border-color: #e2e8f0 !important;
+}
+
+/* Card panels, forms, and asides in admin light mode */
+.admin-theme-light .bg-card\/70,
+.admin-theme-light .bg-card {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+}
+
+.admin-theme-light aside {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+}
+
+.admin-theme-light form {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+}
+
+/* Background chips and secondary buttons in admin light mode */
+.admin-theme-light .bg-white\/\[0\.02\],
+.admin-theme-light .bg-white\/\[0\.04\] {
+  background-color: #f8fafc !important;
+  color: #1e293b !important;
+  border-color: #e2e8f0 !important;
+}
+
+.admin-theme-light .hover\:bg-white\/\[0\.06\]:hover,
+.admin-theme-light .hover\:bg-white\/\[0\.08\]:hover {
+  background-color: #f1f5f9 !important;
+}
+
+/* Inputs, textareas, and selects */
+.admin-theme-light input:not([type="checkbox"]):not([type="radio"]),
+.admin-theme-light textarea,
+.admin-theme-light select {
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  color: #0f172a !important;
+}
+
+.admin-theme-light input::placeholder,
+.admin-theme-light textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+.admin-theme-light select option {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+}
+
+/* Muted text in light mode */
+.admin-theme-light .text-muted-foreground {
+  color: #64748b !important;
+}
+
+/* Outline buttons */
+.admin-theme-light button.border-white\/15 {
+  border-color: #cbd5e1 !important;
+  background-color: #ffffff !important;
+  color: #334155 !important;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.admin-theme-light button.border-white\/15:hover {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+/* Admin Scrollbars in light theme */
+.admin-theme-light ::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+.admin-theme-light ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+}
+.admin-theme-light ::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+

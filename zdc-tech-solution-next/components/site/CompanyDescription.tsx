@@ -38,8 +38,12 @@ export function CompanyDescription() {
               ))}
             </ul>
 
+            <p className="text-[15px] leading-relaxed text-slate-500">
+              Our engineering team brings together experienced full-stack developers, cloud architects, and UI/UX designers to build high-availability software platforms, high-ranking search-optimized websites, and scalable mobile apps that grow with your business.
+            </p>
+
             <p className="text-[14px] leading-relaxed text-slate-400 italic border-l-2 border-gray-100 pl-4">
-              Recognized as the Best Web Design Agency in Indore, we also deliver innovative technology solutions as a leading Software Development Company.
+              Recognized as the Best IT Company in Jaipur, Rajasthan & India, we deliver innovative technology solutions as a leading Software Development Company.
             </p>
 
             <div className="pt-2">

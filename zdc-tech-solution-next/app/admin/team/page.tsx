@@ -29,6 +29,7 @@ interface TeamItem {
   _id: string;
   name: string;
   position: string;
+  category?: string;
   description: string;
   image: { public_id: string; url: string };
   socials: { linkedin: string; twitter: string; github: string };
@@ -42,6 +43,7 @@ type ApiResponse<T> = { data?: T; message?: string };
 const emptyDraft: TeamDraft = {
   name: "",
   position: "",
+  category: "",
   description: "",
   image: { public_id: "", url: "" },
   socials: { linkedin: "", twitter: "", github: "" },
@@ -73,6 +75,7 @@ function toDraft(item: TeamItem): TeamDraft {
   return {
     name: item.name || "",
     position: item.position || "",
+    category: item.category || "",
     description: item.description || "",
     image: {
       public_id: item.image?.public_id || "",
@@ -218,7 +221,7 @@ export default function TeamPage() {
             selectedId={selectedId}
             onSelect={(id) => void select(id)}
             label={(item) => item.name || "Unnamed member"}
-            detail={(item) => item.position || "No position"}
+            detail={(item) => `${item.category ? item.category + " • " : ""}${item.position || "No position"}`}
             onNew={startNew}
             empty="No team members exist yet."
           />
@@ -244,6 +247,20 @@ export default function TeamPage() {
                 onChange={(value) => update("position", value)}
                 required
               />
+              <Field
+                label="Category / Department"
+                value={draft.category || ""}
+                onChange={(value) => update("category", value)}
+                placeholder="e.g. Developers, Leadership, Sales, Design..."
+                list="category-suggestions"
+              />
+              <datalist id="category-suggestions">
+                <option value="Leadership & Founders" />
+                <option value="Developers" />
+                <option value="Sales & Marketing" />
+                <option value="UI/UX Design" />
+                <option value="Quality Assurance" />
+              </datalist>
               <div className="md:col-span-2">
                 <label className="mb-2 block text-sm font-medium text-white">Description</label>
                 <RichTextEditor
@@ -438,11 +455,15 @@ function Field({
   value,
   onChange,
   required = false,
+  placeholder,
+  list,
 }: {
   label: string;
   value: string;
   onChange: (value: string) => void;
   required?: boolean;
+  placeholder?: string;
+  list?: string;
 }) {
   const id = label.toLowerCase().replaceAll(/[^a-z0-9]+/g, "-");
   return (
@@ -455,6 +476,8 @@ function Field({
         value={value}
         onChange={(event) => onChange(event.target.value)}
         required={required}
+        placeholder={placeholder}
+        list={list}
       />
     </div>
   );

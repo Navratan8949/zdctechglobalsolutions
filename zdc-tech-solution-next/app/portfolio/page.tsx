@@ -15,9 +15,9 @@ import { getPortfolios } from "@/service/portfolio.service";
 import { getApiErrorMessage, unwrapApiResponse } from "@/lib/public-api";
 
 export default function PortfolioPage() {
-  const [items, setItems] = useState<PortfolioItem[]>([]);
+  const [items, setItems] = useState<PortfolioItem[]>(fallbackPortfolio);
   const [activeCategory, setActiveCategory] = useState<string>("All");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -26,11 +26,13 @@ export default function PortfolioPage() {
     getPortfolios()
       .then((response) => {
         if (!active) return;
-        setItems(unwrapApiResponse<PortfolioItem[]>(response) || []);
+        const live = unwrapApiResponse<PortfolioItem[]>(response);
+        if (Array.isArray(live) && live.length > 0) {
+          setItems(live);
+        }
       })
       .catch((requestError) => {
         if (!active) return;
-        setItems(fallbackPortfolio);
         setError(getApiErrorMessage(requestError));
       })
       .finally(() => {
@@ -65,11 +67,6 @@ export default function PortfolioPage() {
 
       <section className="py-16 lg:py-20 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          {loading && (
-            <p className="mb-8 text-center text-sm text-slate-500">
-              Loading portfolio...
-            </p>
-          )}
           {error && (
             <p className="mb-8 text-center text-sm text-red-500">{error}</p>
           )}

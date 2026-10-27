@@ -12,6 +12,11 @@ const teamSchema = new mongoose.Schema(
             required: true,
             trim: true,
         },
+        category: {
+            type: String,
+            trim: true,
+            default: "Developers",
+        },
         description: {
             type: String,
             trim: true,

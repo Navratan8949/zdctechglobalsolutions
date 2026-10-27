@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Linkedin, Twitter, Github } from 'lucide-react';
-import type { TeamMember } from '@/data/team';
+import { normalizeCategory, type TeamMember } from '@/data/team';
 
 interface TeamCardProps {
   member: TeamMember;
@@ -10,21 +10,32 @@ interface TeamCardProps {
 }
 
 export function TeamCard({ member, index = 0 }: TeamCardProps) {
+  const displayCategory = normalizeCategory(member.category, member.position);
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 25 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.4, delay: index * 0.08 }}
-      className="group overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-all hover:border-primary/40"
+      transition={{ duration: 0.35, delay: Math.min(index * 0.05, 0.3) }}
+      className="group flex flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:shadow-xl hover:border-[#0ea5e9]/40 hover:-translate-y-1"
     >
-      <div className="relative aspect-square overflow-hidden">
+      <div className="relative aspect-square overflow-hidden bg-slate-100">
         <img
           src={member.image}
           alt={member.name}
-          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0b1b3d]/80 via-[#0b1b3d]/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+        {/* Category Pill Tag on Image */}
+        <div className="absolute top-3 left-3 z-10">
+          <span className="inline-flex items-center rounded-full bg-slate-950/70 backdrop-blur-md px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-white border border-white/20 shadow-sm">
+            {displayCategory}
+          </span>
+        </div>
+
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0b1b3d]/85 via-[#0b1b3d]/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
         <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100 z-10">
           {member.socials?.linkedin && member.socials.linkedin !== "#" ? (
             <a
@@ -76,11 +87,11 @@ export function TeamCard({ member, index = 0 }: TeamCardProps) {
           ) : null}
         </div>
       </div>
-      <div className="p-6 bg-white border-t border-gray-100">
-        <h3 className="text-[18px] font-bold text-[#0b1b3d]">{member.name}</h3>
-        <p className="text-[13px] font-bold uppercase tracking-wider text-[#0ea5e9] mt-1">{member.position}</p>
+      <div className="flex flex-1 flex-col p-6 bg-white border-t border-gray-100">
+        <h3 className="text-[18px] font-bold text-[#0b1b3d] leading-snug">{member.name}</h3>
+        <p className="text-[12px] font-bold uppercase tracking-wider text-[#0ea5e9] mt-1.5">{member.position}</p>
         <div 
-          className="mt-3 text-[14px] leading-relaxed text-slate-500"
+          className="mt-3 text-[14px] leading-relaxed text-slate-500 line-clamp-4 flex-1"
           dangerouslySetInnerHTML={{ __html: member.description }}
         />
       </div>

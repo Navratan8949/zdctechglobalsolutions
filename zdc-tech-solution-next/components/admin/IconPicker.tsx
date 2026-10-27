@@ -3,7 +3,6 @@
 import { useState } from "react";
 import * as Icons from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import {
   Popover,
   PopoverContent,
@@ -54,17 +53,17 @@ export function IconPicker({
           variant="outline"
           role="combobox"
           aria-expanded={isOpen}
-          className="w-full justify-start border-white/10 bg-white/[0.04] hover:bg-white/[0.08] text-white font-normal"
+          className="w-full justify-start border-slate-300 bg-white hover:bg-slate-50 text-slate-800 dark:border-white/10 dark:bg-white/[0.04] dark:hover:bg-white/[0.08] dark:text-white font-normal shadow-xs"
         >
           <SelectedIcon className="mr-2 h-4 w-4" />
           {value || "Select an icon..."}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[300px] p-2 bg-slate-900 border-white/10 text-white" align="start">
-        <div className="flex items-center border-b border-white/10 pb-2 mb-2 px-1">
+      <PopoverContent className="w-[300px] p-2 bg-white border-slate-200 text-slate-900 dark:bg-slate-900 dark:border-white/10 dark:text-white shadow-xl" align="start">
+        <div className="flex items-center border-b border-slate-200 dark:border-white/10 pb-2 mb-2 px-1">
           <Search className="mr-2 h-4 w-4 opacity-50" />
           <input
-            className="flex-1 bg-transparent outline-none text-sm placeholder:text-white/50"
+            className="flex-1 bg-transparent outline-none text-sm placeholder:text-slate-400 dark:placeholder:text-white/50 text-slate-900 dark:text-white"
             placeholder="Search icons..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -84,8 +83,10 @@ export function IconPicker({
                     onChange(iconName);
                     setIsOpen(false);
                   }}
-                  className={`flex h-10 w-10 items-center justify-center rounded-md border hover:bg-white/10 transition-colors ${
-                    value === iconName ? "border-primary bg-primary/20" : "border-transparent"
+                  className={`flex h-10 w-10 items-center justify-center rounded-md border transition-colors ${
+                    value === iconName
+                      ? "border-primary bg-primary/20 text-primary"
+                      : "border-transparent text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-white/10"
                   }`}
                   title={iconName}
                 >
@@ -95,7 +96,7 @@ export function IconPicker({
             })}
           </div>
           {displayIcons.length === 0 && (
-            <p className="text-center text-sm text-white/50 py-4">No icons found.</p>
+            <p className="text-center text-sm text-slate-400 dark:text-white/50 py-4">No icons found.</p>
           )}
         </ScrollArea>
       </PopoverContent>

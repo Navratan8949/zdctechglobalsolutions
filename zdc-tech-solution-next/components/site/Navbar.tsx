@@ -212,6 +212,7 @@ export function Navbar() {
               width={40}
               height={40}
               className="h-10 w-auto object-contain transition-transform group-hover:scale-105"
+              style={{ width: "auto", height: "auto" }}
             />
             <Image
               src={companyInfo?.logoText?.url || "/logo/zdc.png"}
@@ -219,6 +220,7 @@ export function Navbar() {
               width={180}
               height={46}
               className="h-7 sm:h-9 w-auto object-contain brightness-0"
+              style={{ width: "auto", height: "auto" }}
             />
           </Link>
 
@@ -398,6 +400,7 @@ export function Navbar() {
                     width={32}
                     height={32}
                     className="h-8 w-auto object-contain"
+                    style={{ width: "auto", height: "auto" }}
                   />
                   <Image
                     src={companyInfo?.logoText?.url || "/logo/zdc.png"}
@@ -405,6 +408,7 @@ export function Navbar() {
                     width={130}
                     height={30}
                     className="h-6 w-auto object-contain brightness-0"
+                    style={{ width: "auto", height: "auto" }}
                   />
                 </Link>
                 <button

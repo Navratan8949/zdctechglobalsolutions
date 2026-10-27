@@ -9,8 +9,8 @@ import { getBlogs } from "@/service/blog.service";
 import { getApiErrorMessage, unwrapApiResponse } from "@/lib/public-api";
 
 export default function BlogPage() {
-  const [posts, setPosts] = useState<BlogPost[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [posts, setPosts] = useState<BlogPost[]>(fallbackPosts);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -19,11 +19,13 @@ export default function BlogPage() {
     getBlogs()
       .then((response) => {
         if (!active) return;
-        setPosts(unwrapApiResponse<BlogPost[]>(response) || []);
+        const live = unwrapApiResponse<BlogPost[]>(response);
+        if (Array.isArray(live) && live.length > 0) {
+          setPosts(live);
+        }
       })
       .catch((requestError) => {
         if (!active) return;
-        setPosts(fallbackPosts);
         setError(getApiErrorMessage(requestError));
       })
       .finally(() => {
@@ -50,11 +52,6 @@ export default function BlogPage() {
 
       <section className="py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          {loading && (
-            <p className="mb-8 text-center text-sm text-muted-foreground">
-              Loading blog posts...
-            </p>
-          )}
           {error && (
             <p className="mb-8 text-center text-sm text-amber-300">{error}</p>
           )}

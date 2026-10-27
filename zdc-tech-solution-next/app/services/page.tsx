@@ -9,8 +9,8 @@ import { getServices } from "@/service/service.service";
 import { getApiErrorMessage, unwrapApiResponse } from "@/lib/public-api";
 
 export default function ServicesPage() {
-  const [items, setItems] = useState<Service[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [items, setItems] = useState<Service[]>(fallbackServices);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -19,11 +19,13 @@ export default function ServicesPage() {
     getServices()
       .then((response) => {
         if (!active) return;
-        setItems(unwrapApiResponse<Service[]>(response) || []);
+        const live = unwrapApiResponse<Service[]>(response);
+        if (Array.isArray(live) && live.length > 0) {
+          setItems(live);
+        }
       })
       .catch((requestError) => {
         if (!active) return;
-        setItems(fallbackServices);
         setError(getApiErrorMessage(requestError));
       })
       .finally(() => {
@@ -45,11 +47,6 @@ export default function ServicesPage() {
 
       <section className="py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          {loading && (
-            <p className="mb-8 text-center text-sm text-muted-foreground">
-              Loading services...
-            </p>
-          )}
           {error && (
             <p className="mb-8 text-center text-sm text-amber-300">{error}</p>
           )}

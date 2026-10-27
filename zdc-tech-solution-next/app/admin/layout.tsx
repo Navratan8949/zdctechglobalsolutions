@@ -1,10 +1,11 @@
 import type { ReactNode } from "react";
 import { AdminAuthProvider } from "@/components/admin/AdminAuthProvider";
+import { AdminThemeProvider } from "@/components/admin/AdminThemeProvider";
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="dark" style={{ colorScheme: "dark" }}>
+    <AdminThemeProvider>
       <AdminAuthProvider>{children}</AdminAuthProvider>
-    </div>
+    </AdminThemeProvider>
   );
 }

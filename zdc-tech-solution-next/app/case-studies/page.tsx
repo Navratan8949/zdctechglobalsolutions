@@ -12,8 +12,8 @@ import { getCaseStudies } from "@/service/caseStudy.service";
 import { getApiErrorMessage, unwrapApiResponse } from "@/lib/public-api";
 
 export default function CaseStudiesPage() {
-  const [items, setItems] = useState<CaseStudy[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [items, setItems] = useState<CaseStudy[]>(fallbackCaseStudies);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -22,11 +22,13 @@ export default function CaseStudiesPage() {
     getCaseStudies()
       .then((response) => {
         if (!active) return;
-        setItems(unwrapApiResponse<CaseStudy[]>(response) || []);
+        const live = unwrapApiResponse<CaseStudy[]>(response);
+        if (Array.isArray(live) && live.length > 0) {
+          setItems(live);
+        }
       })
       .catch((requestError) => {
         if (!active) return;
-        setItems(fallbackCaseStudies);
         setError(getApiErrorMessage(requestError));
       })
       .finally(() => {
@@ -48,11 +50,6 @@ export default function CaseStudiesPage() {
 
       <section className="py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          {loading && (
-            <p className="mb-8 text-center text-sm text-muted-foreground">
-              Loading case studies...
-            </p>
-          )}
           {error && (
             <p className="mb-8 text-center text-sm text-amber-300">{error}</p>
           )}

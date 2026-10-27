@@ -62,10 +62,12 @@ export function ImageUploadField({
 
   return (
     <div className="md:col-span-2">
-      <label className="mb-2 block text-sm font-medium text-white">{label}</label>
+      <label className="mb-2 block text-sm font-medium text-slate-800 dark:text-white">
+        {label}
+      </label>
       
       {url ? (
-        <div className="relative mt-2 flex h-48 items-center justify-center overflow-hidden rounded-lg border border-white/10 bg-white/[0.02]">
+        <div className="relative mt-2 flex h-48 items-center justify-center overflow-hidden rounded-lg border border-slate-200 bg-slate-50 dark:border-white/10 dark:bg-white/[0.02]">
           <img
             src={url}
             alt="Uploaded preview"
@@ -84,17 +86,17 @@ export function ImageUploadField({
           </div>
         </div>
       ) : (
-        <div className="mt-2 flex justify-center rounded-lg border border-dashed border-white/20 px-6 py-10 transition-colors hover:border-white/40 hover:bg-white/[0.02]">
+        <div className="mt-2 flex justify-center rounded-lg border border-dashed border-slate-300 hover:border-blue-500 bg-slate-50/50 hover:bg-blue-50/20 dark:border-white/20 dark:hover:border-white/40 dark:bg-transparent dark:hover:bg-white/[0.02] px-6 py-10 transition-colors">
           <div className="text-center">
             {isUploading ? (
               <Loader2 className="mx-auto h-12 w-12 animate-spin text-primary" />
             ) : (
               <UploadCloud
-                className="mx-auto h-12 w-12 text-white/50"
+                className="mx-auto h-12 w-12 text-slate-400 dark:text-white/50"
                 aria-hidden="true"
               />
             )}
-            <div className="mt-4 flex text-sm leading-6 text-white/70">
+            <div className="mt-4 flex text-sm leading-6 text-slate-600 dark:text-white/70">
               <label
                 htmlFor="file-upload"
                 className="relative cursor-pointer rounded-md bg-transparent font-semibold text-primary focus-within:outline-none focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 hover:text-primary/80"
@@ -113,17 +115,17 @@ export function ImageUploadField({
               </label>
               <p className="pl-1">or drag and drop</p>
             </div>
-            <p className="text-xs leading-5 text-white/50">PNG, JPG, WEBP up to 10MB</p>
+            <p className="text-xs leading-5 text-slate-400 dark:text-white/50">PNG, JPG, WEBP up to 10MB</p>
           </div>
         </div>
       )}
 
       {error && (
-        <p className="mt-2 text-sm text-red-400">{error}</p>
+        <p className="mt-2 text-sm text-red-500">{error}</p>
       )}
 
       {url && (
-        <p className="mt-2 text-xs text-white/50 break-all">
+        <p className="mt-2 text-xs text-slate-500 dark:text-white/50 break-all">
           <ImageIcon className="inline-block h-3 w-3 mr-1" />
           {publicId}
         </p>

@@ -8,40 +8,54 @@ import { ArrowRight, Globe } from "lucide-react";
 
 import InteractiveNeuralVortex from "@/components/ui/interactive-neural-vortex-background";
 
+const DEFAULT_WORDS = [
+  "ZDC TECH",
+  "DIGITAL GROWTH",
+  "SMART SOLUTIONS",
+  "NEW HORIZONS",
+];
+
 // Separate component to prevent HomeHero from re-rendering every 40ms during typing
-const TypewriterEffect = ({ words = ["ZDC TECH", "DIGITAL GROWTH", "SMART SOLUTIONS", "NEW HORIZONS"] }: { words?: string[] }) => {
-  const [text, setText] = useState("");
+const TypewriterEffect = ({
+  words = DEFAULT_WORDS,
+}: {
+  words?: string[];
+}) => {
+  const wordList = words && words.length > 0 ? words : DEFAULT_WORDS;
+  const [text, setText] = useState(wordList[0]);
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
-  const [typingSpeed, setTypingSpeed] = useState(100);
+  const [typingSpeed, setTypingSpeed] = useState(2000); // 2s initial display of first word
 
   useEffect(() => {
+    const i = loopNum % wordList.length;
+    const fullText = wordList[i];
+
     const handleTyping = () => {
-      const i = loopNum % words.length;
-      const fullText = words[i];
-
-      setText(
-        isDeleting
-          ? fullText.substring(0, text.length - 1)
-          : fullText.substring(0, text.length + 1),
-      );
-
-      // Speed is faster when deleting
-      setTypingSpeed(isDeleting ? 40 : 100);
-
-      if (!isDeleting && text === fullText) {
-        // Pause at the end of the word before starting to delete
-        setTimeout(() => setIsDeleting(true), 1500);
-      } else if (isDeleting && text === "") {
-        // Move to the next word
-        setIsDeleting(false);
-        setLoopNum(loopNum + 1);
+      if (!isDeleting) {
+        if (text === fullText) {
+          // Pause at end of word before deleting
+          setIsDeleting(true);
+          setTypingSpeed(40);
+        } else {
+          setText(fullText.substring(0, text.length + 1));
+          setTypingSpeed(text.length + 1 === fullText.length ? 2000 : 90);
+        }
+      } else {
+        if (text === "") {
+          setIsDeleting(false);
+          setLoopNum((prev) => prev + 1);
+          setTypingSpeed(120);
+        } else {
+          setText(fullText.substring(0, text.length - 1));
+          setTypingSpeed(40);
+        }
       }
     };
 
     const timer = setTimeout(handleTyping, typingSpeed);
     return () => clearTimeout(timer);
-  }, [text, isDeleting, loopNum, typingSpeed]);
+  }, [text, isDeleting, loopNum, typingSpeed, wordList]);
 
   return (
     <span className="relative ml-3 inline-flex items-center min-w-[280px] whitespace-nowrap sm:min-w-[400px]">
@@ -64,6 +78,10 @@ export function HomeHero({
   words?: string[];
   description?: string;
 }) {
+  const displayHeading = heading?.trim() || "WELCOME TO THE";
+  const displayDescription =
+    description?.trim() ||
+    "We design and build world-class websites, mobile apps, and custom software that moves your business forward — fast, secure, and highly scalable.";
   return (
     <InteractiveNeuralVortex className="flex items-center justify-center text-center">
       {/* ── Text content ── */}
@@ -84,7 +102,7 @@ export function HomeHero({
           transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
           className="font-display text-5xl font-bold leading-[1.1] tracking-tight text-white sm:text-6xl lg:text-[90px] flex flex-col items-center"
         >
-          {heading}
+          {displayHeading}
           <span className="relative mt-2 flex flex-wrap sm:flex-nowrap items-center justify-center whitespace-nowrap">
             <TypewriterEffect words={words} />
           </span>
@@ -96,7 +114,7 @@ export function HomeHero({
           transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
           className="mx-auto mt-8 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg lg:text-xl"
         >
-          {description}
+          {displayDescription}
         </motion.p>
 
         <motion.div

@@ -21,12 +21,13 @@ import {
   Users,
   X,
   CheckCircle,
-  Shield,
 } from "lucide-react";
 import {
   useAdminAuth,
   type AdminUser,
 } from "@/components/admin/AdminAuthProvider";
+import { useAdminTheme } from "@/components/admin/AdminThemeProvider";
+import { AdminThemeToggle } from "@/components/admin/AdminThemeToggle";
 
 interface AdminNavItem {
   label: string;
@@ -83,9 +84,11 @@ function getInitials(user: AdminUser | null) {
 function NavigationLink({
   item,
   onNavigate,
+  isDark,
 }: {
   item: AdminNavItem;
   onNavigate: () => void;
+  isDark: boolean;
 }) {
   const pathname = usePathname();
   const isActive =
@@ -100,13 +103,23 @@ function NavigationLink({
       onClick={onNavigate}
       className={`group flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200 ${
         isActive
-          ? "bg-blue-600 text-white shadow-lg shadow-blue-600/30"
-          : "text-slate-400 hover:bg-slate-700/60 hover:text-white"
+          ? "bg-blue-600 text-white shadow-md shadow-blue-600/30"
+          : isDark
+            ? "text-slate-400 hover:bg-slate-800/60 hover:text-white"
+            : "text-slate-600 hover:bg-slate-100 hover:text-slate-950"
       }`}
     >
-      <Icon className="h-4 w-4 shrink-0" />
+      <Icon
+        className={`h-4 w-4 shrink-0 transition-colors ${
+          isActive
+            ? "text-white"
+            : isDark
+              ? "text-slate-400 group-hover:text-white"
+              : "text-slate-500 group-hover:text-slate-900"
+        }`}
+      />
       <span>{item.label}</span>
-      {isActive && <ChevronRight className="ml-auto h-3.5 w-3.5 opacity-70" />}
+      {isActive && <ChevronRight className="ml-auto h-3.5 w-3.5 opacity-75" />}
     </Link>
   );
 }
@@ -120,15 +133,17 @@ function Sidebar({
   onClose: () => void;
   onLogout: () => void;
 }) {
+  const { isDark } = useAdminTheme();
+
   return (
     <aside
-      style={{
-        backgroundColor: "#0f1729",
-        borderRight: "1px solid rgba(255,255,255,0.06)",
-      }}
-      className="flex h-full min-h-0 w-64 shrink-0 flex-col px-3 py-4"
+      className={`flex h-full min-h-0 w-64 shrink-0 flex-col px-3 py-4 transition-colors duration-200 ${
+        isDark
+          ? "bg-[#0f1729] border-r border-white/[0.08]"
+          : "bg-white border-r border-slate-200 shadow-sm"
+      }`}
     >
-      {/* Logo */}
+      {/* Logo & Close Button */}
       <div className="flex items-center justify-between px-2 mb-6">
         <Link
           href="/admin"
@@ -137,21 +152,29 @@ function Sidebar({
         >
           <span
             style={{ background: "linear-gradient(135deg, #2563eb, #7c3aed)" }}
-            className="flex h-8 w-8 items-center justify-center rounded-lg text-sm font-bold text-white shadow-lg"
+            className="flex h-8 w-8 items-center justify-center rounded-lg text-sm font-bold text-white shadow-md"
           >
             Z
           </span>
           <div>
-            <p className="text-sm font-bold text-white tracking-wide">
+            <p
+              className={`text-sm font-bold tracking-wide ${
+                isDark ? "text-white" : "text-slate-900"
+              }`}
+            >
               ZDC Admin
             </p>
-            <p className="text-[10px] text-slate-500 uppercase tracking-wider">
+            <p className="text-[10px] text-slate-400 uppercase tracking-wider">
               Control Panel
             </p>
           </div>
         </Link>
         <button
-          className="lg:hidden text-slate-400 hover:text-white"
+          className={`lg:hidden p-1 rounded-md transition-colors ${
+            isDark
+              ? "text-slate-400 hover:text-white hover:bg-slate-800"
+              : "text-slate-500 hover:text-slate-900 hover:bg-slate-100"
+          }`}
           onClick={onClose}
           aria-label="Close navigation"
         >
@@ -159,13 +182,17 @@ function Sidebar({
         </button>
       </div>
 
-      {/* Nav */}
+      {/* Navigation List */}
       <nav
         className="flex-1 overflow-y-auto space-y-5 pr-1"
         aria-label="Admin navigation"
       >
         <div>
-          <p className="px-3 mb-1.5 text-[10px] font-semibold uppercase tracking-widest text-slate-600">
+          <p
+            className={`px-3 mb-1.5 text-[10px] font-bold uppercase tracking-widest ${
+              isDark ? "text-slate-500" : "text-slate-400"
+            }`}
+          >
             Workspace
           </p>
           <div className="space-y-0.5">
@@ -174,12 +201,17 @@ function Sidebar({
                 key={item.href}
                 item={item}
                 onNavigate={onClose}
+                isDark={isDark}
               />
             ))}
           </div>
         </div>
         <div>
-          <p className="px-3 mb-1.5 text-[10px] font-semibold uppercase tracking-widest text-slate-600">
+          <p
+            className={`px-3 mb-1.5 text-[10px] font-bold uppercase tracking-widest ${
+              isDark ? "text-slate-500" : "text-slate-400"
+            }`}
+          >
             Inbox
           </p>
           <div className="space-y-0.5">
@@ -188,38 +220,52 @@ function Sidebar({
                 key={item.href}
                 item={item}
                 onNavigate={onClose}
+                isDark={isDark}
               />
             ))}
           </div>
         </div>
       </nav>
 
-      {/* User */}
+      {/* User Card & Logout */}
       <div
-        style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
-        className="shrink-0 pt-3 mt-3"
+        className={`shrink-0 pt-3 mt-3 border-t ${
+          isDark ? "border-white/[0.08]" : "border-slate-200"
+        }`}
       >
         <div
-          style={{ backgroundColor: "rgba(255,255,255,0.04)" }}
-          className="flex items-center gap-3 rounded-lg px-3 py-2.5"
+          className={`flex items-center gap-3 rounded-lg px-3 py-2.5 transition-colors ${
+            isDark
+              ? "bg-white/[0.04] text-white"
+              : "bg-slate-50 text-slate-900 border border-slate-100"
+          }`}
         >
           <div
             style={{ background: "linear-gradient(135deg, #2563eb, #7c3aed)" }}
-            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white"
+            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white shadow-xs"
           >
             {getInitials(user)}
           </div>
           <div className="min-w-0 flex-1">
-            <p className="truncate text-xs font-semibold text-white">
+            <p
+              className={`truncate text-xs font-semibold ${
+                isDark ? "text-white" : "text-slate-900"
+              }`}
+            >
               {user?.fullName || "Administrator"}
             </p>
-            <p className="truncate text-[10px] text-slate-500">{user?.email}</p>
+            <p className="truncate text-[10px] text-slate-400">{user?.email}</p>
           </div>
           <button
             type="button"
             onClick={onLogout}
-            className="text-slate-500 hover:text-red-400 transition-colors"
+            className={`transition-colors p-1 rounded-md ${
+              isDark
+                ? "text-slate-400 hover:text-red-400 hover:bg-slate-800/80"
+                : "text-slate-500 hover:text-red-500 hover:bg-red-50"
+            }`}
             aria-label="Log out"
+            title="Log out"
           >
             <LogOut className="h-4 w-4" />
           </button>
@@ -238,6 +284,7 @@ export function AdminShell({
 }) {
   const router = useRouter();
   const { logout } = useAdminAuth();
+  const { isDark } = useAdminTheme();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const handleLogout = async () => {
@@ -250,7 +297,9 @@ export function AdminShell({
 
   return (
     <div
-      style={{ backgroundColor: "#080f1e", minHeight: "100vh", color: "white" }}
+      className={`min-h-screen transition-colors duration-200 ${
+        isDark ? "bg-[#080f1e] text-slate-100" : "bg-[#f8fafc] text-slate-900"
+      }`}
     >
       {/* Desktop Sidebar */}
       <div className="fixed inset-y-0 left-0 z-40 hidden lg:flex">
@@ -265,7 +314,7 @@ export function AdminShell({
       {isSidebarOpen && (
         <>
           <button
-            className="fixed inset-0 z-40 bg-black/60 lg:hidden"
+            className="fixed inset-0 z-40 bg-black/60 backdrop-blur-xs lg:hidden"
             onClick={() => setIsSidebarOpen(false)}
             aria-label="Close navigation"
           />
@@ -279,51 +328,70 @@ export function AdminShell({
         </>
       )}
 
-      {/* Main content */}
+      {/* Main content wrapper */}
       <div className="lg:pl-64">
-        {/* Top Bar */}
+        {/* Top Header Bar */}
         <header
-          style={{
-            backgroundColor: "rgba(8,15,30,0.95)",
-            borderBottom: "1px solid rgba(255,255,255,0.06)",
-            backdropFilter: "blur(12px)",
-          }}
-          className="sticky top-0 z-30 flex h-14 items-center justify-between px-4 sm:px-6"
+          className={`sticky top-0 z-30 flex h-14 items-center justify-between px-4 sm:px-6 backdrop-blur-md transition-colors duration-200 border-b ${
+            isDark
+              ? "bg-[#080f1e]/90 border-white/[0.08]"
+              : "bg-white/90 border-slate-200 shadow-xs"
+          }`}
         >
           <div className="flex items-center gap-3">
             <button
-              className="lg:hidden text-slate-400 hover:text-white"
+              className={`lg:hidden p-1.5 rounded-lg transition-colors ${
+                isDark
+                  ? "text-slate-400 hover:text-white hover:bg-slate-800"
+                  : "text-slate-600 hover:text-slate-950 hover:bg-slate-100"
+              }`}
               onClick={() => setIsSidebarOpen(true)}
               aria-label="Open navigation"
             >
               <Menu className="h-5 w-5" />
             </button>
             <div>
-              <p className="text-sm font-semibold text-white">
+              <p
+                className={`text-sm font-semibold ${
+                  isDark ? "text-white" : "text-slate-900"
+                }`}
+              >
                 Welcome, {user?.fullName?.split(" ")[0] || "Admin"} 👋
               </p>
-              <p className="hidden text-[11px] text-slate-500 sm:block">
-                ZDC Tech Global Solutions — Admin Panel
+              <p
+                className={`hidden text-[11px] sm:block ${
+                  isDark ? "text-slate-400" : "text-slate-500"
+                }`}
+              >
+                ZDC Tech Global Solutions — Control Panel
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-3">
-            <span className="hidden sm:flex items-center gap-1.5 text-[11px] text-emerald-400">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              Session active
+
+          {/* Top Actions: Theme Switcher + Status + User */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* Theme Toggle Button */}
+            <AdminThemeToggle />
+
+            {/* Session Indicator */}
+            <span className="hidden sm:flex items-center gap-1.5 text-[11px] font-medium text-emerald-500">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              Active
             </span>
+
+            {/* Mobile Avatar */}
             <div
               style={{
                 background: "linear-gradient(135deg, #2563eb, #7c3aed)",
               }}
-              className="flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold text-white lg:hidden"
+              className="flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold text-white lg:hidden shadow-xs"
             >
               {getInitials(user)}
             </div>
           </div>
         </header>
 
-        {/* Page Content */}
+        {/* Page Content Container */}
         <main className="px-4 py-6 sm:px-6 sm:py-8">
           <div className="mx-auto max-w-7xl">{children}</div>
         </main>

@@ -74,7 +74,7 @@ function FooterLinkList({
   return (
     <ul className="mt-5 space-y-3">
       {links.map((link) => (
-        <li key={link.href}>
+        <li key={`${link.label}-${link.href}`}>
           <Link
             href={link.href}
             className="group flex items-center text-[13px] text-slate-300 transition-colors duration-300 hover:text-white"
@@ -195,7 +195,8 @@ export function Footer() {
                   alt="ZDC Tech Icon"
                   width={28}
                   height={28}
-                  className="object-contain"
+                  className="h-7 w-auto object-contain"
+                  style={{ width: "auto", height: "auto" }}
                 />
               </div>
               <Image
@@ -204,6 +205,7 @@ export function Footer() {
                 width={140}
                 height={34}
                 className="h-8 w-auto object-contain brightness-0 invert"
+                style={{ width: "auto", height: "auto" }}
               />
             </Link>
 
