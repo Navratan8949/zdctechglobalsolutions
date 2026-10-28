@@ -8,6 +8,7 @@ import {
   Pin,
 } from "lucide-react";
 import type { Post } from "@/data/posts";
+import { resolveImageUrl } from "@/lib/utils";
 
 interface PostCardProps {
   post: Post;
@@ -26,7 +27,7 @@ export function PostCard({ post, index = 0, featured = false }: PostCardProps) {
   );
 
   const postImageUrl =
-    post.image?.url ||
+    resolveImageUrl(post.image) ||
     "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80";
 
   return (

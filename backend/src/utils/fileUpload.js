@@ -26,15 +26,24 @@ const uploadLocalFile = async (localFilePath) => {
     const uniqueFilename = `${Date.now()}-${crypto.randomBytes(6).toString("hex")}${ext}`;
     const targetPath = path.join(UPLOAD_DIR, uniqueFilename);
 
-    // Move the file
-    fs.renameSync(localFilePath, targetPath);
+    // Move the file safely
+    try {
+      fs.copyFileSync(localFilePath, targetPath);
+      try {
+        fs.unlinkSync(localFilePath);
+      } catch (unlinkErr) {
+        // ignore unlink error
+      }
+    } catch (copyErr) {
+      fs.renameSync(localFilePath, targetPath);
+    }
 
-    // Define the public URL (this assumes the backend is serving the /public folder)
-    // Ensure PORT or BACKEND URL matches your production setup if needed.
-    // For standard MERN setups where frontend prefixes the API URL, relative paths often work better,
-    // but to match Cloudinary exactly, we provide an absolute URL or just the path.
-    const baseUrl =
-      process.env.API_URL || `http://localhost:${process.env.PORT || 5000}`;
+    // Define the public URL (backend serves the /public folder)
+    let baseUrl =
+      process.env.API_URL || `http://localhost:${process.env.PORT || 8002}`;
+    if (baseUrl.includes("localhost:8000")) {
+      baseUrl = baseUrl.replace("localhost:8000", `localhost:${process.env.PORT || 8002}`);
+    }
     const fileUrl = `${baseUrl}/public/uploads/${uniqueFilename}`;
 
     console.log("File uploaded successfully to local folder", fileUrl);

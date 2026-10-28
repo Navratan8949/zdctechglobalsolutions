@@ -23,6 +23,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { RichTextEditor } from "@/components/admin/RichTextEditor";
 import { ImageUploadField } from "@/components/admin/ImageUploadField";
+import { resolveImageUrl } from "@/lib/utils";
 import {
   getPosts,
   createPost,
@@ -48,8 +49,12 @@ export interface PostItem {
   content: string;
   excerpt: string;
   category: string;
-  image: PostMedia;
-  author: PostAuthor;
+  image?: PostMedia | string;
+  author?: {
+    name: string;
+    role: string;
+    avatar?: PostMedia | string;
+  };
   tags: string[];
   date: string;
   status: "draft" | "published";
@@ -166,6 +171,27 @@ export default function AdminPostsPage() {
 
   const selectPost = (item: PostItem) => {
     setSelectedId(item._id);
+
+    const normalizedImage: PostMedia =
+      typeof item.image === "string"
+        ? { public_id: "", url: resolveImageUrl(item.image) }
+        : item.image
+        ? {
+            public_id: item.image.public_id || "",
+            url: resolveImageUrl(item.image.url),
+          }
+        : { public_id: "", url: "" };
+
+    const authorAvatar: PostMedia =
+      item.author?.avatar
+        ? typeof item.author.avatar === "string"
+          ? { public_id: "", url: resolveImageUrl(item.author.avatar) }
+          : {
+              public_id: item.author.avatar.public_id || "",
+              url: resolveImageUrl(item.author.avatar.url),
+            }
+        : { public_id: "", url: "" };
+
     setDraft({
       title: item.title,
       slug: item.slug,
@@ -175,11 +201,11 @@ export default function AdminPostsPage() {
       date: item.date ? item.date.slice(0, 10) : new Date().toISOString().slice(0, 10),
       status: item.status || "published",
       pinned: !!item.pinned,
-      image: item.image || { public_id: "", url: "" },
-      author: item.author || {
-        name: "ZDC Tech Team",
-        role: "Admin",
-        avatar: { public_id: "", url: "" },
+      image: normalizedImage,
+      author: {
+        name: item.author?.name || "ZDC Tech Team",
+        role: item.author?.role || "Admin",
+        avatar: authorAvatar,
       },
       tags: Array.isArray(item.tags) ? item.tags.join(", ") : "",
     });
@@ -393,12 +419,25 @@ export default function AdminPostsPage() {
                         </span>
                       </div>
                     </div>
-                    <h3 className="mt-2 text-sm font-bold text-foreground line-clamp-1">
-                      {item.title}
-                    </h3>
-                    <p className="mt-1 text-xs text-muted-foreground line-clamp-2">
-                      {item.excerpt || item.content?.replace(/<[^>]*>/g, "")}
-                    </p>
+                    <div className="mt-2.5 flex items-start gap-3">
+                      {resolveImageUrl(item.image) ? (
+                        <div className="h-12 w-12 shrink-0 overflow-hidden rounded-lg border border-border bg-muted/40 flex items-center justify-center">
+                          <img
+                            src={resolveImageUrl(item.image)}
+                            alt=""
+                            className="h-full w-full object-cover"
+                          />
+                        </div>
+                      ) : null}
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-sm font-bold text-foreground line-clamp-1">
+                          {item.title}
+                        </h3>
+                        <p className="mt-0.5 text-xs text-muted-foreground line-clamp-2">
+                          {item.excerpt || item.content?.replace(/<[^>]*>/g, "")}
+                        </p>
+                      </div>
+                    </div>
                     <div className="mt-2 flex items-center justify-between text-[11px] text-muted-foreground">
                       <span className="flex items-center gap-1">
                         <Calendar className="h-3 w-3" />

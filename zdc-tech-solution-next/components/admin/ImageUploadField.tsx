@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import { UploadCloud, X, Loader2, Image as ImageIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { uploadFile } from "@/service/upload.service";
+import { resolveImageUrl } from "@/lib/utils";
 
 export function ImageUploadField({
   publicId,
@@ -42,7 +43,7 @@ export function ImageUploadField({
     try {
       const response = await uploadFile(file);
       if (response.success && response.data) {
-        onChange(response.data.public_id, response.data.url);
+        onChange(response.data.public_id, resolveImageUrl(response.data.url));
       } else {
         setError(response.message || "Failed to upload image.");
       }
@@ -69,7 +70,7 @@ export function ImageUploadField({
       {url ? (
         <div className="relative mt-2 flex h-48 items-center justify-center overflow-hidden rounded-lg border border-slate-200 bg-slate-50 dark:border-white/10 dark:bg-white/[0.02]">
           <img
-            src={url}
+            src={resolveImageUrl(url)}
             alt="Uploaded preview"
             className="h-full w-full object-contain"
           />

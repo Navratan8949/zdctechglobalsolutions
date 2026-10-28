@@ -13,6 +13,7 @@ import {
 import { samplePosts, type Post } from "@/data/posts";
 import { getPostBySlug, getPosts } from "@/service/post.service";
 import { unwrapApiResponse } from "@/lib/public-api";
+import { resolveImageUrl } from "@/lib/utils";
 import { PostCard } from "@/components/site/PostCard";
 
 export default function PostDetailPage() {
@@ -168,9 +169,17 @@ export default function PostDetailPage() {
 
           {/* Author Bar */}
           <div className="flex items-center gap-3 pt-4 pb-6 border-b border-gray-100">
-            <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-[#0ea5e9] to-blue-700 text-white font-bold text-sm shadow-md">
-              {post.author?.name ? post.author.name[0] : "Z"}
-            </div>
+            {resolveImageUrl(post.author?.avatar) ? (
+              <img
+                src={resolveImageUrl(post.author?.avatar)}
+                alt={post.author?.name || "Author"}
+                className="h-11 w-11 rounded-full object-cover shadow-md"
+              />
+            ) : (
+              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-[#0ea5e9] to-blue-700 text-white font-bold text-sm shadow-md">
+                {post.author?.name ? post.author.name[0] : "Z"}
+              </div>
+            )}
             <div>
               <p className="text-sm font-bold text-[#0b1b3d]">
                 {post.author?.name || "ZDC Tech Team"}
@@ -183,15 +192,19 @@ export default function PostDetailPage() {
         </header>
 
         {/* Featured Cover Image - Using object-contain and max-h so image is 100% visible and uncropped */}
-        {post.image?.url && (
-          <div className="my-8 overflow-hidden rounded-3xl bg-slate-900/5 shadow-sm border border-gray-100 flex items-center justify-center p-2 sm:p-4">
-            <img
-              src={post.image.url}
-              alt={post.title}
-              className="w-full h-auto max-h-[650px] object-contain rounded-2xl"
-            />
-          </div>
-        )}
+        {(() => {
+          const coverUrl = resolveImageUrl(post.image);
+          if (!coverUrl) return null;
+          return (
+            <div className="my-8 overflow-hidden rounded-3xl bg-slate-900/5 shadow-sm border border-gray-100 flex items-center justify-center p-2 sm:p-4">
+              <img
+                src={coverUrl}
+                alt={post.title}
+                className="w-full h-auto max-h-[650px] object-contain rounded-2xl"
+              />
+            </div>
+          );
+        })()}
 
         {/* Excerpt / Lead Description */}
         {post.excerpt && (

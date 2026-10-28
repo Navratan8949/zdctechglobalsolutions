@@ -1,7 +1,8 @@
 const fs = require("fs");
+const path = require("path");
 const multer = require("multer");
 
-const uploadDir = "temp/";
+const uploadDir = path.join(__dirname, "..", "..", "temp");
 
 if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir, { recursive: true });

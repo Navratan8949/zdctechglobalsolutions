@@ -5,17 +5,21 @@ export interface Post {
   content: string;
   excerpt: string;
   category: string;
-  image?: {
-    public_id?: string;
-    url?: string;
-  };
+  image?:
+    | {
+        public_id?: string;
+        url?: string;
+      }
+    | string;
   author?: {
     name: string;
     role: string;
-    avatar?: {
-      public_id?: string;
-      url?: string;
-    };
+    avatar?:
+      | {
+          public_id?: string;
+          url?: string;
+        }
+      | string;
   };
   tags?: string[];
   date: string;
