@@ -19,6 +19,7 @@ import { useSiteContent } from "@/components/providers/SiteContentProvider";
 
 const companyLinks = [
   { label: "About Us", href: "/about" },
+  { label: "Our Products", href: "/products" },
   { label: "Our Team", href: "/team" },
   { label: "Daily Posts", href: "/posts" },
   { label: "Portfolio", href: "/portfolio" },
@@ -240,17 +241,31 @@ export function Footer() {
                   {companyInfo.headOffice}
                 </span>
               </div>
-              {companyInfo.branchOffice && (
-                <div className="flex items-start gap-3 text-[13px] text-slate-300">
-                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#0ea5e9]" />
-                  <span className="leading-relaxed">
-                    <span className="block text-white font-medium mb-1">
-                      Branch Office
+              {(() => {
+                const branches =
+                  Array.isArray(companyInfo.branchOffices) &&
+                  companyInfo.branchOffices.length > 0
+                    ? companyInfo.branchOffices.filter(Boolean)
+                    : companyInfo.branchOffice
+                    ? [companyInfo.branchOffice]
+                    : [];
+                return branches.map((branch, idx) => (
+                  <div
+                    key={idx}
+                    className="flex items-start gap-3 text-[13px] text-slate-300"
+                  >
+                    <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#0ea5e9]" />
+                    <span className="leading-relaxed">
+                      <span className="block text-white font-medium mb-1">
+                        {branches.length > 1
+                          ? `Branch Office ${idx + 1}`
+                          : "Branch Office"}
+                      </span>
+                      {branch}
                     </span>
-                    {companyInfo.branchOffice}
-                  </span>
-                </div>
-              )}
+                  </div>
+                ));
+              })()}
             </div>
 
             <div className="mt-8 flex items-center gap-3">

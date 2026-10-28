@@ -38,12 +38,25 @@ export function PublicContactDetails() {
           <h3 className="text-sm font-medium text-white">Visit Us</h3>
           <h3 className="mt-3 text-sm font-medium text-white">Head Office</h3>
           <p className="mt-1 text-sm text-blue-100/70">{details.headOffice}</p>
-          <h3 className="mt-4 text-sm font-medium text-white">Branch Office</h3>
-          {details.branchOffice && (
-            <p className="mt-1 text-sm text-blue-100/70">
-              {details.branchOffice}
-            </p>
-          )}
+          {(() => {
+            const branches =
+              Array.isArray(details.branchOffices) &&
+              details.branchOffices.length > 0
+                ? details.branchOffices.filter(Boolean)
+                : details.branchOffice
+                ? [details.branchOffice]
+                : [];
+            return branches.map((branch, idx) => (
+              <div key={idx} className="mt-4">
+                <h3 className="text-sm font-medium text-white">
+                  {branches.length > 1
+                    ? `Branch Office ${idx + 1}`
+                    : "Branch Office"}
+                </h3>
+                <p className="mt-1 text-sm text-blue-100/70">{branch}</p>
+              </div>
+            ));
+          })()}
         </div>
       </div>
     </div>

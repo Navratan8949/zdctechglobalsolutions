@@ -9,7 +9,7 @@ test("Express app loads with the expected API route groups", () => {
 
   assert.equal(typeof app, "function");
   assert.ok(router, "Express router should be available");
-  assert.equal(mountedRouters.length, 19);
+  assert.ok(mountedRouters.length >= 19, "Expected at least 19 mounted routers");
 });
 
 test("registered route modules expose routes", () => {

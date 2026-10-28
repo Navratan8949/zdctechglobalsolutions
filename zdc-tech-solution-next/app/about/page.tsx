@@ -11,6 +11,7 @@ import {
   stats as fallbackStats,
   processSteps as fallbackProcessSteps,
   coreValues as fallbackCoreValues,
+  companyInfo as fallbackCompanyInfo,
   type Stat,
   type ProcessStep,
   type CoreValue,
@@ -18,7 +19,9 @@ import {
 import { getStats } from "@/service/stat.service";
 import { getProcessSteps } from "@/service/processStep.service";
 import { getCoreValues } from "@/service/coreValue.service";
+import { getCurrentSiteContent } from "@/service/siteContent.service";
 import { unwrapApiResponse } from "@/lib/public-api";
+import { resolveImageUrl } from "@/lib/utils";
 import { technologyStack } from "@/data/technologies";
 import { getIcon } from "@/lib/icons";
 
@@ -47,18 +50,56 @@ export const metadata: Metadata = {
 };
 
 export default async function AboutPage() {
-  const [statsRaw, processStepsRaw, coreValuesRaw] = await Promise.all([
+  const [statsRaw, processStepsRaw, coreValuesRaw, siteContentRaw] = await Promise.all([
     getStats().catch(() => null),
     getProcessSteps().catch(() => null),
     getCoreValues().catch(() => null),
+    getCurrentSiteContent().catch(() => null),
   ]);
   const liveStats = unwrapApiResponse<Stat[]>(statsRaw);
   const liveProcessSteps = unwrapApiResponse<ProcessStep[]>(processStepsRaw);
   const liveCoreValues = unwrapApiResponse<CoreValue[]>(coreValuesRaw);
+  const liveSiteContent = unwrapApiResponse<any>(siteContentRaw);
 
   const stats = Array.isArray(liveStats) && liveStats.length > 0 ? liveStats : fallbackStats;
   const processSteps = Array.isArray(liveProcessSteps) && liveProcessSteps.length > 0 ? liveProcessSteps : fallbackProcessSteps;
   const coreValues = Array.isArray(liveCoreValues) && liveCoreValues.length > 0 ? liveCoreValues : fallbackCoreValues;
+  const about = liveSiteContent?.about || (fallbackCompanyInfo as any)?.about || {};
+
+  const aboutImage =
+    resolveImageUrl(about.image?.url) ||
+    "https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop";
+
+  const badgeNumber = about.badgeNumber || "20+";
+  const badgeText = about.badgeText || "Expert Professionals";
+  const eyebrow = about.eyebrow || "WHO WE ARE";
+  const title = about.title || "A Technology Company Built on Trust and Excellence";
+  const description1 =
+    about.description1 ||
+    "ZDC Tech Global Solutions was founded with a simple belief: technology should solve real problems, not create new ones. Since 2019, we have been helping businesses across industries leverage digital solutions to streamline operations, reach more customers, and grow faster.";
+  const description2 =
+    about.description2 ||
+    "What started as a small team of passionate engineers has grown into a full-service technology company with expertise across web, mobile, software, and cloud. We have delivered over 100 projects for more than 50 clients, from startups to enterprises.";
+  const highlights =
+    Array.isArray(about.highlights) && about.highlights.length > 0
+      ? about.highlights
+      : [
+          "Transparent communication at every step",
+          "Solutions aligned with your business goals",
+          "Long-term partnerships built on quality",
+        ];
+
+  const missionTitle = about.missionTitle || "Our Mission";
+  const missionDescription =
+    about.missionDescription ||
+    "To empower businesses with innovative digital solutions that drive growth, efficiency and competitive advantage. We exist to turn complex problems into elegant software that people love to use.";
+  const MissionIcon = getIcon(about.missionIcon || "Rocket");
+
+  const visionTitle = about.visionTitle || "Our Vision";
+  const visionDescription =
+    about.visionDescription ||
+    "To be the most trusted technology partner for businesses worldwide, recognized for engineering excellence, honest partnerships and solutions that stand the test of time.";
+  const VisionIcon = getIcon(about.visionIcon || "TrendingUp");
 
   return (
     <div className="bg-white">
@@ -75,50 +116,50 @@ export default async function AboutPage() {
             <div className="relative lg:pr-8">
               <div className="overflow-hidden rounded-3xl border-4 border-white shadow-xl bg-slate-100 aspect-[4/3]">
                 <img
-                  src="https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
-                  alt="ZDC Tech Global Solutions team collaborating"
+                  src={aboutImage}
+                  alt={title}
                   className="h-full w-full object-cover"
                 />
               </div>
               <div className="absolute -bottom-6 -right-2 sm:right-6 rounded-2xl border border-gray-100 bg-white p-6 shadow-[0_10px_40px_rgba(0,0,0,0.08)] flex items-center gap-4">
                 <div className="flex h-14 w-14 items-center justify-center rounded-full bg-blue-50 text-2xl font-black text-[#0ea5e9]">
-                  20+
+                  {badgeNumber}
                 </div>
                 <div>
-                  <p className="text-[14px] font-bold text-[#0b1b3d] leading-tight">Expert<br/>Professionals</p>
+                  <p className="text-[14px] font-bold text-[#0b1b3d] leading-tight">
+                    {badgeText.includes(" ") ? (
+                      <>
+                        {badgeText.split(" ")[0]}
+                        <br />
+                        {badgeText.split(" ").slice(1).join(" ")}
+                      </>
+                    ) : (
+                      badgeText
+                    )}
+                  </p>
                 </div>
               </div>
             </div>
             <div>
               <p className="text-[12px] font-black uppercase tracking-widest text-[#0ea5e9] mb-3">
-                WHO WE ARE
+                {eyebrow}
               </p>
               <h2 className="text-3xl sm:text-4xl font-bold text-[#0b1b3d] leading-tight mb-6">
-                A Technology Company Built on Trust and Excellence
+                {title}
               </h2>
               <div className="space-y-4 text-[16px] leading-relaxed text-slate-500">
-                <p>
-                  ZDC Tech Global Solutions was founded with a simple belief:
-                  technology should solve real problems, not create new ones.
-                  Since 2019, we have been helping businesses across industries
-                  leverage digital solutions to streamline operations, reach
-                  more customers, and grow faster.
-                </p>
-                <p>
-                  What started as a small team of passionate engineers has grown
-                  into a full-service technology company with expertise across
-                  web, mobile, software, and cloud. We have delivered over 100
-                  projects for more than 50 clients, from startups to
-                  enterprises.
-                </p>
+                <p>{description1}</p>
+                <p>{description2}</p>
                 <ul className="space-y-3 pt-4">
-                  {[
-                    "Transparent communication at every step",
-                    "Solutions aligned with your business goals",
-                    "Long-term partnerships built on quality"
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-center gap-3 text-[15px] font-semibold text-[#0b1b3d]">
-                      <CheckCircle2 className="h-5 w-5 text-[#0ea5e9]" strokeWidth={2.5} />
+                  {highlights.map((item: string, i: number) => (
+                    <li
+                      key={i}
+                      className="flex items-center gap-3 text-[15px] font-semibold text-[#0b1b3d]"
+                    >
+                      <CheckCircle2
+                        className="h-5 w-5 text-[#0ea5e9]"
+                        strokeWidth={2.5}
+                      />
                       {item}
                     </li>
                   ))}
@@ -135,35 +176,24 @@ export default async function AboutPage() {
           <div className="grid gap-8 lg:grid-cols-2">
             <div className="rounded-3xl border border-gray-100 bg-white p-10 shadow-sm transition-shadow hover:shadow-md">
               <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50">
-                {(() => {
-                  const Icon = getIcon("Rocket");
-                  return <Icon className="h-7 w-7 text-[#0ea5e9]" strokeWidth={2.5} />;
-                })()}
+                <MissionIcon className="h-7 w-7 text-[#0ea5e9]" strokeWidth={2.5} />
               </div>
               <h3 className="mt-6 text-2xl font-bold text-[#0b1b3d]">
-                Our Mission
+                {missionTitle}
               </h3>
               <p className="mt-4 text-[16px] leading-relaxed text-slate-500">
-                To empower businesses with innovative digital solutions that
-                drive growth, efficiency and competitive advantage. We exist to
-                turn complex problems into elegant software that people love to
-                use.
+                {missionDescription}
               </p>
             </div>
             <div className="rounded-3xl border border-gray-100 bg-white p-10 shadow-sm transition-shadow hover:shadow-md">
               <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50">
-                {(() => {
-                  const Icon = getIcon("TrendingUp");
-                  return <Icon className="h-7 w-7 text-[#0ea5e9]" strokeWidth={2.5} />;
-                })()}
+                <VisionIcon className="h-7 w-7 text-[#0ea5e9]" strokeWidth={2.5} />
               </div>
               <h3 className="mt-6 text-2xl font-bold text-[#0b1b3d]">
-                Our Vision
+                {visionTitle}
               </h3>
               <p className="mt-4 text-[16px] leading-relaxed text-slate-500">
-                To be the most trusted technology partner for businesses
-                worldwide, recognized for engineering excellence, honest
-                partnerships and solutions that stand the test of time.
+                {visionDescription}
               </p>
             </div>
           </div>

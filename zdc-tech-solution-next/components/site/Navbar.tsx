@@ -16,6 +16,7 @@ import type { Service } from "@/data/services";
 
 const companyLinks = [
   { label: "About Us", href: "/about" },
+  { label: "Our Products", href: "/products" },
   { label: "Our Team", href: "/team" },
   { label: "Daily Posts", href: "/posts" },
   { label: "Services", href: "/services" },

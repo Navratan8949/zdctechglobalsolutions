@@ -14,6 +14,23 @@ interface SocialLinks {
   whatsapp?: string;
 }
 
+export interface AboutContent {
+  image?: { public_id: string; url: string };
+  badgeNumber?: string;
+  badgeText?: string;
+  eyebrow?: string;
+  title?: string;
+  description1?: string;
+  description2?: string;
+  highlights?: string[];
+  missionTitle?: string;
+  missionDescription?: string;
+  missionIcon?: string;
+  visionTitle?: string;
+  visionDescription?: string;
+  visionIcon?: string;
+}
+
 export interface SiteContent {
   _id?: string;
   name: string;
@@ -22,10 +39,12 @@ export interface SiteContent {
   phone: string;
   headOffice: string;
   branchOffice: string;
+  branchOffices?: string[];
   hours: string;
   logo?: { public_id: string; url: string };
   logoText?: { public_id: string; url: string };
   socials: SocialLinks;
+  about?: AboutContent;
 }
 
 const SiteContentContext = createContext<SiteContent>(fallbackCompanyInfo as any);
@@ -45,7 +64,17 @@ export function SiteContentProvider({
         if (!active) return;
         const data = unwrapApiResponse<SiteContent>(response);
         if (data && data.name) {
-          setSiteContent(data);
+          const branchOffices =
+            Array.isArray(data.branchOffices) && data.branchOffices.length > 0
+              ? data.branchOffices
+              : data.branchOffice
+              ? [data.branchOffice]
+              : [];
+          setSiteContent({
+            ...data,
+            branchOffices,
+            branchOffice: data.branchOffice || branchOffices[0] || "",
+          });
         }
       } catch (error) {
         console.error("Failed to fetch site content, using fallback.", error);

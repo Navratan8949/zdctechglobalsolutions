@@ -42,6 +42,7 @@ interface SiteContent {
   phone: string;
   headOffice: string;
   branchOffice: string;
+  branchOffices?: string[];
   hours: string;
   logo: { public_id: string; url: string };
   logoText: { public_id: string; url: string };
@@ -49,11 +50,15 @@ interface SiteContent {
   heroHeading: string;
   heroWords: string;
   heroDescription: string;
+  about?: any;
   createdAt?: string;
   updatedAt?: string;
 }
 
-type SiteContentDraft = Omit<SiteContent, "_id" | "createdAt" | "updatedAt">;
+type SiteContentDraft = Omit<SiteContent, "_id" | "createdAt" | "updatedAt"> & {
+  branchOffices: string[];
+  about?: any;
+};
 type ApiResponse<T> = { success?: boolean; data?: T; message?: string };
 
 const emptyDraft: SiteContentDraft = {
@@ -63,6 +68,7 @@ const emptyDraft: SiteContentDraft = {
   phone: "",
   headOffice: "",
   branchOffice: "",
+  branchOffices: [""],
   hours: "",
   logo: { public_id: "", url: "" },
   logoText: { public_id: "", url: "" },
@@ -77,6 +83,7 @@ const emptyDraft: SiteContentDraft = {
   heroHeading: "WELCOME TO THE",
   heroWords: "ZDC TECH, DIGITAL GROWTH, SMART SOLUTIONS, NEW HORIZONS",
   heroDescription: "We design and build world-class websites, mobile apps, and custom software that moves your business forward — fast, secure, and highly scalable.",
+  about: undefined,
 };
 
 function getErrorMessage(error: unknown) {
@@ -103,13 +110,21 @@ function unwrap<T>(response: ApiResponse<T> | T): T {
 }
 
 function toDraft(content: SiteContent): SiteContentDraft {
+  const branchOffices =
+    Array.isArray(content.branchOffices) && content.branchOffices.length > 0
+      ? [...content.branchOffices]
+      : content.branchOffice
+      ? [content.branchOffice]
+      : [""];
+
   return {
     name: content.name || "",
     tagline: content.tagline || "",
     email: content.email || "",
     phone: content.phone || "",
     headOffice: content.headOffice || "",
-    branchOffice: content.branchOffice || "",
+    branchOffice: content.branchOffice || branchOffices[0] || "",
+    branchOffices,
     hours: content.hours || "",
     logo: {
       public_id: content.logo?.public_id || "",
@@ -130,6 +145,7 @@ function toDraft(content: SiteContent): SiteContentDraft {
     heroHeading: content.heroHeading || "WELCOME TO THE",
     heroWords: content.heroWords || "ZDC TECH, DIGITAL GROWTH, SMART SOLUTIONS, NEW HORIZONS",
     heroDescription: content.heroDescription || "We design and build world-class websites, mobile apps, and custom software that moves your business forward — fast, secure, and highly scalable.",
+    about: content.about,
   };
 }
 
@@ -211,6 +227,38 @@ export default function SiteContentPage() {
     setDraft((current) => ({ ...current, [field]: value }));
   };
 
+  const updateBranchOffice = (index: number, value: string) => {
+    setDraft((current) => {
+      const updated = [...(current.branchOffices || [""])];
+      updated[index] = value;
+      return {
+        ...current,
+        branchOffices: updated,
+        branchOffice: updated[0] || "",
+      };
+    });
+  };
+
+  const addBranchOffice = () => {
+    setDraft((current) => ({
+      ...current,
+      branchOffices: [...(current.branchOffices || []), ""],
+    }));
+  };
+
+  const removeBranchOffice = (index: number) => {
+    setDraft((current) => {
+      const currentList = current.branchOffices || [];
+      const updated = currentList.filter((_, i) => i !== index);
+      const finalList = updated.length > 0 ? updated : [""];
+      return {
+        ...current,
+        branchOffices: finalList,
+        branchOffice: finalList[0] || "",
+      };
+    });
+  };
+
   const updateSocial = (field: keyof SocialLinks, value: string) => {
     setDraft((current) => ({
       ...current,
@@ -242,9 +290,17 @@ export default function SiteContentPage() {
     setError(null);
     setFeedback(null);
     try {
+      const cleanedBranches = (draft.branchOffices || [])
+        .map((b) => b.trim())
+        .filter(Boolean);
+      const payload: SiteContentDraft = {
+        ...draft,
+        branchOffices: cleanedBranches.length > 0 ? cleanedBranches : [],
+        branchOffice: cleanedBranches[0] || "",
+      };
       const response = selectedId
-        ? unwrap<SiteContent>(await updateSiteContent(selectedId, draft))
-        : unwrap<SiteContent>(await createSiteContent(draft));
+        ? unwrap<SiteContent>(await updateSiteContent(selectedId, payload))
+        : unwrap<SiteContent>(await createSiteContent(payload));
       const saved = response;
       setContents((current) =>
         selectedId
@@ -473,21 +529,63 @@ export default function SiteContentPage() {
                   value={draft.hours}
                   onChange={(value) => updateDraft("hours", value)}
                 />
-                <div className="md:col-span-2">
-                  <label
-                    className="mb-2 block text-sm font-medium text-white"
-                    htmlFor="branchOffice"
-                  >
-                    Branch office
-                  </label>
-                  <Textarea
-                    id="branchOffice"
-                    value={draft.branchOffice}
-                    onChange={(event) =>
-                      updateDraft("branchOffice", event.target.value)
-                    }
-                    rows={3}
-                  />
+                <div className="md:col-span-2 space-y-3">
+                  <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                    <div>
+                      <label className="block text-sm font-medium text-white">
+                        Branch Offices
+                      </label>
+                      <p className="text-xs text-muted-foreground">
+                        Add one or more branch office locations for your company
+                      </p>
+                    </div>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={addBranchOffice}
+                      className="w-fit border-white/15 bg-white/5 hover:bg-white/10 text-white hover:text-white"
+                    >
+                      <Plus className="mr-1.5 h-3.5 w-3.5 text-primary" />
+                      Add Another Branch
+                    </Button>
+                  </div>
+
+                  <div className="space-y-3">
+                    {draft.branchOffices.map((branch, index) => (
+                      <div
+                        key={index}
+                        className="rounded-lg border border-white/10 bg-white/[0.02] p-3.5 transition-colors focus-within:border-primary/50"
+                      >
+                        <div className="mb-2 flex items-center justify-between">
+                          <span className="text-xs font-semibold tracking-wide text-muted-foreground">
+                            Branch Office {index + 1}
+                          </span>
+                          {draft.branchOffices.length > 1 && (
+                            <Button
+                              type="button"
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => removeBranchOffice(index)}
+                              className="h-7 px-2 text-xs text-red-400 hover:bg-red-400/10 hover:text-red-300"
+                            >
+                              <Trash2 className="mr-1 h-3.5 w-3.5" />
+                              Remove
+                            </Button>
+                          )}
+                        </div>
+                        <Textarea
+                          value={branch}
+                          onChange={(event) =>
+                            updateBranchOffice(index, event.target.value)
+                          }
+                          placeholder={`Enter branch office address ${index + 1}...`}
+                          rows={2}
+                          className="w-full"
+                        />
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
               <div className="mt-7 border-t border-white/10 pt-6">
@@ -568,6 +666,27 @@ export default function SiteContentPage() {
                     value={draft.socials.whatsapp}
                     onChange={(value) => updateSocial("whatsapp", value)}
                   />
+                </div>
+              </div>
+              <div className="mt-7 rounded-xl border border-primary/20 bg-primary/5 p-5">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                  <div>
+                    <h3 className="text-sm font-semibold text-white">
+                      About Us Section (Team Image, Floating Badge &amp; Values)
+                    </h3>
+                    <p className="text-xs text-muted-foreground mt-0.5">
+                      Customize the company story, upload the About team photo, configure the floating metric badge, and edit mission/vision cards.
+                    </p>
+                  </div>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => router.push("/admin/about")}
+                    className="border-primary/30 bg-primary/10 hover:bg-primary/20 text-primary hover:text-primary whitespace-nowrap"
+                  >
+                    Manage About Us &rarr;
+                  </Button>
                 </div>
               </div>
               <div className="mt-7 flex justify-end border-t border-white/10 pt-5">
