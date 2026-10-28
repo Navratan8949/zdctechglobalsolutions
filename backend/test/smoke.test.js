@@ -30,6 +30,7 @@ test("registered route modules expose routes", () => {
     "technology",
     "faq",
     "subscriber",
+    "product",
   ];
 
   for (const routeFile of routeFiles) {

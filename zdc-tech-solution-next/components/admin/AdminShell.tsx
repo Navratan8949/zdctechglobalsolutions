@@ -23,6 +23,7 @@ import {
   CheckCircle,
   Newspaper,
   Info,
+  Package,
 } from "lucide-react";
 import {
   useAdminAuth,
@@ -41,6 +42,7 @@ const primaryNavigation: AdminNavItem[] = [
   { label: "Overview", href: "/admin", icon: LayoutDashboard },
   { label: "Site content", href: "/admin/site-content", icon: Building2 },
   { label: "About Us", href: "/admin/about", icon: Info },
+  { label: "Products", href: "/admin/products", icon: Package },
   { label: "Stats", href: "/admin/stats", icon: Settings2 },
   { label: "Process Steps", href: "/admin/process", icon: ClipboardList },
   { label: "Core Values", href: "/admin/core-values", icon: Star },

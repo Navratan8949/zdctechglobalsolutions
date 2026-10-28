@@ -74,6 +74,7 @@ export function SiteContentProvider({
             ...data,
             branchOffices,
             branchOffice: data.branchOffice || branchOffices[0] || "",
+            about: data.about || (fallbackCompanyInfo as any)?.about,
           });
         }
       } catch (error) {

@@ -100,11 +100,17 @@ export default function AdminAboutPage() {
           setSiteContentId(data._id);
           setRawSiteContent(data);
           if (data.about) {
+            const rawImg = data.about.image;
+            const imgUrl =
+              typeof rawImg === "string"
+                ? rawImg
+                : rawImg?.url || defaultAboutState.image.url;
+            const imgPublicId =
+              typeof rawImg === "object" ? rawImg?.public_id || "" : "";
             setAbout({
               image: {
-                public_id: data.about.image?.public_id || "",
-                url:
-                  data.about.image?.url || defaultAboutState.image.url,
+                public_id: imgPublicId,
+                url: imgUrl,
               },
               badgeNumber:
                 data.about.badgeNumber || defaultAboutState.badgeNumber,
@@ -196,16 +202,47 @@ export default function AdminAboutPage() {
             : defaultAboutState.highlights,
       };
 
+      const { _id, createdAt, updatedAt, __v, ...restContent } = rawSiteContent || {};
+
       const payload = {
-        ...rawSiteContent,
+        ...restContent,
         about: aboutPayload,
       };
 
+      let res: any;
       if (siteContentId) {
-        await updateSiteContent(siteContentId, payload);
+        res = await updateSiteContent(siteContentId, payload);
       } else {
-        const res: any = await createSiteContent(payload);
+        res = await createSiteContent(payload);
         if (res?.data?._id) setSiteContentId(res.data._id);
+      }
+
+      const savedData = res?.data || res;
+      if (savedData) {
+        setRawSiteContent(savedData);
+        if (savedData._id) setSiteContentId(savedData._id);
+        if (savedData.about) {
+          const rawImg = savedData.about.image;
+          const imgUrl =
+            typeof rawImg === "string"
+              ? rawImg
+              : rawImg?.url || defaultAboutState.image.url;
+          const imgPublicId =
+            typeof rawImg === "object" ? rawImg?.public_id || "" : "";
+          setAbout({
+            ...defaultAboutState,
+            ...savedData.about,
+            image: {
+              public_id: imgPublicId,
+              url: imgUrl,
+            },
+            highlights:
+              Array.isArray(savedData.about.highlights) &&
+              savedData.about.highlights.length > 0
+                ? savedData.about.highlights
+                : defaultAboutState.highlights,
+          });
+        }
       }
 
       setFeedback("About Us section updated successfully!");

@@ -25,6 +25,11 @@ const defaultAbout = {
 };
 
 const normalizeSiteContentPayload = (body) => {
+    delete body._id;
+    delete body.__v;
+    delete body.createdAt;
+    delete body.updatedAt;
+
     if (Array.isArray(body.branchOffices)) {
         const cleaned = body.branchOffices
             .map((b) => (typeof b === "string" ? b.trim() : ""))
@@ -35,10 +40,20 @@ const normalizeSiteContentPayload = (body) => {
         body.branchOffices = [body.branchOffice.trim()];
     }
 
-    if (body.about && Array.isArray(body.about.highlights)) {
-        body.about.highlights = body.about.highlights
-            .map((h) => (typeof h === "string" ? h.trim() : ""))
-            .filter(Boolean);
+    if (body.about) {
+        if (typeof body.about.image === "string") {
+            body.about.image = { public_id: "", url: body.about.image.trim() };
+        } else if (body.about.image && typeof body.about.image === "object") {
+            body.about.image = {
+                public_id: typeof body.about.image.public_id === "string" ? body.about.image.public_id.trim() : "",
+                url: typeof body.about.image.url === "string" ? body.about.image.url.trim() : (body.about.image.secure_url || "").trim()
+            };
+        }
+        if (Array.isArray(body.about.highlights)) {
+            body.about.highlights = body.about.highlights
+                .map((h) => (typeof h === "string" ? h.trim() : ""))
+                .filter(Boolean);
+        }
     }
 };
 
@@ -48,15 +63,31 @@ const normalizeSiteContentDoc = (doc) => {
     if ((!docObj.branchOffices || docObj.branchOffices.length === 0) && docObj.branchOffice) {
         docObj.branchOffices = [docObj.branchOffice];
     }
+    const savedAbout = docObj.about || {};
+    
+    let imageUrl = defaultAbout.image.url;
+    let publicId = "";
+    if (typeof savedAbout.image === "string" && savedAbout.image.trim() !== "") {
+        imageUrl = savedAbout.image.trim();
+    } else if (savedAbout.image && typeof savedAbout.image === "object") {
+        const rawUrl = savedAbout.image.url || savedAbout.image.secure_url;
+        if (typeof rawUrl === "string" && rawUrl.trim() !== "") {
+            imageUrl = rawUrl.trim();
+        }
+        if (typeof savedAbout.image.public_id === "string") {
+            publicId = savedAbout.image.public_id.trim();
+        }
+    }
+
     docObj.about = {
         ...defaultAbout,
-        ...(docObj.about || {}),
+        ...savedAbout,
         image: {
-            ...defaultAbout.image,
-            ...((docObj.about && docObj.about.image) || {})
+            public_id: publicId,
+            url: imageUrl
         },
-        highlights: (docObj.about && Array.isArray(docObj.about.highlights) && docObj.about.highlights.length > 0)
-            ? docObj.about.highlights
+        highlights: (Array.isArray(savedAbout.highlights) && savedAbout.highlights.length > 0)
+            ? savedAbout.highlights
             : defaultAbout.highlights
     };
     return docObj;

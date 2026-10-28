@@ -16,6 +16,7 @@ app.use(cookieParser());
 
 const path = require("path");
 app.use("/public", express.static(path.join(__dirname, "..", "public")));
+app.use("/uploads", express.static(path.join(__dirname, "..", "public", "uploads")));
 
 // Routes
 app.use("/api/v1/auth", require("./routes/auth.routes"));
@@ -47,6 +48,8 @@ app.use("/api/v1/stats", require("./routes/stat.routes"));
 app.use("/api/v1/process-steps", require("./routes/processStep.routes"));
 app.use("/api/v1/core-values", require("./routes/coreValue.routes"));
 app.use("/api/v1/life-at-company", require("./routes/lifeAtCompany.routes"));
+app.use("/api/v1/products", require("./routes/product.routes"));
+app.use("/api/v1/product", require("./routes/product.routes"));
 // Admin — Backup
 const isAuthenticated = require("./middleware/auth");
 const authorizeRoles = require("./middleware/role");
