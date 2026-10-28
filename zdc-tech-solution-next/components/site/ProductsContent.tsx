@@ -135,8 +135,11 @@ export function ProductsContent({ initialProducts }: { initialProducts?: Product
         name: demoForm.name,
         email: demoForm.email,
         phone: demoForm.phone,
+        company: demoForm.company,
+        service: demoModalProduct.title,
+        inquiryType: "project",
         subject: `Product Demo Request: ${demoModalProduct.title}`,
-        message: `${demoForm.message}\n\n[Product Details: ${demoModalProduct.title} | Category: ${demoModalProduct.category} | Company: ${demoForm.company || "N/A"}]`,
+        message: `${demoForm.message}\n\n[Product: ${demoModalProduct.title} | Category: ${demoModalProduct.category} | Company: ${demoForm.company || "N/A"}]`,
       });
       setDemoSuccess(true);
       setTimeout(() => {
@@ -449,151 +452,157 @@ export function ProductsContent({ initialProducts }: { initialProducts?: Product
 
       {/* Demo Request Modal */}
       {demoModalProduct && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/75 p-4 backdrop-blur-sm">
-          <div className="relative my-8 w-full max-w-lg rounded-3xl border border-slate-200 bg-white p-6 shadow-2xl sm:p-8 dark:border-white/10 dark:bg-slate-900">
-            <button
-              type="button"
-              onClick={() => setDemoModalProduct(null)}
-              className="absolute top-5 right-5 rounded-full p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-600 dark:hover:bg-white/5"
-            >
-              <X className="h-5 w-5" />
-            </button>
-
-            {demoSuccess ? (
-              <div className="py-8 text-center space-y-4">
-                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
-                  <Check className="h-8 w-8" strokeWidth={3} />
-                </div>
-                <h3 className="text-2xl font-bold text-[#0b1b3d] dark:text-white">
-                  Demo Request Received!
-                </h3>
-                <p className="text-sm text-slate-500 max-w-sm mx-auto">
-                  Thank you! Our enterprise solutions team will reach out within 2 hours to schedule your personalized live demo of{" "}
-                  <strong className="text-[#0b1b3d] dark:text-white">
-                    {demoModalProduct.title}
-                  </strong>.
-                </p>
-              </div>
-            ) : (
+        <div className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-black/75 p-3 sm:p-6 backdrop-blur-sm">
+          <div className="relative flex flex-col w-full max-w-lg max-h-[92vh] rounded-3xl border border-slate-200 bg-white shadow-2xl overflow-hidden dark:border-white/10 dark:bg-slate-900">
+            {/* Header */}
+            <div className="shrink-0 flex items-center justify-between border-b border-slate-100 px-6 py-4 sm:px-8 dark:border-white/10 bg-white dark:bg-slate-900 z-10">
               <div>
-                <div className="mb-6">
-                  <span className="rounded-full bg-blue-50 text-[#0ea5e9] px-3 py-1 text-xs font-black uppercase tracking-wider">
-                    Interactive Walkthrough
-                  </span>
-                  <h3 className="mt-2 text-2xl font-bold text-[#0b1b3d] dark:text-white">
-                    Request Live Demo
+                <span className="rounded-full bg-blue-50 text-[#0ea5e9] px-3 py-1 text-[11px] font-black uppercase tracking-wider">
+                  Interactive Walkthrough
+                </span>
+                <h3 className="mt-1.5 text-xl font-bold text-[#0b1b3d] dark:text-white">
+                  Request Live Demo
+                </h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setDemoModalProduct(null)}
+                className="rounded-full p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-600 dark:hover:bg-white/5"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+
+            {/* Scrollable Body */}
+            <div className="flex-1 overflow-y-auto p-6 sm:p-8">
+              {demoSuccess ? (
+                <div className="py-8 text-center space-y-4">
+                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+                    <Check className="h-8 w-8" strokeWidth={3} />
+                  </div>
+                  <h3 className="text-2xl font-bold text-[#0b1b3d] dark:text-white">
+                    Demo Request Received!
                   </h3>
-                  <p className="mt-1 text-sm text-slate-500">
+                  <p className="text-sm text-slate-500 max-w-sm mx-auto">
+                    Thank you! Our enterprise solutions team will reach out within 2 hours to schedule your personalized live demo of{" "}
+                    <strong className="text-[#0b1b3d] dark:text-white">
+                      {demoModalProduct.title}
+                    </strong>.
+                  </p>
+                </div>
+              ) : (
+                <div>
+                  <p className="mb-4 text-xs text-slate-500">
                     See how{" "}
                     <strong className="text-[#0ea5e9]">
                       {demoModalProduct.title}
                     </strong>{" "}
                     can streamline operations for your organization.
                   </p>
+
+                  {demoError && (
+                    <div className="mb-4 rounded-xl border border-red-200 bg-red-50 p-3 text-xs text-red-600">
+                      {demoError}
+                    </div>
+                  )}
+
+                  <form onSubmit={handleSubmitDemo} className="space-y-4">
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">
+                        Your Full Name *
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={demoForm.name}
+                        onChange={(e) =>
+                          setDemoForm((p) => ({ ...p, name: e.target.value }))
+                        }
+                        placeholder="e.g. John Doe"
+                        className="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm text-[#0b1b3d] placeholder:text-slate-400 focus:border-[#0ea5e9] focus:outline-none dark:border-white/10 dark:bg-card dark:text-white"
+                      />
+                    </div>
+
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">
+                          Work Email *
+                        </label>
+                        <input
+                          type="email"
+                          required
+                          value={demoForm.email}
+                          onChange={(e) =>
+                            setDemoForm((p) => ({ ...p, email: e.target.value }))
+                          }
+                          placeholder="john@company.com"
+                          className="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm text-[#0b1b3d] placeholder:text-slate-400 focus:border-[#0ea5e9] focus:outline-none dark:border-white/10 dark:bg-card dark:text-white"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">
+                          Phone Number *
+                        </label>
+                        <input
+                          type="tel"
+                          required
+                          value={demoForm.phone}
+                          onChange={(e) =>
+                            setDemoForm((p) => ({ ...p, phone: e.target.value }))
+                          }
+                          placeholder="+91 98765 43210"
+                          className="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm text-[#0b1b3d] placeholder:text-slate-400 focus:border-[#0ea5e9] focus:outline-none dark:border-white/10 dark:bg-card dark:text-white"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">
+                        Organization / Company Name
+                      </label>
+                      <input
+                        type="text"
+                        value={demoForm.company}
+                        onChange={(e) =>
+                          setDemoForm((p) => ({ ...p, company: e.target.value }))
+                        }
+                        placeholder="e.g. Acme Global Logistics"
+                        className="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm text-[#0b1b3d] placeholder:text-slate-400 focus:border-[#0ea5e9] focus:outline-none dark:border-white/10 dark:bg-card dark:text-white"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">
+                        Message / Requirements
+                      </label>
+                      <textarea
+                        rows={3}
+                        value={demoForm.message}
+                        onChange={(e) =>
+                          setDemoForm((p) => ({ ...p, message: e.target.value }))
+                        }
+                        className="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm text-[#0b1b3d] placeholder:text-slate-400 focus:border-[#0ea5e9] focus:outline-none dark:border-white/10 dark:bg-card dark:text-white"
+                      />
+                    </div>
+
+                    <div className="pt-2">
+                      <button
+                        type="submit"
+                        disabled={isSubmittingDemo}
+                        className="w-full flex items-center justify-center gap-2 rounded-xl bg-[#0ea5e9] py-3 text-sm font-bold text-white shadow-lg shadow-[#0ea5e9]/25 hover:bg-[#0284c7] disabled:opacity-50"
+                      >
+                        {isSubmittingDemo ? (
+                          <Loader2 className="h-4 w-4 animate-spin" />
+                        ) : (
+                          <Send className="h-4 w-4" />
+                        )}
+                        <span>Schedule Live Demo</span>
+                      </button>
+                    </div>
+                  </form>
                 </div>
-
-                {demoError && (
-                  <div className="mb-4 rounded-xl border border-red-200 bg-red-50 p-3 text-xs text-red-600">
-                    {demoError}
-                  </div>
-                )}
-
-                <form onSubmit={handleSubmitDemo} className="space-y-4">
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">
-                      Your Full Name *
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={demoForm.name}
-                      onChange={(e) =>
-                        setDemoForm((p) => ({ ...p, name: e.target.value }))
-                      }
-                      placeholder="e.g. John Doe"
-                      className="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm text-[#0b1b3d] placeholder:text-slate-400 focus:border-[#0ea5e9] focus:outline-none dark:border-white/10 dark:bg-card dark:text-white"
-                    />
-                  </div>
-
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <div>
-                      <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">
-                        Work Email *
-                      </label>
-                      <input
-                        type="email"
-                        required
-                        value={demoForm.email}
-                        onChange={(e) =>
-                          setDemoForm((p) => ({ ...p, email: e.target.value }))
-                        }
-                        placeholder="john@company.com"
-                        className="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm text-[#0b1b3d] placeholder:text-slate-400 focus:border-[#0ea5e9] focus:outline-none dark:border-white/10 dark:bg-card dark:text-white"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">
-                        Phone Number *
-                      </label>
-                      <input
-                        type="tel"
-                        required
-                        value={demoForm.phone}
-                        onChange={(e) =>
-                          setDemoForm((p) => ({ ...p, phone: e.target.value }))
-                        }
-                        placeholder="+91 98765 43210"
-                        className="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm text-[#0b1b3d] placeholder:text-slate-400 focus:border-[#0ea5e9] focus:outline-none dark:border-white/10 dark:bg-card dark:text-white"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">
-                      Organization / Company Name
-                    </label>
-                    <input
-                      type="text"
-                      value={demoForm.company}
-                      onChange={(e) =>
-                        setDemoForm((p) => ({ ...p, company: e.target.value }))
-                      }
-                      placeholder="e.g. Acme Global Logistics"
-                      className="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm text-[#0b1b3d] placeholder:text-slate-400 focus:border-[#0ea5e9] focus:outline-none dark:border-white/10 dark:bg-card dark:text-white"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase mb-1">
-                      Message / Requirements
-                    </label>
-                    <textarea
-                      rows={3}
-                      value={demoForm.message}
-                      onChange={(e) =>
-                        setDemoForm((p) => ({ ...p, message: e.target.value }))
-                      }
-                      className="w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm text-[#0b1b3d] placeholder:text-slate-400 focus:border-[#0ea5e9] focus:outline-none dark:border-white/10 dark:bg-card dark:text-white"
-                    />
-                  </div>
-
-                  <div className="pt-2">
-                    <button
-                      type="submit"
-                      disabled={isSubmittingDemo}
-                      className="w-full flex items-center justify-center gap-2 rounded-xl bg-[#0ea5e9] py-3 text-sm font-bold text-white shadow-lg shadow-[#0ea5e9]/25 hover:bg-[#0284c7] disabled:opacity-50"
-                    >
-                      {isSubmittingDemo ? (
-                        <Loader2 className="h-4 w-4 animate-spin" />
-                      ) : (
-                        <Send className="h-4 w-4" />
-                      )}
-                      <span>Schedule Live Demo</span>
-                    </button>
-                  </div>
-                </form>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       )}

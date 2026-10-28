@@ -618,12 +618,12 @@ export default function AdminProductsPage() {
 
         {/* Create / Edit Modal */}
         {isFormOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/80 p-4 backdrop-blur-md">
-            <div className="my-8 w-full max-w-4xl rounded-2xl border border-white/10 bg-card p-6 shadow-2xl sm:p-8">
-              {/* Header */}
-              <div className="flex items-center justify-between border-b border-white/10 pb-5">
+          <div className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-black/80 p-3 sm:p-6 backdrop-blur-md">
+            <div className="relative flex flex-col w-full max-w-4xl max-h-[92vh] rounded-2xl border border-white/10 bg-card shadow-2xl overflow-hidden">
+              {/* Fixed Header */}
+              <div className="shrink-0 flex items-center justify-between border-b border-white/10 px-6 py-4 sm:py-5 bg-card/95 backdrop-blur-sm z-10">
                 <div>
-                  <h2 className="text-2xl font-bold text-white">
+                  <h2 className="text-xl sm:text-2xl font-bold text-white">
                     {editingId ? "Edit Product" : "Add New Product"}
                   </h2>
                   <p className="mt-1 text-xs text-muted-foreground">
@@ -639,9 +639,11 @@ export default function AdminProductsPage() {
                 </button>
               </div>
 
-              {/* Form */}
-              <form onSubmit={handleSave} className="mt-6 space-y-6">
-                <div className="grid gap-6 md:grid-cols-2">
+              {/* Form Container with Internal Scroll */}
+              <form onSubmit={handleSave} className="flex flex-col flex-1 overflow-hidden min-h-0">
+                {/* Scrollable Form Body */}
+                <div className="flex-1 overflow-y-auto p-6 sm:p-8 space-y-6">
+                  <div className="grid gap-6 md:grid-cols-2">
                   {/* Title */}
                   <div>
                     <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-white">
@@ -940,9 +942,10 @@ export default function AdminProductsPage() {
                     </div>
                   </div>
                 </div>
+              </div>
 
-                {/* Actions */}
-                <div className="flex items-center justify-end gap-3 border-t border-white/10 pt-5">
+                {/* Fixed Footer at bottom */}
+                <div className="shrink-0 flex items-center justify-end gap-3 border-t border-white/10 px-6 py-4 bg-card/95 backdrop-blur-sm z-10">
                   <Button
                     type="button"
                     variant="outline"
