@@ -63,12 +63,14 @@ export function AboutCompanySection({ initialAbout }: { initialAbout?: any }) {
   }, [rawUrl]);
 
   const resolvedUrl = rawUrl ? resolveImageUrl(rawUrl) : "";
-  const displayImage = !imageError && resolvedUrl ? resolvedUrl : fallbackImageUrl;
+  const displayImage =
+    !imageError && resolvedUrl ? resolvedUrl : fallbackImageUrl;
 
   const badgeNumber = about?.badgeNumber || "20+";
   const badgeText = about?.badgeText || "Expert Professionals";
   const eyebrow = about?.eyebrow || "WHO WE ARE";
-  const title = about?.title || "A Technology Company Built on Trust and Excellence";
+  const title =
+    about?.title || "A Technology Company Built on Trust and Excellence";
   const description1 =
     about?.description1 ||
     "ZDC Tech Global Solutions was founded with a simple belief: technology should solve real problems, not create new ones. Since 2019, we have been helping businesses across industries leverage digital solutions to streamline operations, reach more customers, and grow faster.";
@@ -109,7 +111,7 @@ export function AboutCompanySection({ initialAbout }: { initialAbout?: any }) {
                   src={displayImage}
                   alt={title}
                   onError={() => setImageError(true)}
-                  className="h-full w-full object-cover transition-all duration-300"
+                  className="h-full w-full object-contain transition-all duration-300"
                 />
               </div>
               <div className="absolute -bottom-6 -right-2 sm:right-6 rounded-2xl border border-gray-100 bg-white p-6 shadow-[0_10px_40px_rgba(0,0,0,0.08)] flex items-center gap-4">
@@ -167,7 +169,10 @@ export function AboutCompanySection({ initialAbout }: { initialAbout?: any }) {
           <div className="grid gap-8 lg:grid-cols-2">
             <div className="rounded-3xl border border-gray-100 bg-white p-10 shadow-sm transition-shadow hover:shadow-md">
               <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50">
-                <MissionIcon className="h-7 w-7 text-[#0ea5e9]" strokeWidth={2.5} />
+                <MissionIcon
+                  className="h-7 w-7 text-[#0ea5e9]"
+                  strokeWidth={2.5}
+                />
               </div>
               <h3 className="mt-6 text-2xl font-bold text-[#0b1b3d]">
                 {missionTitle}
@@ -178,7 +183,10 @@ export function AboutCompanySection({ initialAbout }: { initialAbout?: any }) {
             </div>
             <div className="rounded-3xl border border-gray-100 bg-white p-10 shadow-sm transition-shadow hover:shadow-md">
               <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50">
-                <VisionIcon className="h-7 w-7 text-[#0ea5e9]" strokeWidth={2.5} />
+                <VisionIcon
+                  className="h-7 w-7 text-[#0ea5e9]"
+                  strokeWidth={2.5}
+                />
               </div>
               <h3 className="mt-6 text-2xl font-bold text-[#0b1b3d]">
                 {visionTitle}
