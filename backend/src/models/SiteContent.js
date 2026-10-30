@@ -62,7 +62,33 @@ const siteContentSchema = new mongoose.Schema(
             hero: {
                 eyebrow: { type: String, default: "Our Clients" },
                 title: { type: String, default: "Trusted by Innovative Companies Worldwide" },
-                description: { type: String, default: "We partner with startups, growing brands, and established enterprises to design, engineer, and scale high-performance digital products." }
+                description: { type: String, default: "We partner with startups, growing brands, and established enterprises to design, engineer, and scale high-performance digital products." },
+                image: {
+                    public_id: { type: String, default: "" },
+                    url: { type: String, default: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80" }
+                },
+                badgeNumber: { type: String, default: "98%" },
+                badgeText: { type: String, default: "Client Retention Rate" },
+                ratingText: { type: String, default: "5.0 ★ Rated Across 50+ Global Clients" },
+                primaryCtaText: { type: String, default: "Become a Client Partner" },
+                primaryCtaLink: { type: String, default: "/contact" },
+                secondaryCtaText: { type: String, default: "Explore Case Studies" },
+                secondaryCtaLink: { type: String, default: "/case-studies" },
+                highlights: {
+                    type: [String],
+                    default: [
+                        "100% IP & Source Code Ownership Transferred",
+                        "Strict NDAs Executed Before Technical Discovery",
+                        "Direct Collaboration with Senior Tech Leads",
+                        "Guaranteed 99.99% Cloud Architecture SLA"
+                    ]
+                },
+                stats: [
+                    { value: { type: String, default: "100+" }, label: { type: String, default: "Enterprise Deliveries" } },
+                    { value: { type: String, default: "50+" }, label: { type: String, default: "Global Brand Partners" } },
+                    { value: { type: String, default: "12+" }, label: { type: String, default: "Countries Served" } },
+                    { value: { type: String, default: "98%" }, label: { type: String, default: "Client Satisfaction" } }
+                ]
             },
             partnerships: {
                 eyebrow: { type: String, default: "Partnerships" },

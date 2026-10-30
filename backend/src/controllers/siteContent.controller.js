@@ -28,7 +28,30 @@ const defaultClientsPage = {
     hero: {
         eyebrow: "Our Clients",
         title: "Trusted by Innovative Companies Worldwide",
-        description: "We partner with startups, growing brands, and established enterprises to design, engineer, and scale high-performance digital products."
+        description: "We partner with startups, growing brands, and established enterprises to design, engineer, and scale high-performance digital products.",
+        image: {
+            public_id: "",
+            url: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80"
+        },
+        badgeNumber: "98%",
+        badgeText: "Client Retention Rate",
+        ratingText: "5.0 ★ Rated Across 50+ Global Clients",
+        primaryCtaText: "Become a Client Partner",
+        primaryCtaLink: "/contact",
+        secondaryCtaText: "Explore Case Studies",
+        secondaryCtaLink: "/case-studies",
+        highlights: [
+            "100% IP & Source Code Ownership Transferred",
+            "Strict NDAs Executed Before Technical Discovery",
+            "Direct Collaboration with Senior Tech Leads",
+            "Guaranteed 99.99% Cloud Architecture SLA"
+        ],
+        stats: [
+            { value: "100+", label: "Enterprise Deliveries" },
+            { value: "50+", label: "Global Brand Partners" },
+            { value: "12+", label: "Countries Served" },
+            { value: "98%", label: "Client Satisfaction" }
+        ]
     },
     partnerships: {
         eyebrow: "Partnerships",
@@ -115,10 +138,26 @@ const defaultClientsPage = {
 
 const normalizeClientsPageDoc = (clientsPage = {}) => {
     const raw = clientsPage || {};
+    const rawHero = raw.hero || {};
+    const rawHeroImage = rawHero.image || {};
+    const heroImageUrl = typeof rawHeroImage === "string" && rawHeroImage.trim() !== ""
+        ? rawHeroImage.trim()
+        : (typeof rawHeroImage.url === "string" && rawHeroImage.url.trim() !== "" ? rawHeroImage.url.trim() : defaultClientsPage.hero.image.url);
+
     return {
         hero: {
             ...defaultClientsPage.hero,
-            ...(raw.hero || {})
+            ...rawHero,
+            image: {
+                public_id: typeof rawHeroImage.public_id === "string" ? rawHeroImage.public_id.trim() : "",
+                url: heroImageUrl
+            },
+            highlights: Array.isArray(rawHero.highlights) && rawHero.highlights.length > 0
+                ? rawHero.highlights
+                : defaultClientsPage.hero.highlights,
+            stats: Array.isArray(rawHero.stats) && rawHero.stats.length > 0
+                ? rawHero.stats
+                : defaultClientsPage.hero.stats
         },
         partnerships: {
             ...defaultClientsPage.partnerships,

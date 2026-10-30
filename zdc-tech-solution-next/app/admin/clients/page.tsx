@@ -130,7 +130,25 @@ export default function AdminClientsPage() {
         const res = unwrap<ClientsPageContent>(await getClientsPageContent());
         if (res && res.hero) {
           setPageContent({
-            hero: { ...fallbackClientsPageContent.hero, ...(res.hero || {}) },
+            hero: {
+              ...fallbackClientsPageContent.hero,
+              ...(res.hero || {}),
+              image: {
+                public_id: res.hero?.image?.public_id || "",
+                url:
+                  res.hero?.image?.url ||
+                  fallbackClientsPageContent.hero.image.url,
+              },
+              highlights:
+                Array.isArray(res.hero?.highlights) &&
+                res.hero.highlights.length > 0
+                  ? res.hero.highlights
+                  : fallbackClientsPageContent.hero.highlights,
+              stats:
+                Array.isArray(res.hero?.stats) && res.hero.stats.length > 0
+                  ? res.hero.stats
+                  : fallbackClientsPageContent.hero.stats,
+            },
             partnerships: {
               ...fallbackClientsPageContent.partnerships,
               ...(res.partnerships || {}),
@@ -359,6 +377,83 @@ export default function AdminClientsPage() {
     });
   };
 
+  // Hero Highlights helpers
+  const handleAddHeroHighlight = () => {
+    setPageContent((prev) => ({
+      ...prev,
+      hero: {
+        ...prev.hero,
+        highlights: [...(prev.hero.highlights || []), ""],
+      },
+    }));
+  };
+
+  const handleUpdateHeroHighlight = (index: number, val: string) => {
+    setPageContent((prev) => {
+      const updated = [...(prev.hero.highlights || [])];
+      updated[index] = val;
+      return {
+        ...prev,
+        hero: { ...prev.hero, highlights: updated },
+      };
+    });
+  };
+
+  const handleRemoveHeroHighlight = (index: number) => {
+    setPageContent((prev) => {
+      const updated = (prev.hero.highlights || []).filter((_, i) => i !== index);
+      return {
+        ...prev,
+        hero: {
+          ...prev.hero,
+          highlights: updated.length > 0 ? updated : [""],
+        },
+      };
+    });
+  };
+
+  // Hero Stats helpers
+  const handleAddHeroStat = () => {
+    setPageContent((prev) => ({
+      ...prev,
+      hero: {
+        ...prev.hero,
+        stats: [
+          ...(prev.hero.stats || []),
+          { value: "100+", label: "New Metric" },
+        ],
+      },
+    }));
+  };
+
+  const handleUpdateHeroStat = (
+    index: number,
+    field: "value" | "label",
+    val: string
+  ) => {
+    setPageContent((prev) => {
+      const updated = [...(prev.hero.stats || [])];
+      updated[index] = { ...updated[index], [field]: val };
+      return {
+        ...prev,
+        hero: { ...prev.hero, stats: updated },
+      };
+    });
+  };
+
+  const handleRemoveHeroStat = (index: number) => {
+    setPageContent((prev) => {
+      const updated = (prev.hero.stats || []).filter((_, i) => i !== index);
+      return {
+        ...prev,
+        hero: {
+          ...prev.hero,
+          stats: updated.length > 0 ? updated : [{ value: "", label: "" }],
+        },
+      };
+    });
+  };
+
   // --- Handlers for Client Logos ---
   const handleSelectClient = async (id: string) => {
     setClientError(null);
@@ -543,10 +638,11 @@ export default function AdminClientsPage() {
                       Hero Banner (&ldquo;Our Clients&rdquo;)
                     </h2>
                     <p className="text-xs text-muted-foreground mt-0.5">
-                      Main header, title, and description displayed at the top of the /clients page.
+                      Main header, visual showcase image, proof badges, trust highlights checklist, CTA buttons, and key performance metrics.
                     </p>
                   </div>
 
+                  {/* Basic Info */}
                   <div className="grid gap-6 md:grid-cols-2">
                     <div>
                       <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-white">
@@ -598,6 +694,319 @@ export default function AdminClientsPage() {
                         placeholder="We partner with startups, growing brands, and established enterprises..."
                         required
                       />
+                    </div>
+                  </div>
+
+                  {/* Showcase Image & Floating Proof Badges */}
+                  <div className="mt-8 border-t border-white/10 pt-6">
+                    <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
+                      Hero Visual Showcase &amp; Badges
+                    </h3>
+
+                    <div className="grid gap-6 md:grid-cols-2">
+                      <div className="md:col-span-2">
+                        <ImageUploadField
+                          publicId={pageContent.hero.image?.public_id || ""}
+                          url={pageContent.hero.image?.url || ""}
+                          onChange={(publicId, url) => {
+                            setPageContent((prev) => ({
+                              ...prev,
+                              hero: {
+                                ...prev.hero,
+                                image: { public_id: publicId, url },
+                              },
+                            }));
+                          }}
+                          label="Client Showcase Photo / Hero Image"
+                        />
+                        <div className="mt-2">
+                          <label className="text-xs text-muted-foreground block mb-1">
+                            Or enter direct image URL (Unsplash, Pexels, CDN):
+                          </label>
+                          <Input
+                            type="url"
+                            value={pageContent.hero.image?.url || ""}
+                            onChange={(e) =>
+                              setPageContent((prev) => ({
+                                ...prev,
+                                hero: {
+                                  ...prev.hero,
+                                  image: {
+                                    public_id: prev.hero.image?.public_id || "",
+                                    url: e.target.value,
+                                  },
+                                },
+                              }))
+                            }
+                            placeholder="https://images.unsplash.com/..."
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-white">
+                          Floating Rating Pill Text
+                        </label>
+                        <Input
+                          value={pageContent.hero.ratingText || ""}
+                          onChange={(e) =>
+                            setPageContent((prev) => ({
+                              ...prev,
+                              hero: { ...prev.hero, ratingText: e.target.value },
+                            }))
+                          }
+                          placeholder="e.g. 5.0 ★ Rated Across 50+ Global Clients"
+                        />
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-3">
+                        <div>
+                          <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-white">
+                            Badge Number / %
+                          </label>
+                          <Input
+                            value={pageContent.hero.badgeNumber || ""}
+                            onChange={(e) =>
+                              setPageContent((prev) => ({
+                                ...prev,
+                                hero: {
+                                  ...prev.hero,
+                                  badgeNumber: e.target.value,
+                                },
+                              }))
+                            }
+                            placeholder="e.g. 98%"
+                          />
+                        </div>
+                        <div>
+                          <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-white">
+                            Badge Label
+                          </label>
+                          <Input
+                            value={pageContent.hero.badgeText || ""}
+                            onChange={(e) =>
+                              setPageContent((prev) => ({
+                                ...prev,
+                                hero: {
+                                  ...prev.hero,
+                                  badgeText: e.target.value,
+                                },
+                              }))
+                            }
+                            placeholder="e.g. Client Retention Rate"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Call-to-Action (CTA) Buttons */}
+                  <div className="mt-8 border-t border-white/10 pt-6">
+                    <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
+                      Hero Call-To-Action (CTA) Buttons
+                    </h3>
+                    <div className="grid gap-6 md:grid-cols-2">
+                      <div>
+                        <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-white">
+                          Primary Button Text
+                        </label>
+                        <Input
+                          value={pageContent.hero.primaryCtaText || ""}
+                          onChange={(e) =>
+                            setPageContent((prev) => ({
+                              ...prev,
+                              hero: {
+                                ...prev.hero,
+                                primaryCtaText: e.target.value,
+                              },
+                            }))
+                          }
+                          placeholder="e.g. Become a Client Partner"
+                        />
+                      </div>
+                      <div>
+                        <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-white">
+                          Primary Button Link
+                        </label>
+                        <Input
+                          value={pageContent.hero.primaryCtaLink || ""}
+                          onChange={(e) =>
+                            setPageContent((prev) => ({
+                              ...prev,
+                              hero: {
+                                ...prev.hero,
+                                primaryCtaLink: e.target.value,
+                              },
+                            }))
+                          }
+                          placeholder="e.g. /contact"
+                        />
+                      </div>
+                      <div>
+                        <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-white">
+                          Secondary Button Text
+                        </label>
+                        <Input
+                          value={pageContent.hero.secondaryCtaText || ""}
+                          onChange={(e) =>
+                            setPageContent((prev) => ({
+                              ...prev,
+                              hero: {
+                                ...prev.hero,
+                                secondaryCtaText: e.target.value,
+                              },
+                            }))
+                          }
+                          placeholder="e.g. Explore Case Studies"
+                        />
+                      </div>
+                      <div>
+                        <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-white">
+                          Secondary Button Link
+                        </label>
+                        <Input
+                          value={pageContent.hero.secondaryCtaLink || ""}
+                          onChange={(e) =>
+                            setPageContent((prev) => ({
+                              ...prev,
+                              hero: {
+                                ...prev.hero,
+                                secondaryCtaLink: e.target.value,
+                              },
+                            }))
+                          }
+                          placeholder="e.g. /case-studies"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Trust Highlights Checklist */}
+                  <div className="mt-8 border-t border-white/10 pt-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <div>
+                        <h3 className="text-sm font-semibold text-white uppercase tracking-wider">
+                          Trust Highlights Checklist
+                        </h3>
+                        <p className="text-xs text-muted-foreground mt-0.5">
+                          Bullets displayed directly underneath the hero description.
+                        </p>
+                      </div>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        onClick={handleAddHeroHighlight}
+                        className="border-white/10 hover:bg-white/5"
+                      >
+                        <Plus className="mr-1.5 h-3.5 w-3.5" /> Add Highlight
+                      </Button>
+                    </div>
+
+                    <div className="space-y-3">
+                      {(pageContent.hero.highlights || []).map(
+                        (highlight, index) => (
+                          <div key={index} className="flex items-center gap-3">
+                            <CheckCircle2 className="h-4 w-4 shrink-0 text-primary" />
+                            <Input
+                              value={highlight}
+                              onChange={(e) =>
+                                handleUpdateHeroHighlight(index, e.target.value)
+                              }
+                              placeholder="e.g. 100% IP & Source Code Ownership Transferred"
+                              required
+                            />
+                            <Button
+                              type="button"
+                              variant="ghost"
+                              size="icon"
+                              disabled={(pageContent.hero.highlights || []).length <= 1}
+                              onClick={() => handleRemoveHeroHighlight(index)}
+                              className="text-muted-foreground hover:text-red-400"
+                              title="Delete highlight"
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        )
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Key Client Metrics Bar */}
+                  <div className="mt-8 border-t border-white/10 pt-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <div>
+                        <h3 className="text-sm font-semibold text-white uppercase tracking-wider">
+                          Key Client Metrics &amp; Stats Bar
+                        </h3>
+                        <p className="text-xs text-muted-foreground mt-0.5">
+                          Key performance counters shown in the grid below the hero (e.g. 100+ Enterprise Deliveries).
+                        </p>
+                      </div>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        onClick={handleAddHeroStat}
+                        className="border-white/10 hover:bg-white/5"
+                      >
+                        <Plus className="mr-1.5 h-3.5 w-3.5" /> Add Metric
+                      </Button>
+                    </div>
+
+                    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                      {(pageContent.hero.stats || []).map((stat, index) => (
+                        <div
+                          key={index}
+                          className="rounded-lg border border-white/10 bg-white/[0.02] p-4 relative"
+                        >
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-[10px] font-bold uppercase text-muted-foreground">
+                              Metric #{index + 1}
+                            </span>
+                            <Button
+                              type="button"
+                              variant="ghost"
+                              size="icon"
+                              disabled={(pageContent.hero.stats || []).length <= 1}
+                              onClick={() => handleRemoveHeroStat(index)}
+                              className="h-6 w-6 text-muted-foreground hover:text-red-400"
+                              title="Delete metric"
+                            >
+                              <Trash2 className="h-3.5 w-3.5" />
+                            </Button>
+                          </div>
+                          <div className="space-y-2">
+                            <div>
+                              <label className="text-[10px] font-semibold text-muted-foreground uppercase block mb-1">
+                                Value / Number
+                              </label>
+                              <Input
+                                value={stat.value}
+                                onChange={(e) =>
+                                  handleUpdateHeroStat(index, "value", e.target.value)
+                                }
+                                placeholder="e.g. 100+"
+                                required
+                              />
+                            </div>
+                            <div>
+                              <label className="text-[10px] font-semibold text-muted-foreground uppercase block mb-1">
+                                Label / Title
+                              </label>
+                              <Input
+                                value={stat.label}
+                                onChange={(e) =>
+                                  handleUpdateHeroStat(index, "label", e.target.value)
+                                }
+                                placeholder="e.g. Enterprise Deliveries"
+                                required
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>
