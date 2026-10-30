@@ -2,7 +2,7 @@
 
 import { Marquee } from "./Marquee";
 import { useEffect, useState } from "react";
-import { cn } from "@/lib/utils";
+import { cn, resolveImageUrl } from "@/lib/utils";
 import { getClients } from "@/service/client.service";
 import { getApiErrorMessage, unwrapApiResponse } from "@/lib/public-api";
 
@@ -34,7 +34,7 @@ const popups = [
   },
 ];
 
-export function ClientsMarquee() {
+export function ClientsMarquee({ subheading }: { subheading?: string }) {
   const [companies, setCompanies] = useState(fallbackCompanies);
   const [error, setError] = useState<string | null>(null);
 
@@ -45,20 +45,26 @@ export function ClientsMarquee() {
         const response = await getClients();
         if (!active) return;
         const clients =
-          unwrapApiResponse<{ name: string; logo?: string }[]>(response) || [];
+          unwrapApiResponse<{ name: string; logo?: any }[]>(response) || [];
         if (clients.length) {
           setCompanies(
-            clients.map((client, index) => ({
-              name: client.name,
-              logo: client.logo,
-              icon: "✦",
-              color: [
-                "text-blue-400",
-                "text-emerald-400",
-                "text-orange-400",
-                "text-cyan-400",
-              ][index % 4],
-            })),
+            clients.map((client, index) => {
+              const rawLogo =
+                typeof client.logo === "string"
+                  ? client.logo
+                  : client.logo?.url || "";
+              return {
+                name: client.name,
+                logo: rawLogo,
+                icon: "✦",
+                color: [
+                  "text-blue-400",
+                  "text-emerald-400",
+                  "text-orange-400",
+                  "text-cyan-400",
+                ][index % 4],
+              };
+            }),
           );
         }
       } catch (requestError) {
@@ -75,7 +81,11 @@ export function ClientsMarquee() {
     <section className="relative overflow-hidden bg-[#f8fafc] border-y border-gray-100 py-12 lg:py-16">
       <div className="relative z-10 mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8 mb-10">
         <h2 className="text-[13px] font-bold tracking-[0.2em] text-slate-400 uppercase">
-          Trusted by <span className="text-[#0ea5e9]">100K+</span> Clients Worldwide
+          {subheading || (
+            <>
+              Trusted by <span className="text-[#0ea5e9]">100K+</span> Clients Worldwide
+            </>
+          )}
         </h2>
         {error && <p className="mt-2 text-xs text-amber-300">{error}</p>}
       </div>
@@ -88,7 +98,11 @@ export function ClientsMarquee() {
               className="group relative flex items-center justify-center gap-3 rounded-xl border border-gray-200 bg-white shadow-[0_2px_10px_rgba(0,0,0,0.02)] px-8 py-4 transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-[0_8px_20px_rgba(14,165,233,0.1)] grayscale hover:grayscale-0"
             >
               {company.logo ? (
-                <img src={company.logo} alt={company.name} className="h-8 max-w-[120px] object-contain transition-opacity group-hover:opacity-100 opacity-80" />
+                <img
+                  src={resolveImageUrl(company.logo)}
+                  alt={company.name}
+                  className="h-8 max-w-[120px] object-contain transition-opacity group-hover:opacity-100 opacity-80"
+                />
               ) : (
                 <>
                   <span className={cn("text-2xl", company.color)}>

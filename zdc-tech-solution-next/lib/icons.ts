@@ -31,6 +31,14 @@ import {
   Server,
   Database,
   Layout,
+  Headphones,
+  Lock,
+  CheckCircle2,
+  ArrowRight,
+  Zap,
+  Check,
+  Star,
+  Sparkles,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -67,6 +75,14 @@ const iconMap: Record<string, LucideIcon> = {
   Server,
   Database,
   Layout,
+  Headphones,
+  Lock,
+  CheckCircle2,
+  ArrowRight,
+  Zap,
+  Check,
+  Star,
+  Sparkles,
 };
 
 export function getIcon(name: string): LucideIcon {

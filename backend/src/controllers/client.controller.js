@@ -1,5 +1,45 @@
 const Client = require("../models/Client");
+const SiteContent = require("../models/SiteContent");
 const { normalizeMediaPayload, normalizePublicItem, normalizePublicItems } = require("../utils/publicResponse");
+const { normalizeClientsPageDoc } = require("./siteContent.controller");
+
+// Get Clients Page Content
+exports.getPageContent = async (req, res) => {
+    try {
+        let siteContent = await SiteContent.findOne().sort({ createdAt: -1 });
+        if (!siteContent) {
+            siteContent = await SiteContent.create({});
+        }
+        const docObj = siteContent.toObject ? siteContent.toObject() : siteContent;
+        const normalized = normalizeClientsPageDoc(docObj.clientsPage);
+        res.status(200).json({ success: true, data: normalized });
+    } catch (error) {
+        res.status(400).json({ success: false, message: error.message });
+    }
+};
+
+// Update Clients Page Content
+exports.updatePageContent = async (req, res) => {
+    try {
+        delete req.body._id;
+        delete req.body.__v;
+        delete req.body.createdAt;
+        delete req.body.updatedAt;
+
+        let siteContent = await SiteContent.findOne().sort({ createdAt: -1 });
+        if (!siteContent) {
+            siteContent = await SiteContent.create({ clientsPage: req.body });
+        } else {
+            siteContent.clientsPage = req.body;
+            await siteContent.save();
+        }
+        const docObj = siteContent.toObject ? siteContent.toObject() : siteContent;
+        const normalized = normalizeClientsPageDoc(docObj.clientsPage);
+        res.status(200).json({ success: true, data: normalized });
+    } catch (error) {
+        res.status(400).json({ success: false, message: error.message });
+    }
+};
 
 // Create
 exports.create = async (req, res) => {

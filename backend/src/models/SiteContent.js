@@ -58,6 +58,97 @@ const siteContentSchema = new mongoose.Schema(
             visionDescription: { type: String, default: "To be the most trusted technology partner for businesses worldwide, recognized for engineering excellence, honest partnerships and solutions that stand the test of time." },
             visionIcon: { type: String, default: "TrendingUp" }
         },
+        clientsPage: {
+            hero: {
+                eyebrow: { type: String, default: "Our Clients" },
+                title: { type: String, default: "Trusted by Innovative Companies Worldwide" },
+                description: { type: String, default: "We partner with startups, growing brands, and established enterprises to design, engineer, and scale high-performance digital products." }
+            },
+            partnerships: {
+                eyebrow: { type: String, default: "Partnerships" },
+                title: { type: String, default: "Global Footprint" },
+                description: { type: String, default: "Our engineering solutions power organizations across diverse sectors and global markets." },
+                subheading: { type: String, default: "Trusted by 100K+ Clients Worldwide" }
+            },
+            engagementModels: {
+                eyebrow: { type: String, default: "ENGAGEMENT MODELS" },
+                title: { type: String, default: "Flexible Ways We Work Together" },
+                description: { type: String, default: "Every organization has unique operational workflows. We tailor our collaboration model to match your specific timeline, team structure, and delivery goals." },
+                models: [
+                    {
+                        icon: { type: String, default: "Users" },
+                        title: { type: String, default: "Dedicated Engineering Teams" },
+                        description: { type: String, default: "Seamlessly extend your internal development capabilities with dedicated full-stack engineers, UI/UX designers, and QA specialists who work exclusively on your product roadmap." }
+                    },
+                    {
+                        icon: { type: String, default: "Code2" },
+                        title: { type: String, default: "End-to-End Product Delivery" },
+                        description: { type: String, default: "From discovery and technical architecture to deployment and monitoring, we take full ownership of designing, building, and launching your digital platform on schedule." }
+                    },
+                    {
+                        icon: { type: String, default: "ShieldCheck" },
+                        title: { type: String, default: "Enterprise Technical Consulting" },
+                        description: { type: String, default: "Get strategic guidance on software architecture, performance optimization, cloud infrastructure scalability, and security audits from experienced senior engineers." }
+                    },
+                    {
+                        icon: { type: String, default: "Headphones" },
+                        title: { type: String, default: "Ongoing Support & SLA Management" },
+                        description: { type: String, default: "Keep your production systems secure, updated, and highly responsive with round-the-clock monitoring, routine maintenance, and dedicated technical support." }
+                    }
+                ]
+            },
+            domainExpertise: {
+                eyebrow: { type: String, default: "DOMAIN EXPERTISE" },
+                title: { type: String, default: "Industries We Transform" },
+                description: { type: String, default: "Our engineering teams bring deep technical knowledge combined with practical domain understanding to build purpose-built software." },
+                industries: [
+                    {
+                        title: { type: String, default: "Healthcare & Life Sciences" },
+                        description: { type: String, default: "HIPAA-compliant hospital management, patient portals, appointment scheduling, and electronic health record systems." }
+                    },
+                    {
+                        title: { type: String, default: "E-Commerce & Retail" },
+                        description: { type: String, default: "High-conversion multi-vendor marketplaces, custom checkout flows, inventory automation, and payment gateway integrations." }
+                    },
+                    {
+                        title: { type: String, default: "Finance & Banking" },
+                        description: { type: String, default: "Secure customer dashboards, real-time transaction tracking, compliance-ready financial portals, and automated reporting." }
+                    },
+                    {
+                        title: { type: String, default: "Education & EdTech" },
+                        description: { type: String, default: "Student learning management systems, parent communication apps, digital attendance, and multi-campus administrative software." }
+                    },
+                    {
+                        title: { type: String, default: "Logistics & Supply Chain" },
+                        description: { type: String, default: "Live order tracking, fleet management dashboards, automated dispatch routing, and warehouse inventory systems." }
+                    },
+                    {
+                        title: { type: String, default: "Enterprise SaaS & Cloud" },
+                        description: { type: String, default: "Multi-tenant cloud platforms, subscription billing, CRM automation, and high-performance microservices architecture." }
+                    }
+                ]
+            },
+            trustAndSecurity: {
+                eyebrow: { type: String, default: "TRUST & SECURITY" },
+                title: { type: String, default: "Our Commitment to Every Client Partner" },
+                description: { type: String, default: "Building long-term client relationships requires more than clean code. We maintain rigorous standards for confidentiality, security compliance, and transparent delivery throughout every stage of the project lifecycle." },
+                standards: {
+                    type: [String],
+                    default: [
+                        "Complete intellectual property (IP) and source code ownership transferred to the client upon milestone delivery.",
+                        "Comprehensive Non-Disclosure Agreements (NDAs) signed before technical discovery and requirement analysis.",
+                        "Bi-weekly agile sprint demos, sprint retrospectives, and direct communication with project leads.",
+                        "Automated CI/CD pipelines, code reviews, and comprehensive regression test suites for every deployment."
+                    ]
+                },
+                cardTitle: { type: String, default: "Explore Case Studies & Results" },
+                cardDescription: { type: String, default: "Review real-world architectures and measurable outcomes from our recent client engagements across healthcare, e-commerce, and enterprise management." },
+                caseStudiesText: { type: String, default: "View Case Studies" },
+                caseStudiesLink: { type: String, default: "/case-studies" },
+                portfolioText: { type: String, default: "Browse Portfolio" },
+                portfolioLink: { type: String, default: "/portfolio" }
+            }
+        },
     },
     { timestamps: true }
 );
