@@ -50,6 +50,8 @@ app.use("/api/v1/core-values", require("./routes/coreValue.routes"));
 app.use("/api/v1/life-at-company", require("./routes/lifeAtCompany.routes"));
 app.use("/api/v1/products", require("./routes/product.routes"));
 app.use("/api/v1/product", require("./routes/product.routes"));
+app.use("/api/v1/demos", require("./routes/demo.routes"));
+app.use("/api/v1/demo", require("./routes/demo.routes"));
 // Admin — Backup
 const isAuthenticated = require("./middleware/auth");
 const authorizeRoles = require("./middleware/role");

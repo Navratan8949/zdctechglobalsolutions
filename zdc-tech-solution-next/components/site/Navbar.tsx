@@ -17,6 +17,7 @@ import type { Service } from "@/data/services";
 const companyLinks = [
   { label: "About Us", href: "/about" },
   { label: "Our Products", href: "/products" },
+  { label: "Live Demos", href: "/demos" },
   { label: "Our Team", href: "/team" },
   { label: "Daily Posts", href: "/posts" },
   { label: "Services", href: "/services" },
@@ -50,6 +51,7 @@ export type NavItem = {
 const mainNav: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "Company", href: "/about", children: companyLinks },
+  { label: "Live Demos", href: "/demos" },
   { label: "Careers", href: "/careers" },
   {
     label: "Services",
