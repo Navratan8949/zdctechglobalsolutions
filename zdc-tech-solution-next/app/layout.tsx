@@ -85,6 +85,13 @@ export default function RootLayout({
       lang="en"
       suppressHydrationWarning
     >
+      <head>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8757895657859713"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body
         className="min-h-screen bg-background font-sans text-foreground"
         suppressHydrationWarning
