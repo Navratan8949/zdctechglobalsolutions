@@ -91,11 +91,20 @@ export default function RootLayout({
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8757895657859713"
           crossOrigin="anonymous"
         />
+        <script
+          async
+          custom-element="amp-auto-ads"
+          src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"
+        />
       </head>
       <body
         className="min-h-screen bg-background font-sans text-foreground"
         suppressHydrationWarning
       >
+        <amp-auto-ads
+          type="adsense"
+          data-ad-client="ca-pub-8757895657859713"
+        />
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-1DQD719M6E" strategy="afterInteractive" />
         <Script id="google-analytics" strategy="afterInteractive">
           {`
