@@ -366,7 +366,7 @@ export default function AdminRegistrationServicesPage() {
 
           <div className="flex flex-wrap items-center gap-2.5">
             <Link
-              href="/admin/contacts"
+              href="/admin/registration-applications"
               className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-xs font-semibold transition-all border ${
                 isDark
                   ? "bg-slate-800/80 border-slate-700 text-slate-200 hover:bg-slate-700"

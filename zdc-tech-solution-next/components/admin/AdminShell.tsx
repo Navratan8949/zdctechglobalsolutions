@@ -26,6 +26,7 @@ import {
   Package,
   PlaySquare,
   Landmark,
+  FileCheck,
 } from "lucide-react";
 import {
   useAdminAuth,
@@ -75,6 +76,11 @@ const primaryNavigation: AdminNavItem[] = [
 
 const secondaryNavigation: AdminNavItem[] = [
   { label: "Contacts", href: "/admin/contacts", icon: MessageSquare },
+  {
+    label: "Reg. Applications",
+    href: "/admin/registration-applications",
+    icon: FileCheck,
+  },
   { label: "Subscribers", href: "/admin/subscribers", icon: MessageSquare },
   {
     label: "Applications",

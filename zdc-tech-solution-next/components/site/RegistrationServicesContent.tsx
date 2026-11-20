@@ -32,7 +32,7 @@ import {
 import { getRegistrationServices } from "@/service/registrationService.service";
 import { unwrapApiResponse } from "@/lib/public-api";
 import { resolveImageUrl } from "@/lib/utils";
-import { submitContact } from "@/service/contact.service";
+import { submitRegistrationApplication } from "@/service/registrationApplication.service";
 
 export function RegistrationServicesContent({
   initialServices,
@@ -129,15 +129,14 @@ export function RegistrationServicesContent({
     setSubmitError(null);
 
     try {
-      await submitContact({
+      await submitRegistrationApplication({
         name: applyForm.name,
         email: applyForm.email,
         phone: applyForm.phone,
-        company: applyForm.city ? `City: ${applyForm.city}` : undefined,
-        subject: `[Registration Application] ${applyForm.serviceTitle}`,
-        service: `Registration: ${applyForm.serviceTitle}`,
-        inquiryType: "general",
-        message: `${applyForm.message}\n\n[Selected Service: ${applyForm.serviceTitle}]\n[Applicant City: ${applyForm.city || "Not specified"}]`,
+        city: applyForm.city,
+        serviceTitle: applyForm.serviceTitle,
+        category: applicationModalService?.category || "Other",
+        message: applyForm.message,
       });
       setSubmitSuccess(true);
       setTimeout(() => {
