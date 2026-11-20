@@ -73,6 +73,9 @@ export const metadata: Metadata = {
       "Partner with the best IT company in Jaipur, Rajasthan & India. We build high-performance websites, mobile apps, custom software, and digital solutions that accelerate business growth.",
     images: ["/images/og-image.jpg"],
   },
+  other: {
+    "google-adsense-account": "ca-pub-8757895657859713",
+  },
 };
 
 export default function RootLayout({
@@ -86,6 +89,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        <meta name="google-adsense-account" content="ca-pub-8757895657859713" />
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8757895657859713"
