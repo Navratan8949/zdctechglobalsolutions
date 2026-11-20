@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 import {
   AlertCircle,
   CheckCircle2,
@@ -21,8 +22,11 @@ import {
   Layers,
   Sparkles,
   ExternalLink,
+  MessageSquare,
+  ArrowUpRight,
 } from "lucide-react";
 import { useAdminAuth } from "@/components/admin/AdminAuthProvider";
+import { useAdminTheme } from "@/components/admin/AdminThemeProvider";
 import { AdminShell } from "@/components/admin/AdminShell";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -93,6 +97,7 @@ function getErrorMessage(error: unknown) {
 export default function AdminRegistrationServicesPage() {
   const router = useRouter();
   const { user, isAuthenticated, isLoading: isAuthLoading } = useAdminAuth();
+  const { isDark } = useAdminTheme();
 
   const [services, setServices] = useState<RegistrationServiceItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -262,7 +267,7 @@ export default function AdminRegistrationServicesPage() {
   const handleSeedDefaults = async () => {
     if (
       !confirm(
-        "Do you want to initialize/reset the 16 standard NGO & Company Registration services? Existing records will not be duplicated if already present."
+        "Do you want to initialize/reset the 16 standard NGO & Company Registration services? Existing records will be refreshed."
       )
     ) {
       return;
@@ -335,70 +340,188 @@ export default function AdminRegistrationServicesPage() {
 
   return (
     <AdminShell user={user}>
-      <div className="space-y-6">
-        {/* Top Action Bar & Metrics */}
+      <div className={`space-y-6 ${isDark ? "text-slate-100" : "text-slate-900"}`}>
+        {/* Top Header Banner */}
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#0ea5e9]">
+              Legal &amp; Certification
+            </p>
+            <h1
+              className={`mt-1 font-display text-2xl sm:text-3xl font-bold tracking-tight ${
+                isDark ? "text-white" : "text-slate-900"
+              }`}
+            >
+              NGO &amp; Company Registrations
+            </h1>
+            <p
+              className={`mt-1 text-xs sm:text-sm max-w-2xl ${
+                isDark ? "text-slate-400" : "text-slate-600"
+              }`}
+            >
+              Manage government registration catalogs, document checklists, and review
+              submitted client applications.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2.5">
+            <Link
+              href="/admin/contacts"
+              className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-xs font-semibold transition-all border ${
+                isDark
+                  ? "bg-slate-800/80 border-slate-700 text-slate-200 hover:bg-slate-700"
+                  : "bg-white border-slate-200 text-slate-700 hover:bg-slate-50 shadow-xs"
+              }`}
+            >
+              <MessageSquare className="h-3.5 w-3.5 text-[#0ea5e9]" />
+              <span>View Inquiries / Applications</span>
+              <ArrowUpRight className="h-3.5 w-3.5 text-slate-400" />
+            </Link>
+
+            <Link
+              href="/registration-services"
+              target="_blank"
+              rel="noreferrer"
+              className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-xs font-semibold transition-all border ${
+                isDark
+                  ? "bg-slate-800/80 border-slate-700 text-slate-200 hover:bg-slate-700"
+                  : "bg-white border-slate-200 text-slate-700 hover:bg-slate-50 shadow-xs"
+              }`}
+            >
+              <Eye className="h-3.5 w-3.5 text-emerald-500" />
+              <span>View Public Page</span>
+              <ExternalLink className="h-3.5 w-3.5 text-slate-400" />
+            </Link>
+          </div>
+        </div>
+
+        {/* Top Metrics Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
-            <div className="flex items-center justify-between text-slate-400 text-xs font-semibold uppercase tracking-wider">
+          <div
+            className={`rounded-xl border p-4 transition-colors ${
+              isDark
+                ? "border-slate-800 bg-slate-900/60"
+                : "border-slate-200 bg-white shadow-xs"
+            }`}
+          >
+            <div
+              className={`flex items-center justify-between text-xs font-semibold uppercase tracking-wider ${
+                isDark ? "text-slate-400" : "text-slate-500"
+              }`}
+            >
               <span>Total Services</span>
-              <Layers className="h-4 w-4 text-cyan-400" />
+              <Layers className="h-4 w-4 text-[#0ea5e9]" />
             </div>
-            <p className="mt-2 text-2xl font-bold text-white">{services.length}</p>
-            <p className="text-xs text-slate-400 mt-1">Live active & inactive</p>
+            <p
+              className={`mt-2 text-2xl font-bold ${
+                isDark ? "text-white" : "text-slate-900"
+              }`}
+            >
+              {services.length}
+            </p>
+            <p
+              className={`text-xs mt-1 ${
+                isDark ? "text-slate-400" : "text-slate-500"
+              }`}
+            >
+              Active &amp; inactive offerings
+            </p>
           </div>
 
-          <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
-            <div className="flex items-center justify-between text-slate-400 text-xs font-semibold uppercase tracking-wider">
+          <div
+            className={`rounded-xl border p-4 transition-colors ${
+              isDark
+                ? "border-slate-800 bg-slate-900/60"
+                : "border-slate-200 bg-white shadow-xs"
+            }`}
+          >
+            <div
+              className={`flex items-center justify-between text-xs font-semibold uppercase tracking-wider ${
+                isDark ? "text-slate-400" : "text-slate-500"
+              }`}
+            >
               <span>NGO Registrations</span>
-              <Landmark className="h-4 w-4 text-emerald-400" />
+              <Landmark className="h-4 w-4 text-emerald-500" />
             </div>
-            <p className="mt-2 text-2xl font-bold text-emerald-400">{ngoCount}</p>
-            <p className="text-xs text-slate-400 mt-1">Trust, 12A/80G, CSR-1, etc.</p>
+            <p className="mt-2 text-2xl font-bold text-emerald-500">{ngoCount}</p>
+            <p
+              className={`text-xs mt-1 ${
+                isDark ? "text-slate-400" : "text-slate-500"
+              }`}
+            >
+              Trust, Society, 12A/80G, CSR-1
+            </p>
           </div>
 
-          <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-4">
-            <div className="flex items-center justify-between text-slate-400 text-xs font-semibold uppercase tracking-wider">
+          <div
+            className={`rounded-xl border p-4 transition-colors ${
+              isDark
+                ? "border-slate-800 bg-slate-900/60"
+                : "border-slate-200 bg-white shadow-xs"
+            }`}
+          >
+            <div
+              className={`flex items-center justify-between text-xs font-semibold uppercase tracking-wider ${
+                isDark ? "text-slate-400" : "text-slate-500"
+              }`}
+            >
               <span>Company Registrations</span>
-              <Building2 className="h-4 w-4 text-blue-400" />
+              <Building2 className="h-4 w-4 text-blue-500" />
             </div>
-            <p className="mt-2 text-2xl font-bold text-blue-400">{companyCount}</p>
-            <p className="text-xs text-slate-400 mt-1">Pvt Ltd, LLP, GST, MSME, etc.</p>
+            <p className="mt-2 text-2xl font-bold text-blue-500">{companyCount}</p>
+            <p
+              className={`text-xs mt-1 ${
+                isDark ? "text-slate-400" : "text-slate-500"
+              }`}
+            >
+              Pvt Ltd, LLP, GST, MSME, TM
+            </p>
           </div>
 
-          <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-4 flex flex-col justify-center gap-2">
+          <div
+            className={`rounded-xl border p-4 flex flex-col justify-center gap-2 transition-colors ${
+              isDark
+                ? "border-slate-800 bg-slate-900/60"
+                : "border-slate-200 bg-white shadow-xs"
+            }`}
+          >
             <Button
               onClick={handleOpenAdd}
-              className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold text-sm shadow-lg shadow-cyan-500/20"
+              className="w-full bg-[#0ea5e9] hover:bg-[#0284c7] text-white font-semibold text-xs shadow-md shadow-[#0ea5e9]/20"
             >
-              <Plus className="h-4 w-4 mr-2" />
+              <Plus className="h-4 w-4 mr-1.5" />
               Add Registration
             </Button>
             <Button
               onClick={handleSeedDefaults}
               disabled={isSeeding}
               variant="outline"
-              className="w-full border-slate-700 bg-slate-800/80 hover:bg-slate-700 text-slate-200 text-xs font-medium"
+              className={`w-full text-xs font-medium ${
+                isDark
+                  ? "border-slate-700 bg-slate-800/80 hover:bg-slate-700 text-slate-200"
+                  : "border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700"
+              }`}
             >
               {isSeeding ? (
                 <Loader2 className="h-3.5 w-3.5 animate-spin mr-1.5" />
               ) : (
-                <RefreshCw className="h-3.5 w-3.5 mr-1.5 text-cyan-400" />
+                <RefreshCw className="h-3.5 w-3.5 mr-1.5 text-[#0ea5e9]" />
               )}
-              Seed Standard (16)
+              Restore Standard (16)
             </Button>
           </div>
         </div>
 
         {/* Feedback / Alert */}
         {feedback && (
-          <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 p-3.5 text-emerald-300 text-sm flex items-center justify-between">
+          <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 p-3.5 text-emerald-600 dark:text-emerald-300 text-sm flex items-center justify-between">
             <div className="flex items-center gap-2">
               <CheckCircle2 className="h-4 w-4 flex-shrink-0" />
               <span>{feedback}</span>
             </div>
             <button
               onClick={() => setFeedback(null)}
-              className="text-emerald-400 hover:text-emerald-200 text-xs font-bold"
+              className="text-emerald-600 dark:text-emerald-400 hover:opacity-80 text-xs font-bold"
             >
               Dismiss
             </button>
@@ -406,23 +529,29 @@ export default function AdminRegistrationServicesPage() {
         )}
 
         {error && (
-          <div className="rounded-lg border border-red-500/30 bg-red-500/10 p-3.5 text-red-300 text-sm flex items-center justify-between">
+          <div className="rounded-lg border border-red-500/30 bg-red-500/10 p-3.5 text-red-600 dark:text-red-300 text-sm flex items-center justify-between">
             <div className="flex items-center gap-2">
               <AlertCircle className="h-4 w-4 flex-shrink-0" />
               <span>{error}</span>
             </div>
             <button
               onClick={() => setError(null)}
-              className="text-red-400 hover:text-red-200 text-xs font-bold"
+              className="text-red-600 dark:text-red-400 hover:opacity-80 text-xs font-bold"
             >
               Dismiss
             </button>
           </div>
         )}
 
-        {/* Search & Tabs */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-slate-900/60 p-3 rounded-xl border border-slate-800">
-          <div className="flex items-center gap-2">
+        {/* Search & Tabs Bar */}
+        <div
+          className={`flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-3 rounded-xl border transition-colors ${
+            isDark
+              ? "bg-slate-900/60 border-slate-800"
+              : "bg-white border-slate-200 shadow-xs"
+          }`}
+        >
+          <div className="flex flex-wrap items-center gap-2">
             {(["All", "NGO Registration", "Company Registration"] as const).map(
               (cat) => (
                 <button
@@ -430,8 +559,10 @@ export default function AdminRegistrationServicesPage() {
                   onClick={() => setCategoryFilter(cat)}
                   className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                     categoryFilter === cat
-                      ? "bg-cyan-500 text-slate-950 font-bold shadow-md shadow-cyan-500/20"
-                      : "bg-slate-800/80 text-slate-400 hover:text-white hover:bg-slate-800"
+                      ? "bg-[#0ea5e9] text-white font-bold shadow-md shadow-[#0ea5e9]/20"
+                      : isDark
+                      ? "bg-slate-800/80 text-slate-400 hover:text-white hover:bg-slate-800"
+                      : "bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200"
                   }`}
                 >
                   {cat === "All" ? "All Services" : cat}
@@ -444,35 +575,53 @@ export default function AdminRegistrationServicesPage() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
             <Input
               type="text"
-              placeholder="Search by title, dept, keyword..."
+              placeholder="Search by title, authority, keyword..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-9 h-9 text-xs bg-slate-950 border-slate-700 text-white placeholder-slate-500 focus:border-cyan-500"
+              className={`pl-9 h-9 text-xs transition-colors ${
+                isDark
+                  ? "bg-slate-950 border-slate-700 text-white placeholder-slate-500 focus:border-[#0ea5e9]"
+                  : "bg-slate-50 border-slate-200 text-slate-900 placeholder-slate-400 focus:bg-white focus:border-[#0ea5e9]"
+              }`}
             />
           </div>
         </div>
 
-        {/* List / Table */}
+        {/* List / Cards Grid */}
         {isLoading ? (
           <div className="flex flex-col items-center justify-center py-20 text-slate-400">
-            <Loader2 className="h-8 w-8 animate-spin text-cyan-400 mb-3" />
+            <Loader2 className="h-8 w-8 animate-spin text-[#0ea5e9] mb-3" />
             <p className="text-sm">Loading registration services...</p>
           </div>
         ) : filteredServices.length === 0 ? (
-          <div className="text-center py-16 border border-dashed border-slate-800 rounded-2xl bg-slate-900/30">
-            <FileCheck className="h-12 w-12 text-slate-600 mx-auto mb-3" />
-            <h3 className="text-base font-semibold text-white">
+          <div
+            className={`text-center py-16 border border-dashed rounded-2xl ${
+              isDark
+                ? "border-slate-800 bg-slate-900/30"
+                : "border-slate-200 bg-slate-50/60"
+            }`}
+          >
+            <FileCheck className="h-12 w-12 text-slate-400 mx-auto mb-3" />
+            <h3
+              className={`text-base font-semibold ${
+                isDark ? "text-white" : "text-slate-900"
+              }`}
+            >
               No registration services found
             </h3>
-            <p className="text-sm text-slate-400 mt-1 max-w-sm mx-auto">
+            <p
+              className={`text-sm mt-1 max-w-sm mx-auto ${
+                isDark ? "text-slate-400" : "text-slate-500"
+              }`}
+            >
               {searchQuery
                 ? `No results matching "${searchQuery}". Try a different search.`
-                : "You haven't added any registration services yet. Click 'Add Registration' or 'Seed Standard' to begin."}
+                : "No registration services available. Click 'Add Registration' or 'Restore Standard' to seed 16 services."}
             </p>
             <div className="mt-5 flex items-center justify-center gap-3">
               <Button
                 onClick={handleOpenAdd}
-                className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold"
+                className="bg-[#0ea5e9] hover:bg-[#0284c7] text-white text-xs font-bold"
               >
                 <Plus className="h-3.5 w-3.5 mr-1.5" />
                 Add First Service
@@ -480,9 +629,13 @@ export default function AdminRegistrationServicesPage() {
               <Button
                 onClick={handleSeedDefaults}
                 variant="outline"
-                className="border-slate-700 text-slate-300 text-xs hover:bg-slate-800"
+                className={`text-xs ${
+                  isDark
+                    ? "border-slate-700 text-slate-300 hover:bg-slate-800"
+                    : "border-slate-200 text-slate-700 hover:bg-slate-100"
+                }`}
               >
-                Seed 16 Standard Services
+                Restore 16 Standard Services
               </Button>
             </div>
           </div>
@@ -500,13 +653,17 @@ export default function AdminRegistrationServicesPage() {
                   key={id}
                   className={`rounded-xl border transition-all duration-200 overflow-hidden flex flex-col justify-between ${
                     service.isActive
-                      ? "border-slate-800 bg-slate-900/60 hover:border-slate-700"
-                      : "border-red-950/40 bg-slate-950/40 opacity-70"
+                      ? isDark
+                        ? "border-slate-800 bg-slate-900/60 hover:border-slate-700"
+                        : "border-slate-200 bg-white hover:border-[#0ea5e9]/50 shadow-xs hover:shadow-md"
+                      : isDark
+                      ? "border-red-950/40 bg-slate-950/40 opacity-70"
+                      : "border-red-200 bg-red-50/30 opacity-75"
                   }`}
                 >
                   <div>
                     {/* Thumbnail & Header */}
-                    <div className="relative h-40 w-full overflow-hidden bg-slate-950 group">
+                    <div className="relative h-40 w-full overflow-hidden bg-slate-900 group">
                       <Image
                         src={certImg}
                         alt={service.title}
@@ -520,14 +677,14 @@ export default function AdminRegistrationServicesPage() {
                         <span
                           className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${
                             isNgo
-                              ? "bg-emerald-500/90 text-white"
-                              : "bg-blue-500/90 text-white"
+                              ? "bg-emerald-600/90 text-white"
+                              : "bg-blue-600/90 text-white"
                           }`}
                         >
                           {service.category}
                         </span>
                         {service.popular && (
-                          <span className="bg-amber-500/90 text-slate-950 px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider flex items-center gap-1">
+                          <span className="bg-amber-400 text-slate-950 px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider flex items-center gap-1 shadow-xs">
                             <Sparkles className="h-2.5 w-2.5" /> Popular
                           </span>
                         )}
@@ -558,36 +715,58 @@ export default function AdminRegistrationServicesPage() {
 
                     {/* Content Details */}
                     <div className="p-4 space-y-3">
-                      <p className="text-xs text-slate-400 line-clamp-2">
+                      <p
+                        className={`text-xs line-clamp-2 ${
+                          isDark ? "text-slate-400" : "text-slate-600"
+                        }`}
+                      >
                         {service.shortDescription}
                       </p>
 
-                      <div className="grid grid-cols-2 gap-2 text-[11px] text-slate-300 pt-1 border-t border-slate-800">
+                      <div
+                        className={`grid grid-cols-2 gap-2 text-[11px] pt-1 border-t ${
+                          isDark
+                            ? "border-slate-800 text-slate-300"
+                            : "border-slate-100 text-slate-700"
+                        }`}
+                      >
                         <div className="flex items-center gap-1.5">
-                          <Clock className="h-3.5 w-3.5 text-cyan-400" />
+                          <Clock className="h-3.5 w-3.5 text-[#0ea5e9]" />
                           <span className="truncate">{service.processingTime}</span>
                         </div>
-                        <div className="flex items-center gap-1.5 justify-end font-semibold text-emerald-400">
+                        <div className="flex items-center gap-1.5 justify-end font-semibold text-emerald-600 dark:text-emerald-400">
                           <span className="truncate">{service.fee}</span>
                         </div>
                       </div>
 
-                      <div className="flex items-center justify-between text-[11px] text-slate-400 bg-slate-950/60 p-2 rounded-lg border border-slate-800/80">
+                      <div
+                        className={`flex items-center justify-between text-[11px] p-2 rounded-lg border ${
+                          isDark
+                            ? "bg-slate-950/60 border-slate-800/80 text-slate-400"
+                            : "bg-slate-50 border-slate-200/80 text-slate-600"
+                        }`}
+                      >
                         <span>
                           Docs:{" "}
-                          <strong className="text-white">
+                          <strong
+                            className={isDark ? "text-white" : "text-slate-900"}
+                          >
                             {service.documentsRequired?.length || 0}
                           </strong>
                         </span>
                         <span>
                           Benefits:{" "}
-                          <strong className="text-white">
+                          <strong
+                            className={isDark ? "text-white" : "text-slate-900"}
+                          >
                             {service.benefits?.length || 0}
                           </strong>
                         </span>
                         <span>
                           Steps:{" "}
-                          <strong className="text-white">
+                          <strong
+                            className={isDark ? "text-white" : "text-slate-900"}
+                          >
                             {service.processSteps?.length || 0}
                           </strong>
                         </span>
@@ -596,24 +775,42 @@ export default function AdminRegistrationServicesPage() {
                   </div>
 
                   {/* Actions Footer */}
-                  <div className="p-3 bg-slate-950/80 border-t border-slate-800 flex items-center justify-between gap-2">
+                  <div
+                    className={`p-3 border-t flex items-center justify-between gap-2 ${
+                      isDark
+                        ? "bg-slate-950/80 border-slate-800"
+                        : "bg-slate-50/90 border-slate-100"
+                    }`}
+                  >
                     <button
                       onClick={() => setPreviewItem(service)}
-                      className="px-2.5 py-1 text-xs text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 rounded-md transition-all flex items-center gap-1"
+                      className={`px-2.5 py-1 text-xs rounded-md transition-all flex items-center gap-1 ${
+                        isDark
+                          ? "text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700"
+                          : "text-slate-700 hover:text-slate-950 bg-white hover:bg-slate-100 border border-slate-200 shadow-xs"
+                      }`}
                     >
-                      <Eye className="h-3.5 w-3.5 text-cyan-400" /> View
+                      <Eye className="h-3.5 w-3.5 text-[#0ea5e9]" /> View
                     </button>
 
                     <div className="flex items-center gap-1.5">
                       <button
                         onClick={() => handleOpenEdit(service)}
-                        className="px-2.5 py-1 text-xs text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 rounded-md transition-all flex items-center gap-1"
+                        className={`px-2.5 py-1 text-xs rounded-md transition-all flex items-center gap-1 ${
+                          isDark
+                            ? "text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700"
+                            : "text-slate-700 hover:text-slate-950 bg-white hover:bg-slate-100 border border-slate-200 shadow-xs"
+                        }`}
                       >
-                        <Edit className="h-3.5 w-3.5 text-blue-400" /> Edit
+                        <Edit className="h-3.5 w-3.5 text-blue-500" /> Edit
                       </button>
                       <button
                         onClick={() => handleDelete(id, service.title)}
-                        className="px-2.5 py-1 text-xs text-red-400 hover:text-white hover:bg-red-600 rounded-md transition-all flex items-center gap-1"
+                        className={`px-2.5 py-1 text-xs rounded-md transition-all flex items-center gap-1 ${
+                          isDark
+                            ? "text-red-400 hover:text-white hover:bg-red-600"
+                            : "text-red-600 hover:text-white hover:bg-red-600 bg-red-50 border border-red-100"
+                        }`}
                       >
                         <Trash2 className="h-3.5 w-3.5" />
                       </button>
@@ -627,28 +824,50 @@ export default function AdminRegistrationServicesPage() {
 
         {/* Modal: Add / Edit Registration Service */}
         {isFormOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-sm overflow-y-auto">
-            <div className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto rounded-2xl border border-slate-800 bg-slate-900 p-6 shadow-2xl text-white">
-              <div className="flex items-center justify-between pb-4 border-b border-slate-800">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs overflow-y-auto">
+            <div
+              className={`relative w-full max-w-4xl max-h-[92vh] overflow-y-auto rounded-2xl border p-6 shadow-2xl transition-colors ${
+                isDark
+                  ? "border-slate-800 bg-slate-900 text-white"
+                  : "border-slate-200 bg-white text-slate-900"
+              }`}
+            >
+              <div
+                className={`flex items-center justify-between pb-4 border-b ${
+                  isDark ? "border-slate-800" : "border-slate-200"
+                }`}
+              >
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400">
+                  <div className="p-2 rounded-xl bg-blue-50 dark:bg-cyan-500/10 border border-blue-200 dark:border-cyan-500/20 text-[#0ea5e9]">
                     <FileCheck className="h-6 w-6" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold">
+                    <h3
+                      className={`text-lg font-bold ${
+                        isDark ? "text-white" : "text-slate-900"
+                      }`}
+                    >
                       {editingId
                         ? "Edit Registration Service"
                         : "Add New Registration Service"}
                     </h3>
-                    <p className="text-xs text-slate-400">
-                      Configure legal certification details, checklists, fee, and
+                    <p
+                      className={`text-xs ${
+                        isDark ? "text-slate-400" : "text-slate-500"
+                      }`}
+                    >
+                      Configure legal certification details, checklists, fees, and
                       guidelines.
                     </p>
                   </div>
                 </div>
                 <button
                   onClick={handleCloseForm}
-                  className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-800 hover:text-white"
+                  className={`rounded-lg p-1.5 transition-colors ${
+                    isDark
+                      ? "text-slate-400 hover:bg-slate-800 hover:text-white"
+                      : "text-slate-400 hover:bg-slate-100 hover:text-slate-800"
+                  }`}
                 >
                   <X className="h-5 w-5" />
                 </button>
@@ -658,7 +877,11 @@ export default function AdminRegistrationServicesPage() {
                 {/* 1. Core Category & Title */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-slate-300">
+                    <label
+                      className={`text-xs font-semibold ${
+                        isDark ? "text-slate-300" : "text-slate-700"
+                      }`}
+                    >
                       Category *
                     </label>
                     <select
@@ -669,7 +892,11 @@ export default function AdminRegistrationServicesPage() {
                           category: e.target.value as any,
                         })
                       }
-                      className="w-full h-10 px-3 rounded-lg bg-slate-950 border border-slate-800 text-xs text-white focus:outline-none focus:border-cyan-500"
+                      className={`w-full h-10 px-3 rounded-lg border text-xs focus:outline-none focus:border-[#0ea5e9] ${
+                        isDark
+                          ? "bg-slate-950 border-slate-800 text-white"
+                          : "bg-slate-50 border-slate-200 text-slate-900"
+                      }`}
                     >
                       <option value="NGO Registration">NGO Registration</option>
                       <option value="Company Registration">
@@ -679,7 +906,11 @@ export default function AdminRegistrationServicesPage() {
                   </div>
 
                   <div className="space-y-1.5 md:col-span-2">
-                    <label className="text-xs font-semibold text-slate-300">
+                    <label
+                      className={`text-xs font-semibold ${
+                        isDark ? "text-slate-300" : "text-slate-700"
+                      }`}
+                    >
                       Service / Certificate Title *
                     </label>
                     <Input
@@ -690,7 +921,11 @@ export default function AdminRegistrationServicesPage() {
                         setFormData({ ...formData, title: e.target.value })
                       }
                       required
-                      className="bg-slate-950 border-slate-800 text-xs"
+                      className={`text-xs ${
+                        isDark
+                          ? "bg-slate-950 border-slate-800 text-white"
+                          : "bg-slate-50 border-slate-200 text-slate-900"
+                      }`}
                     />
                   </div>
                 </div>
@@ -698,7 +933,11 @@ export default function AdminRegistrationServicesPage() {
                 {/* 2. Slug, Authority, Timeline, Fee */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-slate-300">
+                    <label
+                      className={`text-xs font-semibold ${
+                        isDark ? "text-slate-300" : "text-slate-700"
+                      }`}
+                    >
                       Slug (URL key)
                     </label>
                     <Input
@@ -708,12 +947,20 @@ export default function AdminRegistrationServicesPage() {
                       onChange={(e) =>
                         setFormData({ ...formData, slug: e.target.value })
                       }
-                      className="bg-slate-950 border-slate-800 text-xs"
+                      className={`text-xs ${
+                        isDark
+                          ? "bg-slate-950 border-slate-800 text-white"
+                          : "bg-slate-50 border-slate-200 text-slate-900"
+                      }`}
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-slate-300">
+                    <label
+                      className={`text-xs font-semibold ${
+                        isDark ? "text-slate-300" : "text-slate-700"
+                      }`}
+                    >
                       Government Body
                     </label>
                     <Input
@@ -726,12 +973,20 @@ export default function AdminRegistrationServicesPage() {
                           governmentBody: e.target.value,
                         })
                       }
-                      className="bg-slate-950 border-slate-800 text-xs"
+                      className={`text-xs ${
+                        isDark
+                          ? "bg-slate-950 border-slate-800 text-white"
+                          : "bg-slate-50 border-slate-200 text-slate-900"
+                      }`}
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-slate-300">
+                    <label
+                      className={`text-xs font-semibold ${
+                        isDark ? "text-slate-300" : "text-slate-700"
+                      }`}
+                    >
                       Processing Time
                     </label>
                     <Input
@@ -744,12 +999,20 @@ export default function AdminRegistrationServicesPage() {
                           processingTime: e.target.value,
                         })
                       }
-                      className="bg-slate-950 border-slate-800 text-xs"
+                      className={`text-xs ${
+                        isDark
+                          ? "bg-slate-950 border-slate-800 text-white"
+                          : "bg-slate-50 border-slate-200 text-slate-900"
+                      }`}
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-slate-300">
+                    <label
+                      className={`text-xs font-semibold ${
+                        isDark ? "text-slate-300" : "text-slate-700"
+                      }`}
+                    >
                       Starting Fee
                     </label>
                     <Input
@@ -759,7 +1022,11 @@ export default function AdminRegistrationServicesPage() {
                       onChange={(e) =>
                         setFormData({ ...formData, fee: e.target.value })
                       }
-                      className="bg-slate-950 border-slate-800 text-xs"
+                      className={`text-xs ${
+                        isDark
+                          ? "bg-slate-950 border-slate-800 text-white"
+                          : "bg-slate-50 border-slate-200 text-slate-900"
+                      }`}
                     />
                   </div>
                 </div>
@@ -767,7 +1034,11 @@ export default function AdminRegistrationServicesPage() {
                 {/* 3. Short & Full Description */}
                 <div className="space-y-3">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-slate-300">
+                    <label
+                      className={`text-xs font-semibold ${
+                        isDark ? "text-slate-300" : "text-slate-700"
+                      }`}
+                    >
                       Short Description (Card summary) *
                     </label>
                     <Textarea
@@ -781,12 +1052,20 @@ export default function AdminRegistrationServicesPage() {
                         })
                       }
                       required
-                      className="bg-slate-950 border-slate-800 text-xs"
+                      className={`text-xs ${
+                        isDark
+                          ? "bg-slate-950 border-slate-800 text-white"
+                          : "bg-slate-50 border-slate-200 text-slate-900"
+                      }`}
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-slate-300">
+                    <label
+                      className={`text-xs font-semibold ${
+                        isDark ? "text-slate-300" : "text-slate-700"
+                      }`}
+                    >
                       Full In-Depth Description
                     </label>
                     <Textarea
@@ -799,19 +1078,37 @@ export default function AdminRegistrationServicesPage() {
                           fullDescription: e.target.value,
                         })
                       }
-                      className="bg-slate-950 border-slate-800 text-xs"
+                      className={`text-xs ${
+                        isDark
+                          ? "bg-slate-950 border-slate-800 text-white"
+                          : "bg-slate-50 border-slate-200 text-slate-900"
+                      }`}
                     />
                   </div>
                 </div>
 
                 {/* 4. Certificate Preview Image */}
-                <div className="space-y-2 rounded-xl border border-slate-800 bg-slate-950/60 p-4">
+                <div
+                  className={`space-y-2 rounded-xl border p-4 ${
+                    isDark
+                      ? "border-slate-800 bg-slate-950/60"
+                      : "border-slate-200 bg-slate-50/70"
+                  }`}
+                >
                   <div className="flex items-center justify-between">
                     <div>
-                      <h4 className="text-xs font-bold text-white">
+                      <h4
+                        className={`text-xs font-bold ${
+                          isDark ? "text-white" : "text-slate-900"
+                        }`}
+                      >
                         Sample Certificate / Portal Image
                       </h4>
-                      <p className="text-[11px] text-slate-400">
+                      <p
+                        className={`text-[11px] ${
+                          isDark ? "text-slate-400" : "text-slate-500"
+                        }`}
+                      >
                         Upload or provide a high-resolution sample certificate or
                         Govt portal banner.
                       </p>
@@ -831,15 +1128,28 @@ export default function AdminRegistrationServicesPage() {
                 </div>
 
                 {/* 5. Key Benefits (Dynamic List) */}
-                <div className="space-y-2 rounded-xl border border-slate-800 bg-slate-950/60 p-4">
+                <div
+                  className={`space-y-2 rounded-xl border p-4 ${
+                    isDark
+                      ? "border-slate-800 bg-slate-950/60"
+                      : "border-slate-200 bg-slate-50/70"
+                  }`}
+                >
                   <div className="flex items-center justify-between">
                     <div>
-                      <h4 className="text-xs font-bold text-white">
-                        Key Benefits & Advantages
+                      <h4
+                        className={`text-xs font-bold ${
+                          isDark ? "text-white" : "text-slate-900"
+                        }`}
+                      >
+                        Key Benefits &amp; Advantages
                       </h4>
-                      <p className="text-[11px] text-slate-400">
-                        Bullet points explaining why clients need this
-                        certificate.
+                      <p
+                        className={`text-[11px] ${
+                          isDark ? "text-slate-400" : "text-slate-500"
+                        }`}
+                      >
+                        Bullet points explaining why clients need this certificate.
                       </p>
                     </div>
                     <Button
@@ -847,7 +1157,11 @@ export default function AdminRegistrationServicesPage() {
                       onClick={() => handleAddArrayItem("benefits")}
                       variant="outline"
                       size="sm"
-                      className="h-7 text-xs border-slate-700 bg-slate-800 text-cyan-300 hover:bg-slate-700"
+                      className={`h-7 text-xs ${
+                        isDark
+                          ? "border-slate-700 bg-slate-800 text-cyan-300 hover:bg-slate-700"
+                          : "border-slate-200 bg-white text-[#0ea5e9] hover:bg-slate-50 shadow-xs"
+                      }`}
                     >
                       <Plus className="h-3 w-3 mr-1" /> Add Benefit
                     </Button>
@@ -862,12 +1176,16 @@ export default function AdminRegistrationServicesPage() {
                           onChange={(e) =>
                             handleArrayChange("benefits", idx, e.target.value)
                           }
-                          className="bg-slate-900 border-slate-800 text-xs"
+                          className={`text-xs ${
+                            isDark
+                              ? "bg-slate-900 border-slate-800 text-white"
+                              : "bg-white border-slate-200 text-slate-900"
+                          }`}
                         />
                         <button
                           type="button"
                           onClick={() => handleRemoveArrayItem("benefits", idx)}
-                          className="p-2 rounded text-slate-500 hover:text-red-400 hover:bg-slate-800"
+                          className="p-2 rounded text-slate-400 hover:text-red-500 hover:bg-red-500/10"
                         >
                           <Trash2 className="h-4 w-4" />
                         </button>
@@ -877,13 +1195,27 @@ export default function AdminRegistrationServicesPage() {
                 </div>
 
                 {/* 6. Documents Checklist (Dynamic List) */}
-                <div className="space-y-2 rounded-xl border border-slate-800 bg-slate-950/60 p-4">
+                <div
+                  className={`space-y-2 rounded-xl border p-4 ${
+                    isDark
+                      ? "border-slate-800 bg-slate-950/60"
+                      : "border-slate-200 bg-slate-50/70"
+                  }`}
+                >
                   <div className="flex items-center justify-between">
                     <div>
-                      <h4 className="text-xs font-bold text-white">
+                      <h4
+                        className={`text-xs font-bold ${
+                          isDark ? "text-white" : "text-slate-900"
+                        }`}
+                      >
                         Required Documents Checklist
                       </h4>
-                      <p className="text-[11px] text-slate-400">
+                      <p
+                        className={`text-[11px] ${
+                          isDark ? "text-slate-400" : "text-slate-500"
+                        }`}
+                      >
                         Specific documents needed from the client to apply.
                       </p>
                     </div>
@@ -892,7 +1224,11 @@ export default function AdminRegistrationServicesPage() {
                       onClick={() => handleAddArrayItem("documentsRequired")}
                       variant="outline"
                       size="sm"
-                      className="h-7 text-xs border-slate-700 bg-slate-800 text-emerald-300 hover:bg-slate-700"
+                      className={`h-7 text-xs ${
+                        isDark
+                          ? "border-slate-700 bg-slate-800 text-emerald-300 hover:bg-slate-700"
+                          : "border-slate-200 bg-white text-emerald-600 hover:bg-slate-50 shadow-xs"
+                      }`}
                     >
                       <Plus className="h-3 w-3 mr-1" /> Add Document
                     </Button>
@@ -911,14 +1247,18 @@ export default function AdminRegistrationServicesPage() {
                               e.target.value
                             )
                           }
-                          className="bg-slate-900 border-slate-800 text-xs"
+                          className={`text-xs ${
+                            isDark
+                              ? "bg-slate-900 border-slate-800 text-white"
+                              : "bg-white border-slate-200 text-slate-900"
+                          }`}
                         />
                         <button
                           type="button"
                           onClick={() =>
                             handleRemoveArrayItem("documentsRequired", idx)
                           }
-                          className="p-2 rounded text-slate-500 hover:text-red-400 hover:bg-slate-800"
+                          className="p-2 rounded text-slate-400 hover:text-red-500 hover:bg-red-500/10"
                         >
                           <Trash2 className="h-4 w-4" />
                         </button>
@@ -928,13 +1268,27 @@ export default function AdminRegistrationServicesPage() {
                 </div>
 
                 {/* 7. Process Steps (Dynamic List) */}
-                <div className="space-y-2 rounded-xl border border-slate-800 bg-slate-950/60 p-4">
+                <div
+                  className={`space-y-2 rounded-xl border p-4 ${
+                    isDark
+                      ? "border-slate-800 bg-slate-950/60"
+                      : "border-slate-200 bg-slate-50/70"
+                  }`}
+                >
                   <div className="flex items-center justify-between">
                     <div>
-                      <h4 className="text-xs font-bold text-white">
+                      <h4
+                        className={`text-xs font-bold ${
+                          isDark ? "text-white" : "text-slate-900"
+                        }`}
+                      >
                         Step-by-Step Approval Process
                       </h4>
-                      <p className="text-[11px] text-slate-400">
+                      <p
+                        className={`text-[11px] ${
+                          isDark ? "text-slate-400" : "text-slate-500"
+                        }`}
+                      >
                         Step-by-step workflow from documentation to certificate
                         delivery.
                       </p>
@@ -944,7 +1298,11 @@ export default function AdminRegistrationServicesPage() {
                       onClick={() => handleAddArrayItem("processSteps")}
                       variant="outline"
                       size="sm"
-                      className="h-7 text-xs border-slate-700 bg-slate-800 text-blue-300 hover:bg-slate-700"
+                      className={`h-7 text-xs ${
+                        isDark
+                          ? "border-slate-700 bg-slate-800 text-blue-300 hover:bg-slate-700"
+                          : "border-slate-200 bg-white text-blue-600 hover:bg-slate-50 shadow-xs"
+                      }`}
                     >
                       <Plus className="h-3 w-3 mr-1" /> Add Step
                     </Button>
@@ -959,14 +1317,18 @@ export default function AdminRegistrationServicesPage() {
                           onChange={(e) =>
                             handleArrayChange("processSteps", idx, e.target.value)
                           }
-                          className="bg-slate-900 border-slate-800 text-xs"
+                          className={`text-xs ${
+                            isDark
+                              ? "bg-slate-900 border-slate-800 text-white"
+                              : "bg-white border-slate-200 text-slate-900"
+                          }`}
                         />
                         <button
                           type="button"
                           onClick={() =>
                             handleRemoveArrayItem("processSteps", idx)
                           }
-                          className="p-2 rounded text-slate-500 hover:text-red-400 hover:bg-slate-800"
+                          className="p-2 rounded text-slate-400 hover:text-red-500 hover:bg-red-500/10"
                         >
                           <Trash2 className="h-4 w-4" />
                         </button>
@@ -978,7 +1340,11 @@ export default function AdminRegistrationServicesPage() {
                 {/* 8. Toggles & Order */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-slate-300">
+                    <label
+                      className={`text-xs font-semibold ${
+                        isDark ? "text-slate-300" : "text-slate-700"
+                      }`}
+                    >
                       Display Order (Ascending)
                     </label>
                     <Input
@@ -990,7 +1356,11 @@ export default function AdminRegistrationServicesPage() {
                           order: parseInt(e.target.value) || 0,
                         })
                       }
-                      className="bg-slate-950 border-slate-800 text-xs"
+                      className={`text-xs ${
+                        isDark
+                          ? "bg-slate-950 border-slate-800 text-white"
+                          : "bg-slate-50 border-slate-200 text-slate-900"
+                      }`}
                     />
                   </div>
 
@@ -1002,11 +1372,13 @@ export default function AdminRegistrationServicesPage() {
                       onChange={(e) =>
                         setFormData({ ...formData, popular: e.target.checked })
                       }
-                      className="h-4 w-4 rounded border-slate-700 bg-slate-950 text-cyan-500 focus:ring-cyan-500"
+                      className="h-4 w-4 rounded border-slate-300 text-[#0ea5e9] focus:ring-[#0ea5e9]"
                     />
                     <label
                       htmlFor="popular-check"
-                      className="text-xs font-semibold text-slate-300 cursor-pointer"
+                      className={`text-xs font-semibold cursor-pointer ${
+                        isDark ? "text-slate-300" : "text-slate-700"
+                      }`}
                     >
                       Mark as Popular / Featured
                     </label>
@@ -1020,11 +1392,13 @@ export default function AdminRegistrationServicesPage() {
                       onChange={(e) =>
                         setFormData({ ...formData, isActive: e.target.checked })
                       }
-                      className="h-4 w-4 rounded border-slate-700 bg-slate-950 text-emerald-500 focus:ring-emerald-500"
+                      className="h-4 w-4 rounded border-slate-300 text-emerald-500 focus:ring-emerald-500"
                     />
                     <label
                       htmlFor="active-check"
-                      className="text-xs font-semibold text-slate-300 cursor-pointer"
+                      className={`text-xs font-semibold cursor-pointer ${
+                        isDark ? "text-slate-300" : "text-slate-700"
+                      }`}
                     >
                       Service is Active (Visible on Website)
                     </label>
@@ -1032,19 +1406,27 @@ export default function AdminRegistrationServicesPage() {
                 </div>
 
                 {/* Form Buttons */}
-                <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-800">
+                <div
+                  className={`flex items-center justify-end gap-3 pt-4 border-t ${
+                    isDark ? "border-slate-800" : "border-slate-200"
+                  }`}
+                >
                   <Button
                     type="button"
                     variant="outline"
                     onClick={handleCloseForm}
-                    className="border-slate-800 text-slate-300 hover:bg-slate-800 text-xs"
+                    className={`text-xs ${
+                      isDark
+                        ? "border-slate-800 text-slate-300 hover:bg-slate-800"
+                        : "border-slate-200 text-slate-700 hover:bg-slate-100"
+                    }`}
                   >
                     Cancel
                   </Button>
                   <Button
                     type="submit"
                     disabled={isSaving}
-                    className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs shadow-md shadow-cyan-500/20"
+                    className="bg-[#0ea5e9] hover:bg-[#0284c7] text-white font-bold text-xs shadow-md shadow-[#0ea5e9]/20"
                   >
                     {isSaving ? (
                       <Loader2 className="h-4 w-4 animate-spin mr-1.5" />
@@ -1061,33 +1443,51 @@ export default function AdminRegistrationServicesPage() {
 
         {/* Modal: Preview Certificate Details */}
         {previewItem && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-sm overflow-y-auto">
-            <div className="relative w-full max-w-2xl rounded-2xl border border-slate-800 bg-slate-900 p-6 shadow-2xl text-white">
-              <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs overflow-y-auto">
+            <div
+              className={`relative w-full max-w-2xl rounded-2xl border p-6 shadow-2xl transition-colors ${
+                isDark
+                  ? "border-slate-800 bg-slate-900 text-white"
+                  : "border-slate-200 bg-white text-slate-900"
+              }`}
+            >
+              <div
+                className={`flex items-center justify-between pb-3 border-b ${
+                  isDark ? "border-slate-800" : "border-slate-200"
+                }`}
+              >
                 <div className="flex items-center gap-2">
                   <span
                     className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
                       previewItem.category === "NGO Registration"
-                        ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
-                        : "bg-blue-500/20 text-blue-300 border border-blue-500/30"
+                        ? "bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30"
+                        : "bg-blue-500/20 text-blue-600 dark:text-blue-300 border border-blue-500/30"
                     }`}
                   >
                     {previewItem.category}
                   </span>
-                  <h3 className="text-base font-bold text-white">
+                  <h3
+                    className={`text-base font-bold ${
+                      isDark ? "text-white" : "text-slate-900"
+                    }`}
+                  >
                     {previewItem.title}
                   </h3>
                 </div>
                 <button
                   onClick={() => setPreviewItem(null)}
-                  className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-800 hover:text-white"
+                  className={`rounded-lg p-1.5 transition-colors ${
+                    isDark
+                      ? "text-slate-400 hover:bg-slate-800 hover:text-white"
+                      : "text-slate-400 hover:bg-slate-100 hover:text-slate-800"
+                  }`}
                 >
                   <X className="h-5 w-5" />
                 </button>
               </div>
 
               <div className="mt-4 space-y-4 max-h-[70vh] overflow-y-auto pr-1">
-                <div className="relative h-48 w-full rounded-xl overflow-hidden bg-slate-950">
+                <div className="relative h-48 w-full rounded-xl overflow-hidden bg-slate-900">
                   <Image
                     src={
                       resolveImageUrl(previewItem.sampleCertificateImage?.url) ||
@@ -1099,45 +1499,67 @@ export default function AdminRegistrationServicesPage() {
                   />
                 </div>
 
-                <p className="text-xs text-slate-300">
+                <p
+                  className={`text-xs ${
+                    isDark ? "text-slate-300" : "text-slate-700"
+                  }`}
+                >
                   {previewItem.fullDescription || previewItem.shortDescription}
                 </p>
 
-                <div className="grid grid-cols-3 gap-3 p-3 rounded-xl bg-slate-950 border border-slate-800 text-xs">
+                <div
+                  className={`grid grid-cols-3 gap-3 p-3 rounded-xl border text-xs ${
+                    isDark
+                      ? "bg-slate-950 border-slate-800"
+                      : "bg-slate-50 border-slate-200"
+                  }`}
+                >
                   <div>
-                    <span className="text-slate-500 block text-[10px] uppercase font-bold">
+                    <span className="text-slate-400 block text-[10px] uppercase font-bold">
                       Authority
                     </span>
-                    <span className="text-white font-medium">
+                    <span
+                      className={`font-medium ${
+                        isDark ? "text-white" : "text-slate-900"
+                      }`}
+                    >
                       {previewItem.governmentBody}
                     </span>
                   </div>
                   <div>
-                    <span className="text-slate-500 block text-[10px] uppercase font-bold">
+                    <span className="text-slate-400 block text-[10px] uppercase font-bold">
                       Timeline
                     </span>
-                    <span className="text-cyan-400 font-medium">
+                    <span className="text-[#0ea5e9] font-medium">
                       {previewItem.processingTime}
                     </span>
                   </div>
                   <div>
-                    <span className="text-slate-500 block text-[10px] uppercase font-bold">
+                    <span className="text-slate-400 block text-[10px] uppercase font-bold">
                       Starting Fee
                     </span>
-                    <span className="text-emerald-400 font-bold">
+                    <span className="text-emerald-500 font-bold">
                       {previewItem.fee}
                     </span>
                   </div>
                 </div>
 
                 <div>
-                  <h4 className="text-xs font-bold text-slate-200 mb-2">
+                  <h4
+                    className={`text-xs font-bold mb-2 ${
+                      isDark ? "text-slate-200" : "text-slate-800"
+                    }`}
+                  >
                     Required Documents Checklist
                   </h4>
-                  <ul className="space-y-1.5 text-xs text-slate-400">
+                  <ul
+                    className={`space-y-1.5 text-xs ${
+                      isDark ? "text-slate-400" : "text-slate-600"
+                    }`}
+                  >
                     {previewItem.documentsRequired?.map((doc, idx) => (
                       <li key={idx} className="flex items-start gap-2">
-                        <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400 mt-0.5 flex-shrink-0" />
+                        <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500 mt-0.5 shrink-0" />
                         <span>{doc}</span>
                       </li>
                     ))}
@@ -1145,10 +1567,18 @@ export default function AdminRegistrationServicesPage() {
                 </div>
               </div>
 
-              <div className="mt-5 pt-3 border-t border-slate-800 flex justify-end">
+              <div
+                className={`mt-5 pt-3 border-t flex justify-end ${
+                  isDark ? "border-slate-800" : "border-slate-200"
+                }`}
+              >
                 <Button
                   onClick={() => setPreviewItem(null)}
-                  className="bg-slate-800 hover:bg-slate-700 text-white text-xs"
+                  className={`text-xs ${
+                    isDark
+                      ? "bg-slate-800 hover:bg-slate-700 text-white"
+                      : "bg-slate-100 hover:bg-slate-200 text-slate-800"
+                  }`}
                 >
                   Close Preview
                 </Button>

@@ -134,8 +134,10 @@ export function RegistrationServicesContent({
         email: applyForm.email,
         phone: applyForm.phone,
         company: applyForm.city ? `City: ${applyForm.city}` : undefined,
-        service: `Registration Service: ${applyForm.serviceTitle}`,
-        message: `${applyForm.message}\n\n[Selected Service: ${applyForm.serviceTitle}]`,
+        subject: `[Registration Application] ${applyForm.serviceTitle}`,
+        service: `Registration: ${applyForm.serviceTitle}`,
+        inquiryType: "general",
+        message: `${applyForm.message}\n\n[Selected Service: ${applyForm.serviceTitle}]\n[Applicant City: ${applyForm.city || "Not specified"}]`,
       });
       setSubmitSuccess(true);
       setTimeout(() => {

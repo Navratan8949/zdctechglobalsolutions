@@ -224,8 +224,8 @@ export function Navbar() {
         >
           <TopBar />
         </div>
-        <nav className="mx-auto flex w-full max-w-7xl items-center justify-between h-20 px-4 sm:px-6 lg:px-8">
-          <Link href="/" className="group flex items-center gap-3" aria-label="ZDC Tech Global Solutions Home">
+        <nav className="mx-auto flex w-full max-w-[1520px] items-center justify-between h-20 px-4 sm:px-6 lg:px-8 xl:px-10">
+          <Link href="/" className="group flex items-center gap-3 shrink-0" aria-label="ZDC Tech Global Solutions Home">
             <span className="sr-only">ZDC Tech Global Solutions Home</span>
             <Image
               src={companyInfo?.logo?.url || "/logo/favi.png"}
@@ -243,7 +243,7 @@ export function Navbar() {
             />
           </Link>
 
-          <ul className="hidden items-center gap-10 lg:flex">
+          <ul className="hidden items-center gap-3 xl:gap-5 2xl:gap-7 lg:flex">
             {navItems.map((item) => (
               <li
                 key={item.label}
@@ -257,7 +257,7 @@ export function Navbar() {
                 {item.children || item.isMegaMenu ? (
                   <button
                     className={cn(
-                      "flex items-center gap-1 py-2 text-[13px] font-bold uppercase tracking-widest transition-colors",
+                      "flex items-center gap-1 py-2 text-[12px] xl:text-[13px] font-bold uppercase tracking-wider xl:tracking-widest transition-colors whitespace-nowrap",
                       isActive(item.href) || openDropdown === item.label
                         ? "text-[#0ea5e9]"
                         : "text-[#0b1b3d] hover:text-[#0ea5e9]",
@@ -280,7 +280,7 @@ export function Navbar() {
                   <Link
                     href={item.href}
                     className={cn(
-                      "py-2 text-[13px] font-bold uppercase tracking-widest transition-colors",
+                      "py-2 text-[12px] xl:text-[13px] font-bold uppercase tracking-wider xl:tracking-widest transition-colors whitespace-nowrap",
                       isActive(item.href)
                         ? "text-[#0ea5e9]"
                         : "text-[#0b1b3d] hover:text-[#0ea5e9]",

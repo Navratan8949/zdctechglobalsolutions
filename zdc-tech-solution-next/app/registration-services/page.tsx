@@ -53,7 +53,7 @@ export default async function RegistrationServicesPage() {
   }
 
   return (
-    <main className="min-h-screen bg-slate-950 text-white">
+    <main className="min-h-screen bg-white text-slate-900">
       <RegistrationServicesContent initialServices={initialServices} />
     </main>
   );
