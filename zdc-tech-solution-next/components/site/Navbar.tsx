@@ -18,6 +18,7 @@ const companyLinks = [
   { label: "About Us", href: "/about" },
   { label: "Our Products", href: "/products" },
   { label: "Live Demos", href: "/demos" },
+  { label: "Registration Services", href: "/registration-services" },
   { label: "Our Team", href: "/team" },
   { label: "Daily Posts", href: "/posts" },
   { label: "Services", href: "/services" },
@@ -52,6 +53,7 @@ const mainNav: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "Company", href: "/about", children: companyLinks },
   { label: "Live Demos", href: "/demos" },
+  { label: "Registrations", href: "/registration-services" },
   { label: "Careers", href: "/careers" },
   {
     label: "Services",
@@ -147,6 +149,20 @@ const mainNav: NavItem[] = [
             label: "Performance Testing",
             href: "/services/performance-testing",
           },
+        ],
+      },
+      {
+        title: "Registration & Legal",
+        items: [
+          { label: "NGO Registration", href: "/registration-services" },
+          { label: "Company Registration", href: "/registration-services" },
+          { label: "12A & 80G Tax Exemption", href: "/registration-services" },
+          {
+            label: "Trust & Society Registration",
+            href: "/registration-services",
+          },
+          { label: "Pvt Ltd & LLP Formation", href: "/registration-services" },
+          { label: "GST & MSME / Trademark", href: "/registration-services" },
         ],
       },
     ],

@@ -25,6 +25,7 @@ import {
   Info,
   Package,
   PlaySquare,
+  Landmark,
 } from "lucide-react";
 import {
   useAdminAuth,
@@ -45,6 +46,11 @@ const primaryNavigation: AdminNavItem[] = [
   { label: "About Us", href: "/admin/about", icon: Info },
   { label: "Products", href: "/admin/products", icon: Package },
   { label: "Live Demos", href: "/admin/demos", icon: PlaySquare },
+  {
+    label: "Registrations",
+    href: "/admin/registration-services",
+    icon: Landmark,
+  },
   { label: "Stats", href: "/admin/stats", icon: Settings2 },
   { label: "Process Steps", href: "/admin/process", icon: ClipboardList },
   { label: "Core Values", href: "/admin/core-values", icon: Star },
