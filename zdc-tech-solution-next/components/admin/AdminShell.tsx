@@ -48,7 +48,7 @@ const primaryNavigation: AdminNavItem[] = [
   { label: "Products", href: "/admin/products", icon: Package },
   { label: "Live Demos", href: "/admin/demos", icon: PlaySquare },
   {
-    label: "Registrations",
+    label: "NGO & Company Reg.",
     href: "/admin/registration-services",
     icon: Landmark,
   },

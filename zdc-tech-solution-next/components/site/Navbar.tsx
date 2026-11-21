@@ -18,7 +18,7 @@ const companyLinks = [
   { label: "About Us", href: "/about" },
   { label: "Our Products", href: "/products" },
   { label: "Live Demos", href: "/demos" },
-  { label: "Registration Services", href: "/registration-services" },
+  { label: "NGO & Company Reg.", href: "/registration-services" },
   { label: "Our Team", href: "/team" },
   { label: "Daily Posts", href: "/posts" },
   { label: "Services", href: "/services" },
@@ -34,6 +34,7 @@ const companyLinks = [
 
 export type NavItem = {
   label: string;
+  shortLabel?: string;
   href: string;
   children?: {
     label: string;
@@ -53,7 +54,7 @@ const mainNav: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "Company", href: "/about", children: companyLinks },
   { label: "Live Demos", href: "/demos" },
-  { label: "Registrations", href: "/registration-services" },
+  { label: "NGO & Company Reg.", href: "/registration-services" },
   { label: "Careers", href: "/careers" },
   {
     label: "Services",
