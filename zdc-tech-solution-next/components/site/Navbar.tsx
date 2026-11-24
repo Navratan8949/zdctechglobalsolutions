@@ -19,6 +19,7 @@ const companyLinks = [
   { label: "Our Products", href: "/products" },
   { label: "Live Demos", href: "/demos" },
   { label: "NGO & Company Reg.", href: "/registration-services" },
+  { label: "Solar Installation", href: "/services/solar-panel-installation" },
   { label: "Our Team", href: "/team" },
   { label: "Daily Posts", href: "/posts" },
   { label: "Services", href: "/services" },
@@ -164,6 +165,27 @@ const mainNav: NavItem[] = [
           },
           { label: "Pvt Ltd & LLP Formation", href: "/registration-services" },
           { label: "GST & MSME / Trademark", href: "/registration-services" },
+        ],
+      },
+      {
+        title: "Clean Energy & Solar",
+        items: [
+          {
+            label: "Solar Panel Installation",
+            href: "/services/solar-panel-installation",
+          },
+          {
+            label: "PM Surya Ghar Subsidy (₹78k)",
+            href: "/services/solar-panel-installation#calculator",
+          },
+          {
+            label: "Solar Savings Calculator",
+            href: "/services/solar-panel-installation#calculator",
+          },
+          {
+            label: "Commercial & Industrial Solar",
+            href: "/services/solar-panel-installation",
+          },
         ],
       },
     ],

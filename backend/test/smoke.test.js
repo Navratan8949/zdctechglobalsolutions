@@ -34,6 +34,7 @@ test("registered route modules expose routes", () => {
     "demo",
     "registrationService",
     "registrationApplication",
+    "solarInquiry",
   ];
 
   for (const routeFile of routeFiles) {
