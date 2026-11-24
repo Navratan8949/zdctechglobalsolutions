@@ -58,6 +58,8 @@ app.use("/api/v1/registration-applications", require("./routes/registrationAppli
 app.use("/api/v1/registration-application", require("./routes/registrationApplication.routes"));
 app.use("/api/v1/solar-inquiries", require("./routes/solarInquiry.routes"));
 app.use("/api/v1/solar-inquiry", require("./routes/solarInquiry.routes"));
+app.use("/api/v1/solar-services", require("./routes/solarService.routes"));
+app.use("/api/v1/solar-service", require("./routes/solarService.routes"));
 // Admin — Backup
 const isAuthenticated = require("./middleware/auth");
 const authorizeRoles = require("./middleware/role");

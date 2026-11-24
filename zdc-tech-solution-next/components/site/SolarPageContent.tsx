@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -28,11 +28,45 @@ import {
 } from "lucide-react";
 import { SolarCalculator } from "@/components/site/SolarCalculator";
 import { submitSolarInquiry } from "@/service/solarInquiry.service";
+import {
+  getAllSolarServices,
+  type SolarServiceItem,
+} from "@/service/solarService.service";
+import { resolveImageUrl } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
 export function SolarPageContent() {
+  // Dynamic Solar Offerings from Admin / Database
+  const [offerings, setOfferings] = useState<SolarServiceItem[]>([]);
+  const [isLoadingOfferings, setIsLoadingOfferings] = useState(true);
+
+  useEffect(() => {
+    let isMounted = true;
+    getAllSolarServices()
+      .then((res: any) => {
+        const data = res?.data || res;
+        const list = Array.isArray(data)
+          ? data
+          : Array.isArray(data?.data)
+          ? data.data
+          : [];
+        if (isMounted && list.length > 0) {
+          setOfferings(list);
+        }
+      })
+      .catch((err) => {
+        console.warn("Could not load dynamic solar services, using defaults:", err);
+      })
+      .finally(() => {
+        if (isMounted) setIsLoadingOfferings(false);
+      });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   // Form State
   const [formData, setFormData] = useState({
     fullName: "",
@@ -59,6 +93,27 @@ export function SolarPageContent() {
       monthlyBill: `₹${billAmount.toLocaleString("en-IN")}`,
       roofArea: `${capacityKw * 100} sq ft`,
       message: `Hi, I used your Solar Calculator. For my monthly bill of ₹${billAmount.toLocaleString("en-IN")}, the recommended system is ${capacityKw} kW. Please contact me with quotation and site survey dates.`,
+    }));
+    const el = document.getElementById("solar-quote-form");
+    el?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleInquireOffering = (
+    title: string,
+    category: string,
+    badge?: string
+  ) => {
+    setFormData((prev) => ({
+      ...prev,
+      propertyType: category.includes("Commercial")
+        ? ("Commercial Building" as any)
+        : category.includes("Residential")
+        ? ("Residential Home" as any)
+        : prev.propertyType,
+      estimatedCapacity: badge || prev.estimatedCapacity,
+      message: `Hi, I am interested in ${title} (${
+        badge || category
+      }). Please share quotation, subsidy details and site survey availability.`,
     }));
     const el = document.getElementById("solar-quote-form");
     el?.scrollIntoView({ behavior: "smooth" });
@@ -119,7 +174,7 @@ export function SolarPageContent() {
   return (
     <div className="bg-white text-slate-900">
       {/* 1. Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 pt-28 pb-20 text-white">
+      <section className="relative overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 pt-36 sm:pt-44 lg:pt-48 pb-20 text-white">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(14,165,233,0.25),rgba(255,255,255,0))]" />
 
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -209,7 +264,7 @@ export function SolarPageContent() {
             <div className="lg:col-span-5 relative">
               <div className="relative aspect-square max-w-md mx-auto rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-slate-900">
                 <Image
-                  src="https://images.unsplash.com/photo-1509391365360-2e959784a276?auto=format&fit=crop&w=1000&q=80"
+                  src="https://images.unsplash.com/photo-1613665813446-82a78c468a1d?auto=format&fit=crop&w=1000&q=80"
                   alt="Modern Rooftop Solar Panels"
                   fill
                   className="object-cover"
@@ -274,183 +329,161 @@ export function SolarPageContent() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Card 1: Residential Solar */}
-            <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm hover:border-[#0ea5e9] hover:shadow-xl transition-all flex flex-col justify-between">
-              <div className="space-y-4">
-                <div className="h-44 w-full relative rounded-2xl overflow-hidden bg-slate-100">
-                  <Image
-                    src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80"
-                    alt="Residential Rooftop Solar"
-                    fill
-                    className="object-cover"
-                  />
-                  <span className="absolute top-3 left-3 bg-[#0ea5e9] text-white text-[11px] font-bold px-3 py-1 rounded-full">
-                    1 kW - 10 kW
-                  </span>
-                </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {(offerings.length > 0
+              ? offerings
+              : [
+                  {
+                    _id: "default-1",
+                    title: "Residential Rooftop Solar",
+                    slug: "residential-rooftop-solar",
+                    category: "Residential Solar" as const,
+                    badge: "1 kW - 10 kW",
+                    shortDescription:
+                      "Ideal for independent houses, villas, and residential societies. Eliminate electricity bills and claim up to ₹78,000 direct subsidy under PM Surya Ghar Muft Bijli Yojana.",
+                    image: {
+                      url: "https://images.unsplash.com/photo-1545208942-e1c9c916524b?auto=format&fit=crop&w=1000&q=80",
+                    },
+                    fee: "Starting from ₹50,000 / kW",
+                    subsidy: "Up to ₹78,000 (PM Surya Ghar)",
+                    features: [
+                      "Reduces domestic bills by 80% to 90%",
+                      "Net Metering with state DISCOM",
+                      "Direct bank subsidy transfer (DBT)",
+                      "High efficiency Mono PERC panels",
+                    ],
+                    popular: true,
+                    order: 1,
+                    isActive: true,
+                  },
+                  {
+                    _id: "default-2",
+                    title: "Commercial & Industrial (C&I)",
+                    slug: "commercial-industrial-solar",
+                    category: "Commercial & Industrial" as const,
+                    badge: "10 kW - 500 kW+",
+                    shortDescription:
+                      "Tailored for factories, warehouses, schools, hospitals, shopping malls, and office complexes facing high commercial tariff rates of ₹9 - ₹12/unit.",
+                    image: {
+                      url: "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?auto=format&fit=crop&w=1000&q=80",
+                    },
+                    fee: "Custom Project Quote",
+                    subsidy: "40% Accelerated Depreciation Benefit",
+                    features: [
+                      "Cut peak commercial electricity tariff",
+                      "40% Accelerated Depreciation tax benefit",
+                      "Elevated tin-shed / RCC custom mounting",
+                      "Remote IoT generation monitoring",
+                    ],
+                    popular: true,
+                    order: 2,
+                    isActive: true,
+                  },
+                  {
+                    _id: "default-3",
+                    title: "Solar Maintenance & AMC",
+                    slug: "solar-maintenance-amc",
+                    category: "Solar Maintenance & AMC" as const,
+                    badge: "Annual AMC",
+                    shortDescription:
+                      "Keep your panels generating maximum power throughout the year. Dust and residue can drop power generation by 20% to 35% without regular cleaning.",
+                    image: {
+                      url: "https://images.unsplash.com/photo-1558449028-b53a39d100fc?auto=format&fit=crop&w=1000&q=80",
+                    },
+                    fee: "Starting from ₹3,499 / year",
+                    subsidy: "Guaranteed 98% Plant Uptime",
+                    features: [
+                      "Scheduled de-mineralized water cleaning",
+                      "Inverter health & string voltage diagnostics",
+                      "Structure torque & cabling inspection",
+                      "Fast breakdown troubleshooting & repair",
+                    ],
+                    popular: false,
+                    order: 3,
+                    isActive: true,
+                  },
+                ]
+            ).map((item) => {
+              const displayImg = resolveImageUrl(
+                item.image?.url ||
+                  "https://images.unsplash.com/photo-1613665813446-82a78c468a1d?auto=format&fit=crop&w=1000&q=80"
+              );
 
-                <div className="flex items-center gap-2">
-                  <Home className="h-5 w-5 text-[#0ea5e9]" />
-                  <h3 className="font-display text-lg font-bold text-slate-900">
-                    Residential Rooftop Solar
-                  </h3>
-                </div>
-
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  Ideal for independent houses, villas, and residential societies.
-                  Eliminate electricity bills and claim up to ₹78,000 direct subsidy
-                  under PM Surya Ghar Muft Bijli Yojana.
-                </p>
-
-                <ul className="space-y-2 text-xs text-slate-700 pt-2 border-t border-slate-100">
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
-                    <span>Reduces domestic bills by 80% to 90%</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
-                    <span>Net Metering with state DISCOM</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
-                    <span>Direct bank subsidy transfer (DBT)</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
-                    <span>High efficiency Mono PERC panels</span>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="pt-6">
-                <a
-                  href="#solar-quote-form"
-                  className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 hover:bg-[#0ea5e9] text-white text-xs font-bold py-3 transition-colors"
+              return (
+                <div
+                  key={item._id}
+                  className="rounded-3xl border border-slate-200 bg-white p-6 sm:p-7 shadow-xs hover:border-[#0ea5e9] hover:shadow-xl transition-all flex flex-col justify-between"
                 >
-                  Inquire for Home Solar
-                  <ArrowRight className="h-3.5 w-3.5" />
-                </a>
-              </div>
-            </div>
+                  <div className="space-y-4">
+                    <div className="h-48 w-full relative rounded-2xl overflow-hidden bg-slate-100">
+                      <Image
+                        src={displayImg}
+                        alt={item.title}
+                        fill
+                        className="object-cover"
+                      />
+                      <span className="absolute top-3 left-3 bg-[#0ea5e9] text-white text-[11px] font-bold px-3 py-1 rounded-full shadow-xs">
+                        {item.badge || "1 kW - 10 kW"}
+                      </span>
+                    </div>
 
-            {/* Card 2: Commercial & Industrial Solar */}
-            <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm hover:border-[#0ea5e9] hover:shadow-xl transition-all flex flex-col justify-between">
-              <div className="space-y-4">
-                <div className="h-44 w-full relative rounded-2xl overflow-hidden bg-slate-100">
-                  <Image
-                    src="https://images.unsplash.com/photo-1542332213-9b5a5a3fad35?auto=format&fit=crop&w=800&q=80"
-                    alt="Commercial Industrial Solar"
-                    fill
-                    className="object-cover"
-                  />
-                  <span className="absolute top-3 left-3 bg-amber-500 text-slate-950 text-[11px] font-bold px-3 py-1 rounded-full">
-                    10 kW - 500 kW+
-                  </span>
+                    <div className="flex items-center gap-2">
+                      {item.category === "Residential Solar" ? (
+                        <Home className="h-5 w-5 text-[#0ea5e9]" />
+                      ) : item.category === "Commercial & Industrial" ? (
+                        <Factory className="h-5 w-5 text-amber-500" />
+                      ) : item.category === "Solar Maintenance & AMC" ? (
+                        <Wrench className="h-5 w-5 text-emerald-600" />
+                      ) : (
+                        <Sun className="h-5 w-5 text-amber-500" />
+                      )}
+                      <h3 className="font-display text-lg font-bold text-slate-900">
+                        {item.title}
+                      </h3>
+                    </div>
+
+                    <p className="text-xs text-slate-600 leading-relaxed min-h-[36px]">
+                      {item.shortDescription}
+                    </p>
+
+                    {item.subsidy && (
+                      <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-700 text-xs font-semibold border border-emerald-100">
+                        <ShieldCheck className="h-4 w-4 shrink-0 text-emerald-600" />
+                        <span>{item.subsidy}</span>
+                      </div>
+                    )}
+
+                    {item.features && item.features.length > 0 && (
+                      <ul className="space-y-2 text-xs text-slate-700 pt-3 border-t border-slate-100">
+                        {item.features.map((feat, fIdx) => (
+                          <li key={fIdx} className="flex items-center gap-2">
+                            <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-emerald-500" />
+                            <span>{feat}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+
+                  <div className="pt-6">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        handleInquireOffering(
+                          item.title,
+                          item.category,
+                          item.badge
+                        )
+                      }
+                      className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 hover:bg-[#0ea5e9] text-white text-xs font-bold py-3 transition-colors cursor-pointer"
+                    >
+                      <span>Inquire for {item.title}</span>
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </button>
+                  </div>
                 </div>
-
-                <div className="flex items-center gap-2">
-                  <Factory className="h-5 w-5 text-amber-500" />
-                  <h3 className="font-display text-lg font-bold text-slate-900">
-                    Commercial &amp; Industrial (C&amp;I)
-                  </h3>
-                </div>
-
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  Tailored for factories, warehouses, schools, hospitals, shopping
-                  malls, and office complexes facing high commercial tariff rates of
-                  ₹9 - ₹12/unit.
-                </p>
-
-                <ul className="space-y-2 text-xs text-slate-700 pt-2 border-t border-slate-100">
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
-                    <span>Cut peak commercial electricity tariff</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
-                    <span>40% Accelerated Depreciation tax benefit</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
-                    <span>Elevated tin-shed / RCC custom mounting</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
-                    <span>Remote IoT generation monitoring</span>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="pt-6">
-                <a
-                  href="#solar-quote-form"
-                  className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 hover:bg-[#0ea5e9] text-white text-xs font-bold py-3 transition-colors"
-                >
-                  Inquire for Business Solar
-                  <ArrowRight className="h-3.5 w-3.5" />
-                </a>
-              </div>
-            </div>
-
-            {/* Card 3: Solar Operations, Maintenance & AMC */}
-            <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm hover:border-[#0ea5e9] hover:shadow-xl transition-all flex flex-col justify-between">
-              <div className="space-y-4">
-                <div className="h-44 w-full relative rounded-2xl overflow-hidden bg-slate-100">
-                  <Image
-                    src="https://images.unsplash.com/photo-1613665813446-82a78c468a1d?auto=format&fit=crop&w=800&q=80"
-                    alt="Solar Panel Maintenance & Cleaning"
-                    fill
-                    className="object-cover"
-                  />
-                  <span className="absolute top-3 left-3 bg-emerald-600 text-white text-[11px] font-bold px-3 py-1 rounded-full">
-                    Annual AMC
-                  </span>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <Wrench className="h-5 w-5 text-emerald-600" />
-                  <h3 className="font-display text-lg font-bold text-slate-900">
-                    Solar Maintenance &amp; AMC
-                  </h3>
-                </div>
-
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  Keep your panels generating maximum power throughout the year.
-                  Dust and residue can drop power generation by 20% to 35% without
-                  regular cleaning.
-                </p>
-
-                <ul className="space-y-2 text-xs text-slate-700 pt-2 border-t border-slate-100">
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
-                    <span>Scheduled de-mineralized water cleaning</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
-                    <span>Inverter health &amp; string voltage diagnostics</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
-                    <span>Structure torque &amp; cabling inspection</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
-                    <span>Fast breakdown troubleshooting &amp; repair</span>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="pt-6">
-                <a
-                  href="#solar-quote-form"
-                  className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 hover:bg-[#0ea5e9] text-white text-xs font-bold py-3 transition-colors"
-                >
-                  Book Solar AMC / Service
-                  <ArrowRight className="h-3.5 w-3.5" />
-                </a>
-              </div>
-            </div>
+              );
+            })}
           </div>
         </div>
       </section>

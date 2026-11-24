@@ -53,6 +53,11 @@ const primaryNavigation: AdminNavItem[] = [
     href: "/admin/registration-services",
     icon: Landmark,
   },
+  {
+    label: "Solar Services",
+    href: "/admin/solar-services",
+    icon: Sun,
+  },
   { label: "Stats", href: "/admin/stats", icon: Settings2 },
   { label: "Process Steps", href: "/admin/process", icon: ClipboardList },
   { label: "Core Values", href: "/admin/core-values", icon: Star },
