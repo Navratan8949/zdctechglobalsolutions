@@ -36,7 +36,8 @@ export const metadata: Metadata = {
   },
 };
 
-export const revalidate = 60; // ISR cache revalidation every minute
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export default async function RegistrationServicesPage() {
   let initialServices: RegistrationServiceItem[] = fallbackRegistrationServices;
